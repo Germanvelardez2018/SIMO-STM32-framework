@@ -44,7 +44,10 @@ uint32_t count = 0;
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef hspi1;
 
+static void __irq__(){
+   HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
+}
 
 /* USER CODE BEGIN PV */
 
@@ -100,26 +103,30 @@ int main(void)
   #define BAUDRATE      (uint32_t)115200
   #define NAME_LEN      10
   #define BUFFER_LEN    100
-  #define MESSAGE       "Escribe tu nombre \r\n"
-  char name[NAME_LEN]={0};
-  char buffer[BUFFER_LEN]={0};
+  #define MESSAGE       "Simo STM32 \r\n"
+  //char name[NAME_LEN]={0};
+  //char buffer[BUFFER_LEN]={0};
   simo_uart_init(UART_A,BAUDRATE);
+  simo_uart_set_callback(UART_A,__irq__);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
    
   
-   simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE)+1,500);
+   simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
 
+/*
     if(simo_uart_read(UART_A,name,(uint8_t*)NAME_LEN,1000) == 1){
-       HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+      
        sprintf(buffer,(char*)"tu nombre es:%s\r\n",name);
-       simo_uart_write(UART_A,(uint8_t*)buffer,strlen(buffer)+1,1000);
+       simo_uart_write(UART_A,(uint8_t*)buffer,strlen(buffer)+1,1000,0);
      // memset(name,0,NAME_LEN);
 
     }
-      HAL_Delay(2000);
+  
+  */
+     HAL_Delay(2000);
   
     /* USER CODE END WHILE */
    
@@ -127,6 +134,10 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
+
+
+
+
 
 /**
   * @brief System Clock Configuration

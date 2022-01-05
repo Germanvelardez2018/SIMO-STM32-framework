@@ -18,28 +18,29 @@
 //INCLUDES DE C STANDAR
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 
-
-//En este archivo van todos los recursos disponibles en el microcontrolador y que queremos utilizar
+//Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
 
 #define SIMO_UART_ENA          1
-#define SIMO_SPI_ENA          1
+#define SIMO_SPI_ENA           1
 
 
-
+// Cantidad de instancias
 #define NUM_SIMO_UART          2
 #define NUM_SIMO_SPI           2
 
 
 
-
 #define NUM_SIMO_PINS          10
-
 #define NUM_TIME               2
 
 
 
-
+// Interrupciones
+#define SIMO_UART_IRQ        1
+#define SIMO_SPI_IRQ         1
+#define SIMO_TIMER_IRQ       1
 
 
 
@@ -75,6 +76,26 @@
         UART_C
     #endif
     } SIMO_UART;
+
+#if SIMO_UART_IRQ   == 1
+
+    typedef void (*uart_irq)(void);
+
+#endif
+
+
+#if SIMO_SPI_IRQ   == 1
+
+    typedef void (*spi_irq)(void);
+
+#endif
+
+
+#if SIMO_TIMER_IRQ   == 1
+
+    typedef void (*timer_irq)(void);
+
+#endif
 
 #endif
 
