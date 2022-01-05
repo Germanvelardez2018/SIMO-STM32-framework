@@ -11,31 +11,29 @@
 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __usart_H
-#define __usart_H
+#ifndef __USART_H
+#define __USART_H
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "core.h"
 
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
-extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart2;
 
-/* USER CODE BEGIN Private defines */
+#if SIMO_UART_ENA == 1
 
-/* USER CODE END Private defines */
+uint32_t simo_uart_read(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t timeout );
+uint32_t simo_uart_write(SIMO_UART uart,uint8_t* buffer,uint32_t len ,uint32_t timeout);
 
- void MX_USART1_UART_Init(void);
- void MX_USART2_UART_Init(void);
+uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate);
 
-/* USER CODE BEGIN Prototypes */
+#endif
 
-/* USER CODE END Prototypes */
+
+
+
 
 #ifdef __cplusplus
 }

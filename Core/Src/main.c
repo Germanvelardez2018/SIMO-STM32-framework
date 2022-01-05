@@ -19,6 +19,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+//Simo
+#include "uart.h"
+#include <stdio.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 uint32_t count = 0;
@@ -90,19 +93,34 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
-  MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
+ 
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-
+  #define BAUDRATE      (uint32_t)115200
+  #define NAME_LEN      10
+  #define BUFFER_LEN    100
+  #define MESSAGE       "Escribe tu nombre \r\n"
+  char name[NAME_LEN]={0};
+  char buffer[BUFFER_LEN]={0};
+  simo_uart_init(UART_A,BAUDRATE);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-    HAL_Delay(1500);
-    HAL_UART_Transmit(&huart1,"hola mundo \r\n",13,100);
+   
+  
+   simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE)+1,500);
+
+    if(simo_uart_read(UART_A,name,(uint8_t*)NAME_LEN,1000) == 1){
+       HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+       sprintf(buffer,(char*)"tu nombre es:%s\r\n",name);
+       simo_uart_write(UART_A,(uint8_t*)buffer,strlen(buffer)+1,1000);
+     // memset(name,0,NAME_LEN);
+
+    }
+      HAL_Delay(2000);
+  
     /* USER CODE END WHILE */
    
     /* USER CODE BEGIN 3 */
