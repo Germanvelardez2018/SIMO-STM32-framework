@@ -24,7 +24,12 @@
 #include <stdio.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define RX_BUFFER_LEN   100
+
 uint32_t count = 0;
+uint32_t pos_rx =0;
+uint8_t  buffer_rx[RX_BUFFER_LEN]={0};
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,8 +49,33 @@ uint32_t count = 0;
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef hspi1;
 
-static void __irq__(){
+static void __irq__tx(){
+  // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
    HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+
+}
+
+
+static void __irq__rx(){
+ 
+  
+  if(buffer_rx[pos_rx] == '\n'){
+   
+    simo_uart_write(UART_A,(uint8_t*)buffer_rx,pos_rx,100,0);
+        simo_uart_write(UART_A,(uint8_t*)"\n",1,100,0);
+
+    pos_rx = 0;
+    simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
+
+
+  } else{
+    pos_rx++;
+    simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
+
+  } 
+ 
+
+
 
 }
 
@@ -101,31 +131,38 @@ int main(void)
 
   /* USER CODE END 2 */
   #define BAUDRATE      (uint32_t)115200
-  #define NAME_LEN      10
+  
   #define BUFFER_LEN    100
-  #define MESSAGE       "Simo STM32 \r\n"
-  //char name[NAME_LEN]={0};
-  //char buffer[BUFFER_LEN]={0};
+  #define MESSAGE       "\r\nSimo STM32 \r\n"
+  
   simo_uart_init(UART_A,BAUDRATE);
-  simo_uart_set_callback(UART_A,__irq__);
+  simo_uart_ena_irq(UART_A,1);
+
+  simo_uart_set_tx_callback(UART_A,__irq__tx);
+  simo_uart_set_rx_callback(UART_A,__irq__rx);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  simo_uart_write(UART_A,(uint8_t*)"\r\ninit program\r\n",strlen("\r\ninit program\r\n"),1000,0);
+
+  uint32_t res = simo_uart_read(UART_A,(buffer_rx),1,500,1); // llamo a la funcion
+  if (res == 1){
+    simo_uart_write(UART_A,(uint8_t*)"RX INIT SUCCEFULL\r\n",strlen("RX INIT SUCCEFULL\r\n"),500,1);
+
+  }
+  else{
+    simo_uart_write(UART_A,(uint8_t*)"RX INIT FULT\r\n",strlen("RX INIT FULT\r\n"),500,1);
+  }
+
+
   while (1)
   {
    
   
-   simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
+      simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
 
-/*
-    if(simo_uart_read(UART_A,name,(uint8_t*)NAME_LEN,1000) == 1){
-      
-       sprintf(buffer,(char*)"tu nombre es:%s\r\n",name);
-       simo_uart_write(UART_A,(uint8_t*)buffer,strlen(buffer)+1,1000,0);
-     // memset(name,0,NAME_LEN);
 
-    }
-  
-  */
+   //  simo_uart_write(UART_A,(uint8_t*)buffer_rx,pos_rx,500,0);
+
      HAL_Delay(2000);
   
     /* USER CODE END WHILE */

@@ -39,6 +39,14 @@
 
 // Interrupciones
 #define SIMO_UART_IRQ        1
+    #if SIMO_UART_IRQ == 1
+        //Habilite configuracion para generar interrupciones UART
+        #define SIMO_UART_TX_IRQ     1
+        #define SIMO_UART_RX_IRQ     1
+        #else
+        #define SIMO_UART_TX_IRQ     0
+        #define SIMO_UART_RX_IRQ     0
+    #endif
 #define SIMO_SPI_IRQ         1
 #define SIMO_TIMER_IRQ       1
 
