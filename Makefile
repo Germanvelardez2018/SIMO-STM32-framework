@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/simo/timer.c\
 Core/simo/uart.c\
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \

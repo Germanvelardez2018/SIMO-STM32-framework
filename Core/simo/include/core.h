@@ -15,123 +15,168 @@
 #define __SIMO_CORE_H
 
 
-//INCLUDES DE C STANDAR
-#include <string.h>
-#include <stdint.h>
-#include <stdlib.h>
+    //INCLUDES DE C STANDAR
+    #include <string.h>
+    #include <stdint.h>
+    #include <stdlib.h>
 
-//Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
+    #include "config.h"
 
-#define SIMO_UART_ENA          1
-#define SIMO_SPI_ENA           1
-
-
-// Cantidad de instancias
-#define NUM_SIMO_UART          2
-#define NUM_SIMO_SPI           2
+    //Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
 
 
 
-#define NUM_SIMO_PINS          10
-#define NUM_TIME               2
+
+    #define CLOCK_TIMER                 4000000
 
 
 
-// Interrupciones
-#define SIMO_UART_IRQ        1
-    #if SIMO_UART_IRQ == 1
-        //Habilite configuracion para generar interrupciones UART
-        #define SIMO_UART_TX_IRQ     1
-        #define SIMO_UART_RX_IRQ     1
-        #else
-        #define SIMO_UART_TX_IRQ     0
-        #define SIMO_UART_RX_IRQ     0
+
+    #define SIMO_UART_ENA               C_SIMO_UART_ENA
+    #define SIMO_SPI_ENA                C_SIMO_SPI_ENA
+    #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA
+
+
+    // Cantidad de instancias
+    #define NUM_SIMO_UART               C_NUM_SIMO_UART
+    #define NUM_SIMO_SPI                C_NUM_SIMO_SPI
+    #define NUM_SIMO_GPIO               C_NUM_SIMO_GPIO
+    #define NUM_SIMO_TIMER              C_NUM_SIMO_TIMER
+
+
+
+
+
+
+
+    // Interrupciones
+    #define SIMO_UART_IRQ           C_SIMO_UART_IRQ
+        #if SIMO_UART_IRQ == 1
+            //Habilite configuracion para generar interrupciones UART
+            #define SIMO_UART_TX_IRQ     C_SIMO_UART_TX_IRQ
+            #define SIMO_UART_RX_IRQ     C_SIMO_UART_RX_IRQ
+            #else
+            #define SIMO_UART_TX_IRQ     0
+            #define SIMO_UART_RX_IRQ     0
+        #endif
+
+
+
+    #define SIMO_SPI_IRQ                C_SIMO_SPI_IRQ
+        #if SIMO_SPI_IRQ == 1
+            //Habilite configuracion para generar interrupciones SPI
+            #define SIMO_SPI_TX_IRQ     C_SIMO_SPI_TX_IRQ
+            #define SIMO_SPI_RX_IRQ     C_SIMO_SPI_RX_IRQ
+            #else
+            #define SIMO_SPI_TX_IRQ     0
+            #define SIMO_SPI_RX_IRQ     0
+        #endif
+
+
+
+    #define SIMO_TIMER_IRQ              C_SIMO_TIMER_IRQ
+
+
+
+
+
+    // Deshabilitamos si valores de instancias son 0
+
+
+    #if NUM_SIMO_TIMER == 0
+        #define    SIMO_UART_ENA   0
     #endif
-#define SIMO_SPI_IRQ         1
-#define SIMO_TIMER_IRQ       1
 
 
 
-// Deshabilitamos si valores de instancias son 0
-
-#if NUM_SIMO_UART == 0
-    #define    SIMO_UART_ENA   2
-#endif
-
-
-#if NUM_SIMO_SPI == 0
-    #define    SIMO_SPI_ENA   0
-#endif
-
-
-
-
-
-//CORE UART 
-
-// CORE UART 
-
-#if SIMO_UART_ENA == 1
-
-    typedef enum {
-    #if NUM_SIMO_UART >0
-        UART_A,
+    #if NUM_SIMO_UART == 0
+        #define    SIMO_UART_ENA   0
     #endif
-    #if NUM_SIMO_UART >1
-        UART_B,
+
+
+    #if NUM_SIMO_SPI == 0
+        #define    SIMO_SPI_ENA   0
     #endif
-    #if NUM_SIMO_UART >2
-        UART_C
+
+
+
+
+
+
+
+    // CORE TIMER 
+
+    #if SIMO_TIMER_ENA == 1
+
+        typedef enum {
+        #if NUM_SIMO_TIMER >0
+            TIMER_A,
+        #endif
+        #if NUM_SIMO_TIMER >1
+            TIMER_B,
+        #endif
+        #if NUM_SIMO_TIMER >2
+            TIMER_C
+        #endif
+        } SIMO_TIMER;
+
+        #if SIMO_TIMER_IRQ   == 1
+            typedef void (*timer_irq)(void);
+        #endif
+
     #endif
-    } SIMO_UART;
-
-#if SIMO_UART_IRQ   == 1
-
-    typedef void (*uart_irq)(void);
-
-#endif
 
 
-#if SIMO_SPI_IRQ   == 1
-
-    typedef void (*spi_irq)(void);
-
-#endif
 
 
-#if SIMO_TIMER_IRQ   == 1
+    //CORE UART
+    #if SIMO_UART_ENA == 1
 
-    typedef void (*timer_irq)(void);
+        typedef enum {
+        #if NUM_SIMO_UART >0
+            UART_A,
+        #endif
+        #if NUM_SIMO_UART >1
+            UART_B,
+        #endif
+        #if NUM_SIMO_UART >2
+            UART_C
+        #endif
+        } SIMO_UART;
 
-#endif
 
-#endif
+        #if SIMO_UART_IRQ   == 1
+            typedef void (*uart_irq)(void);
+        #endif
 
-
-// CORE SPI 
-
-#if SIMO_SPI_ENA == 1
-    typedef enum {
-    #if NUM_SIMO_SPI >0
-        SPI_A,
     #endif
-    #if NUM_SIMO_SPI >1
-        SPI_B,
+
+
+
+
+
+    // CORE SPI 
+
+    #if SIMO_SPI_ENA == 1
+        typedef enum {
+        #if NUM_SIMO_SPI >0
+            SPI_A,
+        #endif
+        #if NUM_SIMO_SPI >1
+            SPI_B,
+        #endif
+        #if NUM_SIMO_SPI >2
+            SPI_C
+        #endif
+        } SIMO_SPI;
+
+
+
+        #if SIMO_SPI_IRQ   == 1
+            typedef void (*spi_irq)(void);
+        #endif
+
     #endif
-    #if NUM_SIMO_SPI >2
-        SPI_C
-    #endif
-    } SIMO_SPI;
-
-#endif
-
-
-
-
-
-
-
-
 
 
 #endif

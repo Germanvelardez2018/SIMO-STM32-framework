@@ -3,6 +3,8 @@
         "main.h": "c",
         "uart.h": "c",
         "core.h": "c",
-        "stm32f1xx_hal_uart.h": "c"
+        "stm32f1xx_hal_uart.h": "c",
+        "clock_config.h": "c",
+        "stimer.h": "c"
     }
 }

@@ -21,7 +21,8 @@
 
 //Simo
 #include "uart.h"
-#include <stdio.h>
+#include "timer.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #define RX_BUFFER_LEN   100
@@ -32,46 +33,35 @@ uint8_t  buffer_rx[RX_BUFFER_LEN]={0};
 
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
 
-/* USER CODE END PTD */
+void SystemClock_Config(void);
 
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef hspi1;
 
+
+static void __irq_tim(){
+  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+
+}
+
+
 static void __irq__tx(){
   // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-   HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
 }
 
 
 static void __irq__rx(){
- 
-  
   if(buffer_rx[pos_rx] == '\n'){
-   
     simo_uart_write(UART_A,(uint8_t*)buffer_rx,pos_rx,100,0);
-        simo_uart_write(UART_A,(uint8_t*)"\n",1,100,0);
-
+    simo_uart_write(UART_A,(uint8_t*)"\n",1,100,0);
     pos_rx = 0;
     simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
-
-
   } else{
     pos_rx++;
     simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
-
   } 
  
 
@@ -84,7 +74,6 @@ static void __irq__rx(){
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
 
@@ -103,13 +92,8 @@ static void MX_SPI1_Init(void);
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -135,6 +119,14 @@ int main(void)
   #define BUFFER_LEN    100
   #define MESSAGE       "\r\nSimo STM32 \r\n"
   
+
+  simo_timer_config(TIMER_A,TIME_MS,50);
+  simo_timer_set_event_callback(TIMER_A,__irq_tim);
+
+  simo_timer_ena_irq(TIMER_A,1);
+  simo_timer_start(TIMER_A);
+
+
   simo_uart_init(UART_A,BAUDRATE);
   simo_uart_ena_irq(UART_A,1);
 
@@ -156,21 +148,15 @@ int main(void)
 
   while (1)
   {
-   
+    simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
+    HAL_Delay(2000);
   
-      simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
-
-
-   //  simo_uart_write(UART_A,(uint8_t*)buffer_rx,pos_rx,500,0);
-
-     HAL_Delay(2000);
   
-    /* USER CODE END WHILE */
-   
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
+
+
 
 
 
@@ -212,6 +198,11 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
+
+
+
+
 
 /**
   * @brief SPI1 Initialization Function
