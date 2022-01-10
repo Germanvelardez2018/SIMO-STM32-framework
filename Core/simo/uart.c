@@ -207,8 +207,13 @@
         }
     
     
-    
-        //Setea el callback
+        /**
+         * @brief Configuro una funcion callback para el evento UART RX
+         * 
+         * @param uart Uart a utilizar. UART_A , UART_B o UART_C. Visibilidad depende de NUM_SIMO_UART
+         * @param callback  Funcion sin argumentos y  retorna void 
+         * @return ** uint32_t   1 Exitoso, 0 Error
+         */
         uint32_t simo_uart_set_rx_callback(SIMO_UART uart,uart_irq callback)
         {
             uint32_t res = 0;
