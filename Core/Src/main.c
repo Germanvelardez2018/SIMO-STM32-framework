@@ -30,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #define RX_BUFFER_LEN   100
 #define TIMER     TIMER_C
+#define UART      UART_B
 uint32_t count = 0;
 uint32_t pos_rx =0;
 uint8_t  buffer_rx[RX_BUFFER_LEN]={0};
@@ -114,9 +115,9 @@ int main(void)
   
 
 
-  simo_uart_init(UART_A,115200);
+  simo_uart_init(UART,115200);
 
-  simo_uart_write(UART_A,(uint8_t*)" INIT PROGRAM\r\n",strlen(" INIT PROGRAM\r\n"),500,0);
+  simo_uart_write(UART,(uint8_t*)" INIT PROGRAM\r\n",strlen(" INIT PROGRAM\r\n"),500,0);
 
 
   
@@ -127,22 +128,22 @@ int main(void)
   uint32_t res = simo_timer_config(TIMER,TIME_MS,170);
 
   if (res == 1){
-   simo_uart_write(UART_A,(uint8_t*)" SUCCEFULL\r\n",strlen(" SUCCEFULL\r\n"),500,0);
+   simo_uart_write(UART,(uint8_t*)" SUCCEFULL\r\n",strlen(" SUCCEFULL\r\n"),500,0);
    simo_timer_set_event_callback(TIMER,__irq_tim);
    simo_timer_ena_irq(TIMER,1);
    simo_timer_start(TIMER);
 
   }
   else{
-    simo_uart_write(UART_A,(uint8_t*)" FULT\r\n",strlen(" FULT\r\n"),500,0);
+    simo_uart_write(UART,(uint8_t*)" FULT\r\n",strlen(" FULT\r\n"),500,0);
   }
 
 
   while (1)
   {
-    sprintf((char*)buffer_rx,"el clock es : %ld \r\n",45);
+    sprintf((char*)buffer_rx,"clock es : %ld \r\n",45);
 
-    simo_uart_write(UART_A,(uint8_t*)buffer_rx,strlen((char*)buffer_rx),500,0);
+    simo_uart_write(UART,(uint8_t*)buffer_rx,strlen((char*)buffer_rx),500,0);
     HAL_Delay(2000);
   
   

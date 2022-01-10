@@ -27,7 +27,7 @@
 
 // Cantidad de instancias
 #define C_NUM_SIMO_TIMER                        3
-#define C_NUM_SIMO_UART                         2
+#define C_NUM_SIMO_UART                         3
 #define C_NUM_SIMO_SPI                          2
 
 #define C_NUM_SIMO_GPIO                         10
