@@ -385,9 +385,6 @@ uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate){
         simo_uart->Init.Mode = UART_MODE_TX_RX;
         simo_uart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
         simo_uart->Init.OverSampling = UART_OVERSAMPLING_16;
-
-
-        
         if (HAL_UART_Init(simo_uart) == HAL_OK){
             res = 1; // EXITO EN LA CONFIGURACION
             

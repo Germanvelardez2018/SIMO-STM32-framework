@@ -10,6 +10,7 @@
  */
 
 #include "timer.h"
+#include "clock_config.h"
 #include "main.h"
 
 
@@ -46,7 +47,7 @@
 
         #if SIMO_TIMER_IRQ   == 1
             static  timer_irq __TIMER3_EVENT_IRQ__ ;
-            void TIM2_IRQHandler(void){
+            void TIM3_IRQHandler(void){
                   HAL_TIM_IRQHandler(&htim3);
             }
         #endif
@@ -72,11 +73,11 @@
                         #endif
                         #if NUM_SIMO_TIMER >2
                             case TIMER_C:            
-                            __timer= USART3_IRQn;
+                            __timer= TIM3_IRQn;
                             break;
                         #endif
                             default:
-                            __timer= TIM3_IRQn; // por default, evita errores
+                            __timer= TIM1_UP_IRQn; // por default, evita errores
                             break;
                     }
 
@@ -140,6 +141,7 @@
                             break;
                         #endif
                             default:
+                            __TIMER1_EVENT_IRQ__ = callback;
                             res= 0;
                             break;
                     }
@@ -189,11 +191,21 @@
 
 
     uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint32_t time){
+    
+    uint32_t clock_base = simo_clock_get_base(); // Default 40 MHz
+    
+    
+    
     uint32_t res = 0;
+
+
+
+
     //CLOCK_TIMER == 40M
     TIM_HandleTypeDef* tim = __get_timer(timer);
     // si unit es uS   => unit = 100 , si unit es mS => unit = 1
-    tim->Init.Prescaler = 400 * unit;
+
+    tim->Init.Prescaler = (uint32_t)(clock_base / unit);
     tim->Init.CounterMode = TIM_COUNTERMODE_UP;
     tim->Init.Period = (1* time) ;
     tim->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1; // MAX DIV 4
@@ -237,8 +249,14 @@
 
 
 
-    uint32_t simo_timer_stop(){
-        return 0;
+    uint32_t simo_timer_stop(SIMO_TIMER timer){
+          uint32_t res = 0;
+        TIM_HandleTypeDef* tim = __get_timer(timer);
+        if(HAL_TIM_Base_Stop_IT(tim) == HAL_OK){
+            res = 1; // EXITO EN LA CONFIGURACION
+        }
+    
+        return  res;
     }
     uint32_t simo_timer_get_conter(){
         return 0;
@@ -256,20 +274,27 @@
     {
 
 
-    if(htim_base->Instance==TIM1  ){
-        __HAL_RCC_TIM1_CLK_ENABLE();
-            
-    }
 
-    if(htim_base->Instance==TIM2 ){
-        __HAL_RCC_TIM2_CLK_ENABLE();
-    }
-        
-    if (htim_base->Instance==TIM3 ){
-        __HAL_RCC_TIM3_CLK_ENABLE();
-    }
-    
 
+            #if NUM_SIMO_TIMER >0
+            if(htim_base->Instance==TIM1){
+            __HAL_RCC_TIM1_CLK_ENABLE();
+            }
+            #endif
+
+            #if NUM_SIMO_TIMER >1
+            if(htim_base->Instance==TIM2){
+            __HAL_RCC_TIM2_CLK_ENABLE();
+            }
+            #endif
+
+            #if NUM_SIMO_TIMER >2
+            if ((htim_base->Instance==TIM3)){
+            __HAL_RCC_TIM3_CLK_ENABLE();
+            }
+            #endif
+
+   
 
     }
 
@@ -285,19 +310,23 @@
     void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     {
 
-        if(htim_base->Instance==TIM1){
-        __HAL_RCC_TIM1_CLK_DISABLE();
-        }
-    
-        if(htim_base->Instance==TIM2){
-        __HAL_RCC_TIM2_CLK_DISABLE();
-        }
-        
-        if ((htim_base->Instance==TIM3)){
-        __HAL_RCC_TIM3_CLK_DISABLE();
-        }
-    
+            #if NUM_SIMO_TIMER >0
+            if(htim_base->Instance==TIM1){
+            __HAL_RCC_TIM1_CLK_DISABLE();
+            }
+            #endif
 
+            #if NUM_SIMO_TIMER >1
+            if(htim_base->Instance==TIM2){
+            __HAL_RCC_TIM2_CLK_DISABLE();
+            }
+            #endif
+
+            #if NUM_SIMO_TIMER >2
+            if ((htim_base->Instance==TIM3)){
+            __HAL_RCC_TIM3_CLK_DISABLE();
+            }
+            #endif
 
     }
 

@@ -11,8 +11,8 @@
     #if SIMO_TIMER_ENA == 1
 
         typedef enum {
-            TIME_US = 1,
-            TIME_MS = 100,
+            TIME_US = 100000,
+            TIME_MS = 1000,
             
         
         }TIMER_UNIT;
@@ -20,7 +20,7 @@
 
         uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint32_t time);
         uint32_t simo_timer_start(SIMO_TIMER timer);
-        uint32_t simo_timer_stop();
+        uint32_t simo_timer_stop(SIMO_TIMER timer);
         uint32_t simo_timer_get_conter();
 
 

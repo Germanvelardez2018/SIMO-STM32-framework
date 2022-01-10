@@ -21,7 +21,6 @@
 #include "main.h"
 #include "stm32f1xx_it.h"
 
-extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */

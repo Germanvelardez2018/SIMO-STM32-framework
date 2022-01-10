@@ -20,21 +20,24 @@
 #include "main.h"
 
 //Simo
-#include "uart.h"
+#include "stdio.h"
+#include "uart.h"     
+#include "config.h"
 #include "timer.h"
+#include "clock_config.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #define RX_BUFFER_LEN   100
-
+#define TIMER     TIMER_C
 uint32_t count = 0;
 uint32_t pos_rx =0;
 uint8_t  buffer_rx[RX_BUFFER_LEN]={0};
-
+uint32_t counter = 0;
+#define TIME_COUNTS 10
 /* USER CODE END Includes */
 
 
-void SystemClock_Config(void);
 
 
 /* Private variables ---------------------------------------------------------*/
@@ -43,31 +46,24 @@ SPI_HandleTypeDef hspi1;
 
 static void __irq_tim(){
   HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+  HAL_GPIO_TogglePin(LED_GPIO_Port,GPIO_PIN_3);
+
+  // simo_uart_write(UART_A,(uint8_t*)"timer irq \r\n",strlen("timer irq \r\n"),500,0);
+  // counter ++;
+//   if (counter >= TIME_COUNTS) simo_timer_stop(TIMER_B);
 
 }
 
 
 static void __irq__tx(){
-  // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+   HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
 }
 
 
-static void __irq__rx(){
-  if(buffer_rx[pos_rx] == '\n'){
-    simo_uart_write(UART_A,(uint8_t*)buffer_rx,pos_rx,100,0);
-    simo_uart_write(UART_A,(uint8_t*)"\n",1,100,0);
-    pos_rx = 0;
-    simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
-  } else{
-    pos_rx++;
-    simo_uart_read(UART_A,(buffer_rx + pos_rx),1,100,1);
-  } 
- 
 
 
 
-}
 
 /* USER CODE BEGIN PV */
 
@@ -76,6 +72,7 @@ static void __irq__rx(){
 /* Private function prototypes -----------------------------------------------*/
 static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
+static void GPIO_PB3_Init(void);
 
 /* USER CODE BEGIN PFP */
 
@@ -96,59 +93,56 @@ int main(void)
 
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
+  
 
   /* Configure the system clock */
-  SystemClock_Config();
+  simo_clock_config();
 
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
+  
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  GPIO_PB3_Init();
+
   MX_SPI1_Init();
  
-  /* USER CODE BEGIN 2 */
-
-  /* USER CODE END 2 */
+  
   #define BAUDRATE      (uint32_t)115200
   
   #define BUFFER_LEN    100
   #define MESSAGE       "\r\nSimo STM32 \r\n"
   
 
-  simo_timer_config(TIMER_A,TIME_MS,50);
-  simo_timer_set_event_callback(TIMER_A,__irq_tim);
 
-  simo_timer_ena_irq(TIMER_A,1);
-  simo_timer_start(TIMER_A);
+  simo_uart_init(UART_A,115200);
+
+  simo_uart_write(UART_A,(uint8_t*)" INIT PROGRAM\r\n",strlen(" INIT PROGRAM\r\n"),500,0);
 
 
-  simo_uart_init(UART_A,BAUDRATE);
-  simo_uart_ena_irq(UART_A,1);
+  
 
-  simo_uart_set_tx_callback(UART_A,__irq__tx);
-  simo_uart_set_rx_callback(UART_A,__irq__rx);
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  simo_uart_write(UART_A,(uint8_t*)"\r\ninit program\r\n",strlen("\r\ninit program\r\n"),1000,0);
 
-  uint32_t res = simo_uart_read(UART_A,(buffer_rx),1,500,1); // llamo a la funcion
+
+
+  uint32_t res = simo_timer_config(TIMER,TIME_MS,170);
+
   if (res == 1){
-    simo_uart_write(UART_A,(uint8_t*)"RX INIT SUCCEFULL\r\n",strlen("RX INIT SUCCEFULL\r\n"),500,1);
+   simo_uart_write(UART_A,(uint8_t*)" SUCCEFULL\r\n",strlen(" SUCCEFULL\r\n"),500,0);
+   simo_timer_set_event_callback(TIMER,__irq_tim);
+   simo_timer_ena_irq(TIMER,1);
+   simo_timer_start(TIMER);
 
   }
   else{
-    simo_uart_write(UART_A,(uint8_t*)"RX INIT FULT\r\n",strlen("RX INIT FULT\r\n"),500,1);
+    simo_uart_write(UART_A,(uint8_t*)" FULT\r\n",strlen(" FULT\r\n"),500,0);
   }
 
 
   while (1)
   {
-    simo_uart_write(UART_A,(uint8_t*)MESSAGE,strlen(MESSAGE),500,1);
+    sprintf((char*)buffer_rx,"el clock es : %ld \r\n",45);
+
+    simo_uart_write(UART_A,(uint8_t*)buffer_rx,strlen((char*)buffer_rx),500,0);
     HAL_Delay(2000);
   
   
@@ -161,43 +155,6 @@ int main(void)
 
 
 
-
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
-  /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL10;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
 
 
 
@@ -243,6 +200,8 @@ static void MX_SPI1_Init(void)
 }
 
 
+
+
 /**
   * @brief GPIO Initialization Function
   * @param None
@@ -261,6 +220,36 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PB2 */
   GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+}
+
+
+
+
+
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void GPIO_PB3_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
