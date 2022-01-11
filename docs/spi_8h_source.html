@@ -72,7 +72,71 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="spi_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* Define to prevent recursive inclusion -------------------------------------*/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef __SIMO_SPI_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define __SIMO_SPI_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* Includes ------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="core_8h.html">core.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#if SIMO_SPI_ENA == 1</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    uint32_t <a class="code" href="spi_8h.html#ac95bbb591cd4353f3b2a40d4be315f57">simo_spi_read</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    uint32_t <a class="code" href="spi_8h.html#ab151c5d56e7949de948fea9450e9a247">simo_spi_write</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    uint32_t <a class="code" href="spi_8h.html#a7bc4b84c1111b13f535d43c740f324db">simo_spi_init</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,uint32_t baudrate);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">    #if SIMO_SPI_IRQ   == 1</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">//Activo o desactivo las interrupciones</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="spi_8h.html#adf9bd23308882931ca043fd353dd3e34">simo_spi_ena_irq</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,uint32_t ena);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">        #if SIMO_SPI_TX_IRQ == 1</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            uint32_t <a class="code" href="spi_8h.html#aec731af7e9bc35e8b15a453ad33e4ba8">simo_spi_set_tx_callback</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,<a class="code" href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a> callback);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">        #if SIMO_SPI_RX_IRQ == 1</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            uint32_t <a class="code" href="spi_8h.html#ad3c5d0dadc09a1e222079484d64f977c">simo_spi_set_rx_callback</a>(<a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi,<a class="code" href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a> callback);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*__ usart_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aspi_8h_html_adf9bd23308882931ca043fd353dd3e34"><div class="ttname"><a href="spi_8h.html#adf9bd23308882931ca043fd353dd3e34">simo_spi_ena_irq</a></div><div class="ttdeci">void simo_spi_ena_irq(SIMO_SPI spi, uint32_t ena)</div></div>
+<div class="ttc" id="aspi_8h_html_ab151c5d56e7949de948fea9450e9a247"><div class="ttname"><a href="spi_8h.html#ab151c5d56e7949de948fea9450e9a247">simo_spi_write</a></div><div class="ttdeci">uint32_t simo_spi_write(SIMO_SPI spi, uint8_t *buffer, uint32_t len, uint32_t timeout, uint32_t ena_callback)</div><div class="ttdoc">Enviar un buffer de datos mediante puerto SPI.</div></div>
+<div class="ttc" id="aspi_8h_html_aec731af7e9bc35e8b15a453ad33e4ba8"><div class="ttname"><a href="spi_8h.html#aec731af7e9bc35e8b15a453ad33e4ba8">simo_spi_set_tx_callback</a></div><div class="ttdeci">uint32_t simo_spi_set_tx_callback(SIMO_SPI spi, spi_irq callback)</div><div class="ttdoc">Configuro una funcion callback para el evento SPI TX.</div></div>
+<div class="ttc" id="aspi_8h_html_ad3c5d0dadc09a1e222079484d64f977c"><div class="ttname"><a href="spi_8h.html#ad3c5d0dadc09a1e222079484d64f977c">simo_spi_set_rx_callback</a></div><div class="ttdeci">uint32_t simo_spi_set_rx_callback(SIMO_SPI spi, spi_irq callback)</div><div class="ttdoc">Configuro una funcion callback para el evento SPI RX.</div></div>
+<div class="ttc" id="aspi_8h_html_a7bc4b84c1111b13f535d43c740f324db"><div class="ttname"><a href="spi_8h.html#a7bc4b84c1111b13f535d43c740f324db">simo_spi_init</a></div><div class="ttdeci">uint32_t simo_spi_init(SIMO_SPI spi, uint32_t baudrate)</div><div class="ttdoc">Inicia el puerto SPI.</div></div>
+<div class="ttc" id="acore_8h_html"><div class="ttname"><a href="core_8h.html">core.h</a></div></div>
+<div class="ttc" id="aspi_8h_html_ac95bbb591cd4353f3b2a40d4be315f57"><div class="ttname"><a href="spi_8h.html#ac95bbb591cd4353f3b2a40d4be315f57">simo_spi_read</a></div><div class="ttdeci">uint32_t simo_spi_read(SIMO_SPI spi, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</div><div class="ttdoc">Leer un buffer de datos mediante puerto SPI.</div></div>
+<div class="ttc" id="acore_8h_html_aa9393e64e5f74a3cc24c3564b8c75a59"><div class="ttname"><a href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a></div><div class="ttdeci">void(* spi_irq)(void)</div><div class="ttdef"><b>Definition:</b> core.h:176</div></div>
+<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41eca"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a></div><div class="ttdeci">SIMO_SPI</div><div class="ttdef"><b>Definition:</b> core.h:161</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generado por &#160;<a href="http://www.doxygen.org/index.html">

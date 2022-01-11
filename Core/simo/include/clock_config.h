@@ -49,4 +49,12 @@
 
 
 
+
+  uint32_t simo_clock_get_APB1();
+
+
+
+  uint32_t simo_clock_get_APB2();
+
+
 #endif

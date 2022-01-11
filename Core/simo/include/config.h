@@ -26,9 +26,9 @@
 
 
 // Cantidad de instancias
-#define C_NUM_SIMO_TIMER                        3
-#define C_NUM_SIMO_UART                         3
-#define C_NUM_SIMO_SPI                          2
+#define C_NUM_SIMO_TIMER                        3    // MAXIMO:  3 INSTANCIAS
+#define C_NUM_SIMO_UART                         3    // MAXIMO:  3 INSTANCIAS
+#define C_NUM_SIMO_SPI                          2    // MAXIMO:  1 INSTANCIAS, CON 2 ENTRAMOS EN CONFLICTO CON UART3 (UASRT_C)
 
 #define C_NUM_SIMO_GPIO                         10
 

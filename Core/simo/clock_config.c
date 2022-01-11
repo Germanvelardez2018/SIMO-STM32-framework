@@ -89,3 +89,15 @@ void simo_clock_config(void){
   uint32_t simo_clock_get_timer_base(){
     return (simo_clock_get_base() * CLOCK_APB2_DIV) ;
   }
+
+
+
+  uint32_t simo_clock_get_APB1(){
+    return (simo_clock_get_base() / CLOCK_APB2_DIV) ;
+  }
+
+
+
+  uint32_t simo_clock_get_APB2(){
+    return (simo_clock_get_base() / CLOCK_APB2_DIV) ;
+  }

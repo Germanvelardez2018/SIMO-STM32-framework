@@ -142,16 +142,13 @@
                 return res;
             }
 
-           
 
-   
-
-
-
-
-
-
-
+    /**
+     * @brief Obtiene la instancia de TIM
+     * 
+     * @param timer_enum 
+     * @return ** TIM_HandleTypeDef* 
+     */
     static TIM_HandleTypeDef* __get_timer(SIMO_TIMER timer_enum)
     {
         TIM_HandleTypeDef* timer = NULL;
