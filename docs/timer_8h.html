@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIMO: Referencia del Archivo Core/simo/include/timer.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SIMO
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Framework de trabajo para STM32. La idea es simplificar el trabajo de configuracion y generacion de aplicaciones simples</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a class="el" href="dir_1ffac0d2630f4824660dea6691be9d7f.html">simo</a></li><li class="navelem"><a class="el" href="dir_51ae6caf7e11bae481ee121923f41a47.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#enum-members">Enumeraciones</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo timer.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="core_8h_source.html">core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para timer.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="timer_8h__incl.png" border="0" usemap="#_core_2simo_2include_2timer_8h" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="timer_8h__dep__incl.png" border="0" usemap="#_core_2simo_2include_2timer_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="timer_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:a1ff33d7c0529133f1f46217f10833713"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713">TIMER_UNIT</a> { <a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713aef96c3935bbc898edd62723ad8cb00ea">TIME_US</a> = 100000, 
+<a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713ab2234de0b81a6c02ab51dcfc63065bca">TIME_MS</a> = 1000
+ }</td></tr>
+<tr class="memdesc:a1ff33d7c0529133f1f46217f10833713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unidades utilizada para configurar los periodos del timer.  <a href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713">Más...</a><br /></td></tr>
+<tr class="separator:a1ff33d7c0529133f1f46217f10833713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:acdbf50286d94285fc60fb601d3734a0a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#acdbf50286d94285fc60fb601d3734a0a">simo_timer_config</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer, <a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713">TIMER_UNIT</a> unit, uint16_t time)</td></tr>
+<tr class="memdesc:acdbf50286d94285fc60fb601d3734a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura el timer para generar eventos de desborde en intervalos definidos de tiempo.  <a href="timer_8h.html#acdbf50286d94285fc60fb601d3734a0a">Más...</a><br /></td></tr>
+<tr class="separator:acdbf50286d94285fc60fb601d3734a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37992ae90070c581d1b4ab8ad98a7bdf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#a37992ae90070c581d1b4ab8ad98a7bdf">simo_timer_start</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer)</td></tr>
+<tr class="memdesc:a37992ae90070c581d1b4ab8ad98a7bdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activa el timer y la interrupcion asociada. Si no se configura la interrupcion el evento no llama a la funcion callback.  <a href="timer_8h.html#a37992ae90070c581d1b4ab8ad98a7bdf">Más...</a><br /></td></tr>
+<tr class="separator:a37992ae90070c581d1b4ab8ad98a7bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0788d19923ef95e03d55070e87e67e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#a3d0788d19923ef95e03d55070e87e67e">simo_timer_stop</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer)</td></tr>
+<tr class="memdesc:a3d0788d19923ef95e03d55070e87e67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desactiva el timer y la interrupcion asociada.  <a href="timer_8h.html#a3d0788d19923ef95e03d55070e87e67e">Más...</a><br /></td></tr>
+<tr class="separator:a3d0788d19923ef95e03d55070e87e67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746074ee7b7a0b9f2f9f48ea5171389a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#a746074ee7b7a0b9f2f9f48ea5171389a">simo_timer_get_conter</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer)</td></tr>
+<tr class="memdesc:a746074ee7b7a0b9f2f9f48ea5171389a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna el valor actual del timer.  <a href="timer_8h.html#a746074ee7b7a0b9f2f9f48ea5171389a">Más...</a><br /></td></tr>
+<tr class="separator:a746074ee7b7a0b9f2f9f48ea5171389a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a5b57e83c2ea73c66f1e4110004b06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#a84a5b57e83c2ea73c66f1e4110004b06">simo_timer_ena_irq</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer, uint32_t ena)</td></tr>
+<tr class="memdesc:a84a5b57e83c2ea73c66f1e4110004b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion del timer.  <a href="timer_8h.html#a84a5b57e83c2ea73c66f1e4110004b06">Más...</a><br /></td></tr>
+<tr class="separator:a84a5b57e83c2ea73c66f1e4110004b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2e140922253e12770350c11921096b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="timer_8h.html#aed2e140922253e12770350c11921096b">simo_timer_set_event_callback</a> (<a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a> timer, <a class="el" href="core_8h.html#a193d54decbaeab08ce7b8715add38f31">timer_irq</a> callback)</td></tr>
+<tr class="separator:aed2e140922253e12770350c11921096b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de las enumeraciones</h2>
+<a id="a1ff33d7c0529133f1f46217f10833713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ff33d7c0529133f1f46217f10833713">&#9670;&nbsp;</a></span>TIMER_UNIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713">TIMER_UNIT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unidades utilizada para configurar los periodos del timer. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a1ff33d7c0529133f1f46217f10833713aef96c3935bbc898edd62723ad8cb00ea"></a>TIME_US&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1ff33d7c0529133f1f46217f10833713ab2234de0b81a6c02ab51dcfc63065bca"></a>TIME_MS&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="acdbf50286d94285fc60fb601d3734a0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbf50286d94285fc60fb601d3734a0a">&#9670;&nbsp;</a></span>simo_timer_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_timer_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="timer_8h.html#a1ff33d7c0529133f1f46217f10833713">TIMER_UNIT</a>&#160;</td>
+          <td class="paramname"><em>unit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configura el timer para generar eventos de desborde en intervalos definidos de tiempo. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a utilizar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+    <tr><td class="paramname">unit</td><td>unidades del periodo seleccionado. MS(milisegundos) o US (microseg) </td></tr>
+    <tr><td class="paramname">time</td><td>valor del periodo entre eventos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a84a5b57e83c2ea73c66f1e4110004b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a5b57e83c2ea73c66f1e4110004b06">&#9670;&nbsp;</a></span>simo_timer_ena_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_timer_ena_irq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Habilita la interrupcion del timer. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+    <tr><td class="paramname">ena</td><td>1 para habilitar 0 para deshabilitar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a746074ee7b7a0b9f2f9f48ea5171389a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a746074ee7b7a0b9f2f9f48ea5171389a">&#9670;&nbsp;</a></span>simo_timer_get_conter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t simo_timer_get_conter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retorna el valor actual del timer. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="aed2e140922253e12770350c11921096b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed2e140922253e12770350c11921096b">&#9670;&nbsp;</a></span>simo_timer_set_event_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_timer_set_event_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a193d54decbaeab08ce7b8715add38f31">timer_irq</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+    <tr><td class="paramname">callback</td><td>Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a37992ae90070c581d1b4ab8ad98a7bdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37992ae90070c581d1b4ab8ad98a7bdf">&#9670;&nbsp;</a></span>simo_timer_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_timer_start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Activa el timer y la interrupcion asociada. Si no se configura la interrupcion el evento no llama a la funcion callback. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a activar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a3d0788d19923ef95e03d55070e87e67e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d0788d19923ef95e03d55070e87e67e">&#9670;&nbsp;</a></span>simo_timer_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_timer_stop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>&#160;</td>
+          <td class="paramname"><em>timer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desactiva el timer y la interrupcion asociada. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer</td><td>timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

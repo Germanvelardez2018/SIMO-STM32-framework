@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIMO: Fichero Fuente Core/simo/include/config.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SIMO
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Framework de trabajo para STM32. La idea es simplificar el trabajo de configuracion y generacion de aplicaciones simples</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a class="el" href="dir_1ffac0d2630f4824660dea6691be9d7f.html">simo</a></li><li class="navelem"><a class="el" href="dir_51ae6caf7e11bae481ee121923f41a47.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">config.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="config_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//Habilitamos el hardware UART</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="config_8h.html#a7f0b5f1c4708e3e9ce64811683a3b522">   21</a></span>&#160;<span class="preprocessor">#define C_SIMO_UART_ENA                         1</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//Habilitamos el hardware SPI</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="config_8h.html#a776aa75537a3df7687ec85dcb64ff156">   23</a></span>&#160;<span class="preprocessor">#define C_SIMO_SPI_ENA                          1</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//Habilitamos el hardware Timer                 </span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="config_8h.html#a0fc67892397e72390f3323528c6e17f1">   25</a></span>&#160;<span class="preprocessor">#define C_SIMO_TIMER_ENA                        1</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// Cantidad de instancias</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="config_8h.html#abc063e9c320f67c8a484653e7411ef56">   29</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_TIMER                        3</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="config_8h.html#a96b5037f728a1ad98d7cf5984d2dc08e">   30</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_UART                         3</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="config_8h.html#a552966f98f5b80fd0010e222de61a76c">   31</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_SPI                          2</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="config_8h.html#a65a8bd13eec756a9e6215154958c3753">   33</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_GPIO                         10</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Interrupciones</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//TIMER GLOBAL IRQ</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="config_8h.html#a0f433dfe932f86883557c3ba80156ecd">   41</a></span>&#160;<span class="preprocessor">#define  C_SIMO_TIMER_IRQ                          1</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//Habilitamos configuracion de interrupciones</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="config_8h.html#a1e5009e5da6bc5721f7f9c68055003ea">   43</a></span>&#160;<span class="preprocessor">#define  C_SIMO_TIMER_EVENT_IRQ                    1</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//UART GLOBAL  IRQ</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="config_8h.html#ad3dc54467ec892ca1d05de94b8178f57">   47</a></span>&#160;<span class="preprocessor">#define  C_SIMO_UART_IRQ                       1</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// Habilite configuracion para generar interrupciones UART</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="config_8h.html#aa20c6758fa822ad5f90a397a357e27e4">   50</a></span>&#160;<span class="preprocessor">#define  C_SIMO_UART_TX_IRQ                    1</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="config_8h.html#afc8482dad61619c8e0caa5cc4598bd40">   51</a></span>&#160;<span class="preprocessor">#define  C_SIMO_UART_RX_IRQ                    1</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//SPI GLOBAL IRQ</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="config_8h.html#ad6b1e140fe2e514c3f9ce4f48f5470a3">   55</a></span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_IRQ                        1</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//Habilitamos configuracion de interrupciones SPI</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="config_8h.html#aba2a6dad327bddf8a44d8bc8ed0cdbb2">   58</a></span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_TX_IRQ                          1</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="config_8h.html#a2c6f645beb966f0fb362301d55d52bf1">   59</a></span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_RX_IRQ                          1</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>
