@@ -26,12 +26,15 @@
 
 
 
+
+
+
 #if SIMO_SPI_ENA == 1
 
      /**
      * @brief Leer un buffer de datos mediante puerto SPI
      * 
-     * @param SPI SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI
+     * @param SPI SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI
      * @param buffer    Buffer para almacenar datos a leer.
      * @param len       Tamanio del buffer de datos a leer.
      * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
@@ -41,10 +44,16 @@
     uint32_t simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
 
 
-    /**
+
+
+
+
+
+
+  /**
      * @brief Enviar un buffer de datos mediante puerto SPI
      * 
-     * @param SPI SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI
+     * @param SPI SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI
      * @param buffer    Buffer de datos a enviar.
      * @param len       Tamanio del buffer de datos a enviar
      * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
@@ -52,6 +61,22 @@
      * @return ** uint32_t 
      */
     uint32_t simo_spi_write(SIMO_SPI spi,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
+
+
+
+
+    /**
+     * @brief Enviar y recibir un buffer de datos mediante puerto SPI
+     * 
+     * @param SPI SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI
+     * @param buffer_tx Buffer de datos a transmitir
+     * @param buffer_rx Buffer para almacenar datos leidos
+     * @param len       Tamanio del buffer de datos a enviar
+     * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
+     * @param ena_callback  Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion
+     * @return ** uint32_t 
+     */
+    uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
 
 
     /**
@@ -73,7 +98,7 @@
          /**
          * @brief Configuro una funcion callback para el evento SPI TX
          * 
-         * @param SPI SPI a utilizar. SPI_A , SPI_B o SPI_C. Visibilidad depende de NUM_SIMO_SPI
+         * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
@@ -83,11 +108,21 @@
          /**
          * @brief Configuro una funcion callback para el evento SPI RX
          * 
-         * @param SPI SPI a utilizar. SPI_A , SPI_B o SPI_C. Visibilidad depende de NUM_SIMO_SPI
+         * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
             uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,spi_irq callback);
+        #endif
+          #if SIMO_SPI_TX_RX_IRQ == 1
+         /**
+         * @brief Configuro una funcion callback para el evento SPI tanto TX como RX
+         * 
+         * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
+         * @param callback  Funcion sin argumentos y  retorna void 
+         * @return ** uint32_t   1 Exitoso, 0 Error
+         */
+            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,spi_irq callback);
         #endif
     
     #endif

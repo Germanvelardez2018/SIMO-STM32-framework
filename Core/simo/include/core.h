@@ -65,8 +65,9 @@
     #define SIMO_SPI_IRQ                C_SIMO_SPI_IRQ
         #if SIMO_SPI_IRQ == 1
             //Habilite configuracion para generar interrupciones SPI
-            #define SIMO_SPI_TX_IRQ     C_SIMO_SPI_TX_IRQ
-            #define SIMO_SPI_RX_IRQ     C_SIMO_SPI_RX_IRQ
+            #define SIMO_SPI_TX_IRQ         C_SIMO_SPI_TX_IRQ
+            #define SIMO_SPI_RX_IRQ         C_SIMO_SPI_RX_IRQ
+            #define SIMO_SPI_TX_RX_IRQ      C_SIMO_SPI_TX_RX_IRQ
             #else
             #define SIMO_SPI_TX_IRQ     0
             #define SIMO_SPI_RX_IRQ     0
@@ -165,9 +166,7 @@
         #if NUM_SIMO_SPI >1
             SPI_B,
         #endif
-        #if NUM_SIMO_SPI >2
-            SPI_C
-        #endif
+    
         } SIMO_SPI;
 
 

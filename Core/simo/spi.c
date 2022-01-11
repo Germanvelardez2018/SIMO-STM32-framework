@@ -28,6 +28,7 @@
         #if SIMO_SPI_IRQ   == 1
             static  spi_irq __SPI1_TX_IRQ__ ;
             static  spi_irq __SPI1_RX_IRQ__ ;
+            static  spi_irq __SPI1_TX_RX_IRQ__;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -45,6 +46,7 @@
         #if SIMO_SPI_IRQ   == 1
             static  spi_irq __SPI2_TX_IRQ__ ;
             static  spi_irq __SPI2_RX_IRQ__ ;
+            static  spi_irq __SPI2_TX_RX_IRQ__;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -70,10 +72,10 @@
  * @return ** SPI_HandleTypeDef* 
  */
 
-static SPI_HandleTypeDef* __get_SPI(SIMO_SPI SPI_enum)
+static SPI_HandleTypeDef* __get_spi(SIMO_SPI spi_enum)
 {
     SPI_HandleTypeDef* SPI = NULL;
-    switch (SPI_enum)
+    switch (spi_enum)
     {
         #if NUM_SIMO_SPI >0
             case SPI_A:
@@ -99,17 +101,10 @@ static SPI_HandleTypeDef* __get_SPI(SIMO_SPI SPI_enum)
 
 
 
-
-
-
-
-
-
-
-uint32_t simo_SPI_write(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback ){
+uint32_t simo_spi_write(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback ){
     uint32_t res = 0;  // retorna error por defecto
 
-        SPI_HandleTypeDef* simo_spi = __get_SPI(spi);
+        SPI_HandleTypeDef* simo_spi = __get_spi(spi);
         if(simo_spi != NULL) {  
             if (ena_callback == 1){
                  if(HAL_SPI_Transmit_IT(simo_spi,data,len) == HAL_OK){
@@ -130,10 +125,10 @@ uint32_t simo_SPI_write(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeou
 
 
 
-uint32_t simo_SPI_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
+uint32_t simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
     uint32_t res = 0;  // retorna error por defecto
 
-        SPI_HandleTypeDef* simo_spi = __get_SPI(spi);
+        SPI_HandleTypeDef* simo_spi = __get_spi(spi);
         if(simo_spi != NULL) {  
             if (ena_callback == 1){
                  if(HAL_SPI_Receive_IT(simo_spi,data,len) == HAL_OK){
@@ -154,6 +149,25 @@ uint32_t simo_SPI_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout
 }
 
 
+uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback){
+     uint32_t res = 0;  // retorna error por defecto
+
+        SPI_HandleTypeDef* simo_spi = __get_spi(spi);
+        if(simo_spi != NULL) {  
+            if (ena_callback == 1){
+                 if(HAL_SPI_TransmitReceive_IT(simo_spi,buffer_tx,buffer_rx,len) == HAL_OK){
+                res = 1; // EXITO EN LA CONFIGURACION
+                }
+            }
+            else{
+                 if(HAL_SPI_TransmitReceive(simo_spi,buffer_tx,buffer_rx,len,timeout) == HAL_OK){
+                res = 1; // EXITO EN LA CONFIGURACION
+                }
+            }           
+    }
+    return res;
+
+}
 
 
 
@@ -167,23 +181,23 @@ uint32_t simo_SPI_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout
  * @return ** uint32_t 
  */
 
-uint32_t simo_SPI_init(SIMO_SPI SPI,uint32_t baudrate){
+uint32_t simo_spi_init(SIMO_SPI SPI,uint32_t baudrate){
         uint32_t res = 0;  // retorna error por defecto
-        SPI_HandleTypeDef* simo_SPI = __get_SPI(SPI);        
+        SPI_HandleTypeDef* simo_SPI = __get_spi(SPI);        
         if(simo_SPI != NULL) {  
-            hspi2.Instance = SPI2;
-            hspi2.Init.Mode = SPI_MODE_MASTER;
-            hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-            hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
-            hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
-            hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
-            hspi2.Init.NSS = SPI_NSS_SOFT;
-            hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-            hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
-            hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
-            hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-            hspi2.Init.CRCPolynomial = 10;
-            if (HAL_SPI_Init(&hspi2) != HAL_OK)
+           ;
+            simo_SPI->Init.Mode = SPI_MODE_MASTER;
+            simo_SPI->Init.Direction = SPI_DIRECTION_2LINES;
+            simo_SPI->Init.DataSize = SPI_DATASIZE_8BIT;
+            simo_SPI->Init.CLKPolarity = SPI_POLARITY_LOW;
+            simo_SPI->Init.CLKPhase = SPI_PHASE_1EDGE;
+            simo_SPI->Init.NSS = SPI_NSS_SOFT;
+            simo_SPI->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+            simo_SPI->Init.FirstBit = SPI_FIRSTBIT_MSB;
+            simo_SPI->Init.TIMode = SPI_TIMODE_DISABLE;
+            simo_SPI->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+            simo_SPI->Init.CRCPolynomial = 10;
+            if (HAL_SPI_Init(simo_SPI) != HAL_OK)
             {
                 Error_Handler();
             }
@@ -266,40 +280,33 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 */
 void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 {
-
-
-
     #if NUM_SIMO_SPI >0
     if(hspi->Instance==SPI1)
-        {
-            /* Peripheral clock disable */
-            __HAL_RCC_USART1_CLK_DISABLE();
-            /**USART1 GPIO Configuration
-            PA9     ------> USART1_TX
-            PA10     ------> USART1_RX
-            */
-            HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
-        }
+    {
+        /* Peripheral clock disable */
+        __HAL_RCC_SPI1_CLK_DISABLE();
+
+        /**SPI1 GPIO Configuration
+        PB3     ------> SPI1_SCK
+        PB4     ------> SPI1_MISO
+        PB5     ------> SPI1_MOSI
+        */
+        HAL_GPIO_DeInit(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);
+    }
     #endif
     #if NUM_SIMO_SPI >1
     if(hspi->Instance==SPI2)
-        {
-            /* Peripheral clock disable */
-            __HAL_RCC_USART2_CLK_DISABLE();
-            /**USART2 GPIO Configuration
-             * Control por hardware
-            PA0-WKUP     ------> USART2_CTS
-            PA1     ------> USART2_RTS
-            PA2     ------> USART2_TX
-            PA3     ------> USART2_RX
-            */
-            HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
-        }
+    {
+           /* Peripheral clock disable */
+        __HAL_RCC_SPI2_CLK_DISABLE();
+        /**SPI2 GPIO Configuration
+        PB13     ------> SPI2_SCK
+        PB14     ------> SPI2_MISO
+        PB15     ------> SPI2_MOSI
+        */
+        HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15);
+    }
     #endif
-   
-    
-    
- 
 }
 
 
@@ -312,7 +319,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
 
     #if SIMO_SPI_IRQ   == 1
-        void simo_SPI_ena_irq(SIMO_SPI spi,uint32_t ena){
+        void simo_spi_ena_irq(SIMO_SPI spi,uint32_t ena){
                 IRQn_Type __SPI= 0;
                 switch (spi){
                     #if NUM_SIMO_SPI >0
@@ -327,13 +334,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
             
                         break;
                     #endif
-                    #if NUM_SIMO_SPI >2
-                        case SPI_C:
-                        
-                        __SPI= USART3_IRQn;
-        
-                        break;
-                    #endif
+                   
                         default:
                         __SPI= SPI1_IRQn; // por default, evita errores
                         break;
@@ -350,12 +351,12 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
         #if SIMO_SPI_TX_IRQ == 1
             
-            uint32_t simo_SPI_set_tx_callback(SIMO_SPI SPI,spi_irq callback)
+            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,spi_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){
                     res = 1;
-                    switch (SPI)
+                    switch (spi)
                     {
                         #if NUM_SIMO_SPI >0
                             case SPI_A:
@@ -367,11 +368,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                             __SPI2_TX_IRQ__ = callback;
                             break;
                         #endif
-                        #if NUM_SIMO_SPI >2
-                            case SPI_C:
-                            __SPI3_TX_IRQ__ = callback;
-                            break;
-                        #endif
+                     
                             default:
                             res= 0;
                             break;
@@ -397,13 +394,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                 }
             
             #endif
-            #if NUM_SIMO_SPI >2
-                if(hspi == &hspi3){
-                // Funcion callback SPI3
-                if(__SPI3_TX_IRQ__ != NULL) __SPI3_TX_IRQ__();
-                }
-        
-            #endif
+           
 
             }
 
@@ -412,30 +403,25 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
         
         #if SIMO_SPI_RX_IRQ == 1
 
-            void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hSPI){
+            void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi){
 
                     #if NUM_SIMO_SPI >0
-                        if(hSPI == &hspi1){
+                        if(hspi == &hspi1){
                         //funcion callback SPI1
                         if(__SPI1_RX_IRQ__ != NULL) __SPI1_RX_IRQ__();
                         }
                     #endif
                     #if NUM_SIMO_SPI >1
-                        if(hSPI == &hspi2){
+                        if(hspi == &hspi2){
                         // funcion callbacl SPI2
                         if(__SPI2_RX_IRQ__ != NULL) __SPI2_RX_IRQ__();
                         }     
                     #endif
-                    #if NUM_SIMO_SPI >2
-                        if(hSPI == &hspi3){
-                        // Funcion callback SPI3
-                        if(__SPI3_RX_IRQ__ != NULL) __SPI3_RX_IRQ__();
-                        } 
-                    #endif
+                  
             }
         
         
-            uint32_t simo_SPI_set_rx_callback(SIMO_SPI spi,spi_irq callback)
+            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,spi_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){
@@ -452,11 +438,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                             __SPI2_RX_IRQ__ = callback;
                             break;
                         #endif
-                        #if NUM_SIMO_SPI >2
-                            case SPI_C:
-                            __SPI3_RX_IRQ__ = callback;   
-                            break;
-                        #endif
+                       
                             default:
                             res= 0;
                             break;
@@ -465,6 +447,56 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                 return res;
             }
         #endif // SIMO_SPI_RX_IRQ
+
+
+
+
+        #if SIMO_SPI_TX_RX_IRQ == 1
+
+            void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi){
+
+                    #if NUM_SIMO_SPI >0
+                        if(hspi == &hspi1){
+                        //funcion callback SPI1
+                        if(__SPI1_TX_RX_IRQ__ != NULL) __SPI1_TX_RX_IRQ__();
+                        }
+                    #endif
+                    #if NUM_SIMO_SPI >1
+                        if(hspi == &hspi2){
+                        // funcion callbacl SPI2
+                        if(__SPI2_TX_RX_IRQ__ != NULL) __SPI2_TX_RX_IRQ__();
+                        }     
+                    #endif
+                  
+            }
+        
+        
+            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,spi_irq callback)
+            {
+                uint32_t res = 0;
+            if (callback != NULL){
+                    res = 1;
+                    switch (spi)
+                    {
+                        #if NUM_SIMO_SPI >0
+                            case SPI_A:
+                            __SPI1_TX_RX_IRQ__ = callback;
+                            break;
+                        #endif
+                        #if NUM_SIMO_SPI >1
+                            case SPI_B:
+                            __SPI2_TX_RX_IRQ__ = callback;
+                            break;
+                        #endif
+                       
+                            default:
+                            res= 0;
+                            break;
+                    }
+            }
+                return res;
+            }
+        #endif // SIMO_SPI_TX_RX_IRQ
 
         
         

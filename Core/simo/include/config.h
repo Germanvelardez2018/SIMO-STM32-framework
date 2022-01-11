@@ -14,22 +14,23 @@
  *
  */
 
-// Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
 
-
-//Habilitamos el hardware UART
+//!Habilita el hardware UART
 #define C_SIMO_UART_ENA                         1
-//Habilitamos el hardware SPI
+//!Habilita el hardware SPI
 #define C_SIMO_SPI_ENA                          1
-//Habilitamos el hardware Timer                 
+//!Habilita el hardware Timer                 
 #define C_SIMO_TIMER_ENA                        1
 
 
-// Cantidad de instancias
-#define C_NUM_SIMO_TIMER                        3    // MAXIMO:  3 INSTANCIAS
-#define C_NUM_SIMO_UART                         3    // MAXIMO:  3 INSTANCIAS
-#define C_NUM_SIMO_SPI                          2    // MAXIMO:  1 INSTANCIAS, CON 2 ENTRAMOS EN CONFLICTO CON UART3 (UASRT_C)
-
+//! Cantidad de instancias
+//! Numero de instancias disponibles. Verificar  valores maximo y conflictos. Maximo: 3 instancias 
+#define C_NUM_SIMO_TIMER                        3    
+//! Numero de instancias disponibles. Verificar  valores maximo y conflictos. Maximo: 3 instancias 
+#define C_NUM_SIMO_UART                         3    
+//! Numero de instancias disponibles. Verificar  valores maximo y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3 
+#define C_NUM_SIMO_SPI                          2   
+//! Numero de instancias disponibles. Verificar  valores maximo y conflictos 
 #define C_NUM_SIMO_GPIO                         10
 
 
@@ -38,26 +39,31 @@
 
 
 //TIMER GLOBAL IRQ
+//! Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1
 #define  C_SIMO_TIMER_IRQ                          1
-//Habilitamos configuracion de interrupciones
 #define  C_SIMO_TIMER_EVENT_IRQ                    1
 
 
 //UART GLOBAL  IRQ
+//! Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1
 #define  C_SIMO_UART_IRQ                       1
 
-// Habilite configuracion para generar interrupciones UART
+//!UART INTERRUPCIONES: TX
 #define  C_SIMO_UART_TX_IRQ                    1
+//!UART INTERRUPCIONES: RX
 #define  C_SIMO_UART_RX_IRQ                    1
 
+//! Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1
+#define  C_SIMO_SPI_IRQ                             1
 
-//SPI GLOBAL IRQ
-#define  C_SIMO_SPI_IRQ                        1
 
-//Habilitamos configuracion de interrupciones SPI
+//Habilita configuracion de interrupciones SPI
+//!SPI INTERRUPCIONES: TX 
 #define  C_SIMO_SPI_TX_IRQ                          1
+//!SPI INTERRUPCIONES: RX
 #define  C_SIMO_SPI_RX_IRQ                          1
-
+//!SPI INTERRUPCIONES: TX RX
+#define  C_SIMO_SPI_TX_RX_IRQ                       1
 
 
 

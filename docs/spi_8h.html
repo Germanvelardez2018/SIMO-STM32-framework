@@ -100,6 +100,9 @@ Funciones</h2></td></tr>
 <tr class="memitem:ab151c5d56e7949de948fea9450e9a247"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#ab151c5d56e7949de948fea9450e9a247">simo_spi_write</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, uint8_t *buffer, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
 <tr class="memdesc:ab151c5d56e7949de948fea9450e9a247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enviar un buffer de datos mediante puerto SPI.  <a href="spi_8h.html#ab151c5d56e7949de948fea9450e9a247">Más...</a><br /></td></tr>
 <tr class="separator:ab151c5d56e7949de948fea9450e9a247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#aeeb1ca026ff6fc9e8f45400adecfe486">simo_spi_write_read</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, uint8_t *buffer_tx, uint8_t *buffer_rx, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
+<tr class="memdesc:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enviar y recibir un buffer de datos mediante puerto SPI.  <a href="spi_8h.html#aeeb1ca026ff6fc9e8f45400adecfe486">Más...</a><br /></td></tr>
+<tr class="separator:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bc4b84c1111b13f535d43c740f324db"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a7bc4b84c1111b13f535d43c740f324db">simo_spi_init</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, uint32_t baudrate)</td></tr>
 <tr class="memdesc:a7bc4b84c1111b13f535d43c740f324db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el puerto SPI.  <a href="spi_8h.html#a7bc4b84c1111b13f535d43c740f324db">Más...</a><br /></td></tr>
 <tr class="separator:a7bc4b84c1111b13f535d43c740f324db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,6 +114,9 @@ Funciones</h2></td></tr>
 <tr class="memitem:ad3c5d0dadc09a1e222079484d64f977c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#ad3c5d0dadc09a1e222079484d64f977c">simo_spi_set_rx_callback</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, <a class="el" href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a> callback)</td></tr>
 <tr class="memdesc:ad3c5d0dadc09a1e222079484d64f977c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuro una funcion callback para el evento SPI RX.  <a href="spi_8h.html#ad3c5d0dadc09a1e222079484d64f977c">Más...</a><br /></td></tr>
 <tr class="separator:ad3c5d0dadc09a1e222079484d64f977c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2771ee1531f6ca0019ffda4f3805ee"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a4c2771ee1531f6ca0019ffda4f3805ee">simo_spi_set_tx_rx_callback</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, <a class="el" href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a> callback)</td></tr>
+<tr class="memdesc:a4c2771ee1531f6ca0019ffda4f3805ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuro una funcion callback para el evento SPI tanto TX como RX.  <a href="spi_8h.html#a4c2771ee1531f6ca0019ffda4f3805ee">Más...</a><br /></td></tr>
+<tr class="separator:a4c2771ee1531f6ca0019ffda4f3805ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
 <div class="textblock"><p>Driver para abstraer hardware SPI. </p>
@@ -232,7 +238,7 @@ Funciones</h2></td></tr>
 <p>Leer un buffer de datos mediante puerto SPI. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">SPI</td><td>SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">SPI</td><td>SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI </td></tr>
     <tr><td class="paramname">buffer</td><td>Buffer para almacenar datos a leer. </td></tr>
     <tr><td class="paramname">len</td><td>Tamanio del buffer de datos a leer. </td></tr>
     <tr><td class="paramname">timeout</td><td>Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado </td></tr>
@@ -273,7 +279,7 @@ Funciones</h2></td></tr>
 <p>Configuro una funcion callback para el evento SPI RX. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">SPI</td><td>SPI a utilizar. SPI_A , SPI_B o SPI_C. Visibilidad depende de NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">SPI</td><td>SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI </td></tr>
     <tr><td class="paramname">callback</td><td>Funcion sin argumentos y retorna void </td></tr>
   </table>
   </dd>
@@ -311,7 +317,45 @@ Funciones</h2></td></tr>
 <p>Configuro una funcion callback para el evento SPI TX. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">SPI</td><td>SPI a utilizar. SPI_A , SPI_B o SPI_C. Visibilidad depende de NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">SPI</td><td>SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">callback</td><td>Funcion sin argumentos y retorna void </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t 1 Exitoso, 0 Error </dd></dl>
+
+</div>
+</div>
+<a id="a4c2771ee1531f6ca0019ffda4f3805ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2771ee1531f6ca0019ffda4f3805ee">&#9670;&nbsp;</a></span>simo_spi_set_tx_rx_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_spi_set_tx_rx_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a>&#160;</td>
+          <td class="paramname"><em>spi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59">spi_irq</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configuro una funcion callback para el evento SPI tanto TX como RX. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">SPI</td><td>SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI </td></tr>
     <tr><td class="paramname">callback</td><td>Funcion sin argumentos y retorna void </td></tr>
   </table>
   </dd>
@@ -367,8 +411,74 @@ Funciones</h2></td></tr>
 <p>Enviar un buffer de datos mediante puerto SPI. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">SPI</td><td>SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">SPI</td><td>SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI </td></tr>
     <tr><td class="paramname">buffer</td><td>Buffer de datos a enviar. </td></tr>
+    <tr><td class="paramname">len</td><td>Tamanio del buffer de datos a enviar </td></tr>
+    <tr><td class="paramname">timeout</td><td>Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado </td></tr>
+    <tr><td class="paramname">ena_callback</td><td>Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="aeeb1ca026ff6fc9e8f45400adecfe486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb1ca026ff6fc9e8f45400adecfe486">&#9670;&nbsp;</a></span>simo_spi_write_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_spi_write_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a>&#160;</td>
+          <td class="paramname"><em>spi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buffer_tx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buffer_rx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enviar y recibir un buffer de datos mediante puerto SPI. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">SPI</td><td>SPI a iniciar. SPI_A, SPI_B . NUM_SIMO_SPI </td></tr>
+    <tr><td class="paramname">buffer_tx</td><td>Buffer de datos a transmitir </td></tr>
+    <tr><td class="paramname">buffer_rx</td><td>Buffer para almacenar datos leidos </td></tr>
     <tr><td class="paramname">len</td><td>Tamanio del buffer de datos a enviar </td></tr>
     <tr><td class="paramname">timeout</td><td>Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado </td></tr>
     <tr><td class="paramname">ena_callback</td><td>Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion </td></tr>

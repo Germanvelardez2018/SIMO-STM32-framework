@@ -88,33 +88,49 @@ defines</h2></td></tr>
 <tr class="memdesc:a7f0b5f1c4708e3e9ce64811683a3b522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Archivo de configuracion del framework.  <a href="config_8h.html#a7f0b5f1c4708e3e9ce64811683a3b522">Más...</a><br /></td></tr>
 <tr class="separator:a7f0b5f1c4708e3e9ce64811683a3b522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a776aa75537a3df7687ec85dcb64ff156"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a776aa75537a3df7687ec85dcb64ff156">C_SIMO_SPI_ENA</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a776aa75537a3df7687ec85dcb64ff156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita el hardware SPI.  <a href="config_8h.html#a776aa75537a3df7687ec85dcb64ff156">Más...</a><br /></td></tr>
 <tr class="separator:a776aa75537a3df7687ec85dcb64ff156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fc67892397e72390f3323528c6e17f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a0fc67892397e72390f3323528c6e17f1">C_SIMO_TIMER_ENA</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a0fc67892397e72390f3323528c6e17f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita el hardware Timer <br  />
+  <a href="config_8h.html#a0fc67892397e72390f3323528c6e17f1">Más...</a><br /></td></tr>
 <tr class="separator:a0fc67892397e72390f3323528c6e17f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc063e9c320f67c8a484653e7411ef56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#abc063e9c320f67c8a484653e7411ef56">C_NUM_SIMO_TIMER</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:abc063e9c320f67c8a484653e7411ef56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96b5037f728a1ad98d7cf5984d2dc08e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a96b5037f728a1ad98d7cf5984d2dc08e">C_NUM_SIMO_UART</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memdesc:a96b5037f728a1ad98d7cf5984d2dc08e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numero de instancias disponibles. Verificar valores maximo y conflictos. Maximo: 3 instancias.  <a href="config_8h.html#a96b5037f728a1ad98d7cf5984d2dc08e">Más...</a><br /></td></tr>
 <tr class="separator:a96b5037f728a1ad98d7cf5984d2dc08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a552966f98f5b80fd0010e222de61a76c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a552966f98f5b80fd0010e222de61a76c">C_NUM_SIMO_SPI</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:a552966f98f5b80fd0010e222de61a76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numero de instancias disponibles. Verificar valores maximo y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3.  <a href="config_8h.html#a552966f98f5b80fd0010e222de61a76c">Más...</a><br /></td></tr>
 <tr class="separator:a552966f98f5b80fd0010e222de61a76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65a8bd13eec756a9e6215154958c3753"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a65a8bd13eec756a9e6215154958c3753">C_NUM_SIMO_GPIO</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:a65a8bd13eec756a9e6215154958c3753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numero de instancias disponibles. Verificar valores maximo y conflictos.  <a href="config_8h.html#a65a8bd13eec756a9e6215154958c3753">Más...</a><br /></td></tr>
 <tr class="separator:a65a8bd13eec756a9e6215154958c3753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f433dfe932f86883557c3ba80156ecd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a0f433dfe932f86883557c3ba80156ecd">C_SIMO_TIMER_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a0f433dfe932f86883557c3ba80156ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1.  <a href="config_8h.html#a0f433dfe932f86883557c3ba80156ecd">Más...</a><br /></td></tr>
 <tr class="separator:a0f433dfe932f86883557c3ba80156ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e5009e5da6bc5721f7f9c68055003ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a1e5009e5da6bc5721f7f9c68055003ea">C_SIMO_TIMER_EVENT_IRQ</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a1e5009e5da6bc5721f7f9c68055003ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3dc54467ec892ca1d05de94b8178f57"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad3dc54467ec892ca1d05de94b8178f57">C_SIMO_UART_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ad3dc54467ec892ca1d05de94b8178f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1.  <a href="config_8h.html#ad3dc54467ec892ca1d05de94b8178f57">Más...</a><br /></td></tr>
 <tr class="separator:ad3dc54467ec892ca1d05de94b8178f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa20c6758fa822ad5f90a397a357e27e4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa20c6758fa822ad5f90a397a357e27e4">C_SIMO_UART_TX_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:aa20c6758fa822ad5f90a397a357e27e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART INTERRUPCIONES: TX.  <a href="config_8h.html#aa20c6758fa822ad5f90a397a357e27e4">Más...</a><br /></td></tr>
 <tr class="separator:aa20c6758fa822ad5f90a397a357e27e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8482dad61619c8e0caa5cc4598bd40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#afc8482dad61619c8e0caa5cc4598bd40">C_SIMO_UART_RX_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:afc8482dad61619c8e0caa5cc4598bd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">UART INTERRUPCIONES: RX.  <a href="config_8h.html#afc8482dad61619c8e0caa5cc4598bd40">Más...</a><br /></td></tr>
 <tr class="separator:afc8482dad61619c8e0caa5cc4598bd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6b1e140fe2e514c3f9ce4f48f5470a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad6b1e140fe2e514c3f9ce4f48f5470a3">C_SIMO_SPI_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ad6b1e140fe2e514c3f9ce4f48f5470a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1.  <a href="config_8h.html#ad6b1e140fe2e514c3f9ce4f48f5470a3">Más...</a><br /></td></tr>
 <tr class="separator:ad6b1e140fe2e514c3f9ce4f48f5470a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2a6dad327bddf8a44d8bc8ed0cdbb2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aba2a6dad327bddf8a44d8bc8ed0cdbb2">C_SIMO_SPI_TX_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:aba2a6dad327bddf8a44d8bc8ed0cdbb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI INTERRUPCIONES: TX.  <a href="config_8h.html#aba2a6dad327bddf8a44d8bc8ed0cdbb2">Más...</a><br /></td></tr>
 <tr class="separator:aba2a6dad327bddf8a44d8bc8ed0cdbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c6f645beb966f0fb362301d55d52bf1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a2c6f645beb966f0fb362301d55d52bf1">C_SIMO_SPI_RX_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a2c6f645beb966f0fb362301d55d52bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI INTERRUPCIONES: RX.  <a href="config_8h.html#a2c6f645beb966f0fb362301d55d52bf1">Más...</a><br /></td></tr>
 <tr class="separator:a2c6f645beb966f0fb362301d55d52bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abff46f51790530bae4d8eee94d243b42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#abff46f51790530bae4d8eee94d243b42">C_SIMO_SPI_TX_RX_IRQ</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:abff46f51790530bae4d8eee94d243b42"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI INTERRUPCIONES: TX RX.  <a href="config_8h.html#abff46f51790530bae4d8eee94d243b42">Más...</a><br /></td></tr>
+<tr class="separator:abff46f51790530bae4d8eee94d243b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
 <div class="textblock"><dl class="section author"><dt>Autor</dt><dd>German Velardez (<a href="#" onclick="location.href='mai'+'lto:'+'you'+'@d'+'oma'+'in'+'.co'+'m'; return false;">you@d<span style="display: none;">.nosp@m.</span>omai<span style="display: none;">.nosp@m.</span>n.com</a>) </dd></dl>
@@ -134,6 +150,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Numero de instancias disponibles. Verificar valores maximo y conflictos. </p>
+
 </div>
 </div>
 <a id="a552966f98f5b80fd0010e222de61a76c"></a>
@@ -148,6 +166,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Numero de instancias disponibles. Verificar valores maximo y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3. </p>
+
 </div>
 </div>
 <a id="abc063e9c320f67c8a484653e7411ef56"></a>
@@ -161,6 +181,8 @@ defines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Cantidad de instancias Numero de instancias disponibles. Verificar valores maximo y conflictos. Maximo: 3 instancias <br  />
+ </p>
 
 </div>
 </div>
@@ -176,6 +198,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Numero de instancias disponibles. Verificar valores maximo y conflictos. Maximo: 3 instancias. </p>
+
 </div>
 </div>
 <a id="a776aa75537a3df7687ec85dcb64ff156"></a>
@@ -189,6 +213,8 @@ defines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Habilita el hardware SPI. </p>
 
 </div>
 </div>
@@ -204,6 +230,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1. </p>
+
 </div>
 </div>
 <a id="a2c6f645beb966f0fb362301d55d52bf1"></a>
@@ -217,6 +245,8 @@ defines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>SPI INTERRUPCIONES: RX. </p>
 
 </div>
 </div>
@@ -232,6 +262,24 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>SPI INTERRUPCIONES: TX. </p>
+
+</div>
+</div>
+<a id="abff46f51790530bae4d8eee94d243b42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abff46f51790530bae4d8eee94d243b42">&#9670;&nbsp;</a></span>C_SIMO_SPI_TX_RX_IRQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C_SIMO_SPI_TX_RX_IRQ&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SPI INTERRUPCIONES: TX RX. </p>
+
 </div>
 </div>
 <a id="a0fc67892397e72390f3323528c6e17f1"></a>
@@ -245,6 +293,9 @@ defines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Habilita el hardware Timer <br  />
+ </p>
 
 </div>
 </div>
@@ -274,6 +325,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1. </p>
+
 </div>
 </div>
 <a id="a7f0b5f1c4708e3e9ce64811683a3b522"></a>
@@ -289,6 +342,7 @@ defines</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Archivo de configuracion del framework. </p>
+<p>Habilita el hardware UART </p>
 
 </div>
 </div>
@@ -304,6 +358,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Habilita interrupcion. Se debe configurar el callback correspondientes, habilitar la interrupcion y llamar a la funcion con ena_callback = 1. </p>
+
 </div>
 </div>
 <a id="afc8482dad61619c8e0caa5cc4598bd40"></a>
@@ -318,6 +374,8 @@ defines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>UART INTERRUPCIONES: RX. </p>
+
 </div>
 </div>
 <a id="aa20c6758fa822ad5f90a397a357e27e4"></a>
@@ -331,6 +389,8 @@ defines</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>UART INTERRUPCIONES: TX. </p>
 
 </div>
 </div>

@@ -21,7 +21,8 @@
 
 //Simo
 #include "stdio.h"
-#include "uart.h"     
+#include "uart.h"
+#include "spi.h"     
 #include "config.h"
 #include "timer.h"
 #include "clock_config.h"
@@ -38,47 +39,18 @@ uint32_t counter = 0;
 #define TIME_COUNTS 10
 /* USER CODE END Includes */
 
-
-
-
-static void __irq_tim(){
-  HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-  HAL_GPIO_TogglePin(LED_GPIO_Port,GPIO_PIN_3);
-
-  // simo_uart_write(UART_A,(uint8_t*)"timer irq \r\n",strlen("timer irq \r\n"),500,0);
-  // counter ++;
-//   if (counter >= TIME_COUNTS) simo_timer_stop(TIMER_B);
-
-}
-
-
-static void __irq__tx(){
-   HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
-
-}
-
-
-
-
-
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 static void MX_GPIO_Init(void);
 
-static void GPIO_PB3_Init(void);
 
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
+static void __irq_spi_tx(){
+     HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
-/* USER CODE END 0 */
+}
+
+
+
 
 /**
   * @brief  The application entry point.
@@ -99,48 +71,30 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  GPIO_PB3_Init();
 
 
  
   
-  #define BAUDRATE      (uint32_t)115200
-  
-  #define BUFFER_LEN    100
-  #define MESSAGE       "\r\nSimo STM32 \r\n"
   
 
 
-  simo_uart_init(UART,115200);
-
-  simo_uart_write(UART,(uint8_t*)" INIT PROGRAM\r\n",strlen(" INIT PROGRAM\r\n"),500,0);
-
-
+ // simo_uart_init(UART,115200);
+  simo_spi_init(SPI_A,0);
+  simo_spi_set_tx_rx_callback(SPI_A,__irq_spi_tx);
+  simo_spi_ena_irq(SPI_A,1);
   
 
 
 
 
-  uint32_t res = simo_timer_config(TIMER,TIME_MS,170);
-
-  if (res == 1){
-   simo_uart_write(UART,(uint8_t*)" SUCCEFULL\r\n",strlen(" SUCCEFULL\r\n"),500,0);
-   simo_timer_set_event_callback(TIMER,__irq_tim);
-   simo_timer_ena_irq(TIMER,1);
-   simo_timer_start(TIMER);
-
-  }
-  else{
-    simo_uart_write(UART,(uint8_t*)" FULT\r\n",strlen(" FULT\r\n"),500,0);
-  }
-
-
+uint8_t data[4]={0,1,2,3};
+uint8_t buffer_rx[4] = {0};
   while (1)
   {
-    sprintf((char*)buffer_rx,"clock es : %ld \r\n",45);
 
-    simo_uart_write(UART,(uint8_t*)buffer_rx,strlen((char*)buffer_rx),500,0);
-    HAL_Delay(2000);
+
+    simo_spi_write_read(SPI_A,data,buffer_rx,4,1000,1);
+    HAL_Delay(1000);
   
   
   }
@@ -185,30 +139,6 @@ static void MX_GPIO_Init(void)
 
 
 
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void GPIO_PB3_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PB2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-}
 
 /* USER CODE BEGIN 4 */
 

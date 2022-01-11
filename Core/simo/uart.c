@@ -519,7 +519,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
         
         
         #endif      // SIMO_UART_IRQ
-#endif  // SIMO_UART_ENA
+#endif  // SIMO_UART_ENA 
 
 
 
