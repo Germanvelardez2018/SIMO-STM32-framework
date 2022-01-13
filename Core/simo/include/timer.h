@@ -73,7 +73,7 @@
              * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
              * @return ** uint32_t 
              */
-            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,timer_irq callback);
+            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback);
         #endif
 
     #endif

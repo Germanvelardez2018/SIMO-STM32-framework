@@ -73,7 +73,7 @@
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
-            uint32_t simo_uart_set_tx_callback(SIMO_UART uart,uart_irq callback);
+            uint32_t simo_uart_set_tx_callback(SIMO_UART uart,callback_irq callback);
         #endif
         #if SIMO_UART_RX_IRQ == 1
          /**
@@ -83,7 +83,7 @@
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
-            uint32_t simo_uart_set_rx_callback(SIMO_UART uart,uart_irq callback);
+            uint32_t simo_uart_set_rx_callback(SIMO_UART uart,callback_irq callback);
         #endif
     
     #endif

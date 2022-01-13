@@ -22,7 +22,7 @@
     #if NUM_SIMO_TIMER >0
         TIM_HandleTypeDef htim1;
         #if SIMO_TIMER_IRQ   == 1
-            static  timer_irq __TIMER1_EVENT_IRQ__ ;
+            static  callback_irq __TIMER1_EVENT_IRQ__ ;
             void TIM1_UP_IRQHandler(void){
                   HAL_TIM_IRQHandler(&htim1);
             }
@@ -31,7 +31,7 @@
     #if NUM_SIMO_TIMER >1
         TIM_HandleTypeDef htim2;
         #if SIMO_TIMER_IRQ   == 1
-            static  timer_irq __TIMER2_EVENT_IRQ__ ;   
+            static  callback_irq __TIMER2_EVENT_IRQ__ ;   
             void TIM2_IRQHandler(void){
                 HAL_TIM_IRQHandler(&htim2);
            }
@@ -40,7 +40,7 @@
     #if NUM_SIMO_TIMER >2
         TIM_HandleTypeDef htim3;
         #if SIMO_TIMER_IRQ   == 1
-            static  timer_irq __TIMER3_EVENT_IRQ__ ;
+            static  callback_irq __TIMER3_EVENT_IRQ__ ;
             void TIM3_IRQHandler(void){
                 HAL_TIM_IRQHandler(&htim3);
             }
@@ -111,7 +111,7 @@
 
             //setea el callback
 
-            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,timer_irq callback)
+            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){

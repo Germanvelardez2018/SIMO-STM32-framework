@@ -124,7 +124,7 @@
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,spi_irq callback);
+            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
         #if SIMO_SPI_RX_IRQ == 1
          /**
@@ -134,7 +134,7 @@
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,spi_irq callback);
+            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
           #if SIMO_SPI_TX_RX_IRQ == 1
          /**
@@ -144,7 +144,7 @@
          * @param callback  Funcion sin argumentos y  retorna void 
          * @return ** uint32_t   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,spi_irq callback);
+            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
     
     #endif

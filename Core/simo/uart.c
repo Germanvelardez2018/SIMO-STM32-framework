@@ -19,8 +19,8 @@
     #if NUM_SIMO_UART >0
         UART_HandleTypeDef huart1;
         #if SIMO_UART_IRQ   == 1
-            static  uart_irq __UART1_TX_IRQ__ ;
-            static  uart_irq __UART1_RX_IRQ__ ;
+            static  callback_irq __UART1_TX_IRQ__ ;
+            static  callback_irq __UART1_RX_IRQ__ ;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -34,8 +34,8 @@
     #if NUM_SIMO_UART >1
         UART_HandleTypeDef huart2;
         #if SIMO_UART_IRQ   == 1
-            static  uart_irq __UART2_TX_IRQ__ ;
-            static  uart_irq __UART2_RX_IRQ__ ;
+            static  callback_irq __UART2_TX_IRQ__ ;
+            static  callback_irq __UART2_RX_IRQ__ ;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -49,8 +49,8 @@
     #if NUM_SIMO_UART >2
         UART_HandleTypeDef huart3;
         #if SIMO_UART_IRQ   == 1
-            static  uart_irq __UART3_TX_IRQ__ ;
-            static  uart_irq __UART3_RX_IRQ__ ;
+            static  callback_irq __UART3_TX_IRQ__ ;
+            static  callback_irq __UART3_RX_IRQ__ ;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -400,7 +400,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
         #if SIMO_UART_TX_IRQ == 1
             
-            uint32_t simo_uart_set_tx_callback(SIMO_UART uart,uart_irq callback)
+            uint32_t simo_uart_set_tx_callback(SIMO_UART uart,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){
@@ -485,7 +485,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
             }
         
         
-            uint32_t simo_uart_set_rx_callback(SIMO_UART uart,uart_irq callback)
+            uint32_t simo_uart_set_rx_callback(SIMO_UART uart,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){

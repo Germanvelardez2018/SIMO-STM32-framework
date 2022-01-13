@@ -21,7 +21,7 @@
 
 
 
-    #if SIMO_GPIO_ENA == 1
+#if SIMO_GPIO_ENA == 1
 
 
 typedef struct{
@@ -67,13 +67,6 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
 
 
 
-
-
-
-
-
-
-
         /**
          * @brief 
          * 
@@ -81,21 +74,48 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
          * @param mode 
          * @return ** uint32_t 
          */
-        void simo_gpio_set(SIMO_GPIO_PIN simo_pin, simo_gpio_mode mode){
-        __pin__ pin = {0};
-        __get_pin(simo_pin,&pin);
-        GPIO_InitTypeDef GPIO_InitStruct = {0};
-        /*Configure GPIO pin Output Level */
-        HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);
+ void simo_gpio_set(SIMO_GPIO_PIN simo_pin, simo_gpio_mode mode){
+     __pin__ pin = {0};
+     __get_pin(simo_pin,&pin);
+     GPIO_InitTypeDef GPIO_InitStruct = {0};
+    switch (mode)  // Salida por default
+    {
+            case  SIMO_GPIO_OUT:
+            GPIO_InitStruct.Mode =  GPIO_MODE_OUTPUT_PP; 
+            HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);// Para seguridad del dispositivo
+            break;
+            case  SIMO_GPIO_IN:
+            GPIO_InitStruct.Mode =GPIO_MODE_INPUT ;
+            break;
 
-        /*Configure GPIO pin : PB2 */
-        GPIO_InitStruct.Pin = pin.index;
-        GPIO_InitStruct.Mode = (mode == SIMO_GPIO_IN)?  GPIO_MODE_INPUT  :GPIO_MODE_OUTPUT_PP;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-        HAL_GPIO_Init(pin.port, &GPIO_InitStruct);
+         #if SIMO_GPIO_ADC == 1
+             case SIMO_GPIO_ADC:
+             GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+             break;
+         #endif 
 
-        }
+         #if SIMO_GPIO_EXT_IRQ == 1 
+             case  SIMO_GPIO_EXT_IT_RISING:
+             GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+             break;
+             case  SIMO_GPIO_EXT_IT_FALLING:
+             GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+             break;
+             case  SIMO_GPIO_EXT_IT_RISING_FALLING:
+             GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+             break;
+         #endif
+            
+         default:
+         GPIO_InitStruct.Mode =  GPIO_MODE_OUTPUT_PP; 
+         HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);// Para seguridad del dispositivo
+         break;
+    }
+    GPIO_InitStruct.Pin = pin.index;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    HAL_GPIO_Init(pin.port, &GPIO_InitStruct);
+}
 
 
 
@@ -140,6 +160,35 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
 
         #if SIMO_GPIO_EXT_IRQ   == 1
 
+
+            /**
+             * @brief This function handles EXTI line0 interrupt.
+             */
+             #if NUM_SIMO_GPIO > 0 
+
+            callback_gpio_ext_it __GPIO_EXT_CALLBACK__ = NULL;
+            void EXTI0_IRQHandler(void){ HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);}
+            void EXTI1_IRQHandler(void){ HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);}
+            void EXTI2_IRQHandler(void){ HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);}
+            void EXTI3_IRQHandler(void){ HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);}
+            void EXTI4_IRQHandler(void){ HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);}
+            #endif
+            #if NUM_SIMO_GPIO > 5 
+            uint16_t __GPIO_EXTI9_5_ = 0;
+            //Solo podemos tener un solo canal como fuente de esta interrupcion
+            void EXTI9_5_IRQHandler(void){
+                HAL_GPIO_EXTI_IRQHandler(__GPIO_EXTI9_5_);
+            }
+            #endif
+            #if NUM_SIMO_GPIO > 15 
+            uint16_t __GPIO_EXTI15_10_ = 0;
+            //Solo podemos tener un solo canal como fuente de esta interrupcion
+            void EXTI15_10_IRQHandler(void){
+                HAL_GPIO_EXTI_IRQHandler(__GPIO_EXTI15_10_);
+            }
+            #endif
+
+
             /**
              * @brief  Habilita la interrupcion del timer
              * 
@@ -147,9 +196,80 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
              * @param ena  1 para habilitar 0 para deshabilitar
              */
             void simo_gpio_ena_irq(SIMO_GPIO_PIN pin,uint32_t ena){
+                IRQn_Type __GPIO_IRQ= 0;
+                switch (pin  % SIMO_GPIO_15){
+                     #if NUM_SIMO_GPIO > 0 
+                        case SIMO_GPIO_0:
+                        __GPIO_IRQ= EXTI0_IRQn;
+                        break;
                 
+                        case SIMO_GPIO_1:
+                        __GPIO_IRQ= EXTI1_IRQn;
+                        break;
+                  
+                        case SIMO_GPIO_2:
+                        __GPIO_IRQ= EXTI2_IRQn;
+                        break;
+                         case SIMO_GPIO_3:
+                        __GPIO_IRQ= EXTI3_IRQn;
+                        break;
+                
+                        case SIMO_GPIO_4:
+                        __GPIO_IRQ= EXTI4_IRQn;
+                        break;
+                  #endif
+                   #if NUM_SIMO_GPIO > 5 
+                        case SIMO_GPIO_5:
+                        __GPIO_IRQ= EXTI9_5_IRQn;
+                        __GPIO_EXTI9_5_ = (1 <<SIMO_GPIO_5);
+                        break;
+                        case SIMO_GPIO_6:
+                        __GPIO_IRQ= EXTI9_5_IRQn;
+                        __GPIO_EXTI9_5_ = (1 <<SIMO_GPIO_6);
+                        break;
+                
+                        case SIMO_GPIO_7:
+                        __GPIO_IRQ= EXTI9_5_IRQn;
+                        __GPIO_EXTI9_5_ = (1 <<SIMO_GPIO_7);
+                        break;
+                        case SIMO_GPIO_8:
+                        __GPIO_IRQ= EXTI9_5_IRQn;
+                        __GPIO_EXTI9_5_ = (1 <<SIMO_GPIO_8);
+                        break;
+                        case SIMO_GPIO_9:
+                        __GPIO_IRQ= EXTI9_5_IRQn;
+                        __GPIO_EXTI9_5_ = (1 <<SIMO_GPIO_9);
+                        
+                        break;
+                    #endif
+                  
+                        default:
+                    #if NUM_SIMO_GPIO > 15
+                        __GPIO_IRQ= EXTI15_10_IRQn; // por default, evita errores
+                        __GPIO_EXTI15_10_ = (1 <<(pin  % SIMO_GPIO_15));
+                    #endif
+                        break;
+                }
+                if(ena != 0){
+                    HAL_NVIC_SetPriority(__GPIO_IRQ, 0, 0);
+                    HAL_NVIC_EnableIRQ(__GPIO_IRQ);
+                }
+                else{
+                    HAL_NVIC_DisableIRQ(__GPIO_IRQ);
+                }
             }
             
+
+
+            /**
+                 * @brief  EXTI line detection callbacks.
+                 * @param  GPIO_Pin: Specifies the pins connected EXTI line
+                 * @retval None
+                 */
+                void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+                {
+                    if(__GPIO_EXT_CALLBACK__ != NULL)__GPIO_EXT_CALLBACK__(GPIO_Pin);
+                }
 
 
             /**
@@ -160,9 +280,14 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
              * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
              * @return ** uint32_t 
              */
-            uint32_t simo_gpio_set_extern_event_callback(SIMO_GPIO_PIN Pin,simo_gpio_event evento,timer_irq callback){
-                return 0;
+            uint32_t simo_gpio_set_extern_event_callback(callback_gpio_ext_it callback){
+                uint32_t res = 0;
+                if( callback != NULL) {
+                __GPIO_EXT_CALLBACK__= callback;
+                res = 1;
+                }
+                 return res;
             }
         #endif
 
-    #endif
+#endif

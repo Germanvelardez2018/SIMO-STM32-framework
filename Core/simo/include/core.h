@@ -76,9 +76,14 @@
         #endif
 
 
-#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ                         
+#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ   
 
-#define SIMO_TIMER_IRQ              C_SIMO_TIMER_IRQ
+#if SIMO_GPIO_EXT_IRQ == 1
+    typedef void (*callback_gpio_ext_it)(uint16_t);
+
+#endif 
+
+#define SIMO_TIMER_IRQ                  C_SIMO_TIMER_IRQ
 
 
 
@@ -124,9 +129,7 @@
         #endif
         } SIMO_TIMER;
 
-        #if SIMO_TIMER_IRQ   == 1
-            typedef void (*timer_irq)(void);
-        #endif
+       
 
     #endif
 
@@ -149,9 +152,7 @@
         } SIMO_UART;
 
 
-        #if SIMO_UART_IRQ   == 1
-            typedef void (*uart_irq)(void);
-        #endif
+     
 
     #endif
 
@@ -174,11 +175,14 @@
 
 
 
-        #if SIMO_SPI_IRQ   == 1
-            typedef void (*spi_irq)(void);
-        #endif
+      
 
     #endif
+
+    //! Funcion callback asociada a una interupcion por hardware
+    typedef void (*callback_irq)(void);
+
+    
 
 
 #endif

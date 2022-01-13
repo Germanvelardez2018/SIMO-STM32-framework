@@ -40,15 +40,14 @@ uint32_t counter = 0;
 #define TIME_COUNTS 10
 /* USER CODE END Includes */
 
-static void MX_GPIO_Init(void);
+
+uint32_t ena = 0;
 
 
-
-
-static void __irq_spi_tx(){
+static void __IRQ_GPIO_EXT(uint16_t pin){
     // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
-     simo_gpio_toogle(SIMO_GPIO_17);
+     ena = 1;
 
 }
 
@@ -70,34 +69,22 @@ int main(void)
   /* Configure the system clock */
   simo_clock_config();
 
-  
 
-  /* Initialize all configured peripherals */
-  //MX_GPIO_Init();
 
    simo_gpio_set(SIMO_GPIO_17,SIMO_GPIO_OUT);
+   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_EXT_IT_RISING_FALLING);//PB3
+   simo_gpio_set_extern_event_callback(__IRQ_GPIO_EXT);
+
+   simo_gpio_ena_irq(SIMO_GPIO_18,1); // Habilito interrupciones
  
-  
-  
 
-
- // simo_uart_init(UART,115200);
-  simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
-  simo_spi_set_tx_rx_callback(SPI_A,__irq_spi_tx);
-  simo_spi_ena_irq(SPI_A,1);
-  
-
-
-
-
-uint8_t data[4]={0,1,2,3};
-uint8_t buffer_rx[4] = {0};
   while (1)
   {
 
 
-    simo_spi_write_read(SPI_A,data,buffer_rx,4,1000,1);
+  
     HAL_Delay(250);
+    if(ena == 1) simo_gpio_toogle(SIMO_GPIO_17);
   
   
   }
@@ -109,33 +96,6 @@ uint8_t buffer_rx[4] = {0};
 
 
 
-
-
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PB2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-}
 
 
 

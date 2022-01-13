@@ -32,18 +32,7 @@
 
     //Señal de reloj maxima soportada por el hardware SPI.Se calcula con el clock base del spi (SPI1 APB1 y SP2 APB2 )y el valor del prescaler
     #define SPI_CLOCK_MAX        10000000 // 10Mhz
-    
-
-
-
-
-
-
-
   
-
-
- 
 
     #if NUM_SIMO_SPI >0
 
@@ -51,9 +40,9 @@
         // SPI CLOCK APB2. BAUDRATE MAX 10MHZ
         SPI_HandleTypeDef hspi1;
         #if SIMO_SPI_IRQ   == 1
-            static  spi_irq __SPI1_TX_IRQ__ ;
-            static  spi_irq __SPI1_RX_IRQ__ ;
-            static  spi_irq __SPI1_TX_RX_IRQ__;
+            static  callback_irq __SPI1_TX_IRQ__ ;
+            static  callback_irq __SPI1_RX_IRQ__ ;
+            static  callback_irq __SPI1_TX_RX_IRQ__;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -69,9 +58,9 @@
          // SPI CLOCK APB1. BAUDRATE MAX 10MHZ
         SPI_HandleTypeDef hspi2;
         #if SIMO_SPI_IRQ   == 1
-            static  spi_irq __SPI2_TX_IRQ__ ;
-            static  spi_irq __SPI2_RX_IRQ__ ;
-            static  spi_irq __SPI2_TX_RX_IRQ__;
+            static  callback_irq __SPI2_TX_IRQ__ ;
+            static  callback_irq __SPI2_RX_IRQ__ ;
+            static  callback_irq __SPI2_TX_RX_IRQ__;
             /**
              * @brief This function handles USART2 global interrupt.
              */
@@ -426,7 +415,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
         #if SIMO_SPI_TX_IRQ == 1
             
-            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,spi_irq callback)
+            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){
@@ -496,7 +485,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
             }
         
         
-            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,spi_irq callback)
+            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){
@@ -546,7 +535,7 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
             }
         
         
-            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,spi_irq callback)
+            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback)
             {
                 uint32_t res = 0;
             if (callback != NULL){

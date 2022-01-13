@@ -26,19 +26,21 @@
             //! Modos de funcionamiento
              typedef enum{
                  SIMO_GPIO_OUT,
-                 SIMO_GPIO_IN
+                 SIMO_GPIO_IN,
+                #if SIMO_GPIO_ADC == 1
+                    SIMO_GPIO_ADC,
+                #endif 
+                #if SIMO_GPIO_EXT_IRQ == 1
+                    SIMO_GPIO_EXT_IT_RISING,
+                    SIMO_GPIO_EXT_IT_FALLING,
+                    SIMO_GPIO_EXT_IT_RISING_FALLING,
+                #endif   
              }  simo_gpio_mode;
 
 
           
 
-        //! Tipo de evento externo
-
-            typedef enum{
-                SIMO_GPIO_EVENT_RISE,
-                SIMO_GPIO_EVENT_FALL,
-                SIMO_GPIO_EVENT_RISE_FALL
-            } simo_gpio_event;
+   
 
         //! Instancias de GPIO disponibles 
         typedef enum {
@@ -124,8 +126,9 @@
              * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
              * @return ** uint32_t 
              */
-            uint32_t simo_gpio_set_extern_event_callback(SIMO_GPIO_PIN Pin,simo_gpio_event evento,timer_irq callback);
-        #endif
+            uint32_t simo_gpio_set_extern_event_callback( callback_gpio_ext_it callback);
+        
+        #endif // SIMO_GPIO_EXT_IRQ
 
     #endif
 
