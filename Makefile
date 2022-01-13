@@ -38,6 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core\simo/clock_config.c \
 Core/simo/timer.c\
+Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
 Core/Src/main.c \

@@ -21,6 +21,8 @@
 #define C_SIMO_SPI_ENA                          1
 //!Habilita el hardware Timer                 
 #define C_SIMO_TIMER_ENA                        1
+//!Habilita el hardware GPIO                 
+#define C_SIMO_GPIO_ENA                         1
 
 
 //! Cantidad de instancias
@@ -31,7 +33,7 @@
 //! Numero de instancias disponibles. Verificar  valores maximo y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3 
 #define C_NUM_SIMO_SPI                          2   
 //! Numero de instancias disponibles. Verificar  valores maximo y conflictos 
-#define C_NUM_SIMO_GPIO                         10
+#define C_NUM_SIMO_GPIO                         45
 
 
 
@@ -66,7 +68,7 @@
 #define  C_SIMO_SPI_TX_RX_IRQ                       1
 
 
-
+#define C_SIMO_GPIO_EXT_IRQ                         1
 
 
 

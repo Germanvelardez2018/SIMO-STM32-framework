@@ -25,6 +25,7 @@
 #include "spi.h"     
 #include "config.h"
 #include "timer.h"
+#include "gpio.h"
 #include "clock_config.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -45,7 +46,9 @@ static void MX_GPIO_Init(void);
 
 
 static void __irq_spi_tx(){
-     HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+    // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
+
+     simo_gpio_toogle(SIMO_GPIO_17);
 
 }
 
@@ -70,16 +73,16 @@ int main(void)
   
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+  //MX_GPIO_Init();
 
-
+   simo_gpio_set(SIMO_GPIO_17,SIMO_GPIO_OUT);
  
   
   
 
 
  // simo_uart_init(UART,115200);
-  simo_spi_init(SPI_A,0);
+  simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
   simo_spi_set_tx_rx_callback(SPI_A,__irq_spi_tx);
   simo_spi_ena_irq(SPI_A,1);
   
@@ -94,7 +97,7 @@ uint8_t buffer_rx[4] = {0};
 
 
     simo_spi_write_read(SPI_A,data,buffer_rx,4,1000,1);
-    HAL_Delay(1000);
+    HAL_Delay(250);
   
   
   }

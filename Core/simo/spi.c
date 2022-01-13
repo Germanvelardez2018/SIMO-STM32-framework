@@ -16,9 +16,34 @@
 #include "main.h"
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 #if SIMO_SPI_ENA == 1
 
-    // Estructuras
+    //Señal de reloj maxima soportada por el hardware SPI.Se calcula con el clock base del spi (SPI1 APB1 y SP2 APB2 )y el valor del prescaler
+    #define SPI_CLOCK_MAX        10000000 // 10Mhz
+    
+
+
+
+
+
+
+
+  
+
+
+ 
 
     #if NUM_SIMO_SPI >0
 
@@ -60,6 +85,54 @@
     
 
 
+
+
+
+
+
+/**
+ * @brief Obtiene la instancia de SPI necesaria
+ * 
+ * @param SPI_enum instancia SPI simo : SPI_A, SPI_B o SPI_C
+ * @return ** SPI_HandleTypeDef* 
+ */
+
+static uint32_t __get_prescaler(simo_spi_prescaler prescaler)
+{
+    uint32_t _prescaler = 0;
+        switch (prescaler)
+        {
+            case  SIMO_SPI_PRESCALER_2 :
+                _prescaler = SPI_BAUDRATEPRESCALER_2;
+                break;
+            
+            case  SIMO_SPI_PRESCALER_4 :
+                _prescaler = SPI_BAUDRATEPRESCALER_4;
+                break;
+
+            case  SIMO_SPI_PRESCALER_16 :
+                _prescaler = SPI_BAUDRATEPRESCALER_16;
+                break;
+            case  SIMO_SPI_PRESCALER_32 :
+                _prescaler = SPI_BAUDRATEPRESCALER_32;
+                break;
+            case  SIMO_SPI_PRESCALER_64 :
+                _prescaler = SPI_BAUDRATEPRESCALER_64;
+                break;
+
+            case  SIMO_SPI_PRESCALER_128 :
+                _prescaler = SPI_BAUDRATEPRESCALER_128;
+                break;
+            case  SIMO_SPI_PRESCALER_256 :
+                _prescaler = SPI_BAUDRATEPRESCALER_256;
+                break;
+
+            default:
+                _prescaler = SPI_BAUDRATEPRESCALER_4;
+                break;
+        }
+    return _prescaler;
+}
 
 
 
@@ -181,18 +254,20 @@ uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx 
  * @return ** uint32_t 
  */
 
-uint32_t simo_spi_init(SIMO_SPI SPI,uint32_t baudrate){
+uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler){
         uint32_t res = 0;  // retorna error por defecto
-        SPI_HandleTypeDef* simo_SPI = __get_spi(SPI);        
+        SPI_HandleTypeDef* simo_SPI = __get_spi(SPI);   
+        uint32_t __prescaler = __get_prescaler(prescaler);     
+        
         if(simo_SPI != NULL) {  
-           ;
+           
             simo_SPI->Init.Mode = SPI_MODE_MASTER;
             simo_SPI->Init.Direction = SPI_DIRECTION_2LINES;
             simo_SPI->Init.DataSize = SPI_DATASIZE_8BIT;
             simo_SPI->Init.CLKPolarity = SPI_POLARITY_LOW;
             simo_SPI->Init.CLKPhase = SPI_PHASE_1EDGE;
             simo_SPI->Init.NSS = SPI_NSS_SOFT;
-            simo_SPI->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+            simo_SPI->Init.BaudRatePrescaler = __prescaler;
             simo_SPI->Init.FirstBit = SPI_FIRSTBIT_MSB;
             simo_SPI->Init.TIMode = SPI_TIMODE_DISABLE;
             simo_SPI->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;

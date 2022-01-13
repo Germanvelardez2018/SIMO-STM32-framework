@@ -31,6 +31,27 @@
 
 #if SIMO_SPI_ENA == 1
 
+
+     typedef enum{
+
+         SIMO_SPI_PRESCALER_2 =   2
+        ,SIMO_SPI_PRESCALER_4 =   4
+        ,SIMO_SPI_PRESCALER_8 =   8
+        ,SIMO_SPI_PRESCALER_16 =  16
+        ,SIMO_SPI_PRESCALER_32 =  32
+        ,SIMO_SPI_PRESCALER_64 =  64
+        ,SIMO_SPI_PRESCALER_128 = 128
+        ,SIMO_SPI_PRESCALER_256 = 256
+
+    } simo_spi_prescaler;
+
+
+
+
+
+
+
+
      /**
      * @brief Leer un buffer de datos mediante puerto SPI
      * 
@@ -83,10 +104,11 @@
      * @brief Inicia el puerto SPI.
      * 
      * @param SPI SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI
-     * @param baudrate  Baudios de la comunicacion
+     * @param prescaler  el prescaler puede dividir el clock por un rango de valores( 2, 4 ,8 ,...,256).
+     * Recordar que el maximo valor de clock de SPI es 10Mhz.Tambien SPI1 alimentado por APB1 y SP2 alimentado por APB2
      * @return ** uint32_t 
      */
-    uint32_t simo_spi_init(SIMO_SPI spi,uint32_t baudrate);
+    uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler);
 
 
     #if SIMO_SPI_IRQ   == 1

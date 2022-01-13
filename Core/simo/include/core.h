@@ -35,6 +35,8 @@
     #define SIMO_UART_ENA               C_SIMO_UART_ENA
     #define SIMO_SPI_ENA                C_SIMO_SPI_ENA
     #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA
+    #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA                         
+
 
 
     // Cantidad de instancias
@@ -74,8 +76,9 @@
         #endif
 
 
+#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ                         
 
-    #define SIMO_TIMER_IRQ              C_SIMO_TIMER_IRQ
+#define SIMO_TIMER_IRQ              C_SIMO_TIMER_IRQ
 
 
 
