@@ -30,13 +30,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#define RX_BUFFER_LEN   100
-#define TIMER     TIMER_C
-#define UART      UART_B
-uint32_t count = 0;
-uint32_t pos_rx =0;
-uint8_t  buffer_rx[RX_BUFFER_LEN]={0};
-uint32_t counter = 0;
+
 #define TIME_COUNTS 10
 /* USER CODE END Includes */
 
