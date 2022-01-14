@@ -36,41 +36,45 @@
              }  simo_gpio_mode;
 
 
-          
-
-   
-
-        //! Instancias de GPIO disponibles 
+        //! Instancias de GPIO disponibles. SIMO_GPIO_0 a SIMO_GPIO_15 son A0 a A15, SIMO_GPIO_16 B0 y SIMO_GPIO_31 B15
         typedef enum {
+
+            //GPIOA
             #if NUM_SIMO_GPIO > 0      
                 SIMO_GPIO_0 , SIMO_GPIO_1, SIMO_GPIO_2, SIMO_GPIO_3, SIMO_GPIO_4,
             #endif
             #if NUM_SIMO_GPIO > 5      
-                SIMO_GPIO_5 , SIMO_GPIO_6 ,SIMO_GPIO_7 ,SIMO_GPIO_8 ,SIMO_GPIO_9,
+                SIMO_GPIO_5 , SIMO_GPIO_6 ,SIMO_GPIO_7 ,SIMO_GPIO_8 ,SIMO_GPIO_9,SIMO_GPIO_10 ,
             #endif
             #if NUM_SIMO_GPIO > 10     
-                SIMO_GPIO_10 , SIMO_GPIO_11, SIMO_GPIO_12, SIMO_GPIO_13, SIMO_GPIO_14,
+                 SIMO_GPIO_11, SIMO_GPIO_12, SIMO_GPIO_13, SIMO_GPIO_14,SIMO_GPIO_15 ,
             #endif
+
+
+            // GPIOB 
             #if NUM_SIMO_GPIO > 15     
-                SIMO_GPIO_15 , SIMO_GPIO_16 ,SIMO_GPIO_17 ,SIMO_GPIO_18 ,SIMO_GPIO_19,
+                 SIMO_GPIO_16 ,SIMO_GPIO_17 ,SIMO_GPIO_18 ,SIMO_GPIO_19, SIMO_GPIO_20 ,
             #endif
             #if NUM_SIMO_GPIO > 20     
-                SIMO_GPIO_20 , SIMO_GPIO_21, SIMO_GPIO_22, SIMO_GPIO_23, SIMO_GPIO_24,
+                SIMO_GPIO_21, SIMO_GPIO_22, SIMO_GPIO_23, SIMO_GPIO_24, SIMO_GPIO_25 ,
             #endif
             #if NUM_SIMO_GPIO > 25     
-                SIMO_GPIO_25 , SIMO_GPIO_26 ,SIMO_GPIO_27 ,SIMO_GPIO_28 ,SIMO_GPIO_29,
+                SIMO_GPIO_26 ,SIMO_GPIO_27 ,SIMO_GPIO_28 ,SIMO_GPIO_29,SIMO_GPIO_30 ,SIMO_GPIO_31
             #endif
-            #if NUM_SIMO_GPIO > 30     
-                SIMO_GPIO_30 , SIMO_GPIO_31, SIMO_GPIO_32, SIMO_GPIO_33, SIMO_GPIO_34,
+
+
+            //GPIOC
+            #if NUM_SIMO_GPIO > 31     
+                 , SIMO_GPIO_32, SIMO_GPIO_33, SIMO_GPIO_34, SIMO_GPIO_35 ,
             #endif
             #if NUM_SIMO_GPIO > 35     
-                SIMO_GPIO_35 , SIMO_GPIO_36 ,SIMO_GPIO_37 ,SIMO_GPIO_38 ,SIMO_GPIO_39,
+                SIMO_GPIO_36 ,SIMO_GPIO_37 ,SIMO_GPIO_38 ,SIMO_GPIO_39, SIMO_GPIO_40 ,
             #endif
             #if NUM_SIMO_GPIO > 40     
-                SIMO_GPIO_40 , SIMO_GPIO_41, SIMO_GPIO_42, SIMO_GPIO_43, SIMO_GPIO_44,
+                SIMO_GPIO_41, SIMO_GPIO_42, SIMO_GPIO_43, SIMO_GPIO_44, SIMO_GPIO_45 ,
             #endif
             #if NUM_SIMO_GPIO > 45     
-                SIMO_GPIO_45 , SIMO_GPIO_46 ,SIMO_GPIO_47 ,SIMO_GPIO_48 ,SIMO_GPIO_49,
+                SIMO_GPIO_46 ,SIMO_GPIO_47 ,SIMO_GPIO_48 ,SIMO_GPIO_49,
             #endif
            
         }SIMO_GPIO_PIN;
@@ -79,25 +83,39 @@
         /**
          * @brief 
          * 
-         * @param pin 
+         * @param pin  Pin a configurar:    Ejemplos de conversion SIMO_GPIO_N a ST32 Pin
+         *                  SIMO_GPIO_2 == GPIOA, PIN2     
+         *                  SIMO_GPIO_20 == GPIOB, PIN4
+         *                  SIMO_GPIO_41 == GPIOC,PIN9
          * @param mode 
          * @return ** uint32_t 
          */
         void simo_gpio_set(SIMO_GPIO_PIN simo_pin, simo_gpio_mode mode);
 
 
-
+        /**
+         * @brief Escribir en el pin GPIO
+         * 
+         * @param simo_pin  pin  simo gpio a utilizar
+         * @param value     valor . 0 es valor bajo, diferente de 0 es valor alto
+         * @return ** void 
+         */
          void simo_gpio_write(SIMO_GPIO_PIN simo_pin, uint32_t value);
 
 
-
+        /**
+         * @brief Conmuta el pin seleccionado
+         * 
+         * @param simo_pin pin simo gpio a utilizar
+         * @return ** void 
+         */
         void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin);
 
         /**
-         * @brief 
+         * @brief Deshabilitamos el pin
          * 
-         * @param pin 
-         * @param mode 
+         * @param pin pin simo gpio a utilizar
+         * @param mode El modo de funcionamiento del pin. Puede ser entrada, salida o pin de interrupcion externa
          * @return ** uint32_t 
          */
         uint32_t simo_gpio_deinit(SIMO_GPIO_PIN pin, simo_gpio_mode mode);
@@ -107,7 +125,7 @@
         #if SIMO_GPIO_EXT_IRQ   == 1
 
             /**
-             * @brief  Habilita la interrupcion del timer
+             * @brief  Habilita la interrupcion externa del pin
              * 
              * @param pin Disponibilidad de pins depende de NUM_SIMO_GPIO
              * @param ena  1 para habilitar 0 para deshabilitar
@@ -117,11 +135,9 @@
 
 
             /**
-             * @brief 
-             * 
-             * @param pin       Disponibilidad de pins depende de NUM_SIMO_GPIO
-             * @param evento    Tipo de evento externo
-             * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
+             * @brief  Agregamos la funcion callback para atender interrupcion externa. 
+             * Solo existe un callback para todas las interrupciones externas.
+             * @param callback Esta funcion debe retornar void y recibir un uint16_t (pin).
              * @return ** uint32_t 
              */
             uint32_t simo_gpio_set_extern_event_callback( callback_gpio_ext_it callback);

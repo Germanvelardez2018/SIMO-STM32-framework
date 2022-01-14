@@ -33,26 +33,27 @@ typedef struct{
 
 
 /**
- * @brief Obtiene la instancia de SPI necesaria
+ * @brief Obtiene la instancia de gpio
  * 
- * @param SPI_enum instancia SPI simo : SPI_A, SPI_B o SPI_C
- * @return ** SPI_HandleTypeDef* 
+ * @param simo_pin instancia SPI simo 
+ * @param pin instancia donde se guarda la instancia gpio de STM32
+ * @return void
  */
 
 static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
 {
-        if( simo_pin < SIMO_GPIO_15 ) {
+        if( simo_pin <= SIMO_GPIO_15 ) {
             pin->index = simo_pin;
             pin->port=GPIOA;
             __HAL_RCC_GPIOA_CLK_ENABLE();    
             }
-        if( simo_pin > SIMO_GPIO_15  && simo_pin < SIMO_GPIO_30) {
-            pin->index =  (simo_pin - SIMO_GPIO_15);
+        if( (simo_pin >= SIMO_GPIO_16)  && (simo_pin <= SIMO_GPIO_31)) {
+            pin->index =  (simo_pin - SIMO_GPIO_16);
             pin->port=GPIOB;
             __HAL_RCC_GPIOB_CLK_ENABLE();
             }
-        if( simo_pin > SIMO_GPIO_30  && simo_pin < SIMO_GPIO_44) {
-            pin->index = (simo_pin - SIMO_GPIO_30);
+        if( (simo_pin >= SIMO_GPIO_32)  && (simo_pin <= SIMO_GPIO_47)) {
+            pin->index = (simo_pin - SIMO_GPIO_32);
             pin->port = GPIOC;
             __HAL_RCC_GPIOC_CLK_ENABLE();
             }
@@ -175,14 +176,14 @@ void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
 
 
             /**
-             * @brief  Habilita la interrupcion del timer
+             * @brief  Habilita la interrupcion externa del GPIO
              * 
              * @param pin Disponibilidad de pins depende de NUM_SIMO_GPIO
              * @param ena  1 para habilitar 0 para deshabilitar
              */
             void simo_gpio_ena_irq(SIMO_GPIO_PIN pin,uint32_t ena){
                 IRQn_Type __GPIO_IRQ= 0;
-                switch (pin  % SIMO_GPIO_15){
+                switch (pin  % SIMO_GPIO_16){
                      #if NUM_SIMO_GPIO > 0 
                         case SIMO_GPIO_0:
                         __GPIO_IRQ= EXTI0_IRQn;
@@ -230,8 +231,8 @@ void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
                   
                         default:
                     #if NUM_SIMO_GPIO > 15
-                        __GPIO_IRQ= EXTI15_10_IRQn; // por default, evita errores
-                        __GPIO_EXTI15_10_ = (1 <<(pin  % SIMO_GPIO_15));
+                        __GPIO_IRQ= EXTI15_10_IRQn; // por default, 
+                        __GPIO_EXTI15_10_ = (1 <<(pin  % SIMO_GPIO_16));
                     #endif
                         break;
                 }
@@ -257,14 +258,7 @@ void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
                 }
 
 
-            /**
-             * @brief 
-             * 
-             * @param pin       Disponibilidad de pins depende de NUM_SIMO_GPIO
-             * @param evento    Tipo de evento externo
-             * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
-             * @return ** uint32_t 
-             */
+         
             uint32_t simo_gpio_set_extern_event_callback(callback_gpio_ext_it callback){
                 uint32_t res = 0;
                 if( callback != NULL) {

@@ -162,10 +162,16 @@ Enumeraciones</h2></td></tr>
 <a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a3e64a2b434afcd58fbb41d45e3b6c3f2">SIMO_GPIO_42</a>, 
 <a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a3696dab8c94d08eeebaa8655425f37cb">SIMO_GPIO_43</a>, 
 <br />
-&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105">SIMO_GPIO_44</a>
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105">SIMO_GPIO_44</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a907b7d947f51ed96967d54b2abfec814">SIMO_GPIO_45</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a7b676859c063f986e775514bb8a1dde2">SIMO_GPIO_46</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a0062d4436308720ea81303482527fade">SIMO_GPIO_47</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1adc66b917524c7415cb0648e209fcc26f">SIMO_GPIO_48</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5566dfb0ab8de13d0b3cf9d6637fce0b">SIMO_GPIO_49</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancias de GPIO disponibles.  <a href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">Más...</a><br /></td></tr>
+<tr class="memdesc:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancias de GPIO disponibles. SIMO_GPIO_0 a SIMO_GPIO_15 son A0 a A15, SIMO_GPIO_16 B0 y SIMO_GPIO_31 B15.  <a href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">Más...</a><br /></td></tr>
 <tr class="separator:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -173,15 +179,19 @@ Funciones</h2></td></tr>
 <tr class="memitem:a36630fe3d99eec2fa34107826555d2c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a36630fe3d99eec2fa34107826555d2c5">simo_gpio_set</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin, <a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a> mode)</td></tr>
 <tr class="separator:a36630fe3d99eec2fa34107826555d2c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51f7332efa379ccb990346aae2d7a310"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a51f7332efa379ccb990346aae2d7a310">simo_gpio_write</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin, uint32_t value)</td></tr>
+<tr class="memdesc:a51f7332efa379ccb990346aae2d7a310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escribir en el pin GPIO.  <a href="gpio_8h.html#a51f7332efa379ccb990346aae2d7a310">Más...</a><br /></td></tr>
 <tr class="separator:a51f7332efa379ccb990346aae2d7a310"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cbc7e182ab1b6fdf3764c75129fa246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a2cbc7e182ab1b6fdf3764c75129fa246">simo_gpio_toogle</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin)</td></tr>
+<tr class="memdesc:a2cbc7e182ab1b6fdf3764c75129fa246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conmuta el pin seleccionado.  <a href="gpio_8h.html#a2cbc7e182ab1b6fdf3764c75129fa246">Más...</a><br /></td></tr>
 <tr class="separator:a2cbc7e182ab1b6fdf3764c75129fa246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98c39e8fd071918a2816e819e5da0630"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a98c39e8fd071918a2816e819e5da0630">simo_gpio_deinit</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> pin, <a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a> mode)</td></tr>
+<tr class="memdesc:a98c39e8fd071918a2816e819e5da0630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deshabilitamos el pin.  <a href="gpio_8h.html#a98c39e8fd071918a2816e819e5da0630">Más...</a><br /></td></tr>
 <tr class="separator:a98c39e8fd071918a2816e819e5da0630"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c4e14114b0899b399ff0941a3297f2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a7c4e14114b0899b399ff0941a3297f2d">simo_gpio_ena_irq</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> pin, uint32_t ena)</td></tr>
-<tr class="memdesc:a7c4e14114b0899b399ff0941a3297f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion del timer.  <a href="gpio_8h.html#a7c4e14114b0899b399ff0941a3297f2d">Más...</a><br /></td></tr>
+<tr class="memdesc:a7c4e14114b0899b399ff0941a3297f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion externa del pin.  <a href="gpio_8h.html#a7c4e14114b0899b399ff0941a3297f2d">Más...</a><br /></td></tr>
 <tr class="separator:a7c4e14114b0899b399ff0941a3297f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63100051ac0765a05dad95d30e629afb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a63100051ac0765a05dad95d30e629afb">simo_gpio_set_extern_event_callback</a> (<a class="el" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a> callback)</td></tr>
+<tr class="memdesc:a63100051ac0765a05dad95d30e629afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Agregamos la funcion callback para atender interrupcion externa. Solo existe un callback para todas las interrupciones externas.  <a href="gpio_8h.html#a63100051ac0765a05dad95d30e629afb">Más...</a><br /></td></tr>
 <tr class="separator:a63100051ac0765a05dad95d30e629afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
@@ -226,7 +236,7 @@ Funciones</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Instancias de GPIO disponibles. </p>
+<p>Instancias de GPIO disponibles. SIMO_GPIO_0 a SIMO_GPIO_15 son A0 a A15, SIMO_GPIO_16 B0 y SIMO_GPIO_31 B15. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a725d6fb63560b2d955429bafc1762a30"></a>SIMO_GPIO_0&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a717a945058f8139474fa7830fde48ce2"></a>SIMO_GPIO_1&#160;</td><td class="fielddoc"></td></tr>
@@ -273,6 +283,11 @@ Funciones</h2></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3e64a2b434afcd58fbb41d45e3b6c3f2"></a>SIMO_GPIO_42&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3696dab8c94d08eeebaa8655425f37cb"></a>SIMO_GPIO_43&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105"></a>SIMO_GPIO_44&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a907b7d947f51ed96967d54b2abfec814"></a>SIMO_GPIO_45&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7b676859c063f986e775514bb8a1dde2"></a>SIMO_GPIO_46&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a0062d4436308720ea81303482527fade"></a>SIMO_GPIO_47&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1adc66b917524c7415cb0648e209fcc26f"></a>SIMO_GPIO_48&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5566dfb0ab8de13d0b3cf9d6637fce0b"></a>SIMO_GPIO_49&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -303,10 +318,12 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Deshabilitamos el pin. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td></td></tr>
-    <tr><td class="paramname">mode</td><td></td></tr>
+    <tr><td class="paramname">pin</td><td>pin simo gpio a utilizar </td></tr>
+    <tr><td class="paramname">mode</td><td>El modo de funcionamiento del pin. Puede ser entrada, salida o pin de interrupcion externa </td></tr>
   </table>
   </dd>
 </dl>
@@ -340,7 +357,7 @@ Funciones</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Habilita la interrupcion del timer. </p>
+<p>Habilita la interrupcion externa del pin. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>Disponibilidad de pins depende de NUM_SIMO_GPIO </td></tr>
@@ -378,7 +395,8 @@ Funciones</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">pin</td><td>Pin a configurar: Ejemplos de conversion SIMO_GPIO_N a ST32 Pin SIMO_GPIO_2 == GPIOA, PIN2 <br  />
+ SIMO_GPIO_20 == GPIOB, PIN4 SIMO_GPIO_41 == GPIOC,PIN9 </td></tr>
     <tr><td class="paramname">mode</td><td></td></tr>
   </table>
   </dd>
@@ -402,11 +420,11 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Agregamos la funcion callback para atender interrupcion externa. Solo existe un callback para todas las interrupciones externas. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>Disponibilidad de pins depende de NUM_SIMO_GPIO </td></tr>
-    <tr><td class="paramname">evento</td><td>Tipo de evento externo </td></tr>
-    <tr><td class="paramname">callback</td><td>Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void </td></tr>
+    <tr><td class="paramname">callback</td><td>Esta funcion debe retornar void y recibir un uint16_t (pin). </td></tr>
   </table>
   </dd>
 </dl>
@@ -429,6 +447,15 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Conmuta el pin seleccionado. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">simo_pin</td><td>pin simo gpio a utilizar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
 
 </div>
 </div>
@@ -457,6 +484,16 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Escribir en el pin GPIO. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">simo_pin</td><td>pin simo gpio a utilizar </td></tr>
+    <tr><td class="paramname">value</td><td>valor . 0 es valor bajo, diferente de 0 es valor alto </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
 
 </div>
 </div>

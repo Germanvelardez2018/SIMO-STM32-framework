@@ -41,11 +41,10 @@ uint32_t counter = 0;
 /* USER CODE END Includes */
 
 
-uint32_t ena = 0;
+uint32_t volatile ena = 0;
 
 
 static void __IRQ_GPIO_EXT(uint16_t pin){
-    // HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin);
 
      ena = 1;
 
@@ -68,14 +67,14 @@ int main(void)
 
   /* Configure the system clock */
   simo_clock_config();
-  simo_gpio_set(SIMO_GPIO_17,SIMO_GPIO_OUT);
-  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_EXT_IT_RISING);//PB3
+  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
+  simo_gpio_set(SIMO_GPIO_19,SIMO_GPIO_EXT_IT_RISING);//PB3
   simo_gpio_set_extern_event_callback(__IRQ_GPIO_EXT);
-  simo_gpio_ena_irq(SIMO_GPIO_18,1); // Habilito interrupciones
+  simo_gpio_ena_irq(SIMO_GPIO_19,1); // Habilito interrupciones
   while (1)
   {  
-    HAL_Delay(1000);
-    if(ena == 1) simo_gpio_toogle(SIMO_GPIO_17);
+    HAL_Delay(100);
+    if(ena == 1) simo_gpio_toogle(SIMO_GPIO_18);
   }
   /* USER CODE END 3 */
 }
