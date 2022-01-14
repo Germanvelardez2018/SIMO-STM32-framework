@@ -76,7 +76,9 @@
         #endif
 
 
-#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ   
+#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ 
+#define SIMO_GPIO_ADC_ENA               C_SIMO_GPIO_ADC_ENA
+
 
 #if SIMO_GPIO_EXT_IRQ == 1
     typedef void (*callback_gpio_ext_it)(uint16_t);

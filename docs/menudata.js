@@ -31,10 +31,14 @@ var menudata={children:[
 {text:"s",url:"globals.html#index_s"},
 {text:"t",url:"globals.html#index_t"},
 {text:"u",url:"globals.html#index_u"}]},
-{text:"Funciones",url:"globals_func.html"},
+{text:"Funciones",url:"globals_func.html",children:[
+{text:"s",url:"globals_func.html#index_s"}]},
 {text:"typedefs",url:"globals_type.html"},
 {text:"Enumeraciones",url:"globals_enum.html"},
-{text:"Valores de enumeraciones",url:"globals_eval.html"},
+{text:"Valores de enumeraciones",url:"globals_eval.html",children:[
+{text:"s",url:"globals_eval.html#index_s"},
+{text:"t",url:"globals_eval.html#index_t"},
+{text:"u",url:"globals_eval.html#index_u"}]},
 {text:"defines",url:"globals_defs.html",children:[
 {text:"c",url:"globals_defs.html#index_c"},
 {text:"n",url:"globals_defs.html#index_n"},

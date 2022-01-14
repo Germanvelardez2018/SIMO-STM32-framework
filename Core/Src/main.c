@@ -68,25 +68,14 @@ int main(void)
 
   /* Configure the system clock */
   simo_clock_config();
-
-
-
-   simo_gpio_set(SIMO_GPIO_17,SIMO_GPIO_OUT);
-   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_EXT_IT_RISING_FALLING);//PB3
-   simo_gpio_set_extern_event_callback(__IRQ_GPIO_EXT);
-
-   simo_gpio_ena_irq(SIMO_GPIO_18,1); // Habilito interrupciones
- 
-
+  simo_gpio_set(SIMO_GPIO_17,SIMO_GPIO_OUT);
+  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_EXT_IT_RISING);//PB3
+  simo_gpio_set_extern_event_callback(__IRQ_GPIO_EXT);
+  simo_gpio_ena_irq(SIMO_GPIO_18,1); // Habilito interrupciones
   while (1)
-  {
-
-
-  
-    HAL_Delay(250);
+  {  
+    HAL_Delay(1000);
     if(ena == 1) simo_gpio_toogle(SIMO_GPIO_17);
-  
-  
   }
   /* USER CODE END 3 */
 }

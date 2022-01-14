@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['timer_2ec_105',['timer.c',['../timer_8c.html',1,'']]],
-  ['timer_2eh_106',['timer.h',['../timer_8h.html',1,'']]]
+  ['spi_2ec_179',['spi.c',['../spi_8c.html',1,'']]],
+  ['spi_2eh_180',['spi.h',['../spi_8h.html',1,'']]]
 ];

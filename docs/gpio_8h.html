@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIMO: Referencia del Archivo Core/simo/include/gpio.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SIMO
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Framework de trabajo para STM32. La idea es simplificar el trabajo de configuracion y generacion de aplicaciones simples</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a class="el" href="dir_1ffac0d2630f4824660dea6691be9d7f.html">simo</a></li><li class="navelem"><a class="el" href="dir_51ae6caf7e11bae481ee121923f41a47.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#enum-members">Enumeraciones</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo gpio.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Driver para abstraer el hardware GPIO del microcontrolador.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="core_8h_source.html">core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para gpio.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpio_8h__incl.png" border="0" usemap="#_core_2simo_2include_2gpio_8h" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="gpio_8h__dep__incl.png" border="0" usemap="#_core_2simo_2include_2gpio_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="gpio_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:af8574ff6def10169d7c507f0ff69a5da"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a> { <br />
+&#160;&#160;<a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5daa067aea22ae3ddaee12603bdcdc0840c1">SIMO_GPIO_OUT</a>, 
+<a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5daa96c95b5c063bf2414e88326431610e1e">SIMO_GPIO_IN</a>, 
+<a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5daaf95ea021c62c8083f33dc69933ade7a6">SIMO_GPIO_EXT_IT_RISING</a>, 
+<a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5daab2fd815463412efa3027c91f4d9a0a9e">SIMO_GPIO_EXT_IT_FALLING</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5daa337217bfc76c863afd39a154b31b3446">SIMO_GPIO_EXT_IT_RISING_FALLING</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:af8574ff6def10169d7c507f0ff69a5da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modos de funcionamiento.  <a href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">Más...</a><br /></td></tr>
+<tr class="separator:af8574ff6def10169d7c507f0ff69a5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> { <br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a725d6fb63560b2d955429bafc1762a30">SIMO_GPIO_0</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a717a945058f8139474fa7830fde48ce2">SIMO_GPIO_1</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1acc0b1e41fabd0745b7048ace0ee0aeaa">SIMO_GPIO_2</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a56617bf42d1fd315bf504462ecd87010">SIMO_GPIO_3</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a74063692012b34404cdb500559e3dcdf">SIMO_GPIO_4</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a23d0bea3eae6c1e57271b5b39702fccb">SIMO_GPIO_5</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a7baabbae89eb02dbe52ec87e2fcef717">SIMO_GPIO_6</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a1ccead9d52219c603fd6286149a79f36">SIMO_GPIO_7</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a8df6e47937f38a580590002737af6476">SIMO_GPIO_8</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a7f5dcf64ca8b6d2b06979b827766f2ea">SIMO_GPIO_9</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1aadfaaf57acfc4ae7a6f02fa9c9d4f64f">SIMO_GPIO_10</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a69c152f222d5d88f9d37727e549330c0">SIMO_GPIO_11</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a93ff367a3bb25244c39919cdab4bc5d8">SIMO_GPIO_12</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1ab5f4aaf6b6d48a977a540119b686a020">SIMO_GPIO_13</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1aa1b19d4370fad8ee0e7145757fe5ca28">SIMO_GPIO_14</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1abbeabdc37bc8a29e16a8decd7cf2e993">SIMO_GPIO_15</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a247bd91bcdff9c60bd40fb76af996f1b">SIMO_GPIO_16</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1acf920921a9bdc8304ace5eb2297d716b">SIMO_GPIO_17</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a3f43be3dfbe990cc7dd57f1b9acb8810">SIMO_GPIO_18</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1aa2022a56831661c1bae9aac5da51b307">SIMO_GPIO_19</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a00246673137e461f461bd3fc6f2b71d3">SIMO_GPIO_20</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5b03ea8e9bf95219a89694a1360d2d7f">SIMO_GPIO_21</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1ac2da226998c111e68c56c01f671b2405">SIMO_GPIO_22</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a6e2638dac22a5b364174dffaf15bafb5">SIMO_GPIO_23</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a4c835c28c08ff315b87df92a0a062867">SIMO_GPIO_24</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1af95ec07612e80b58ab6bf58c1fee2ad7">SIMO_GPIO_25</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5431d5f0818ae063471efa70b95445a6">SIMO_GPIO_26</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1abdd44af385121943375b2ae478a9b910">SIMO_GPIO_27</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1af516b3d761c81f047b5ec6d694f3173f">SIMO_GPIO_28</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1add488a5efb866307556392c2ef2f3d1c">SIMO_GPIO_29</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1aa614ce7fc43db783966bf7a260995cf9">SIMO_GPIO_30</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a185f8606cf92222944658c9c147a540d">SIMO_GPIO_31</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a1d3d2398e43c41d13691f5e5b0dd54ed">SIMO_GPIO_32</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a9225c11fa1645861bc0ae2da9104def6">SIMO_GPIO_33</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1ac6a023ac90ee26560c4787e936d84475">SIMO_GPIO_34</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a065bfb0dbcd569c38963cbea39e7a9dc">SIMO_GPIO_35</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a7c30c5e7fa40cee213a77eeb96c0a115">SIMO_GPIO_36</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1ab7f5c24320c58b412b9f598331a6a214">SIMO_GPIO_37</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a97e5687631202b387245396b449faa8c">SIMO_GPIO_38</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a064c56614c199be8da59981a5dd1b6bc">SIMO_GPIO_39</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5e891e8c60154f65bc866dcbe703974c">SIMO_GPIO_40</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a2eba66884e7d2469f05085c1a9334562">SIMO_GPIO_41</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a3e64a2b434afcd58fbb41d45e3b6c3f2">SIMO_GPIO_42</a>, 
+<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a3696dab8c94d08eeebaa8655425f37cb">SIMO_GPIO_43</a>, 
+<br />
+&#160;&#160;<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105">SIMO_GPIO_44</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancias de GPIO disponibles.  <a href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">Más...</a><br /></td></tr>
+<tr class="separator:a1cc6ad965f0a9d917e153e5ca6eb62b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a36630fe3d99eec2fa34107826555d2c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a36630fe3d99eec2fa34107826555d2c5">simo_gpio_set</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin, <a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a> mode)</td></tr>
+<tr class="separator:a36630fe3d99eec2fa34107826555d2c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f7332efa379ccb990346aae2d7a310"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a51f7332efa379ccb990346aae2d7a310">simo_gpio_write</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin, uint32_t value)</td></tr>
+<tr class="separator:a51f7332efa379ccb990346aae2d7a310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cbc7e182ab1b6fdf3764c75129fa246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a2cbc7e182ab1b6fdf3764c75129fa246">simo_gpio_toogle</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> simo_pin)</td></tr>
+<tr class="separator:a2cbc7e182ab1b6fdf3764c75129fa246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98c39e8fd071918a2816e819e5da0630"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a98c39e8fd071918a2816e819e5da0630">simo_gpio_deinit</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> pin, <a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a> mode)</td></tr>
+<tr class="separator:a98c39e8fd071918a2816e819e5da0630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4e14114b0899b399ff0941a3297f2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a7c4e14114b0899b399ff0941a3297f2d">simo_gpio_ena_irq</a> (<a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a> pin, uint32_t ena)</td></tr>
+<tr class="memdesc:a7c4e14114b0899b399ff0941a3297f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion del timer.  <a href="gpio_8h.html#a7c4e14114b0899b399ff0941a3297f2d">Más...</a><br /></td></tr>
+<tr class="separator:a7c4e14114b0899b399ff0941a3297f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63100051ac0765a05dad95d30e629afb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio_8h.html#a63100051ac0765a05dad95d30e629afb">simo_gpio_set_extern_event_callback</a> (<a class="el" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a> callback)</td></tr>
+<tr class="separator:a63100051ac0765a05dad95d30e629afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Driver para abstraer el hardware GPIO del microcontrolador. </p>
+<dl class="section author"><dt>Autor</dt><dd>German Velardez (<a href="#" onclick="location.href='mai'+'lto:'+'ger'+'ma'+'nve'+'la'+'rde'+'z1'+'6@g'+'ma'+'il.'+'co'+'m'; return false;">germa<span style="display: none;">.nosp@m.</span>nvel<span style="display: none;">.nosp@m.</span>ardez<span style="display: none;">.nosp@m.</span>16@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2022-01-12</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
+</div><h2 class="groupheader">Documentación de las enumeraciones</h2>
+<a id="af8574ff6def10169d7c507f0ff69a5da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8574ff6def10169d7c507f0ff69a5da">&#9670;&nbsp;</a></span>simo_gpio_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modos de funcionamiento. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa067aea22ae3ddaee12603bdcdc0840c1"></a>SIMO_GPIO_OUT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa96c95b5c063bf2414e88326431610e1e"></a>SIMO_GPIO_IN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daaf95ea021c62c8083f33dc69933ade7a6"></a>SIMO_GPIO_EXT_IT_RISING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daab2fd815463412efa3027c91f4d9a0a9e"></a>SIMO_GPIO_EXT_IT_FALLING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa337217bfc76c863afd39a154b31b3446"></a>SIMO_GPIO_EXT_IT_RISING_FALLING&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a1cc6ad965f0a9d917e153e5ca6eb62b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cc6ad965f0a9d917e153e5ca6eb62b1">&#9670;&nbsp;</a></span>SIMO_GPIO_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Instancias de GPIO disponibles. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a725d6fb63560b2d955429bafc1762a30"></a>SIMO_GPIO_0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a717a945058f8139474fa7830fde48ce2"></a>SIMO_GPIO_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1acc0b1e41fabd0745b7048ace0ee0aeaa"></a>SIMO_GPIO_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a56617bf42d1fd315bf504462ecd87010"></a>SIMO_GPIO_3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a74063692012b34404cdb500559e3dcdf"></a>SIMO_GPIO_4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a23d0bea3eae6c1e57271b5b39702fccb"></a>SIMO_GPIO_5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7baabbae89eb02dbe52ec87e2fcef717"></a>SIMO_GPIO_6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a1ccead9d52219c603fd6286149a79f36"></a>SIMO_GPIO_7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a8df6e47937f38a580590002737af6476"></a>SIMO_GPIO_8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7f5dcf64ca8b6d2b06979b827766f2ea"></a>SIMO_GPIO_9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aadfaaf57acfc4ae7a6f02fa9c9d4f64f"></a>SIMO_GPIO_10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a69c152f222d5d88f9d37727e549330c0"></a>SIMO_GPIO_11&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a93ff367a3bb25244c39919cdab4bc5d8"></a>SIMO_GPIO_12&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ab5f4aaf6b6d48a977a540119b686a020"></a>SIMO_GPIO_13&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa1b19d4370fad8ee0e7145757fe5ca28"></a>SIMO_GPIO_14&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1abbeabdc37bc8a29e16a8decd7cf2e993"></a>SIMO_GPIO_15&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a247bd91bcdff9c60bd40fb76af996f1b"></a>SIMO_GPIO_16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1acf920921a9bdc8304ace5eb2297d716b"></a>SIMO_GPIO_17&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3f43be3dfbe990cc7dd57f1b9acb8810"></a>SIMO_GPIO_18&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa2022a56831661c1bae9aac5da51b307"></a>SIMO_GPIO_19&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a00246673137e461f461bd3fc6f2b71d3"></a>SIMO_GPIO_20&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5b03ea8e9bf95219a89694a1360d2d7f"></a>SIMO_GPIO_21&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ac2da226998c111e68c56c01f671b2405"></a>SIMO_GPIO_22&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a6e2638dac22a5b364174dffaf15bafb5"></a>SIMO_GPIO_23&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a4c835c28c08ff315b87df92a0a062867"></a>SIMO_GPIO_24&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1af95ec07612e80b58ab6bf58c1fee2ad7"></a>SIMO_GPIO_25&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5431d5f0818ae063471efa70b95445a6"></a>SIMO_GPIO_26&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1abdd44af385121943375b2ae478a9b910"></a>SIMO_GPIO_27&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1af516b3d761c81f047b5ec6d694f3173f"></a>SIMO_GPIO_28&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1add488a5efb866307556392c2ef2f3d1c"></a>SIMO_GPIO_29&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa614ce7fc43db783966bf7a260995cf9"></a>SIMO_GPIO_30&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a185f8606cf92222944658c9c147a540d"></a>SIMO_GPIO_31&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a1d3d2398e43c41d13691f5e5b0dd54ed"></a>SIMO_GPIO_32&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a9225c11fa1645861bc0ae2da9104def6"></a>SIMO_GPIO_33&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ac6a023ac90ee26560c4787e936d84475"></a>SIMO_GPIO_34&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a065bfb0dbcd569c38963cbea39e7a9dc"></a>SIMO_GPIO_35&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7c30c5e7fa40cee213a77eeb96c0a115"></a>SIMO_GPIO_36&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ab7f5c24320c58b412b9f598331a6a214"></a>SIMO_GPIO_37&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a97e5687631202b387245396b449faa8c"></a>SIMO_GPIO_38&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a064c56614c199be8da59981a5dd1b6bc"></a>SIMO_GPIO_39&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5e891e8c60154f65bc866dcbe703974c"></a>SIMO_GPIO_40&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a2eba66884e7d2469f05085c1a9334562"></a>SIMO_GPIO_41&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3e64a2b434afcd58fbb41d45e3b6c3f2"></a>SIMO_GPIO_42&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3696dab8c94d08eeebaa8655425f37cb"></a>SIMO_GPIO_43&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105"></a>SIMO_GPIO_44&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a98c39e8fd071918a2816e819e5da0630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98c39e8fd071918a2816e819e5da0630">&#9670;&nbsp;</a></span>simo_gpio_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_gpio_deinit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a>&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">mode</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a7c4e14114b0899b399ff0941a3297f2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c4e14114b0899b399ff0941a3297f2d">&#9670;&nbsp;</a></span>simo_gpio_ena_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_gpio_ena_irq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Habilita la interrupcion del timer. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Disponibilidad de pins depende de NUM_SIMO_GPIO </td></tr>
+    <tr><td class="paramname">ena</td><td>1 para habilitar 0 para deshabilitar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36630fe3d99eec2fa34107826555d2c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36630fe3d99eec2fa34107826555d2c5">&#9670;&nbsp;</a></span>simo_gpio_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_gpio_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a>&#160;</td>
+          <td class="paramname"><em>simo_pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#af8574ff6def10169d7c507f0ff69a5da">simo_gpio_mode</a>&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td></td></tr>
+    <tr><td class="paramname">mode</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a63100051ac0765a05dad95d30e629afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63100051ac0765a05dad95d30e629afb">&#9670;&nbsp;</a></span>simo_gpio_set_extern_event_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_gpio_set_extern_event_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a>&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Disponibilidad de pins depende de NUM_SIMO_GPIO </td></tr>
+    <tr><td class="paramname">evento</td><td>Tipo de evento externo </td></tr>
+    <tr><td class="paramname">callback</td><td>Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a2cbc7e182ab1b6fdf3764c75129fa246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cbc7e182ab1b6fdf3764c75129fa246">&#9670;&nbsp;</a></span>simo_gpio_toogle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_gpio_toogle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a>&#160;</td>
+          <td class="paramname"><em>simo_pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51f7332efa379ccb990346aae2d7a310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f7332efa379ccb990346aae2d7a310">&#9670;&nbsp;</a></span>simo_gpio_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_gpio_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="gpio_8h.html#a1cc6ad965f0a9d917e153e5ca6eb62b1">SIMO_GPIO_PIN</a>&#160;</td>
+          <td class="paramname"><em>simo_pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

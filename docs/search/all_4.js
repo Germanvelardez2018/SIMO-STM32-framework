@@ -1,14 +1,11 @@
 var searchData=
 [
-  ['uart_2ec_88',['uart.c',['../uart_8c.html',1,'']]],
-  ['uart_2eh_89',['uart.h',['../uart_8h.html',1,'']]],
-  ['uart_5fa_90',['UART_A',['../core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea',1,'core.h']]],
-  ['uart_5fb_91',['UART_B',['../core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191',1,'core.h']]],
-  ['uart_5fc_92',['UART_C',['../core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723',1,'core.h']]],
-  ['uart_5firq_93',['uart_irq',['../core_8h.html#aa59b70c298d7828999115e42953ac313',1,'core.h']]],
-  ['used_5fclock_5fapb1_5fdiv_94',['USED_CLOCK_APB1_DIV',['../clock__config_8c.html#a2cb7b2f5ee527b47385473d98090977c',1,'clock_config.c']]],
-  ['used_5fclock_5fapb2_5fdiv_95',['USED_CLOCK_APB2_DIV',['../clock__config_8c.html#a761c1588aeebed7eaa0aae86c8ce658e',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_96',['USED_CLOCK_LSI',['../clock__config_8c.html#ad19bce2ae485e9262faf97516e6455a1',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fdiv_97',['USED_CLOCK_LSI_DIV',['../clock__config_8c.html#a90099f42b08eea2256c8d8facc261b70',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fmul_98',['USED_CLOCK_LSI_MUL',['../clock__config_8c.html#a409f940217d942b6919114b4ae51ed6e',1,'clock_config.c']]]
+  ['time_5fms_155',['TIME_MS',['../timer_8h.html#a1ff33d7c0529133f1f46217f10833713ab2234de0b81a6c02ab51dcfc63065bca',1,'timer.h']]],
+  ['time_5fus_156',['TIME_US',['../timer_8h.html#a1ff33d7c0529133f1f46217f10833713aef96c3935bbc898edd62723ad8cb00ea',1,'timer.h']]],
+  ['timer_2ec_157',['timer.c',['../timer_8c.html',1,'']]],
+  ['timer_2eh_158',['timer.h',['../timer_8h.html',1,'']]],
+  ['timer_5fa_159',['TIMER_A',['../core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598',1,'core.h']]],
+  ['timer_5fb_160',['TIMER_B',['../core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a7537925211db58591cb5eeb7ebc7f44f',1,'core.h']]],
+  ['timer_5fc_161',['TIMER_C',['../core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a77982cc924eb33d3ea2f8f541f757f9d',1,'core.h']]],
+  ['timer_5funit_162',['TIMER_UNIT',['../timer_8h.html#a1ff33d7c0529133f1f46217f10833713',1,'timer.h']]]
 ];

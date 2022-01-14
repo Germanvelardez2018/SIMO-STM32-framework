@@ -23,7 +23,7 @@
 
 #if SIMO_GPIO_ENA == 1
 
-
+//! Estructura usada para pasar de simo_pin a un pin de stm32
 typedef struct{
     uint32_t index;
     GPIO_TypeDef* port;
@@ -41,11 +41,8 @@ typedef struct{
 
 static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
 {
-
-    __HAL_RCC_GPIOA_CLK_ENABLE();
         if( simo_pin < SIMO_GPIO_15 ) {
             pin->index = simo_pin;
-
             pin->port=GPIOA;
             __HAL_RCC_GPIOA_CLK_ENABLE();    
             }
@@ -59,9 +56,7 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
             pin->port = GPIOC;
             __HAL_RCC_GPIOC_CLK_ENABLE();
             }
-
-               pin->index = (uint16_t) (1 << (pin->index));
-           //  pin->index = 4;
+        pin->index = (uint16_t) (1 << (pin->index));
 }
 
 
@@ -82,84 +77,74 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
     {
             case  SIMO_GPIO_OUT:
             GPIO_InitStruct.Mode =  GPIO_MODE_OUTPUT_PP; 
-            HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);// Para seguridad del dispositivo
+            HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);// Por seguridad del dispositivo
             break;
             case  SIMO_GPIO_IN:
             GPIO_InitStruct.Mode =GPIO_MODE_INPUT ;
             break;
 
-         #if SIMO_GPIO_ADC == 1
+         #if SIMO_GPIO_ADC_ENA == 1
              case SIMO_GPIO_ADC:
              GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
              break;
          #endif 
 
-         #if SIMO_GPIO_EXT_IRQ == 1 
-             case  SIMO_GPIO_EXT_IT_RISING:
-             GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-             break;
+       #if SIMO_GPIO_EXT_IRQ == 1
+
+            case  SIMO_GPIO_EXT_IT_RISING: 
+            GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+            break;
+
              case  SIMO_GPIO_EXT_IT_FALLING:
              GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
              break;
+
              case  SIMO_GPIO_EXT_IT_RISING_FALLING:
              GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
              break;
-         #endif
+        #endif
             
          default:
          GPIO_InitStruct.Mode =  GPIO_MODE_OUTPUT_PP; 
          HAL_GPIO_WritePin(pin.port, pin.index, GPIO_PIN_RESET);// Para seguridad del dispositivo
+        // GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+
          break;
     }
+
     GPIO_InitStruct.Pin = pin.index;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
     HAL_GPIO_Init(pin.port, &GPIO_InitStruct);
+}
+
+void simo_gpio_write(SIMO_GPIO_PIN simo_pin, uint32_t value){
+   __pin__ pin = {0};
+   __get_pin(simo_pin,&pin);
+   GPIO_PinState val = (value == 0)? GPIO_PIN_RESET : GPIO_PIN_SET;
+   /*Configure GPIO pin Output Level */
+   HAL_GPIO_WritePin(pin.port, pin.index, val);
 }
 
 
 
-         void simo_gpio_write(SIMO_GPIO_PIN simo_pin, uint32_t value){
-
-            __pin__ pin = {0};
-            __get_pin(simo_pin,&pin);
-            GPIO_PinState val = (value == 0)? GPIO_PIN_RESET : GPIO_PIN_SET;
-            /*Configure GPIO pin Output Level */
-            HAL_GPIO_WritePin(pin.port, pin.index, val);
-
-         }
+void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
+    __pin__ pin = {0};
+    __get_pin(simo_pin,&pin);  
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_TogglePin(pin.port, pin.index);
+}
 
 
 
-        void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
 
-            __pin__ pin = {0};
-            __get_pin(simo_pin,&pin);
-          
-            /*Configure GPIO pin Output Level */
-            HAL_GPIO_TogglePin(pin.port, pin.index);
-           // HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
-
-
-        }
-
-
-
-        /**
-         * @brief 
-         * 
-         * @param pin 
-         * @param mode 
-         * @return ** uint32_t 
-         */
-        uint32_t simo_gpio_deinit(SIMO_GPIO_PIN pin, simo_gpio_mode mode){
-            return 0;
-        }
+ uint32_t simo_gpio_deinit(SIMO_GPIO_PIN pin, simo_gpio_mode mode){
+     return 0;
+ }
 
 
 
         #if SIMO_GPIO_EXT_IRQ   == 1
-
 
             /**
              * @brief This function handles EXTI line0 interrupt.

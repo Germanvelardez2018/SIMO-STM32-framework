@@ -34,7 +34,7 @@
 #define C_NUM_SIMO_SPI                          2   
 //! Numero de instancias disponibles. Verificar  valores maximo y conflictos 
 #define C_NUM_SIMO_GPIO                         45
-
+#define C_SIMO_GPIO_ADC_ENA                      0
 
 
 // Interrupciones

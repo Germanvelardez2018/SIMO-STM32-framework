@@ -75,45 +75,46 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define C_SIMO_UART_ENA                         1</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define C_SIMO_SPI_ENA                          1</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define C_SIMO_TIMER_ENA                        1</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="config_8h.html#abc063e9c320f67c8a484653e7411ef56">   28</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_TIMER                        3    </span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_UART                         3    </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_SPI                          2   </span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_GPIO                         10</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Interrupciones</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define C_SIMO_GPIO_ENA                         1</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="config_8h.html#abc063e9c320f67c8a484653e7411ef56">   30</a></span>&#160;<span class="preprocessor">#define C_NUM_SIMO_TIMER                        3    </span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_UART                         3    </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_SPI                          2   </span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define C_NUM_SIMO_GPIO                         45</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="config_8h.html#a5d6fbce73f5beb1b48e1b078b3f1b2ca">   37</a></span>&#160;<span class="preprocessor">#define C_SIMO_GPIO_ADC_ENA                      0</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//TIMER GLOBAL IRQ</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="config_8h.html#a0f433dfe932f86883557c3ba80156ecd">   43</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_TIMER_IRQ                          1</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="config_8h.html#a1e5009e5da6bc5721f7f9c68055003ea">   44</a></span>&#160;<span class="preprocessor">#define  C_SIMO_TIMER_EVENT_IRQ                    1</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//UART GLOBAL  IRQ</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="config_8h.html#ad3dc54467ec892ca1d05de94b8178f57">   49</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_UART_IRQ                       1</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="config_8h.html#aa20c6758fa822ad5f90a397a357e27e4">   52</a></span>&#160;<span class="preprocessor">#define  C_SIMO_UART_TX_IRQ                    1</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#define  C_SIMO_UART_RX_IRQ                    1</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="config_8h.html#ad6b1e140fe2e514c3f9ce4f48f5470a3">   57</a></span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_IRQ                             1</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//Habilita configuracion de interrupciones SPI</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="config_8h.html#aba2a6dad327bddf8a44d8bc8ed0cdbb2">   62</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_SPI_TX_IRQ                          1</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_RX_IRQ                          1</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_TX_RX_IRQ                       1</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// Interrupciones</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//TIMER GLOBAL IRQ</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="config_8h.html#a0f433dfe932f86883557c3ba80156ecd">   45</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_TIMER_IRQ                          1</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="config_8h.html#a1e5009e5da6bc5721f7f9c68055003ea">   46</a></span>&#160;<span class="preprocessor">#define  C_SIMO_TIMER_EVENT_IRQ                    1</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//UART GLOBAL  IRQ</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="config_8h.html#ad3dc54467ec892ca1d05de94b8178f57">   51</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_UART_IRQ                       1</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="config_8h.html#aa20c6758fa822ad5f90a397a357e27e4">   54</a></span>&#160;<span class="preprocessor">#define  C_SIMO_UART_TX_IRQ                    1</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define  C_SIMO_UART_RX_IRQ                    1</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="config_8h.html#ad6b1e140fe2e514c3f9ce4f48f5470a3">   59</a></span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_IRQ                             1</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//Habilita configuracion de interrupciones SPI</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="config_8h.html#aba2a6dad327bddf8a44d8bc8ed0cdbb2">   64</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define  C_SIMO_SPI_TX_IRQ                          1</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_RX_IRQ                          1</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#define  C_SIMO_SPI_TX_RX_IRQ                       1</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="config_8h.html#a3dc0f7f080e74f1fc66f4e74ed9dd06d">   71</a></span>&#160;<span class="preprocessor">#define C_SIMO_GPIO_EXT_IRQ                         1</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

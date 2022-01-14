@@ -1,9 +1,9 @@
 var indexSectionsWithContent =
 {
-  0: "cnstu",
-  1: "cstu",
+  0: "cgnstu",
+  1: "cgstu",
   2: "s",
-  3: "stu",
+  3: "c",
   4: "st",
   5: "stu",
   6: "cnsu"

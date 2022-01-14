@@ -21,13 +21,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "core.h"
     #if SIMO_GPIO_ENA == 1
-
-
             //! Modos de funcionamiento
              typedef enum{
                  SIMO_GPIO_OUT,
                  SIMO_GPIO_IN,
-                #if SIMO_GPIO_ADC == 1
+                #if SIMO_GPIO_ADC_ENA == 1
                     SIMO_GPIO_ADC,
                 #endif 
                 #if SIMO_GPIO_EXT_IRQ == 1

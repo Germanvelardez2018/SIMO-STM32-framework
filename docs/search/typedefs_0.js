@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['spi_5firq_134',['spi_irq',['../core_8h.html#aa9393e64e5f74a3cc24c3564b8c75a59',1,'core.h']]]
+  ['callback_5fgpio_5fext_5fit_216',['callback_gpio_ext_it',['../core_8h.html#a029315ea37cb1b9a1c3445f7574418fc',1,'core.h']]],
+  ['callback_5firq_217',['callback_irq',['../core_8h.html#acc9b7711c2ddc24116b0231383b54636',1,'core.h']]]
 ];
