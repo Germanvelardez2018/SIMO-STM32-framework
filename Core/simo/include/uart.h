@@ -1,14 +1,13 @@
 /**
  * @file uart.h
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Driver para abstraer el hardware UART 
  * @version 0.1
- * @date 2022-01-04
+ * @date 2022-01-14
  * 
  * @copyright Copyright (c) 2022
  * 
  */
-
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USART_H

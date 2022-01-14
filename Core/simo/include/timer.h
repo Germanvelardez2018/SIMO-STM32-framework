@@ -1,4 +1,13 @@
-
+/**
+ * @file timer.h
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Driver para abstraer el hardware timer 
+ * @version 0.1
+ * @date 2022-01-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __TIMER_H
 #define __TIMER_H

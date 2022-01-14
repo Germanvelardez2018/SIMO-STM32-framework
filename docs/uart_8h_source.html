@@ -72,56 +72,56 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="uart_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/* Define to prevent recursive inclusion -------------------------------------*/</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef __USART_H</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define __USART_H</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* Includes ------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="core_8h.html">core.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/* Define to prevent recursive inclusion -------------------------------------*/</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef __USART_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define __USART_H</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* Includes ------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="core_8h.html">core.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#if SIMO_UART_ENA == 1</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a6cda250bbeab51654da3ec5412c1a953">simo_uart_read</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#if SIMO_UART_ENA == 1</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a6cda250bbeab51654da3ec5412c1a953">simo_uart_read</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a4bc709b66eb97ddfc565954f10c820e9">simo_uart_write</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a4bc709b66eb97ddfc565954f10c820e9">simo_uart_write</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a3adceb671933258bf1f2e1873b4b9d77">simo_uart_init</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint32_t baudrate);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    uint32_t <a class="code" href="uart_8h.html#a3adceb671933258bf1f2e1873b4b9d77">simo_uart_init</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint32_t baudrate);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">    #if SIMO_UART_IRQ   == 1</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">//Activo o desactivo las interrupciones</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="uart_8h.html#a6e73b4edbc1fa88c8dfdc08c6bb6a9c9">simo_uart_ena_irq</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint32_t ena);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">        #if SIMO_UART_TX_IRQ == 1</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            uint32_t <a class="code" href="uart_8h.html#ac3f519ea39b694a98afe903da6d1bf17">simo_uart_set_tx_callback</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">        #if SIMO_UART_RX_IRQ == 1</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            uint32_t <a class="code" href="uart_8h.html#a7f6160ceb69605281beefadd4815b671">simo_uart_set_rx_callback</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    #if SIMO_UART_IRQ   == 1</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">//Activo o desactivo las interrupciones</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="uart_8h.html#a6e73b4edbc1fa88c8dfdc08c6bb6a9c9">simo_uart_ena_irq</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,uint32_t ena);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">        #if SIMO_UART_TX_IRQ == 1</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            uint32_t <a class="code" href="uart_8h.html#ac3f519ea39b694a98afe903da6d1bf17">simo_uart_set_tx_callback</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">        #if SIMO_UART_RX_IRQ == 1</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            uint32_t <a class="code" href="uart_8h.html#a7f6160ceb69605281beefadd4815b671">simo_uart_set_rx_callback</a>(<a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a> uart,<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*__ usart_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*__ usart_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="auart_8h_html_a6cda250bbeab51654da3ec5412c1a953"><div class="ttname"><a href="uart_8h.html#a6cda250bbeab51654da3ec5412c1a953">simo_uart_read</a></div><div class="ttdeci">uint32_t simo_uart_read(SIMO_UART uart, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</div><div class="ttdoc">Leer un buffer de datos mediante puerto UART.</div></div>
 <div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587d"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a></div><div class="ttdeci">SIMO_UART</div><div class="ttdef"><b>Definition:</b> core.h:144</div></div>
