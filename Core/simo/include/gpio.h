@@ -23,15 +23,15 @@
     #if SIMO_GPIO_ENA == 1
             //! Modos de funcionamiento
              typedef enum{
-                 SIMO_GPIO_OUT,
-                 SIMO_GPIO_IN,
+                 SIMO_GPIO_OUT //! Salida digital
+                 ,SIMO_GPIO_IN //! Entrada digital
                 #if SIMO_GPIO_ADC_ENA == 1
-                    SIMO_GPIO_ADC,
+                    ,SIMO_GPIO_ADC //! Entrada analogica
                 #endif 
                 #if SIMO_GPIO_EXT_IRQ == 1
-                    SIMO_GPIO_EXT_IT_RISING,
-                    SIMO_GPIO_EXT_IT_FALLING,
-                    SIMO_GPIO_EXT_IT_RISING_FALLING,
+                    ,SIMO_GPIO_EXT_IT_RISING//! Interrupcion por flanco ascendente 
+                    ,SIMO_GPIO_EXT_IT_FALLING//! Interrupcion por flanco descendente
+                    ,SIMO_GPIO_EXT_IT_RISING_FALLING//! Interrupcion por flanco ascendente y descendente
                 #endif   
              }  simo_gpio_mode;
 
@@ -40,41 +40,57 @@
         typedef enum {
 
             //GPIOA
-            #if NUM_SIMO_GPIO > 0      
+            #if NUM_SIMO_GPIO > 0  
+            //!En STM32 es PA0   
                 SIMO_GPIO_0 , SIMO_GPIO_1, SIMO_GPIO_2, SIMO_GPIO_3, SIMO_GPIO_4,
             #endif
-            #if NUM_SIMO_GPIO > 5      
+            #if NUM_SIMO_GPIO > 5   
+            //!En STM32 es PA5   
+   
                 SIMO_GPIO_5 , SIMO_GPIO_6 ,SIMO_GPIO_7 ,SIMO_GPIO_8 ,SIMO_GPIO_9,SIMO_GPIO_10 ,
             #endif
-            #if NUM_SIMO_GPIO > 10     
+            #if NUM_SIMO_GPIO > 10  
+            //!En STM32 es PA11   
                  SIMO_GPIO_11, SIMO_GPIO_12, SIMO_GPIO_13, SIMO_GPIO_14,SIMO_GPIO_15 ,
             #endif
 
 
             // GPIOB 
-            #if NUM_SIMO_GPIO > 15     
+            #if NUM_SIMO_GPIO > 15
+            //!En STM32 es PB0   
+     
                  SIMO_GPIO_16 ,SIMO_GPIO_17 ,SIMO_GPIO_18 ,SIMO_GPIO_19, SIMO_GPIO_20 ,
             #endif
-            #if NUM_SIMO_GPIO > 20     
+            #if NUM_SIMO_GPIO > 20 
+            //!En STM32 es PB5   
+    
                 SIMO_GPIO_21, SIMO_GPIO_22, SIMO_GPIO_23, SIMO_GPIO_24, SIMO_GPIO_25 ,
             #endif
-            #if NUM_SIMO_GPIO > 25     
+            #if NUM_SIMO_GPIO > 25
+            //!En STM32 es PB10   
                 SIMO_GPIO_26 ,SIMO_GPIO_27 ,SIMO_GPIO_28 ,SIMO_GPIO_29,SIMO_GPIO_30 ,SIMO_GPIO_31
             #endif
 
 
             //GPIOC
-            #if NUM_SIMO_GPIO > 31     
+            #if NUM_SIMO_GPIO > 31
+            //!En STM32 es PC0   
                  , SIMO_GPIO_32, SIMO_GPIO_33, SIMO_GPIO_34, SIMO_GPIO_35 ,
             #endif
-            #if NUM_SIMO_GPIO > 35     
+            #if NUM_SIMO_GPIO > 35    
+            //! En STM32 es PC5 
                 SIMO_GPIO_36 ,SIMO_GPIO_37 ,SIMO_GPIO_38 ,SIMO_GPIO_39, SIMO_GPIO_40 ,
             #endif
-            #if NUM_SIMO_GPIO > 40     
+            #if NUM_SIMO_GPIO > 40
+            //! En STM32 es PC10     
                 SIMO_GPIO_41, SIMO_GPIO_42, SIMO_GPIO_43, SIMO_GPIO_44, SIMO_GPIO_45 ,
             #endif
-            #if NUM_SIMO_GPIO > 45     
-                SIMO_GPIO_46 ,SIMO_GPIO_47 ,SIMO_GPIO_48 ,SIMO_GPIO_49,
+            #if NUM_SIMO_GPIO > 45
+            //! En STM32 es PC15     
+                SIMO_GPIO_46 
+                ,SIMO_GPIO_47 //! En STM32 es PE0,PD0 o PF0. No implementado en gpio.c 
+                ,SIMO_GPIO_48 //! En STM32 es PE0,PD0 o PF0. No implementado en gpio.c 
+                ,SIMO_GPIO_49,//! En STM32 es PE0,PD0 o PF0. No implementado en gpio.c 
             #endif
            
         }SIMO_GPIO_PIN;

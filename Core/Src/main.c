@@ -27,23 +27,30 @@
 #include "timer.h"
 #include "gpio.h"
 #include "clock_config.h"
-
+#include "memory_store.h"
+#include "AT45DB041E.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
 #define TIME_COUNTS 10
+#define CS_PIN     SIMO_GPIO_22
+
 /* USER CODE END Includes */
 
 
-uint32_t volatile ena = 0;
 
 
-static void __IRQ_GPIO_EXT(uint16_t pin){
 
-     ena = 1;
 
-}
 
+
+
+      /**SPI1 GPIO Configuration
+       * PB6  como chip select
+        PB3     ------> SPI1_SCK
+        PB4     ------> SPI1_MISO
+        PB5     ------> SPI1_MOSI
+        */
 
 
 
@@ -57,19 +64,34 @@ int main(void)
 
   HAL_Init();
 
-  
 
   /* Configure the system clock */
   simo_clock_config();
   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
-  simo_gpio_set(SIMO_GPIO_19,SIMO_GPIO_EXT_IT_RISING);//PB3
-  simo_gpio_set_extern_event_callback(__IRQ_GPIO_EXT);
-  simo_gpio_ena_irq(SIMO_GPIO_19,1); // Habilito interrupciones
+  simo_gpio_set(CS_PIN,SIMO_GPIO_OUT); // spi
+
+  simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
+
+
+
+uint32_t ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
   while (1)
   {  
-    HAL_Delay(100);
-    if(ena == 1) simo_gpio_toogle(SIMO_GPIO_18);
+    HAL_Delay(1000);
+    if(ok == 1) {
+    simo_gpio_write(SIMO_GPIO_18,1);
+    ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
+
+    }
+    else{
+      ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
+    }
+  
+
+
   }
+
+
   /* USER CODE END 3 */
 }
 

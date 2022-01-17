@@ -36,6 +36,8 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/drivers/memory/AT45DB041E.c \
+Core/drivers/memory/memory_store.c \
 Core\simo/clock_config.c \
 Core/simo/timer.c\
 Core/simo/gpio.c\
@@ -117,6 +119,7 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -ICore/simo/include \
+-ICore/drivers/include/memory\
 -ICore/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \

@@ -1,6 +1,6 @@
 /**
  * @file gpio.c
- * @author your name (you@domain.com)
+ * @author German Velardez(germanvelardez16@gmail.com)
  * @brief 
  * @version 0.1
  * @date 2022-01-12
