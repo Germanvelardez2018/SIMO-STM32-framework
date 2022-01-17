@@ -115,7 +115,7 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
 
     GPIO_InitStruct.Pin = pin.index;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(pin.port, &GPIO_InitStruct);
 }
 

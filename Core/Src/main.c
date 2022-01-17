@@ -64,35 +64,59 @@ int main(void)
 
   HAL_Init();
 
-
+#define BAUDRATE  115200
   /* Configure the system clock */
   simo_clock_config();
-  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
-  simo_gpio_set(CS_PIN,SIMO_GPIO_OUT); // spi
+  simo_uart_init(UART_B,BAUDRATE);
 
-  simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
+ simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
+ simo_gpio_set(CS_PIN,SIMO_GPIO_OUT); // spi
+
+ simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
+ simo_gpio_write(CS_PIN,0);
+ simo_gpio_write(SIMO_GPIO_18,0);
+  //AT45DB041E_start_config(SPI_A,CS_PIN);
+#define BUFFER_SIZE 100
 
 
+uint8_t msg[BUFFER_SIZE]="SIMOPRO: SISTEMA DE MONITOREO 4G \r\n";
+#define LEN_MSG strlen(msg) -1
+uint8_t buffer_rx[BUFFER_SIZE];
+#define ADDRESS_PAGE    120
 
-uint32_t ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
+AT45DB041E_write_data(SPI_A,CS_PIN,msg,LEN_MSG,ADDRESS_PAGE,0);
+HAL_Delay(2000);
+
+HAL_Delay(2000);
+
+//uint32_t  ret = check_id(SPI_A,CS_PIN);
+//AT45DB041E_full_erase(SPI_A,CS_PIN);
+  AT45DB041E_write_data(SPI_A,CS_PIN,msg,LEN_MSG,ADDRESS_PAGE,0);
+    HAL_Delay(1000);
+   // AT45DB041E_write_data(SPI_A,CS_PIN,msg,14,ADDRESS_PAGE,0);
+    AT45DB041E_read_data(SPI_A,CS_PIN,buffer_rx,LEN_MSG,ADDRESS_PAGE,0);
+  uint32_t ok = 1;
   while (1)
   {  
-    HAL_Delay(1000);
-    if(ok == 1) {
-    simo_gpio_write(SIMO_GPIO_18,1);
-    ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
 
-    }
-    else{
-      ok =   __AT45DB041E_check_id(SPI_A,CS_PIN);
-    }
   
+    
 
+   
+    simo_uart_write(UART_B,"lectura:\n\r",10,100,0);
+
+    simo_uart_write(UART_B,buffer_rx,LEN_MSG,100,0);
+    simo_uart_write(UART_B,"\n",1,100,0);
+
+   
+
+    HAL_Delay(1000);
+
+ 
 
   }
 
 
-  /* USER CODE END 3 */
 }
 
 
