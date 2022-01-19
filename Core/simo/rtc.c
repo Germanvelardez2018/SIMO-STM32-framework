@@ -241,3 +241,25 @@ uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t*seconds){
 
 }
 
+void simo_rtc_write_backup_reg(uint32_t addres_reg,uint32_t data){
+  
+    
+   if(addres_reg <= SIMO_NUM_BACK_REGISTER )HAL_RTCEx_BKUPWrite(&__hrtc, addres_reg,data);
+
+
+ 
+}
+
+uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg){
+
+uint32_t data = 0;
+   if(addres_reg <= SIMO_NUM_BACK_REGISTER ){
+       data = HAL_RTCEx_BKUPRead(&__hrtc, addres_reg);
+
+   }
+
+  return data;
+
+    
+
+}

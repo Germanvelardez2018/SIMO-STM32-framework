@@ -51,7 +51,7 @@
 #define SIMO_RTC_WEEKDAY_SUNDAY             ((uint8_t)0x00)
 
 
-
+#define SIMO_NUM_BACK_REGISTER    ((uint32_t)10)
 
 
 
@@ -154,6 +154,9 @@ uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
 
 
 
+void simo_rtc_write_backup_reg(uint32_t addres_reg,uint32_t data);
+
+uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg);
 
 
 

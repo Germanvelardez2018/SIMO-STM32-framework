@@ -46,6 +46,12 @@ static void rtc_print_alarm(uint8_t h, uint8_t m , uint8_t s){
   sprintf(buffer,"\r\n alarm h:m:s ==> %d : %d :%d",h,m,s);
   simo_uart_write(UART_B,buffer,strlen(buffer),200,0);
 
+uint32_t memory = simo_rtc_read_backup_reg(1);
+
+ uint8_t buf[50]={0};
+  sprintf(buf,"\r\n memory back:  ==> %d ",memory);
+  simo_uart_write(UART_B,buf,strlen(buf),200,0);
+
 
 }
 
@@ -102,6 +108,7 @@ simo_uart_init(UART_B,BAUDRATE);
   simo_rtc_ena_irq(1);
   simo_rtc_set_time(18,6,0);
   simo_rtc_set_alarm(18,6,10);
+ // simo_rtc_write_backup_reg(1,117);
 
  
 
