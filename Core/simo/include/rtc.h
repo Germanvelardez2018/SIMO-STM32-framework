@@ -53,18 +53,24 @@
 
 
 typedef struct {
-     uint8_t second  ;  //! Segundos
-     uint8_t minute;  //! Minutos
-     uint8_t hour  ;  //!Hora. Valores maximo y minimo. 23 a 0
+     //! Segundos
+     uint8_t second  ; 
+      //! Minutos
+     uint8_t minute; 
+     //!Hora. Valores maximo y minimo. 23 a 0
+     uint8_t hour  ;  
 
 } simo_time_t;
 
 
 
 typedef struct {
-    uint8_t day   ;   //! dia del mes
-    uint8_t month ;  //! mes del año. Enero 1, Diciembre 12
-    uint8_t year  ;  //!Año. Valores maximos y minimos. 99 y 0
+     //! dia del mes
+    uint8_t day   ;  
+    //! mes del año. Enero 1, Diciembre 12
+    uint8_t month ; 
+    //!Año. Valores maximos y minimos. 99 y 0 
+    uint8_t year  ;  
 
 } simo_date_t;
 
