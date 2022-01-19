@@ -218,3 +218,26 @@ uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
     }
     return ret;
 }
+
+
+
+
+
+
+uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t*seconds){
+
+     uint32_t ret = 0;
+     uint32_t counter =0;
+    RTC_AlarmTypeDef sAlarm ={0};
+  
+    sAlarm.Alarm = 1;
+    if(  HAL_RTC_GetAlarm(&__hrtc, &sAlarm,&counter,  RTC_FORMAT_BIN) == HAL_OK){
+        ret = 1;
+        (*hours) = sAlarm.AlarmTime.Hours;
+        (*minutes) = sAlarm.AlarmTime.Minutes;
+        (*seconds) = sAlarm.AlarmTime.Seconds;
+    }
+    return ret;
+
+}
+

@@ -38,17 +38,15 @@
 
 
 
-void _check_ret(uint32_t ret){
-  if(( ret) == 1 ){
-   simo_gpio_write(SIMO_GPIO_18,1);
-   HAL_Delay(500);
-   simo_gpio_write(SIMO_GPIO_18,0);
-}
-}
 
 
-static void __rtc_irq(void){
-  simo_gpio_write(SIMO_GPIO_18,1);
+static void rtc_print_alarm(uint8_t h, uint8_t m , uint8_t s){
+
+  uint8_t buffer[100]={0};
+  sprintf(buffer,"\r\n alarm h:m:s ==> %d : %d :%d",h,m,s);
+  simo_uart_write(UART_B,buffer,strlen(buffer),200,0);
+
+
 }
 
 
@@ -64,12 +62,17 @@ static void rtc_printf(uint8_t h, uint8_t m , uint8_t s){
 
 
 
-      /**SPI1 GPIO Configuration
-       * PB6  como chip select
-        PB3     ------> SPI1_SCK
-        PB4     ------> SPI1_MISO
-        PB5     ------> SPI1_MOSI
-        */
+
+static void __rtc_irq(void){
+  simo_gpio_write(SIMO_GPIO_18,1);
+  uint8_t h,m,s;
+  simo_rtc_get_alarm( &h,&m,&s);
+  rtc_print_alarm(h,m,s);
+
+
+}
+
+
 
 
 

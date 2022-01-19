@@ -63,7 +63,12 @@ Asegurese de tener instalado las siguientes herramientas :
 
 
 Para compilar el proyecto ejecute el siguiente comando:
+``` 
+    make
 ```
+
+Para cargar el proyecto al microcontrolador mediante el stlink ejecute el siguiente comando:
+``` 
     ./runCode.sh
 ```
 
