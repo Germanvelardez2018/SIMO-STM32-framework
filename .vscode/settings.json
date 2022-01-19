@@ -7,6 +7,8 @@
         "clock_config.h": "c",
         "stimer.h": "c",
         "gpio.h": "c",
-        "rtc.h": "c"
+        "rtc.h": "c",
+        "stm32f1xx_hal.h": "c",
+        "stm32f1xx_hal_rtc.h": "c"
     }
 }

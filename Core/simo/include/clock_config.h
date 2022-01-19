@@ -23,6 +23,17 @@
     #include "core.h"
 
 
+
+    /**
+     * @brief Configura el rtc con el crista LSE de 32khz
+     * 
+     * @return ** uint32_t 
+     */
+    uint32_t simo_clock_rtc(void);
+
+
+
+
     /**
      * @brief  Configura el clock para que todo el sistema funcione.
      * 

@@ -27,8 +27,7 @@
 #include "timer.h"
 #include "gpio.h"
 #include "clock_config.h"
-#include "memory_store.h"
-#include "AT45DB041E.h"
+#include "rtc.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -39,9 +38,29 @@
 
 
 
+void _check_ret(uint32_t ret){
+  if(( ret) == 1 ){
+   simo_gpio_write(SIMO_GPIO_18,1);
+   HAL_Delay(500);
+   simo_gpio_write(SIMO_GPIO_18,0);
+}
+}
+
+
+static void __rtc_irq(void){
+  simo_gpio_write(SIMO_GPIO_18,1);
+}
 
 
 
+static void rtc_printf(uint8_t h, uint8_t m , uint8_t s){
+
+  uint8_t buffer[100]={0};
+  sprintf(buffer,"\r\n h:m:s ==> %d : %d :%d",h,m,s);
+  simo_uart_write(UART_B,buffer,strlen(buffer),200,0);
+
+
+}
 
 
 
@@ -66,47 +85,34 @@ int main(void)
 
 #define BAUDRATE  115200
   /* Configure the system clock */
-  simo_clock_config();
-  simo_uart_init(UART_B,BAUDRATE);
+simo_clock_config();
+simo_uart_init(UART_B,BAUDRATE);
 
  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
  simo_gpio_set(CS_PIN,SIMO_GPIO_OUT); // spi
 
- simo_spi_init(SPI_A,SIMO_SPI_PRESCALER_4);
  simo_gpio_write(CS_PIN,0);
  simo_gpio_write(SIMO_GPIO_18,0);
-  //AT45DB041E_start_config(SPI_A,CS_PIN);
-#define BUFFER_SIZE 100
+
+  simo_rtc_init();
+  simo_rtc_set_alarm_callback(__rtc_irq);
+  simo_rtc_ena_irq(1);
+  simo_rtc_set_time(18,6,0);
+  simo_rtc_set_alarm(18,6,10);
+
+ 
 
 
-uint8_t msg[BUFFER_SIZE]="SIMOPRO: SISTEMA DE MONITOREO 4G \r\n";
-#define LEN_MSG strlen(msg) -1
-uint8_t buffer_rx[BUFFER_SIZE];
-#define ADDRESS_PAGE    120
-
-AT45DB041E_write_data(SPI_A,CS_PIN,msg,LEN_MSG,ADDRESS_PAGE,0);
-HAL_Delay(2000);
-
-HAL_Delay(2000);
-
-//uint32_t  ret = check_id(SPI_A,CS_PIN);
-//AT45DB041E_full_erase(SPI_A,CS_PIN);
-  AT45DB041E_write_data(SPI_A,CS_PIN,msg,LEN_MSG,ADDRESS_PAGE,0);
-    HAL_Delay(1000);
-   // AT45DB041E_write_data(SPI_A,CS_PIN,msg,14,ADDRESS_PAGE,0);
-    AT45DB041E_read_data(SPI_A,CS_PIN,buffer_rx,LEN_MSG,ADDRESS_PAGE,0);
-  uint32_t ok = 1;
   while (1)
   {  
 
   
-    
+  uint8_t  h,m,s ; 
 
+    simo_rtc_get_time(&h,&m,&s);
+
+    rtc_printf(h,m,s);
    
-    simo_uart_write(UART_B,"lectura:\n\r",10,100,0);
-
-    simo_uart_write(UART_B,buffer_rx,LEN_MSG,100,0);
-    simo_uart_write(UART_B,"\n",1,100,0);
 
    
 

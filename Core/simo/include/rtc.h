@@ -52,60 +52,21 @@
 
 
 
-typedef struct {
-     //! Segundos
-     uint8_t second  ; 
-      //! Minutos
-     uint8_t minute; 
-     //!Hora. Valores maximo y minimo. 23 a 0
-     uint8_t hour  ;  
-
-} simo_time_t;
-
-
-
-typedef struct {
-     //! dia del mes
-    uint8_t day   ;  
-    //! mes del año. Enero 1, Diciembre 12
-    uint8_t month ; 
-    //!Año. Valores maximos y minimos. 99 y 0 
-    uint8_t year  ;  
-
-} simo_date_t;
-
-
 
 
 
 /**
- * @brief Configurar fecha y hora del dispositivo. En caso de formato erroneo retorna 0
+ * @brief 
  * 
- * @param time 
- * @param date 
  * @return ** uint32_t 
  */
-uint32_t simo_rtc_set_all(simo_time_t* time, simo_date_t* date);
-
-/**
- * @brief Obtiene el valor de fecha y hora del dispositvo. En caso de error retorna 0
- * 
- * @param time 
- * @param date 
- * @return ** uint32_t 
- */
-uint32_t simo_rtc_get_all(simo_time_t* time, simo_date_t* date);
-
 uint32_t simo_rtc_init();
 
 
-/**
- * @brief Obtiene el valor de la hora del dispositvo. En caso de error retorna 0 
- * 
- * @param time Esctructura con formato de hora 
- * @return ** uint32_t 
- */
-uint32_t simo_rtc_get_time(simo_time_t* time);
+
+
+
+
 
 
 
@@ -113,9 +74,19 @@ uint32_t simo_rtc_get_time(simo_time_t* time);
  * @brief Obtiene el valor de la hora del dispositvo. En caso de error retorna 0 
  * 
  * @param time Esctructura con formato de hora 
+ * @return ** uint32_t
+ */
+uint32_t simo_rtc_get_time(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
+
+
+
+/**
+ * @brief Obtiene el valor de la hora del dispositvo. En caso de error retorna 0 
+ * 
+ * @param time Esctructura con formato de hora 
  * @return ** uint32_t 
  */
-uint32_t simo_rtc_set_time(simo_time_t* time);
+uint32_t simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 
 
@@ -127,7 +98,7 @@ uint32_t simo_rtc_set_time(simo_time_t* time);
  * @param date Estructura con el formato de fecha 
  * @return ** uint32_t 
  */
-uint32_t simo_rtc_get_date(simo_date_t* date);
+uint32_t simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year);
 
 
 
@@ -137,15 +108,15 @@ uint32_t simo_rtc_get_date(simo_date_t* date);
  * @param date Estructura con el formato de fecha 
  * @return ** uint32_t 
  */ 
-uint32_t simo_rtc_set_date(simo_date_t* date);
+uint32_t simo_rtc_set_date(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year);
 
 /**
  * @brief Habilita la interrupcion por Alarma RTC
  * 
  * @param ena  0 para deshabilita, diferente de 0
- * @return ** uint32_t 
+ * @return ** void
  */
-uint32_t simo_rtc_ena_irq(uint32_t ena);
+void simo_rtc_ena_irq(uint32_t ena);
 
 /**
  * @brief Configura la funcion de callback correspondiente
@@ -154,6 +125,35 @@ uint32_t simo_rtc_ena_irq(uint32_t ena);
  * @return ** uint32_t 
  */
 uint32_t simo_rtc_set_alarm_callback(callback_irq callback);
+
+
+
+/**
+ * @brief 
+ * 
+ * @param hours 
+ * @param minutes 
+ * @param seconds 
+ * @return ** uint32_t 
+ */
+uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
+
+
+
+/**
+ * @brief 
+ * 
+ * @param hours 
+ * @param minutes 
+ * @param seconds 
+ * @return ** uint32_t 
+ */
+uint32_t simo_rtc_get_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
+
+
+
+
+uint32_t simo_rtc_alarm_activated();
 
 
 
