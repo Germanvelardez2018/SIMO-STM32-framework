@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pos_5frx_267',['pos_rx',['../main_8c.html#a0bbc6cd3b31795b603cf5c4599d48fe1',1,'main.c']]]
+  ['year_285',['year',['../group___r_t_c___week_day___definitions.html#ga7af2065789bc84419b8d5fe109be83b5',1,'simo_date_t']]]
 ];

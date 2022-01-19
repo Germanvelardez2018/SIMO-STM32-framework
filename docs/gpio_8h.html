@@ -215,11 +215,16 @@ Funciones</h2></td></tr>
 
 <p>Modos de funcionamiento. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa067aea22ae3ddaee12603bdcdc0840c1"></a>SIMO_GPIO_OUT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa96c95b5c063bf2414e88326431610e1e"></a>SIMO_GPIO_IN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daaf95ea021c62c8083f33dc69933ade7a6"></a>SIMO_GPIO_EXT_IT_RISING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daab2fd815463412efa3027c91f4d9a0a9e"></a>SIMO_GPIO_EXT_IT_FALLING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa337217bfc76c863afd39a154b31b3446"></a>SIMO_GPIO_EXT_IT_RISING_FALLING&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa067aea22ae3ddaee12603bdcdc0840c1"></a>SIMO_GPIO_OUT&#160;</td><td class="fielddoc"><p>Salida digital. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa96c95b5c063bf2414e88326431610e1e"></a>SIMO_GPIO_IN&#160;</td><td class="fielddoc"><p>Entrada digital. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daaf95ea021c62c8083f33dc69933ade7a6"></a>SIMO_GPIO_EXT_IT_RISING&#160;</td><td class="fielddoc"><p>Interrupcion por flanco ascendente. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daab2fd815463412efa3027c91f4d9a0a9e"></a>SIMO_GPIO_EXT_IT_FALLING&#160;</td><td class="fielddoc"><p>Interrupcion por flanco descendente. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af8574ff6def10169d7c507f0ff69a5daa337217bfc76c863afd39a154b31b3446"></a>SIMO_GPIO_EXT_IT_RISING_FALLING&#160;</td><td class="fielddoc"><p>Interrupcion por flanco ascendente y descendente. </p>
+</td></tr>
 </table>
 
 </div>
@@ -238,55 +243,76 @@ Funciones</h2></td></tr>
 
 <p>Instancias de GPIO disponibles. SIMO_GPIO_0 a SIMO_GPIO_15 son A0 a A15, SIMO_GPIO_16 B0 y SIMO_GPIO_31 B15. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a725d6fb63560b2d955429bafc1762a30"></a>SIMO_GPIO_0&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a725d6fb63560b2d955429bafc1762a30"></a>SIMO_GPIO_0&#160;</td><td class="fielddoc"><p>En STM32 es PA0 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a717a945058f8139474fa7830fde48ce2"></a>SIMO_GPIO_1&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1acc0b1e41fabd0745b7048ace0ee0aeaa"></a>SIMO_GPIO_2&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a56617bf42d1fd315bf504462ecd87010"></a>SIMO_GPIO_3&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a74063692012b34404cdb500559e3dcdf"></a>SIMO_GPIO_4&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a23d0bea3eae6c1e57271b5b39702fccb"></a>SIMO_GPIO_5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a23d0bea3eae6c1e57271b5b39702fccb"></a>SIMO_GPIO_5&#160;</td><td class="fielddoc"><p>En STM32 es PA5 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7baabbae89eb02dbe52ec87e2fcef717"></a>SIMO_GPIO_6&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a1ccead9d52219c603fd6286149a79f36"></a>SIMO_GPIO_7&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a8df6e47937f38a580590002737af6476"></a>SIMO_GPIO_8&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7f5dcf64ca8b6d2b06979b827766f2ea"></a>SIMO_GPIO_9&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aadfaaf57acfc4ae7a6f02fa9c9d4f64f"></a>SIMO_GPIO_10&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a69c152f222d5d88f9d37727e549330c0"></a>SIMO_GPIO_11&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a69c152f222d5d88f9d37727e549330c0"></a>SIMO_GPIO_11&#160;</td><td class="fielddoc"><p>En STM32 es PA11 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a93ff367a3bb25244c39919cdab4bc5d8"></a>SIMO_GPIO_12&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ab5f4aaf6b6d48a977a540119b686a020"></a>SIMO_GPIO_13&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa1b19d4370fad8ee0e7145757fe5ca28"></a>SIMO_GPIO_14&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1abbeabdc37bc8a29e16a8decd7cf2e993"></a>SIMO_GPIO_15&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a247bd91bcdff9c60bd40fb76af996f1b"></a>SIMO_GPIO_16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a247bd91bcdff9c60bd40fb76af996f1b"></a>SIMO_GPIO_16&#160;</td><td class="fielddoc"><p>En STM32 es PB0 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1acf920921a9bdc8304ace5eb2297d716b"></a>SIMO_GPIO_17&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3f43be3dfbe990cc7dd57f1b9acb8810"></a>SIMO_GPIO_18&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa2022a56831661c1bae9aac5da51b307"></a>SIMO_GPIO_19&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a00246673137e461f461bd3fc6f2b71d3"></a>SIMO_GPIO_20&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5b03ea8e9bf95219a89694a1360d2d7f"></a>SIMO_GPIO_21&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5b03ea8e9bf95219a89694a1360d2d7f"></a>SIMO_GPIO_21&#160;</td><td class="fielddoc"><p>En STM32 es PB5 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ac2da226998c111e68c56c01f671b2405"></a>SIMO_GPIO_22&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a6e2638dac22a5b364174dffaf15bafb5"></a>SIMO_GPIO_23&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a4c835c28c08ff315b87df92a0a062867"></a>SIMO_GPIO_24&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1af95ec07612e80b58ab6bf58c1fee2ad7"></a>SIMO_GPIO_25&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5431d5f0818ae063471efa70b95445a6"></a>SIMO_GPIO_26&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5431d5f0818ae063471efa70b95445a6"></a>SIMO_GPIO_26&#160;</td><td class="fielddoc"><p>En STM32 es PB10 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1abdd44af385121943375b2ae478a9b910"></a>SIMO_GPIO_27&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1af516b3d761c81f047b5ec6d694f3173f"></a>SIMO_GPIO_28&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1add488a5efb866307556392c2ef2f3d1c"></a>SIMO_GPIO_29&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1aa614ce7fc43db783966bf7a260995cf9"></a>SIMO_GPIO_30&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a185f8606cf92222944658c9c147a540d"></a>SIMO_GPIO_31&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a185f8606cf92222944658c9c147a540d"></a>SIMO_GPIO_31&#160;</td><td class="fielddoc"><p>En STM32 es PC0 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a1d3d2398e43c41d13691f5e5b0dd54ed"></a>SIMO_GPIO_32&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a9225c11fa1645861bc0ae2da9104def6"></a>SIMO_GPIO_33&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ac6a023ac90ee26560c4787e936d84475"></a>SIMO_GPIO_34&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a065bfb0dbcd569c38963cbea39e7a9dc"></a>SIMO_GPIO_35&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7c30c5e7fa40cee213a77eeb96c0a115"></a>SIMO_GPIO_36&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7c30c5e7fa40cee213a77eeb96c0a115"></a>SIMO_GPIO_36&#160;</td><td class="fielddoc"><p>En STM32 es PC5. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1ab7f5c24320c58b412b9f598331a6a214"></a>SIMO_GPIO_37&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a97e5687631202b387245396b449faa8c"></a>SIMO_GPIO_38&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a064c56614c199be8da59981a5dd1b6bc"></a>SIMO_GPIO_39&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5e891e8c60154f65bc866dcbe703974c"></a>SIMO_GPIO_40&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a2eba66884e7d2469f05085c1a9334562"></a>SIMO_GPIO_41&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a2eba66884e7d2469f05085c1a9334562"></a>SIMO_GPIO_41&#160;</td><td class="fielddoc"><p>En STM32 es PC10 <br  />
+ </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3e64a2b434afcd58fbb41d45e3b6c3f2"></a>SIMO_GPIO_42&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a3696dab8c94d08eeebaa8655425f37cb"></a>SIMO_GPIO_43&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5ea4cd8ef317efa88596bfd2925e2105"></a>SIMO_GPIO_44&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a907b7d947f51ed96967d54b2abfec814"></a>SIMO_GPIO_45&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7b676859c063f986e775514bb8a1dde2"></a>SIMO_GPIO_46&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a0062d4436308720ea81303482527fade"></a>SIMO_GPIO_47&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1adc66b917524c7415cb0648e209fcc26f"></a>SIMO_GPIO_48&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a7b676859c063f986e775514bb8a1dde2"></a>SIMO_GPIO_46&#160;</td><td class="fielddoc"><p>En STM32 es PC15 <br  />
+ </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a0062d4436308720ea81303482527fade"></a>SIMO_GPIO_47&#160;</td><td class="fielddoc"><p>En STM32 es PE0,PD0 o PF0. No implementado en <a class="el" href="gpio_8c.html">gpio.c</a>. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1adc66b917524c7415cb0648e209fcc26f"></a>SIMO_GPIO_48&#160;</td><td class="fielddoc"><p>En STM32 es PE0,PD0 o PF0. No implementado en <a class="el" href="gpio_8c.html">gpio.c</a>. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a1cc6ad965f0a9d917e153e5ca6eb62b1a5566dfb0ab8de13d0b3cf9d6637fce0b"></a>SIMO_GPIO_49&#160;</td><td class="fielddoc"></td></tr>
 </table>
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hspi1_266',['hspi1',['../main_8c.html#a9c6222bae4d0328dd843ae099623b40b',1,'main.c']]]
+  ['second_284',['second',['../group___r_t_c___week_day___definitions.html#ga8459fc4e94de7eefc74991e41779c8fc',1,'simo_time_t']]]
 ];
