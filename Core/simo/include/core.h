@@ -28,7 +28,7 @@
 
 
     #define CLOCK_TIMER                 4000000
-
+    #define SIMO_RTC_ENA                C_SIMO_RTC_ENA
 
 
 

@@ -14,13 +14,13 @@
 
 
 
-<p>Se pretende diseñar el firmware de un drifter modular. La arquitectura del mismo debe tener una estructura en capas.
+<p>Se pretende diseñar el firmware para un dispositivo modular. La arquitectura del mismo debe tener una estructura en capas.
 </p>
 
 
  <h4 align="center">Diagrama simple del sistema</h4>
  <div align="center" >
-<img  src="img/diagrama_sistema.jpg" border="1px" 
+<img  src="img/diagrama.png" border="1px" 
      height="320px" width="480px"/>
 </div>
 
