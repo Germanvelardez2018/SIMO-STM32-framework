@@ -64,22 +64,13 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Estructuras de datos</a> &#124;
 <a href="#define-members">defines</a> &#124;
-<a href="#func-members">Funciones</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Funciones</a>  </div>
   <div class="headertitle">
 <div class="title">WeekDay Definitions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Estructuras de datos</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsimo__time__t.html">simo_time_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsimo__date__t.html">simo_date_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 defines</h2></td></tr>
 <tr class="memitem:ga3273ba0481e1a0ca6fe46dcb103a7e05"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga3273ba0481e1a0ca6fe46dcb103a7e05">SIMO_RTC_WEEKDAY_MONDAY</a>&#160;&#160;&#160;((uint8_t)0x01)</td></tr>
@@ -96,59 +87,58 @@ defines</h2></td></tr>
 <tr class="separator:ga61ee8bc2709d0575ca5c0cfc93325581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0df52b50d89065750f70d4d6d58f736a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0df52b50d89065750f70d4d6d58f736a">SIMO_RTC_WEEKDAY_SUNDAY</a>&#160;&#160;&#160;((uint8_t)0x00)</td></tr>
 <tr class="separator:ga0df52b50d89065750f70d4d6d58f736a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa558f4694a221914939be6fe3fe83fde"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaa558f4694a221914939be6fe3fe83fde">SIMO_NUM_BACK_REGISTER</a>&#160;&#160;&#160;((uint32_t)10)</td></tr>
+<tr class="separator:gaa558f4694a221914939be6fe3fe83fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funciones</h2></td></tr>
-<tr class="memitem:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga7628a4a1e82c76cf5e60e49cb4121aa3">simo_rtc_set_all</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time, <a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configurar fecha y hora del dispositivo. En caso de formato erroneo retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga7628a4a1e82c76cf5e60e49cb4121aa3">Más...</a><br /></td></tr>
-<tr class="separator:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7148736072ee0e063fe2dd27a938c3ce"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga7148736072ee0e063fe2dd27a938c3ce">simo_rtc_get_all</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time, <a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga7148736072ee0e063fe2dd27a938c3ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de fecha y hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga7148736072ee0e063fe2dd27a938c3ce">Más...</a><br /></td></tr>
-<tr class="separator:ga7148736072ee0e063fe2dd27a938c3ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a> ()</td></tr>
 <tr class="separator:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf97b44840935755f6edf1b4fbeadd36"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaaf97b44840935755f6edf1b4fbeadd36">simo_rtc_get_time</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time)</td></tr>
-<tr class="memdesc:gaaf97b44840935755f6edf1b4fbeadd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#gaaf97b44840935755f6edf1b4fbeadd36">Más...</a><br /></td></tr>
-<tr class="separator:gaaf97b44840935755f6edf1b4fbeadd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0f69487365144a6c2ad2063c0bb3fa4e">simo_rtc_set_time</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time)</td></tr>
-<tr class="memdesc:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga0f69487365144a6c2ad2063c0bb3fa4e">Más...</a><br /></td></tr>
-<tr class="separator:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbaad3bf738afd391513d5a417da7927"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gacbaad3bf738afd391513d5a417da7927">simo_rtc_get_date</a> (<a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:gacbaad3bf738afd391513d5a417da7927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
-  <a href="group___r_t_c___week_day___definitions.html#gacbaad3bf738afd391513d5a417da7927">Más...</a><br /></td></tr>
-<tr class="separator:gacbaad3bf738afd391513d5a417da7927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga1fc3aff4e72ed97876b4b532b6051a1c">simo_rtc_set_date</a> (<a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
-  <a href="group___r_t_c___week_day___definitions.html#ga1fc3aff4e72ed97876b4b532b6051a1c">Más...</a><br /></td></tr>
-<tr class="separator:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf685ac626d3362c48fffdad5c83eb946"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaf685ac626d3362c48fffdad5c83eb946">simo_rtc_ena_irq</a> (uint32_t ena)</td></tr>
-<tr class="memdesc:gaf685ac626d3362c48fffdad5c83eb946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion por Alarma RTC.  <a href="group___r_t_c___week_day___definitions.html#gaf685ac626d3362c48fffdad5c83eb946">Más...</a><br /></td></tr>
-<tr class="separator:gaf685ac626d3362c48fffdad5c83eb946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
+<tr class="memdesc:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">Más...</a><br /></td></tr>
+<tr class="separator:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0834db19329dc8a0791c62a37b899b6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a> (uint8_t hours, uint8_t minutes, uint8_t seconds)</td></tr>
+<tr class="memdesc:gac0834db19329dc8a0791c62a37b899b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">Más...</a><br /></td></tr>
+<tr class="separator:gac0834db19329dc8a0791c62a37b899b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a> (uint8_t *week_day, uint8_t *month, uint8_t *date_day, uint8_t *year)</td></tr>
+<tr class="memdesc:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
+  <a href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">Más...</a><br /></td></tr>
+<tr class="separator:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a> (uint8_t week_day, uint8_t month, uint8_t date_day, uint8_t year)</td></tr>
+<tr class="memdesc:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
+  <a href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">Más...</a><br /></td></tr>
+<tr class="separator:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2d29826140349663c3b4362b5fec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a> (uint32_t ena)</td></tr>
+<tr class="memdesc:gaa2d29826140349663c3b4362b5fec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion por Alarma RTC.  <a href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">Más...</a><br /></td></tr>
+<tr class="separator:gaa2d29826140349663c3b4362b5fec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga68bb59878ddfb9cf002fc155757b31a3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a> (<a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback)</td></tr>
 <tr class="memdesc:ga68bb59878ddfb9cf002fc155757b31a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura la funcion de callback correspondiente.  <a href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">Más...</a><br /></td></tr>
 <tr class="separator:ga68bb59878ddfb9cf002fc155757b31a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga8459fc4e94de7eefc74991e41779c8fc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga8459fc4e94de7eefc74991e41779c8fc">second</a></td></tr>
-<tr class="separator:ga8459fc4e94de7eefc74991e41779c8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8ff981ec55c945940f4a0da7d8709b3c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga8ff981ec55c945940f4a0da7d8709b3c">minute</a></td></tr>
-<tr class="memdesc:ga8ff981ec55c945940f4a0da7d8709b3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Segundos.  <a href="group___r_t_c___week_day___definitions.html#ga8ff981ec55c945940f4a0da7d8709b3c">Más...</a><br /></td></tr>
-<tr class="separator:ga8ff981ec55c945940f4a0da7d8709b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae5af4ff48939d13d480f87e56a9385d6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gae5af4ff48939d13d480f87e56a9385d6">hour</a></td></tr>
-<tr class="memdesc:gae5af4ff48939d13d480f87e56a9385d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minutos.  <a href="group___r_t_c___week_day___definitions.html#gae5af4ff48939d13d480f87e56a9385d6">Más...</a><br /></td></tr>
-<tr class="separator:gae5af4ff48939d13d480f87e56a9385d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga72369a1087b2aeffe374bb054cb97c12"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga72369a1087b2aeffe374bb054cb97c12">day</a></td></tr>
-<tr class="separator:ga72369a1087b2aeffe374bb054cb97c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3e00faf7fbf9805e9ec4d2edd6339050"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga3e00faf7fbf9805e9ec4d2edd6339050">month</a></td></tr>
-<tr class="memdesc:ga3e00faf7fbf9805e9ec4d2edd6339050"><td class="mdescLeft">&#160;</td><td class="mdescRight">dia del mes  <a href="group___r_t_c___week_day___definitions.html#ga3e00faf7fbf9805e9ec4d2edd6339050">Más...</a><br /></td></tr>
-<tr class="separator:ga3e00faf7fbf9805e9ec4d2edd6339050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7af2065789bc84419b8d5fe109be83b5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga7af2065789bc84419b8d5fe109be83b5">year</a></td></tr>
-<tr class="memdesc:ga7af2065789bc84419b8d5fe109be83b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">mes del año. Enero 1, Diciembre 12  <a href="group___r_t_c___week_day___definitions.html#ga7af2065789bc84419b8d5fe109be83b5">Más...</a><br /></td></tr>
-<tr class="separator:ga7af2065789bc84419b8d5fe109be83b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76f503f99c6717b2262f6f0853b75377"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a> (uint8_t hours, uint8_t minutes, uint8_t seconds)</td></tr>
+<tr class="separator:ga76f503f99c6717b2262f6f0853b75377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
+<tr class="separator:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf88186803dbb718894bb2e02d299c7cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a> (uint32_t addres_reg, uint32_t data)</td></tr>
+<tr class="separator:gaf88186803dbb718894bb2e02d299c7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga042203c6a53f958a7b9fa2902eece759"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a> (uint32_t addres_reg)</td></tr>
+<tr class="separator:ga042203c6a53f958a7b9fa2902eece759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
 <h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="gaa558f4694a221914939be6fe3fe83fde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa558f4694a221914939be6fe3fe83fde">&#9670;&nbsp;</a></span>SIMO_NUM_BACK_REGISTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIMO_NUM_BACK_REGISTER&#160;&#160;&#160;((uint32_t)10)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="gab97b5114c3d9701b687db882c4f878e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab97b5114c3d9701b687db882c4f878e3">&#9670;&nbsp;</a></span>SIMO_RTC_WEEKDAY_FRIDAY</h2>
 
@@ -248,14 +238,14 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Documentación de las funciones</h2>
-<a id="gaf685ac626d3362c48fffdad5c83eb946"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf685ac626d3362c48fffdad5c83eb946">&#9670;&nbsp;</a></span>simo_rtc_ena_irq()</h2>
+<a id="gaa2d29826140349663c3b4362b5fec52e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa2d29826140349663c3b4362b5fec52e">&#9670;&nbsp;</a></span>simo_rtc_ena_irq()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t simo_rtc_ena_irq </td>
+          <td class="memname">void simo_rtc_ena_irq </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>ena</em></td><td>)</td>
@@ -271,27 +261,33 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
 
 </div>
 </div>
-<a id="ga7148736072ee0e063fe2dd27a938c3ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7148736072ee0e063fe2dd27a938c3ce">&#9670;&nbsp;</a></span>simo_rtc_get_all()</h2>
+<a id="gab7adbdd563612fb3626c43f03b9e5a97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7adbdd563612fb3626c43f03b9e5a97">&#9670;&nbsp;</a></span>simo_rtc_get_alarm()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t simo_rtc_get_all </td>
+          <td class="memname">uint32_t simo_rtc_get_alarm </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__time__t.html">simo_time_t</a> *&#160;</td>
-          <td class="paramname"><em>time</em>, </td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>hours</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structsimo__date__t.html">simo_date_t</a> *&#160;</td>
-          <td class="paramname"><em>date</em>&#160;</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>minutes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -300,12 +296,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Obtiene el valor de fecha y hora del dispositvo. En caso de error retorna 0. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">time</td><td></td></tr>
-    <tr><td class="paramname">date</td><td></td></tr>
+    <tr><td class="paramname">hours</td><td></td></tr>
+    <tr><td class="paramname">minutes</td><td></td></tr>
+    <tr><td class="paramname">seconds</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -313,8 +308,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="gacbaad3bf738afd391513d5a417da7927"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacbaad3bf738afd391513d5a417da7927">&#9670;&nbsp;</a></span>simo_rtc_get_date()</h2>
+<a id="ga683a5f5d40aae67917e36a6692d4ffc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga683a5f5d40aae67917e36a6692d4ffc5">&#9670;&nbsp;</a></span>simo_rtc_get_date()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,9 +317,31 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">uint32_t simo_rtc_get_date </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__date__t.html">simo_date_t</a> *&#160;</td>
-          <td class="paramname"><em>date</em></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>week_day</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>month</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>date_day</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -341,8 +358,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="gaaf97b44840935755f6edf1b4fbeadd36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaf97b44840935755f6edf1b4fbeadd36">&#9670;&nbsp;</a></span>simo_rtc_get_time()</h2>
+<a id="ga3cf9e5432aff730e1b8fd9f45348d5b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3cf9e5432aff730e1b8fd9f45348d5b5">&#9670;&nbsp;</a></span>simo_rtc_get_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,9 +367,25 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">uint32_t simo_rtc_get_time </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__time__t.html">simo_time_t</a> *&#160;</td>
-          <td class="paramname"><em>time</em></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>hours</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>minutes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -382,6 +415,68 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="ga042203c6a53f958a7b9fa2902eece759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga042203c6a53f958a7b9fa2902eece759">&#9670;&nbsp;</a></span>simo_rtc_read_backup_reg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_rtc_read_backup_reg </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>addres_reg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga76f503f99c6717b2262f6f0853b75377"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga76f503f99c6717b2262f6f0853b75377">&#9670;&nbsp;</a></span>simo_rtc_set_alarm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_rtc_set_alarm </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>hours</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>minutes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hours</td><td></td></tr>
+    <tr><td class="paramname">minutes</td><td></td></tr>
+    <tr><td class="paramname">seconds</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
 
 </div>
 </div>
@@ -412,46 +507,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ga7628a4a1e82c76cf5e60e49cb4121aa3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7628a4a1e82c76cf5e60e49cb4121aa3">&#9670;&nbsp;</a></span>simo_rtc_set_all()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t simo_rtc_set_all </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__time__t.html">simo_time_t</a> *&#160;</td>
-          <td class="paramname"><em>time</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structsimo__date__t.html">simo_date_t</a> *&#160;</td>
-          <td class="paramname"><em>date</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Configurar fecha y hora del dispositivo. En caso de formato erroneo retorna 0. </p>
-<dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">time</td><td></td></tr>
-    <tr><td class="paramname">date</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
-
-</div>
-</div>
-<a id="ga1fc3aff4e72ed97876b4b532b6051a1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1fc3aff4e72ed97876b4b532b6051a1c">&#9670;&nbsp;</a></span>simo_rtc_set_date()</h2>
+<a id="ga2d093caaf4f1a365628b8d446ba2f4bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2d093caaf4f1a365628b8d446ba2f4bc">&#9670;&nbsp;</a></span>simo_rtc_set_date()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -459,9 +516,31 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">uint32_t simo_rtc_set_date </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__date__t.html">simo_date_t</a> *&#160;</td>
-          <td class="paramname"><em>date</em></td><td>)</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>week_day</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>month</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>date_day</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>year</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -478,8 +557,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ga0f69487365144a6c2ad2063c0bb3fa4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f69487365144a6c2ad2063c0bb3fa4e">&#9670;&nbsp;</a></span>simo_rtc_set_time()</h2>
+<a id="gac0834db19329dc8a0791c62a37b899b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0834db19329dc8a0791c62a37b899b6">&#9670;&nbsp;</a></span>simo_rtc_set_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -487,9 +566,25 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">uint32_t simo_rtc_set_time </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsimo__time__t.html">simo_time_t</a> *&#160;</td>
-          <td class="paramname"><em>time</em></td><td>)</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>hours</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>minutes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -505,96 +600,31 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Documentación de las variables</h2>
-<a id="ga72369a1087b2aeffe374bb054cb97c12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga72369a1087b2aeffe374bb054cb97c12">&#9670;&nbsp;</a></span>day</h2>
+<a id="gaf88186803dbb718894bb2e02d299c7cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf88186803dbb718894bb2e02d299c7cd">&#9670;&nbsp;</a></span>simo_rtc_write_backup_reg()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t day</td>
+          <td class="memname">void simo_rtc_write_backup_reg </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>addres_reg</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="gae5af4ff48939d13d480f87e56a9385d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae5af4ff48939d13d480f87e56a9385d6">&#9670;&nbsp;</a></span>hour</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">uint8_t hour</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Minutos. </p>
-
-</div>
-</div>
-<a id="ga8ff981ec55c945940f4a0da7d8709b3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8ff981ec55c945940f4a0da7d8709b3c">&#9670;&nbsp;</a></span>minute</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">uint8_t minute</td>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Segundos. </p>
-
-</div>
-</div>
-<a id="ga3e00faf7fbf9805e9ec4d2edd6339050"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3e00faf7fbf9805e9ec4d2edd6339050">&#9670;&nbsp;</a></span>month</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t month</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>dia del mes </p>
-
-</div>
-</div>
-<a id="ga8459fc4e94de7eefc74991e41779c8fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8459fc4e94de7eefc74991e41779c8fc">&#9670;&nbsp;</a></span>second</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t second</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ga7af2065789bc84419b8d5fe109be83b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7af2065789bc84419b8d5fe109be83b5">&#9670;&nbsp;</a></span>year</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t year</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>mes del año. Enero 1, Diciembre 12 </p>
 
 </div>
 </div>

@@ -55,15 +55,10 @@
              * @brief This function handles USART2 global interrupt.
              */
             void USART3_IRQHandler(void){
-           
             HAL_UART_IRQHandler(&huart3);
-            
             }
         #endif
     #endif
-
-
-
 
 
 
@@ -104,11 +99,6 @@ static UART_HandleTypeDef* __get_uart(SIMO_UART uart_enum)
     }
     return uart;
 }
-
-
-
-
-
 
 
 

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['hour_41',['hour',['../group___r_t_c___week_day___definitions.html#gae5af4ff48939d13d480f87e56a9385d6',1,'simo_time_t']]]
+  ['hal_5frtc_5falarmaeventcallback_40',['HAL_RTC_AlarmAEventCallback',['../rtc_8c.html#a11aeff83fd498cddbed3bcddcf017e0a',1,'rtc.c']]],
+  ['hal_5frtc_5fmspdeinit_41',['HAL_RTC_MspDeInit',['../rtc_8c.html#a8767bc3a4d472d39a688090ab10ba6ce',1,'rtc.c']]],
+  ['hal_5frtc_5fmspinit_42',['HAL_RTC_MspInit',['../rtc_8c.html#aee6eddaa309c8c9829f1ca794d8f99c5',1,'rtc.c']]]
 ];

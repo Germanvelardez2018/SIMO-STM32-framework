@@ -68,6 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">defines</a> &#124;
 <a href="#func-members">Funciones</a>  </div>
   <div class="headertitle">
 <div class="title">Referencia del Archivo rtc.c</div>  </div>
@@ -75,6 +76,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="rtc_8h_source.html">rtc.h</a>&quot;</code><br />
 <code>#include &quot;main.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="clock__config_8h_source.html">clock_config.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Dependencia gráfica adjunta para rtc.c:</div>
 <div class="dyncontent">
@@ -82,43 +84,180 @@ Dependencia gráfica adjunta para rtc.c:</div>
 <!-- MAP 0 -->
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a2304abba8855ad9f2390db1d92ef90c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8c.html#a2304abba8855ad9f2390db1d92ef90c7">SIMO_RTC_FORMAT</a>&#160;&#160;&#160;RTC_FORMAT_BIN</td></tr>
+<tr class="separator:a2304abba8855ad9f2390db1d92ef90c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funciones</h2></td></tr>
-<tr class="memitem:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga7628a4a1e82c76cf5e60e49cb4121aa3">simo_rtc_set_all</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time, <a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configurar fecha y hora del dispositivo. En caso de formato erroneo retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga7628a4a1e82c76cf5e60e49cb4121aa3">Más...</a><br /></td></tr>
-<tr class="separator:ga7628a4a1e82c76cf5e60e49cb4121aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7148736072ee0e063fe2dd27a938c3ce"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga7148736072ee0e063fe2dd27a938c3ce">simo_rtc_get_all</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time, <a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga7148736072ee0e063fe2dd27a938c3ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de fecha y hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga7148736072ee0e063fe2dd27a938c3ce">Más...</a><br /></td></tr>
-<tr class="separator:ga7148736072ee0e063fe2dd27a938c3ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da4fb52ec579671d337938e78f9a207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8c.html#a4da4fb52ec579671d337938e78f9a207">RTC_Alarm_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:a4da4fb52ec579671d337938e78f9a207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de configuracion.  <a href="rtc_8c.html#a4da4fb52ec579671d337938e78f9a207">Más...</a><br /></td></tr>
+<tr class="separator:a4da4fb52ec579671d337938e78f9a207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11aeff83fd498cddbed3bcddcf017e0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8c.html#a11aeff83fd498cddbed3bcddcf017e0a">HAL_RTC_AlarmAEventCallback</a> (RTC_HandleTypeDef *hrtc)</td></tr>
+<tr class="separator:a11aeff83fd498cddbed3bcddcf017e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee6eddaa309c8c9829f1ca794d8f99c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8c.html#aee6eddaa309c8c9829f1ca794d8f99c5">HAL_RTC_MspInit</a> (RTC_HandleTypeDef *hrtc)</td></tr>
+<tr class="memdesc:aee6eddaa309c8c9829f1ca794d8f99c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC MSP Initialization This function configures the hardware resources used in this example.  <a href="rtc_8c.html#aee6eddaa309c8c9829f1ca794d8f99c5">Más...</a><br /></td></tr>
+<tr class="separator:aee6eddaa309c8c9829f1ca794d8f99c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8767bc3a4d472d39a688090ab10ba6ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtc_8c.html#a8767bc3a4d472d39a688090ab10ba6ce">HAL_RTC_MspDeInit</a> (RTC_HandleTypeDef *hrtc)</td></tr>
+<tr class="memdesc:a8767bc3a4d472d39a688090ab10ba6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTC MSP De-Initialization This function freeze the hardware resources used in this example.  <a href="rtc_8c.html#a8767bc3a4d472d39a688090ab10ba6ce">Más...</a><br /></td></tr>
+<tr class="separator:a8767bc3a4d472d39a688090ab10ba6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a> ()</td></tr>
 <tr class="separator:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaf97b44840935755f6edf1b4fbeadd36"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaaf97b44840935755f6edf1b4fbeadd36">simo_rtc_get_time</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time)</td></tr>
-<tr class="memdesc:gaaf97b44840935755f6edf1b4fbeadd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#gaaf97b44840935755f6edf1b4fbeadd36">Más...</a><br /></td></tr>
-<tr class="separator:gaaf97b44840935755f6edf1b4fbeadd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0f69487365144a6c2ad2063c0bb3fa4e">simo_rtc_set_time</a> (<a class="el" href="structsimo__time__t.html">simo_time_t</a> *time)</td></tr>
-<tr class="memdesc:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga0f69487365144a6c2ad2063c0bb3fa4e">Más...</a><br /></td></tr>
-<tr class="separator:ga0f69487365144a6c2ad2063c0bb3fa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbaad3bf738afd391513d5a417da7927"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gacbaad3bf738afd391513d5a417da7927">simo_rtc_get_date</a> (<a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:gacbaad3bf738afd391513d5a417da7927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
-  <a href="group___r_t_c___week_day___definitions.html#gacbaad3bf738afd391513d5a417da7927">Más...</a><br /></td></tr>
-<tr class="separator:gacbaad3bf738afd391513d5a417da7927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga1fc3aff4e72ed97876b4b532b6051a1c">simo_rtc_set_date</a> (<a class="el" href="structsimo__date__t.html">simo_date_t</a> *date)</td></tr>
-<tr class="memdesc:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
-  <a href="group___r_t_c___week_day___definitions.html#ga1fc3aff4e72ed97876b4b532b6051a1c">Más...</a><br /></td></tr>
-<tr class="separator:ga1fc3aff4e72ed97876b4b532b6051a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf685ac626d3362c48fffdad5c83eb946"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaf685ac626d3362c48fffdad5c83eb946">simo_rtc_ena_irq</a> (uint32_t ena)</td></tr>
-<tr class="memdesc:gaf685ac626d3362c48fffdad5c83eb946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion por Alarma RTC.  <a href="group___r_t_c___week_day___definitions.html#gaf685ac626d3362c48fffdad5c83eb946">Más...</a><br /></td></tr>
-<tr class="separator:gaf685ac626d3362c48fffdad5c83eb946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0834db19329dc8a0791c62a37b899b6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a> (uint8_t hours, uint8_t minutes, uint8_t seconds)</td></tr>
+<tr class="memdesc:gac0834db19329dc8a0791c62a37b899b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">Más...</a><br /></td></tr>
+<tr class="separator:gac0834db19329dc8a0791c62a37b899b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
+<tr class="memdesc:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">Más...</a><br /></td></tr>
+<tr class="separator:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a> (uint8_t *week_day, uint8_t *month, uint8_t *date_day, uint8_t *year)</td></tr>
+<tr class="memdesc:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
+  <a href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">Más...</a><br /></td></tr>
+<tr class="separator:ga683a5f5d40aae67917e36a6692d4ffc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a> (uint8_t week_day, uint8_t month, uint8_t date_day, uint8_t year)</td></tr>
+<tr class="memdesc:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0 <br  />
+  <a href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">Más...</a><br /></td></tr>
+<tr class="separator:ga2d093caaf4f1a365628b8d446ba2f4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2d29826140349663c3b4362b5fec52e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a> (uint32_t ena)</td></tr>
+<tr class="memdesc:gaa2d29826140349663c3b4362b5fec52e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita la interrupcion por Alarma RTC.  <a href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">Más...</a><br /></td></tr>
+<tr class="separator:gaa2d29826140349663c3b4362b5fec52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga68bb59878ddfb9cf002fc155757b31a3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a> (<a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback)</td></tr>
 <tr class="memdesc:ga68bb59878ddfb9cf002fc155757b31a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura la funcion de callback correspondiente.  <a href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">Más...</a><br /></td></tr>
 <tr class="separator:ga68bb59878ddfb9cf002fc155757b31a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76f503f99c6717b2262f6f0853b75377"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a> (uint8_t hours, uint8_t minutes, uint8_t seconds)</td></tr>
+<tr class="separator:ga76f503f99c6717b2262f6f0853b75377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
+<tr class="separator:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf88186803dbb718894bb2e02d299c7cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a> (uint32_t addres_reg, uint32_t data)</td></tr>
+<tr class="separator:gaf88186803dbb718894bb2e02d299c7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga042203c6a53f958a7b9fa2902eece759"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a> (uint32_t addres_reg)</td></tr>
+<tr class="separator:ga042203c6a53f958a7b9fa2902eece759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
 <div class="textblock"><dl class="section author"><dt>Autor</dt><dd>your name (<a href="#" onclick="location.href='mai'+'lto:'+'you'+'@d'+'oma'+'in'+'.co'+'m'; return false;">you@d<span style="display: none;">.nosp@m.</span>omai<span style="display: none;">.nosp@m.</span>n.com</a>) </dd></dl>
 <dl class="section version"><dt>Versión</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Fecha</dt><dd>2022-01-18</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a2304abba8855ad9f2390db1d92ef90c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2304abba8855ad9f2390db1d92ef90c7">&#9670;&nbsp;</a></span>SIMO_RTC_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIMO_RTC_FORMAT&#160;&#160;&#160;RTC_FORMAT_BIN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a11aeff83fd498cddbed3bcddcf017e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11aeff83fd498cddbed3bcddcf017e0a">&#9670;&nbsp;</a></span>HAL_RTC_AlarmAEventCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_RTC_AlarmAEventCallback </td>
+          <td>(</td>
+          <td class="paramtype">RTC_HandleTypeDef *&#160;</td>
+          <td class="paramname"><em>hrtc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8767bc3a4d472d39a688090ab10ba6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8767bc3a4d472d39a688090ab10ba6ce">&#9670;&nbsp;</a></span>HAL_RTC_MspDeInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_RTC_MspDeInit </td>
+          <td>(</td>
+          <td class="paramtype">RTC_HandleTypeDef *&#160;</td>
+          <td class="paramname"><em>hrtc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>RTC MSP De-Initialization This function freeze the hardware resources used in this example. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hrtc</td><td>RTC handle pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aee6eddaa309c8c9829f1ca794d8f99c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee6eddaa309c8c9829f1ca794d8f99c5">&#9670;&nbsp;</a></span>HAL_RTC_MspInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_RTC_MspInit </td>
+          <td>(</td>
+          <td class="paramtype">RTC_HandleTypeDef *&#160;</td>
+          <td class="paramname"><em>hrtc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>RTC MSP Initialization This function configures the hardware resources used in this example. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hrtc</td><td>RTC handle pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4da4fb52ec579671d337938e78f9a207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da4fb52ec579671d337938e78f9a207">&#9670;&nbsp;</a></span>RTC_Alarm_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RTC_Alarm_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estructura de configuracion. </p>
+<p>This function handles RTC alarm interrupt through EXTI line 17. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generado por &#160;<a href="http://www.doxygen.org/index.html">
