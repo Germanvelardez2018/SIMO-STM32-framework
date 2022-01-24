@@ -93,6 +93,7 @@ defines</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funciones</h2></td></tr>
 <tr class="memitem:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a> ()</td></tr>
+<tr class="memdesc:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicio el hardware RTC.  <a href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">Más...</a><br /></td></tr>
 <tr class="separator:ga0d51cac85c51378aa6a6c697fa6e3a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
 <tr class="memdesc:ga3cf9e5432aff730e1b8fd9f45348d5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.  <a href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">Más...</a><br /></td></tr>
@@ -119,8 +120,10 @@ Funciones</h2></td></tr>
 <tr class="memitem:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a> (uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</td></tr>
 <tr class="separator:gab7adbdd563612fb3626c43f03b9e5a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf88186803dbb718894bb2e02d299c7cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a> (uint32_t addres_reg, uint32_t data)</td></tr>
+<tr class="memdesc:gaf88186803dbb718894bb2e02d299c7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escribe un registro del backup.  <a href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">Más...</a><br /></td></tr>
 <tr class="separator:gaf88186803dbb718894bb2e02d299c7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga042203c6a53f958a7b9fa2902eece759"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a> (uint32_t addres_reg)</td></tr>
+<tr class="memdesc:ga042203c6a53f958a7b9fa2902eece759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lee un registro de backup.  <a href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">Más...</a><br /></td></tr>
 <tr class="separator:ga042203c6a53f958a7b9fa2902eece759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
@@ -415,6 +418,8 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Inicio el hardware RTC. </p>
 <dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
 
 </div>
@@ -434,6 +439,15 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Lee un registro de backup. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addres_reg</td><td>direccion del registro. Direccuion maxima 10 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
 
 </div>
 </div>
@@ -625,6 +639,16 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Escribe un registro del backup. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addres_reg</td><td>direccion del registro. Direccuion maxima 10 </td></tr>
+    <tr><td class="paramname">data</td><td>dato a escribir </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
 
 </div>
 </div>

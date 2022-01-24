@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['month_20definitions_43',['Month Definitions',['../group___r_t_c___month___date___definitions.html',1,'']]]
+  ['hal_5frtc_5falarmaeventcallback_43',['HAL_RTC_AlarmAEventCallback',['../rtc_8c.html#a11aeff83fd498cddbed3bcddcf017e0a',1,'rtc.c']]],
+  ['hal_5frtc_5fmspdeinit_44',['HAL_RTC_MspDeInit',['../rtc_8c.html#a8767bc3a4d472d39a688090ab10ba6ce',1,'rtc.c']]],
+  ['hal_5frtc_5fmspinit_45',['HAL_RTC_MspInit',['../rtc_8c.html#aee6eddaa309c8c9829f1ca794d8f99c5',1,'rtc.c']]]
 ];

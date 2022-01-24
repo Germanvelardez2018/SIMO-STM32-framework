@@ -1,3 +1,4 @@
 /build
 /Documentation
-*.ioc
+simo.ioc
+.mxproject

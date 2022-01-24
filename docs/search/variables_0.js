@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['day_280',['day',['../group___r_t_c___week_day___definitions.html#ga72369a1087b2aeffe374bb054cb97c12',1,'simo_date_t']]]
+  ['setup_5fconfig_317',['setup_config',['../power__save_8h.html#a4d3a525899564b564904f8d441208ff2',1,'power_save.h']]]
 ];

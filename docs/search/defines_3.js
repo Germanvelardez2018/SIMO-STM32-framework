@@ -1,8 +1,22 @@
 var searchData=
 [
-  ['used_5fclock_5fapb1_5fdiv_417',['USED_CLOCK_APB1_DIV',['../clock__config_8c.html#a2cb7b2f5ee527b47385473d98090977c',1,'clock_config.c']]],
-  ['used_5fclock_5fapb2_5fdiv_418',['USED_CLOCK_APB2_DIV',['../clock__config_8c.html#a761c1588aeebed7eaa0aae86c8ce658e',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_419',['USED_CLOCK_LSI',['../clock__config_8c.html#ad19bce2ae485e9262faf97516e6455a1',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fdiv_420',['USED_CLOCK_LSI_DIV',['../clock__config_8c.html#a90099f42b08eea2256c8d8facc261b70',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fmul_421',['USED_CLOCK_LSI_MUL',['../clock__config_8c.html#a409f940217d942b6919114b4ae51ed6e',1,'clock_config.c']]]
+  ['simo_5fgpio_5fadc_5fena_442',['SIMO_GPIO_ADC_ENA',['../core_8h.html#a84489d8ea22ca14f8d0882e56cf3940b',1,'core.h']]],
+  ['simo_5fgpio_5fena_443',['SIMO_GPIO_ENA',['../core_8h.html#a1dfae98ec5c2b174f63685d00982fba0',1,'core.h']]],
+  ['simo_5fgpio_5fext_5firq_444',['SIMO_GPIO_EXT_IRQ',['../core_8h.html#a6eeb1e7e8f2f9063ef6db2b034c24b81',1,'core.h']]],
+  ['simo_5fpwr_5fregularo_5fparam_445',['SIMO_PWR_REGULARO_PARAM',['../power__save_8c.html#a50543c32a66a3a01563ad51fc17d8474',1,'power_save.c']]],
+  ['simo_5fpwr_5fsleep_5fmode_446',['SIMO_PWR_SLEEP_MODE',['../power__save_8c.html#aea198b1fd6ef03bf87ed3a2d945461dc',1,'power_save.c']]],
+  ['simo_5fpwr_5fstop_5fmode_447',['SIMO_PWR_STOP_MODE',['../power__save_8c.html#a505d0775b7134badbeb641ec5800dfaf',1,'power_save.c']]],
+  ['simo_5frtc_5fena_448',['SIMO_RTC_ENA',['../core_8h.html#a86b12ec043af758129ead69123128ed1',1,'core.h']]],
+  ['simo_5frtc_5fformat_449',['SIMO_RTC_FORMAT',['../rtc_8c.html#a2304abba8855ad9f2390db1d92ef90c7',1,'rtc.c']]],
+  ['simo_5fspi_5fena_450',['SIMO_SPI_ENA',['../core_8h.html#ae6ed9226e2981af10a2c48ac15e7ea5f',1,'core.h']]],
+  ['simo_5fspi_5firq_451',['SIMO_SPI_IRQ',['../core_8h.html#a50f2633d94840b9306afff04c9852a61',1,'core.h']]],
+  ['simo_5fspi_5frx_5firq_452',['SIMO_SPI_RX_IRQ',['../core_8h.html#a165d1202922d707d33a35562e2592b23',1,'core.h']]],
+  ['simo_5fspi_5ftx_5firq_453',['SIMO_SPI_TX_IRQ',['../core_8h.html#afeb297dd69b0517c6f68c3b3b8ee3006',1,'core.h']]],
+  ['simo_5fspi_5ftx_5frx_5firq_454',['SIMO_SPI_TX_RX_IRQ',['../core_8h.html#a07588e5d9afd89fc5b21b54816e6bf24',1,'core.h']]],
+  ['simo_5ftimer_5fena_455',['SIMO_TIMER_ENA',['../core_8h.html#abadab96dfdc27281408d3e9cdf1002bb',1,'core.h']]],
+  ['simo_5ftimer_5firq_456',['SIMO_TIMER_IRQ',['../core_8h.html#a23ae99b72739dc0b4105015b817f71a3',1,'core.h']]],
+  ['simo_5fuart_5fena_457',['SIMO_UART_ENA',['../core_8h.html#a018dce838a8fcb0c01df271ca9207121',1,'core.h']]],
+  ['simo_5fuart_5firq_458',['SIMO_UART_IRQ',['../core_8h.html#a270762019061e3c8ae3e11b31af6d954',1,'core.h']]],
+  ['simo_5fuart_5frx_5firq_459',['SIMO_UART_RX_IRQ',['../core_8h.html#a0bc21e4e2eda2209a169a31aa6a461e6',1,'core.h']]],
+  ['simo_5fuart_5ftx_5firq_460',['SIMO_UART_TX_IRQ',['../core_8h.html#a8705a58069351513e3d86050bc82f9ef',1,'core.h']]]
 ];

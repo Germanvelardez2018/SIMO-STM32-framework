@@ -16,6 +16,10 @@
 
 #define SIMO_RTC_FORMAT         RTC_FORMAT_BIN
 
+
+
+
+
 static callback_irq __RTC_ALARM_IRQ__ ; 
 
 static RTC_HandleTypeDef __hrtc; //! Estructura de configuracion
@@ -141,7 +145,7 @@ uint32_t simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,u
     uint32_t ret = 0;
     RTC_DateTypeDef DateToUpdate = {0};
     
-    if (HAL_RTC_SetDate(&__hrtc, &DateToUpdate, RTC_FORMAT_BIN) == HAL_OK){
+    if (HAL_RTC_GetDate(&__hrtc, &DateToUpdate, RTC_FORMAT_BIN) == HAL_OK){
         ret = 1;
         (*week_day)  = DateToUpdate.WeekDay ;
         (*month)     = DateToUpdate.Month ;
@@ -174,13 +178,9 @@ void simo_rtc_ena_irq(uint32_t ena){
 
 
     if( ena == 0){
-        HAL_NVIC_DisableIRQ(RTC_IRQn);
         HAL_NVIC_DisableIRQ(RTC_Alarm_IRQn);
-
     }
     else{
-   //     HAL_NVIC_SetPriority(RTC_IRQn, 0, 0);
-   //     HAL_NVIC_EnableIRQ(RTC_IRQn);
         HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
     }
@@ -236,24 +236,14 @@ uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t*seconds){
 }
 
 void simo_rtc_write_backup_reg(uint32_t addres_reg,uint32_t data){
-  
-    
    if(addres_reg <= SIMO_NUM_BACK_REGISTER )HAL_RTCEx_BKUPWrite(&__hrtc, addres_reg,data);
-
-
- 
 }
 
 uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg){
-
 uint32_t data = 0;
    if(addres_reg <= SIMO_NUM_BACK_REGISTER ){
        data = HAL_RTCEx_BKUPRead(&__hrtc, addres_reg);
-
    }
 
   return data;
-
-    
-
 }

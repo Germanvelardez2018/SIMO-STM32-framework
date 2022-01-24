@@ -76,101 +76,109 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define __SIMO_RTC_H</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="core_8h.html">core.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* Coded in BCD format */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga44efd890afbf5a687c4f0ed58e4728b1">   25</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_JANUARY              ((uint8_t)0x01)</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga576e960b2eb67da2d53c2127534841e5">   26</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_FEBRUARY             ((uint8_t)0x02)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gabaa24dd1d5a5d3f5bc6ed7bc2962d6fe">   27</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_MARCH                ((uint8_t)0x03)</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gafc0f9a79d251633610b4ee8c18585299">   28</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_APRIL                ((uint8_t)0x04)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gae056d3c7f0f247af9a8a6b62456bec9a">   29</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_MAY                  ((uint8_t)0x05)</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga39ccd97c9408ff3b1e957201d4c20291">   30</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_JUNE                 ((uint8_t)0x06)</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga5aa25f3aade9c9b0d0b354fdcdb9980a">   31</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_JULY                 ((uint8_t)0x07)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga2544cfd670bdf3f41d691d53e7f66c5a">   32</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_AUGUST               ((uint8_t)0x08)</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga860d21e1575f374341eff3a988f1ba2d">   33</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_SEPTEMBER            ((uint8_t)0x09)</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gaba7a424393c0e73a287676570032767e">   34</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_OCTOBER              ((uint8_t)0x10)</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga4130be6fe2396b2a07365637e78fcbc8">   35</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_NOVEMBER             ((uint8_t)0x11)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga77b3e81eb11a39be0ed39217a4babaee">   36</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_MONTH_DECEMBER             ((uint8_t)0x12)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga3273ba0481e1a0ca6fe46dcb103a7e05">   45</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_MONDAY             ((uint8_t)0x01)</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga2adf25959a34e4006d173c39d38a1289">   46</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_TUESDAY            ((uint8_t)0x02)</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga5a7d319eedb4fbf560b0e19a78ac31b7">   47</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_WEDNESDAY          ((uint8_t)0x03)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gacc2fa27de3003fc39ea570cf8e8266f2">   48</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_THURSDAY           ((uint8_t)0x04)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gab97b5114c3d9701b687db882c4f878e3">   49</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_FRIDAY             ((uint8_t)0x05)</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga61ee8bc2709d0575ca5c0cfc93325581">   50</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_SATURDAY           ((uint8_t)0x06)</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga0df52b50d89065750f70d4d6d58f736a">   51</a></span>&#160;<span class="preprocessor">#define SIMO_RTC_WEEKDAY_SUNDAY             ((uint8_t)0x00)</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gaa558f4694a221914939be6fe3fe83fde">   54</a></span>&#160;<span class="preprocessor">#define SIMO_NUM_BACK_REGISTER    ((uint32_t)10)</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="core_8h.html">core.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#if SIMO_RTC_ENA == 1</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">/* Coded in BCD format */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga44efd890afbf5a687c4f0ed58e4728b1">   31</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_JANUARY              ((uint8_t)0x01)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga576e960b2eb67da2d53c2127534841e5">   32</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_FEBRUARY             ((uint8_t)0x02)</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gabaa24dd1d5a5d3f5bc6ed7bc2962d6fe">   33</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_MARCH                ((uint8_t)0x03)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gafc0f9a79d251633610b4ee8c18585299">   34</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_APRIL                ((uint8_t)0x04)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gae056d3c7f0f247af9a8a6b62456bec9a">   35</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_MAY                  ((uint8_t)0x05)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga39ccd97c9408ff3b1e957201d4c20291">   36</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_JUNE                 ((uint8_t)0x06)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga5aa25f3aade9c9b0d0b354fdcdb9980a">   37</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_JULY                 ((uint8_t)0x07)</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga2544cfd670bdf3f41d691d53e7f66c5a">   38</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_AUGUST               ((uint8_t)0x08)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga860d21e1575f374341eff3a988f1ba2d">   39</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_SEPTEMBER            ((uint8_t)0x09)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#gaba7a424393c0e73a287676570032767e">   40</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_OCTOBER              ((uint8_t)0x10)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga4130be6fe2396b2a07365637e78fcbc8">   41</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_NOVEMBER             ((uint8_t)0x11)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="group___r_t_c___month___date___definitions.html#ga77b3e81eb11a39be0ed39217a4babaee">   42</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_MONTH_DECEMBER             ((uint8_t)0x12)</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga3273ba0481e1a0ca6fe46dcb103a7e05">   51</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_MONDAY             ((uint8_t)0x01)</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga2adf25959a34e4006d173c39d38a1289">   52</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_TUESDAY            ((uint8_t)0x02)</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga5a7d319eedb4fbf560b0e19a78ac31b7">   53</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_WEDNESDAY          ((uint8_t)0x03)</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gacc2fa27de3003fc39ea570cf8e8266f2">   54</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_THURSDAY           ((uint8_t)0x04)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gab97b5114c3d9701b687db882c4f878e3">   55</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_FRIDAY             ((uint8_t)0x05)</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga61ee8bc2709d0575ca5c0cfc93325581">   56</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_SATURDAY           ((uint8_t)0x06)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#ga0df52b50d89065750f70d4d6d58f736a">   57</a></span>&#160;<span class="preprocessor">  #define SIMO_RTC_WEEKDAY_SUNDAY             ((uint8_t)0x00)</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="group___r_t_c___week_day___definitions.html#gaa558f4694a221914939be6fe3fe83fde">   60</a></span>&#160;<span class="preprocessor">  #define SIMO_NUM_BACK_REGISTER    ((uint32_t)10)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a>();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a>(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a>(uint8_t hours, uint8_t minutes, uint8_t seconds);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a>(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a>(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a>(uint32_t ena);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a>(<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a>(uint8_t hours, uint8_t minutes, uint8_t seconds);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a>(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a>(uint32_t addres_reg,uint32_t data);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a>(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a>(uint8_t hours, uint8_t minutes, uint8_t seconds);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a>(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a>(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a>(uint32_t ena);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a>(<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a>(uint8_t hours, uint8_t minutes, uint8_t seconds);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a>(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a>(uint32_t addres_reg);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a>(uint32_t addres_reg,uint32_t data);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  uint32_t <a class="code" href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a>(uint32_t addres_reg);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#endif // SIMO_RTC_ENA</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gab7adbdd563612fb3626c43f03b9e5a97"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a></div><div class="ttdeci">uint32_t simo_rtc_get_alarm(uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</div><div class="ttdef"><b>Definition:</b> rtc.c:227</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga68bb59878ddfb9cf002fc155757b31a3"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a></div><div class="ttdeci">uint32_t simo_rtc_set_alarm_callback(callback_irq callback)</div><div class="ttdoc">Configura la funcion de callback correspondiente.</div><div class="ttdef"><b>Definition:</b> rtc.c:196</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gab7adbdd563612fb3626c43f03b9e5a97"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gab7adbdd563612fb3626c43f03b9e5a97">simo_rtc_get_alarm</a></div><div class="ttdeci">uint32_t simo_rtc_get_alarm(uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</div><div class="ttdef"><b>Definition:</b> rtc.c:221</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga68bb59878ddfb9cf002fc155757b31a3"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga68bb59878ddfb9cf002fc155757b31a3">simo_rtc_set_alarm_callback</a></div><div class="ttdeci">uint32_t simo_rtc_set_alarm_callback(callback_irq callback)</div><div class="ttdoc">Configura la funcion de callback correspondiente.</div><div class="ttdef"><b>Definition:</b> rtc.c:190</div></div>
 <div class="ttc" id="acore_8h_html_acc9b7711c2ddc24116b0231383b54636"><div class="ttname"><a href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a></div><div class="ttdeci">void(* callback_irq)(void)</div><div class="ttdoc">Funcion callback asociada a una interupcion por hardware.</div><div class="ttdef"><b>Definition:</b> core.h:185</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga3cf9e5432aff730e1b8fd9f45348d5b5"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a></div><div class="ttdeci">uint32_t simo_rtc_get_time(uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</div><div class="ttdoc">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.</div><div class="ttdef"><b>Definition:</b> rtc.c:123</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga0d51cac85c51378aa6a6c697fa6e3a2f"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a></div><div class="ttdeci">uint32_t simo_rtc_init()</div><div class="ttdef"><b>Definition:</b> rtc.c:93</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga683a5f5d40aae67917e36a6692d4ffc5"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a></div><div class="ttdeci">uint32_t simo_rtc_get_date(uint8_t *week_day, uint8_t *month, uint8_t *date_day, uint8_t *year)</div><div class="ttdoc">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0</div><div class="ttdef"><b>Definition:</b> rtc.c:146</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gaa2d29826140349663c3b4362b5fec52e"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a></div><div class="ttdeci">void simo_rtc_ena_irq(uint32_t ena)</div><div class="ttdoc">Habilita la interrupcion por Alarma RTC.</div><div class="ttdef"><b>Definition:</b> rtc.c:179</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gac0834db19329dc8a0791c62a37b899b6"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a></div><div class="ttdeci">uint32_t simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds)</div><div class="ttdoc">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.</div><div class="ttdef"><b>Definition:</b> rtc.c:107</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gaf88186803dbb718894bb2e02d299c7cd"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a></div><div class="ttdeci">void simo_rtc_write_backup_reg(uint32_t addres_reg, uint32_t data)</div><div class="ttdef"><b>Definition:</b> rtc.c:244</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga76f503f99c6717b2262f6f0853b75377"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a></div><div class="ttdeci">uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds)</div><div class="ttdef"><b>Definition:</b> rtc.c:209</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga3cf9e5432aff730e1b8fd9f45348d5b5"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga3cf9e5432aff730e1b8fd9f45348d5b5">simo_rtc_get_time</a></div><div class="ttdeci">uint32_t simo_rtc_get_time(uint8_t *hours, uint8_t *minutes, uint8_t *seconds)</div><div class="ttdoc">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.</div><div class="ttdef"><b>Definition:</b> rtc.c:121</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga0d51cac85c51378aa6a6c697fa6e3a2f"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga0d51cac85c51378aa6a6c697fa6e3a2f">simo_rtc_init</a></div><div class="ttdeci">uint32_t simo_rtc_init()</div><div class="ttdoc">Inicio el hardware RTC.</div><div class="ttdef"><b>Definition:</b> rtc.c:91</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga683a5f5d40aae67917e36a6692d4ffc5"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga683a5f5d40aae67917e36a6692d4ffc5">simo_rtc_get_date</a></div><div class="ttdeci">uint32_t simo_rtc_get_date(uint8_t *week_day, uint8_t *month, uint8_t *date_day, uint8_t *year)</div><div class="ttdoc">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0</div><div class="ttdef"><b>Definition:</b> rtc.c:144</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gaa2d29826140349663c3b4362b5fec52e"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gaa2d29826140349663c3b4362b5fec52e">simo_rtc_ena_irq</a></div><div class="ttdeci">void simo_rtc_ena_irq(uint32_t ena)</div><div class="ttdoc">Habilita la interrupcion por Alarma RTC.</div><div class="ttdef"><b>Definition:</b> rtc.c:177</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gac0834db19329dc8a0791c62a37b899b6"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gac0834db19329dc8a0791c62a37b899b6">simo_rtc_set_time</a></div><div class="ttdeci">uint32_t simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds)</div><div class="ttdoc">Obtiene el valor de la hora del dispositvo. En caso de error retorna 0.</div><div class="ttdef"><b>Definition:</b> rtc.c:105</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_gaf88186803dbb718894bb2e02d299c7cd"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#gaf88186803dbb718894bb2e02d299c7cd">simo_rtc_write_backup_reg</a></div><div class="ttdeci">void simo_rtc_write_backup_reg(uint32_t addres_reg, uint32_t data)</div><div class="ttdoc">Escribe un registro del backup.</div><div class="ttdef"><b>Definition:</b> rtc.c:238</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga76f503f99c6717b2262f6f0853b75377"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga76f503f99c6717b2262f6f0853b75377">simo_rtc_set_alarm</a></div><div class="ttdeci">uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds)</div><div class="ttdef"><b>Definition:</b> rtc.c:203</div></div>
 <div class="ttc" id="acore_8h_html"><div class="ttname"><a href="core_8h.html">core.h</a></div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga042203c6a53f958a7b9fa2902eece759"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a></div><div class="ttdeci">uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg)</div><div class="ttdef"><b>Definition:</b> rtc.c:253</div></div>
-<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga2d093caaf4f1a365628b8d446ba2f4bc"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a></div><div class="ttdeci">uint32_t simo_rtc_set_date(uint8_t week_day, uint8_t month, uint8_t date_day, uint8_t year)</div><div class="ttdoc">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0</div><div class="ttdef"><b>Definition:</b> rtc.c:165</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga042203c6a53f958a7b9fa2902eece759"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga042203c6a53f958a7b9fa2902eece759">simo_rtc_read_backup_reg</a></div><div class="ttdeci">uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg)</div><div class="ttdoc">Lee un registro de backup.</div><div class="ttdef"><b>Definition:</b> rtc.c:242</div></div>
+<div class="ttc" id="agroup___r_t_c___week_day___definitions_html_ga2d093caaf4f1a365628b8d446ba2f4bc"><div class="ttname"><a href="group___r_t_c___week_day___definitions.html#ga2d093caaf4f1a365628b8d446ba2f4bc">simo_rtc_set_date</a></div><div class="ttdeci">uint32_t simo_rtc_set_date(uint8_t week_day, uint8_t month, uint8_t date_day, uint8_t year)</div><div class="ttdoc">Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0</div><div class="ttdef"><b>Definition:</b> rtc.c:163</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generado por &#160;<a href="http://www.doxygen.org/index.html">

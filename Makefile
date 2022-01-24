@@ -38,6 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/drivers/memory/AT45DB041E.c \
 Core/drivers/memory/memory_store.c \
+Core/simo/power_save.c \
 Core/simo/delay.c \
 Core/simo/rtc.c \
 Core\simo/clock_config.c \

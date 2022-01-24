@@ -27,7 +27,8 @@ var menudata={children:[
 {text:"Lista de archivos",url:"files.html"},
 {text:"Globales",url:"globals.html",children:[
 {text:"Todo",url:"globals.html",children:[
-{text:"c",url:"globals.html#index_c"},
+{text:"_",url:"globals.html#index__5F"},
+{text:"c",url:"globals_c.html#index_c"},
 {text:"h",url:"globals_h.html#index_h"},
 {text:"n",url:"globals_n.html#index_n"},
 {text:"r",url:"globals_r.html#index_r"},
@@ -38,13 +39,16 @@ var menudata={children:[
 {text:"h",url:"globals_func.html#index_h"},
 {text:"r",url:"globals_func.html#index_r"},
 {text:"s",url:"globals_func.html#index_s"}]},
+{text:"Variables",url:"globals_vars.html"},
 {text:"typedefs",url:"globals_type.html"},
 {text:"Enumeraciones",url:"globals_enum.html"},
 {text:"Valores de enumeraciones",url:"globals_eval.html",children:[
+{text:"n",url:"globals_eval.html#index_n"},
 {text:"s",url:"globals_eval.html#index_s"},
 {text:"t",url:"globals_eval.html#index_t"},
 {text:"u",url:"globals_eval.html#index_u"}]},
 {text:"defines",url:"globals_defs.html",children:[
+{text:"_",url:"globals_defs.html#index__5F"},
 {text:"c",url:"globals_defs.html#index_c"},
 {text:"n",url:"globals_defs.html#index_n"},
 {text:"s",url:"globals_defs.html#index_s"},

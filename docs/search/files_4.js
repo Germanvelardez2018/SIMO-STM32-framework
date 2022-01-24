@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['spi_2ec_232',['spi.c',['../spi_8c.html',1,'']]],
-  ['spi_2eh_233',['spi.h',['../spi_8h.html',1,'']]]
+  ['rtc_2ec_254',['rtc.c',['../rtc_8c.html',1,'']]],
+  ['rtc_2eh_255',['rtc.h',['../rtc_8h.html',1,'']]]
 ];

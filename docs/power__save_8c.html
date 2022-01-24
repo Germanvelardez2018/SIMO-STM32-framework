@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIMO: Referencia del Archivo Core/simo/power_save.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SIMO
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Framework de trabajo para STM32. La idea es simplificar el trabajo de configuracion y generacion de aplicaciones simples</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a class="el" href="dir_1ffac0d2630f4824660dea6691be9d7f.html">simo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#enum-members">Enumeraciones</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo power_save.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Driver para abstraer las funciones de power save en micros ARM.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="power__save_8h_source.html">power_save.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para power_save.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="power__save_8c__incl.png" border="0" usemap="#_core_2simo_2power__save_8c" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:aea198b1fd6ef03bf87ed3a2d945461dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#aea198b1fd6ef03bf87ed3a2d945461dc">SIMO_PWR_SLEEP_MODE</a>&#160;&#160;&#160;PWR_SLEEPENTRY_WFI</td></tr>
+<tr class="separator:aea198b1fd6ef03bf87ed3a2d945461dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a505d0775b7134badbeb641ec5800dfaf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a505d0775b7134badbeb641ec5800dfaf">SIMO_PWR_STOP_MODE</a>&#160;&#160;&#160;PWR_STOPENTRY_WFI</td></tr>
+<tr class="separator:a505d0775b7134badbeb641ec5800dfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50543c32a66a3a01563ad51fc17d8474"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a50543c32a66a3a01563ad51fc17d8474">SIMO_PWR_REGULARO_PARAM</a>&#160;&#160;&#160;PWR_LOWPOWERREGULATOR_ON</td></tr>
+<tr class="memdesc:a50543c32a66a3a01563ad51fc17d8474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solo se usa este parametro en ST serie L.  <a href="power__save_8c.html#a50543c32a66a3a01563ad51fc17d8474">Más...</a><br /></td></tr>
+<tr class="separator:a50543c32a66a3a01563ad51fc17d8474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6885c413f438c3fa6769bb72b115921"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#ac6885c413f438c3fa6769bb72b115921">_SIMO_PWR_BEFORE_SLEEP_</a>&#160;&#160;&#160;HAL_SuspendTick()</td></tr>
+<tr class="separator:ac6885c413f438c3fa6769bb72b115921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922b0b80cecf8885bf6117feb09af0c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a922b0b80cecf8885bf6117feb09af0c5">_SIMO_PWR_AFTER_SLEEP_</a>&#160;&#160;&#160;HAL_ResumeTick()</td></tr>
+<tr class="separator:a922b0b80cecf8885bf6117feb09af0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:a286570be9a3f03292b380081e97254c9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9">simo_pwd_mode</a> { <a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9a50d1448013c6f17125caee18aa418af7">NORMAL</a>, 
+<a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9ad6137abebe4fdc59e2f0f2c84bdbe3fa">SLEEP</a>, 
+<a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9a679ee5320d66c8322e310daeb2ee99b8">STOP</a>, 
+<a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9ae4634ae4352b512b38c5da9dc1610ca6">STANDBY</a>
+ }</td></tr>
+<tr class="separator:a286570be9a3f03292b380081e97254c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:aa657f9b43e7fc4e81acfdd91b5787ba8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#aa657f9b43e7fc4e81acfdd91b5787ba8">simo_pwr_set_initial_config</a> (<a class="el" href="power__save_8h.html#a4d3a525899564b564904f8d441208ff2">setup_config</a> setup)</td></tr>
+<tr class="memdesc:aa657f9b43e7fc4e81acfdd91b5787ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Agregamos una funcion de configuracion inicial. Esta se llama al volver al modo normal desde stop o standbymode.  <a href="power__save_8c.html#aa657f9b43e7fc4e81acfdd91b5787ba8">Más...</a><br /></td></tr>
+<tr class="separator:aa657f9b43e7fc4e81acfdd91b5787ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2651dff4edd2da7de85b92ab07a67709"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a2651dff4edd2da7de85b92ab07a67709">simo_pwr_before_change_mode</a> ()</td></tr>
+<tr class="memdesc:a2651dff4edd2da7de85b92ab07a67709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Secuena de configuracion necesarias antes de cambiar de modo.  <a href="power__save_8c.html#a2651dff4edd2da7de85b92ab07a67709">Más...</a><br /></td></tr>
+<tr class="separator:a2651dff4edd2da7de85b92ab07a67709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a034c94ee2f5735eed40ee6d6fb7ef482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a034c94ee2f5735eed40ee6d6fb7ef482">simo_pwr_return_normal_mode</a> ()</td></tr>
+<tr class="memdesc:a034c94ee2f5735eed40ee6d6fb7ef482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Secuena de configuracion necesarias despues de retornar al modo normal.  <a href="power__save_8c.html#a034c94ee2f5735eed40ee6d6fb7ef482">Más...</a><br /></td></tr>
+<tr class="separator:a034c94ee2f5735eed40ee6d6fb7ef482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f14c77481335d8a14b9682c1f25597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#aa2f14c77481335d8a14b9682c1f25597">simo_pwr_sleep_only_isr</a> (uint32_t ena)</td></tr>
+<tr class="memdesc:aa2f14c77481335d8a14b9682c1f25597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion con la configuracion inicial. Necesaria para cuando estamos en modos stop o standby donde la configuracion inicial es borrada.  <a href="power__save_8c.html#aa2f14c77481335d8a14b9682c1f25597">Más...</a><br /></td></tr>
+<tr class="separator:aa2f14c77481335d8a14b9682c1f25597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5267ffabef40cfb439b1fdec8b16b29b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a5267ffabef40cfb439b1fdec8b16b29b">simo_pwr_enter_sleep_mode</a> ()</td></tr>
+<tr class="memdesc:a5267ffabef40cfb439b1fdec8b16b29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep mode, apaga el cpu, deja los perifericos encendidos.  <a href="power__save_8c.html#a5267ffabef40cfb439b1fdec8b16b29b">Más...</a><br /></td></tr>
+<tr class="separator:a5267ffabef40cfb439b1fdec8b16b29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767474ae84303b9b07f28ab5caf5b2f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#a767474ae84303b9b07f28ab5caf5b2f4">simo_pwr_enter_stop_mode</a> ()</td></tr>
+<tr class="memdesc:a767474ae84303b9b07f28ab5caf5b2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop mode los HSI y LSI se apagan.  <a href="power__save_8c.html#a767474ae84303b9b07f28ab5caf5b2f4">Más...</a><br /></td></tr>
+<tr class="separator:a767474ae84303b9b07f28ab5caf5b2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad026b90458c28e736c769b80ac7fb887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__save_8c.html#ad026b90458c28e736c769b80ac7fb887">simo_pwr_standby_mode</a> ()</td></tr>
+<tr class="memdesc:ad026b90458c28e736c769b80ac7fb887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stanby mode, apagamos todo y nos vamos a la mierda.  <a href="power__save_8c.html#ad026b90458c28e736c769b80ac7fb887">Más...</a><br /></td></tr>
+<tr class="separator:ad026b90458c28e736c769b80ac7fb887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Driver para abstraer las funciones de power save en micros ARM. </p>
+<dl class="section author"><dt>Autor</dt><dd>German Velardez (<a href="#" onclick="location.href='mai'+'lto:'+'vel'+'ar'+'dez'+'ge'+'rma'+'n1'+'6@g'+'ma'+'il.'+'co'+'m'; return false;">velar<span style="display: none;">.nosp@m.</span>dezg<span style="display: none;">.nosp@m.</span>erman<span style="display: none;">.nosp@m.</span>16@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2022-01-21</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a922b0b80cecf8885bf6117feb09af0c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922b0b80cecf8885bf6117feb09af0c5">&#9670;&nbsp;</a></span>_SIMO_PWR_AFTER_SLEEP_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SIMO_PWR_AFTER_SLEEP_&#160;&#160;&#160;HAL_ResumeTick()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6885c413f438c3fa6769bb72b115921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6885c413f438c3fa6769bb72b115921">&#9670;&nbsp;</a></span>_SIMO_PWR_BEFORE_SLEEP_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _SIMO_PWR_BEFORE_SLEEP_&#160;&#160;&#160;HAL_SuspendTick()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50543c32a66a3a01563ad51fc17d8474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50543c32a66a3a01563ad51fc17d8474">&#9670;&nbsp;</a></span>SIMO_PWR_REGULARO_PARAM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIMO_PWR_REGULARO_PARAM&#160;&#160;&#160;PWR_LOWPOWERREGULATOR_ON</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solo se usa este parametro en ST serie L. </p>
+
+</div>
+</div>
+<a id="aea198b1fd6ef03bf87ed3a2d945461dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea198b1fd6ef03bf87ed3a2d945461dc">&#9670;&nbsp;</a></span>SIMO_PWR_SLEEP_MODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIMO_PWR_SLEEP_MODE&#160;&#160;&#160;PWR_SLEEPENTRY_WFI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a505d0775b7134badbeb641ec5800dfaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a505d0775b7134badbeb641ec5800dfaf">&#9670;&nbsp;</a></span>SIMO_PWR_STOP_MODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SIMO_PWR_STOP_MODE&#160;&#160;&#160;PWR_STOPENTRY_WFI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las enumeraciones</h2>
+<a id="a286570be9a3f03292b380081e97254c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a286570be9a3f03292b380081e97254c9">&#9670;&nbsp;</a></span>simo_pwd_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="power__save_8c.html#a286570be9a3f03292b380081e97254c9">simo_pwd_mode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a286570be9a3f03292b380081e97254c9a50d1448013c6f17125caee18aa418af7"></a>NORMAL&#160;</td><td class="fielddoc"><p>Modo de funcionamineto normal. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a286570be9a3f03292b380081e97254c9ad6137abebe4fdc59e2f0f2c84bdbe3fa"></a>SLEEP&#160;</td><td class="fielddoc"><p>CPU apagado perifericos encendidos. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a286570be9a3f03292b380081e97254c9a679ee5320d66c8322e310daeb2ee99b8"></a>STOP&#160;</td><td class="fielddoc"><p>CPU y perifericos apagados, backup de registros. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a286570be9a3f03292b380081e97254c9ae4634ae4352b512b38c5da9dc1610ca6"></a>STANDBY&#160;</td><td class="fielddoc"><p>APAGAMOS TODO. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a2651dff4edd2da7de85b92ab07a67709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2651dff4edd2da7de85b92ab07a67709">&#9670;&nbsp;</a></span>simo_pwr_before_change_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_before_change_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Secuena de configuracion necesarias antes de cambiar de modo. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="a5267ffabef40cfb439b1fdec8b16b29b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5267ffabef40cfb439b1fdec8b16b29b">&#9670;&nbsp;</a></span>simo_pwr_enter_sleep_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_enter_sleep_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleep mode, apaga el cpu, deja los perifericos encendidos. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="a767474ae84303b9b07f28ab5caf5b2f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767474ae84303b9b07f28ab5caf5b2f4">&#9670;&nbsp;</a></span>simo_pwr_enter_stop_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_enter_stop_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop mode los HSI y LSI se apagan. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="a034c94ee2f5735eed40ee6d6fb7ef482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a034c94ee2f5735eed40ee6d6fb7ef482">&#9670;&nbsp;</a></span>simo_pwr_return_normal_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_return_normal_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Secuena de configuracion necesarias despues de retornar al modo normal. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="aa657f9b43e7fc4e81acfdd91b5787ba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa657f9b43e7fc4e81acfdd91b5787ba8">&#9670;&nbsp;</a></span>simo_pwr_set_initial_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_set_initial_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="power__save_8h.html#a4d3a525899564b564904f8d441208ff2">setup_config</a>&#160;</td>
+          <td class="paramname"><em>setup</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Agregamos una funcion de configuracion inicial. Esta se llama al volver al modo normal desde stop o standbymode. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">setup</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="aa2f14c77481335d8a14b9682c1f25597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f14c77481335d8a14b9682c1f25597">&#9670;&nbsp;</a></span>simo_pwr_sleep_only_isr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_sleep_only_isr </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion con la configuracion inicial. Necesaria para cuando estamos en modos stop o standby donde la configuracion inicial es borrada. </p>
+<p>Habilita el modo solo isr en Sleep mode</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ena</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="ad026b90458c28e736c769b80ac7fb887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad026b90458c28e736c769b80ac7fb887">&#9670;&nbsp;</a></span>simo_pwr_standby_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_pwr_standby_mode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stanby mode, apagamos todo y nos vamos a la mierda. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>
