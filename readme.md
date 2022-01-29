@@ -57,6 +57,10 @@ Asegurese de tener instalado las siguientes herramientas :
     <li>
        Compilador ARM:
       <a HREF="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads">arm-none-eabi-gcc</a> 
+    </li>
+    <li>
+      Openocde, necesario para cargar el codigo en el microcontrolador: 
+      <a HREF="https://github.com/xpack-dev-tools/openocd-xpack/releases">openocd</a>      
     </li> 
 </lu>
 
