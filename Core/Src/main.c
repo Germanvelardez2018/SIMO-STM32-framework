@@ -29,61 +29,13 @@
 #include "clock_config.h"
 #include "rtc.h"
 #include "power_save.h"
+#include "simcom.h"
+#include "string.h"
 
 
-
-#define STOP_MODE       0    // Si es 0 entramos en modo SLEEP, sino modo Stop
-#define ISR_ONLY        1
-#define BAUDRATE 115200
 
 /* USER CODE END Includes */
 
-volatile uint8_t ena = 0;
-
-static void rtc_print_alarm(uint8_t h, uint8_t m, uint8_t s)
-{
-
-  uint8_t buffer[100] = {0};
-  sprintf(buffer, "\r\n next alarm h:m:s ==> %d : %d :%d\r\n", h, m, s);
-  simo_uart_write(UART_B, buffer, strlen(buffer), 200, 0);
-}
-
-static void rtc_printf(uint8_t h, uint8_t m, uint8_t s)
-{
-
-  uint8_t buffer[100] = {0};
-  sprintf(buffer, "\r\n h:m:s ==> %d : %d :%d", h, m, s);
-  simo_uart_write(UART_B, buffer, strlen(buffer), 200, 0);
-}
-
-static void __rtc_irq(void)
-{
-
-// En caso de estar en modo STOP de  standby ejecutamos la funcion de configuracion inicial (setup())
-    simo_pwr_return_normal_mode();
-   
-// los toogle no sirve en modo STOP, porque el estado de configuracion inicial es siempre el mismo
-    simo_gpio_toogle(SIMO_GPIO_18); 
-    
-
-
-    #if ISR_ONLY == 1
-        uint8_t h,m,s ; 
-        simo_rtc_get_alarm(&h, &m, &s);
-        #define RTC_DELAY   10
-       s  =s + RTC_DELAY;    // Activar alarmas cada 5 segundos
-        simo_rtc_set_alarm(h, m, s);  
-        rtc_print_alarm(h, m, s);  
-    //    simo_pwr_enter_sleep_mode();
-    
-    #endif
-    
-
-  
-       
-  
-    ena= 1;
-}
 
 
 
@@ -97,8 +49,10 @@ static void setup(void){
   // Aqui va la configuracion inicial
   HAL_Init();
   simo_clock_config();
-  simo_uart_init(UART_B, BAUDRATE);
-  simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
+  simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
+  
+  sim_init();
+  
 
 }
 
@@ -113,66 +67,24 @@ int main(void)
 
  
 
+ 
+
   setup();
-  simo_rtc_set_alarm_callback(__rtc_irq);
-  simo_rtc_init();
+    
+  while(1){
 
+   
+      HAL_Delay(2500);
+      sim_check_at();
+      simo_gpio_toogle(SIMO_GPIO_18);
+      sim_get_version();
 
-  #if STOP_MODE == 1
-  /**
-   * @brief En caso de entrar en modo STOP MODE, la configuracion del micro se pierde y debe volverse a configurar.
-   * 
-   */
-  simo_pwr_set_initial_config(setup);
-  
-  
-  #endif
-   uint8_t h,m,s ;
-  simo_rtc_ena_irq(1);
-  simo_rtc_get_time(&h,&m,&s);
-  rtc_printf(h,m,s);
-  simo_rtc_set_alarm(h, m, s+5);
-  simo_rtc_get_alarm(&h, &m, &s);
-  rtc_print_alarm(h, m, s);  
-
- #if STOP_MODE  == 0
-  /**
-  * @brief Configuro la funcion setup para cuando volvamos de un sueño muy profundo con el micro todo desconfigurado
-  * 
-  */
-
-  #if ISR_ONLY == 1
-  simo_pwr_sleep_only_isr(1);
-
-  #endif
-  simo_pwr_enter_sleep_mode();
-
-#else 
-  simo_pwr_enter_stop_mode();
-#endif
-   while (1)
-  {
-
- #if ISR_ONLY == 0
-    if( ena == 1){
-        uint8_t h,m,s ; 
-        simo_rtc_get_alarm(&h, &m, &s);
-        #define RTC_DELAY   1
-        m = m+ RTC_DELAY;    // Activar alarmas cada 5 segundos
-        simo_rtc_set_alarm(h, m, s);  
-        rtc_print_alarm(h, m, s);  
-        ena= 0;
-        
-        #if STOP_MODE  == 0
-          simo_pwr_enter_sleep_mode();
-        #else 
-          simo_pwr_enter_stop_mode();
-        #endif
-    }
-  #endif
-  HAL_Delay(500);
+      
 
   }
+  
+
+  
 }
 
 /* USER CODE BEGIN 4 */

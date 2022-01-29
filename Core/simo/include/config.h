@@ -15,13 +15,13 @@
  */
 
 //!Habilita el uso del hardware RTC
-#define C_SIMO_RTC_ENA                               1
+#define C_SIMO_RTC_ENA                          1
 //!Habilita el uso hardware UART
 #define C_SIMO_UART_ENA                         1
 //!Habilita el uso hardware SPI
 #define C_SIMO_SPI_ENA                          1
 //!Habilita el uso hardware Timer                 
-#define C_SIMO_TIMER_ENA                        1
+#define C_SIMO_TIMER_ENA                        0
 //!Habilita el uso hardware GPIO                 
 #define C_SIMO_GPIO_ENA                         1
 

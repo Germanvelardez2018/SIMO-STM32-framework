@@ -36,6 +36,8 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/drivers/simcom/simcom.c \
+Core/drivers/simcom/cmd.c \
 Core/drivers/memory/AT45DB041E.c \
 Core/drivers/memory/memory_store.c \
 Core/simo/power_save.c \
@@ -125,6 +127,7 @@ AS_INCLUDES =
 C_INCLUDES =  \
 -ICore/simo/include \
 -ICore/drivers/include/memory\
+-ICore/drivers/include/simcom \
 -ICore/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \

@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#include "core.h"
 #include "uart.h"
 #include "main.h"
 
@@ -101,6 +102,17 @@ static UART_HandleTypeDef* __get_uart(SIMO_UART uart_enum)
 }
 
 
+
+
+
+
+
+    uint8_t simo_uart_rx_available(SIMO_UART uart,uint32_t timeout){
+        uint8_t data = 0;
+        UART_HandleTypeDef* simo_uart = __get_uart(uart);
+        if(simo_uart != NULL)  HAL_UART_Receive(simo_uart,&data,1,timeout);      
+        return data;
+    }
 
 
 
@@ -317,12 +329,11 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
             __HAL_RCC_USART2_CLK_DISABLE();
             /**USART2 GPIO Configuration
              * Control por hardware
-            PA0-WKUP     ------> USART2_CTS
-            PA1     ------> USART2_RTS
+           
             PA2     ------> USART2_TX
             PA3     ------> USART2_RX
             */
-            HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+            HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
         }
     #endif
     #if NUM_SIMO_UART >2

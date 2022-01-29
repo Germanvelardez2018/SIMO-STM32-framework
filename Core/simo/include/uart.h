@@ -23,6 +23,18 @@
 
 #if SIMO_UART_ENA == 1
 
+
+
+    /**
+     * @brief  Verificar si hay datos en buffer rx
+     * 
+     * @param uart 
+     * @param timeout
+     * @return ** uint8_t 
+     */
+    uint8_t simo_uart_rx_available(SIMO_UART uart,uint32_t timeout);
+
+
      /**
      * @brief Leer un buffer de datos mediante puerto UART
      * 
