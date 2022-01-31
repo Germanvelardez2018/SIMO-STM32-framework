@@ -1,7 +1,7 @@
 /**
  * @file uart.c
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez@gmail.com)
+ * @brief  Implementacion del driver para el manejo del hardware UART
  * @version 0.1
  * @date 2022-01-04
  * 
@@ -187,9 +187,6 @@ uint32_t simo_uart_read(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t time
 
 
 
-
-
-
 /**
  * @brief 
  * 
@@ -268,7 +265,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
         GPIO_InitStruct.Pin = GPIO_PIN_3;
         GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
         GPIO_InitStruct.Pull = GPIO_NOPULL;

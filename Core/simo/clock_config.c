@@ -1,3 +1,15 @@
+/**
+ * @file clock_config.c
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Implementacion de la api para configurar el clock del sistema
+ * @version 0.1
+ * @date 2022-01-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+
 
 #include "main.h"
 #include "clock_config.h"

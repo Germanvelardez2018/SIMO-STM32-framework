@@ -1,7 +1,7 @@
 /**
  * @file gpio.c
  * @author German Velardez(germanvelardez16@gmail.com)
- * @brief 
+ * @brief  Implementacion del driver para manejo de GPIOS
  * @version 0.1
  * @date 2022-01-12
  * 
@@ -18,14 +18,13 @@
 
 
 
-
-
-
 #if SIMO_GPIO_ENA == 1
 
 //! Estructura usada para pasar de simo_pin a un pin de stm32
 typedef struct{
+    //!Numero de Pin GPIO
     uint32_t index;
+    //! Puerto
     GPIO_TypeDef* port;
 
 } __pin__; 

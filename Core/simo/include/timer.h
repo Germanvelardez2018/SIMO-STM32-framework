@@ -1,7 +1,7 @@
 /**
  * @file timer.h
  * @author German Velardez (germanvelardez16@gmail.com)
- * @brief  Driver para abstraer el hardware timer 
+ * @brief  Driver para manejar el hardware timer 
  * @version 0.1
  * @date 2022-01-14
  * 

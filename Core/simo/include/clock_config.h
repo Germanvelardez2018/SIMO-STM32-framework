@@ -1,16 +1,13 @@
 /**
  * @file clock_config.h
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Driver para configuracion del clock del sistema
  * @version 0.1
  * @date 2022-01-10
  * 
  * @copyright Copyright (c) 2022
  * 
  */
-
-
-
 
 
 

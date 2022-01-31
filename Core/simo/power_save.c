@@ -1,7 +1,7 @@
 /**
  * @file power_save.c
  * @author German Velardez (velardezgerman16@gmail.com)
- * @brief  Driver para abstraer las funciones de power save en micros ARM
+ * @brief  Implementacion del driver para el manejo de  las funciones de power save
  * @version 0.1
  * @date 2022-01-21
  *

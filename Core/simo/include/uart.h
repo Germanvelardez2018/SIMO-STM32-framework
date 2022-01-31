@@ -1,7 +1,7 @@
 /**
  * @file uart.h
  * @author German Velardez (germanvelardez16@gmail.com)
- * @brief  Driver para abstraer el hardware UART 
+ * @brief  Driver para manejar el hardware UART 
  * @version 0.1
  * @date 2022-01-14
  * 

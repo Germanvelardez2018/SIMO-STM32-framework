@@ -3,7 +3,7 @@ digraph "Core/simo/include/spi.h"
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="Core/simo/include/spi.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Driver para abstraer hardware SPI."];
+  Node1 [label="Core/simo/include/spi.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Driver para manejar hardware SPI."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Core/simo/spi.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$spi_8c.html",tooltip="Driver para abstraer el hardware SPI."];
+  Node2 [label="Core/simo/spi.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$spi_8c.html",tooltip="Implementacion del driver para el manejo del hardware SPI."];
 }

@@ -180,17 +180,17 @@ $(function() {
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">    #if SIMO_TIMER_ENA == 1</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">  122</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;0</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">  124</a></span>&#160;            <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">TIMER_A</a>,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            TIMER_A,</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;1</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a7537925211db58591cb5eeb7ebc7f44f">  127</a></span>&#160;            <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a7537925211db58591cb5eeb7ebc7f44f">TIMER_B</a>,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            TIMER_B,</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;2</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a77982cc924eb33d3ea2f8f541f757f9d">  130</a></span>&#160;            <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a77982cc924eb33d3ea2f8f541f757f9d">TIMER_C</a></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            TIMER_C</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        } <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        } SIMO_TIMER;</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;       </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
@@ -259,10 +259,6 @@ $(function() {
 <div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">UART_C</a></div><div class="ttdeci">@ UART_C</div><div class="ttdef"><b>Definition:</b> core.h:152</div></div>
 <div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587d"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a></div><div class="ttdeci">SIMO_UART</div><div class="ttdef"><b>Definition:</b> core.h:144</div></div>
 <div class="ttc" id="acore_8h_html_acc9b7711c2ddc24116b0231383b54636"><div class="ttname"><a href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a></div><div class="ttdeci">void(* callback_irq)(void)</div><div class="ttdoc">Funcion callback asociada a una interupcion por hardware.</div><div class="ttdef"><b>Definition:</b> core.h:185</div></div>
-<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">TIMER_A</a></div><div class="ttdeci">@ TIMER_A</div><div class="ttdef"><b>Definition:</b> core.h:124</div></div>
-<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a></div><div class="ttdeci">SIMO_TIMER</div><div class="ttdef"><b>Definition:</b> core.h:122</div></div>
-<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2a7537925211db58591cb5eeb7ebc7f44f"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a7537925211db58591cb5eeb7ebc7f44f">TIMER_B</a></div><div class="ttdeci">@ TIMER_B</div><div class="ttdef"><b>Definition:</b> core.h:127</div></div>
-<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2a77982cc924eb33d3ea2f8f541f757f9d"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a77982cc924eb33d3ea2f8f541f757f9d">TIMER_C</a></div><div class="ttdeci">@ TIMER_C</div><div class="ttdef"><b>Definition:</b> core.h:130</div></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11">SPI_B</a></div><div class="ttdeci">@ SPI_B</div><div class="ttdef"><b>Definition:</b> core.h:173</div></div>
 <div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41eca"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a></div><div class="ttdeci">SIMO_SPI</div><div class="ttdef"><b>Definition:</b> core.h:168</div></div>

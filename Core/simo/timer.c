@@ -1,7 +1,7 @@
 /**
  * @file timer.c
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Implementacion del driver para el manejo de timers por hardware
  * @version 0.1
  * @date 2022-01-07
  * 
@@ -15,7 +15,6 @@
 
 
 
-//--------------------------------------
 #if SIMO_TIMER_ENA  == 1
    // Estructuras
 
@@ -180,6 +179,8 @@
 
 
 
+
+
     uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time){
     uint32_t clock_base = simo_clock_get_base(); // Default 40 MHz
     uint32_t res = 0;
@@ -212,13 +213,14 @@
 
 
 
+
+
     uint32_t simo_timer_start(SIMO_TIMER timer){
         uint32_t res = 0;
         TIM_HandleTypeDef* tim = __get_timer(timer);
         if(HAL_TIM_Base_Start_IT(tim) == HAL_OK){
             res = 1; // EXITO EN LA CONFIGURACION
         }
-    
         return  res;
     }
 
@@ -230,7 +232,6 @@
         if(HAL_TIM_Base_Stop_IT(tim) == HAL_OK){
             res = 1; // EXITO EN LA CONFIGURACION
         }
-    
         return  res;
     }
     uint16_t simo_timer_get_conter(SIMO_TIMER timer){
@@ -249,23 +250,23 @@
     void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     {
 
-        #if NUM_SIMO_TIMER >0
+    #if NUM_SIMO_TIMER >0
         if(htim_base->Instance==TIM1){
            __HAL_RCC_TIM1_CLK_ENABLE();
         }
-        #endif
+    #endif
         
-        #if NUM_SIMO_TIMER >1
+    #if NUM_SIMO_TIMER >1
         if(htim_base->Instance==TIM2){
             __HAL_RCC_TIM2_CLK_ENABLE();
         }
-        #endif
+    #endif
 
-        #if NUM_SIMO_TIMER >2
+    #if NUM_SIMO_TIMER >2
         if ((htim_base->Instance==TIM3)){
             __HAL_RCC_TIM3_CLK_ENABLE();
         }
-        #endif
+    #endif
     }
 
             
@@ -280,23 +281,23 @@
     void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     {
 
-            #if NUM_SIMO_TIMER >0
-            if(htim_base->Instance==TIM1){
-            __HAL_RCC_TIM1_CLK_DISABLE();
-            }
-            #endif
+    #if NUM_SIMO_TIMER >0
+        if(htim_base->Instance==TIM1){
+        __HAL_RCC_TIM1_CLK_DISABLE();
+        }
+     #endif
 
-            #if NUM_SIMO_TIMER >1
-            if(htim_base->Instance==TIM2){
-            __HAL_RCC_TIM2_CLK_DISABLE();
-            }
-            #endif
+     #if NUM_SIMO_TIMER >1
+        if(htim_base->Instance==TIM2){
+        __HAL_RCC_TIM2_CLK_DISABLE();
+        }
+     #endif
 
-            #if NUM_SIMO_TIMER >2
-            if ((htim_base->Instance==TIM3)){
-            __HAL_RCC_TIM3_CLK_DISABLE();
-            }
-            #endif
+     #if NUM_SIMO_TIMER >2
+        if ((htim_base->Instance==TIM3)){
+        __HAL_RCC_TIM3_CLK_DISABLE();
+         }
+     #endif
 
     }
 

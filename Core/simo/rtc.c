@@ -1,7 +1,7 @@
 /**
  * @file rtc.c
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez@gmail.com)
+ * @brief  Implementacion del driver de manejo del RTC
  * @version 0.1
  * @date 2022-01-18
  * 

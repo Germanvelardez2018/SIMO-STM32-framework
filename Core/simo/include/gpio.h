@@ -1,7 +1,7 @@
 /**
  * @file gpio.h
  * @author German Velardez (germanvelardez16@gmail.com)
- * @brief  Driver para abstraer el hardware GPIO del microcontrolador
+ * @brief  Driver para manejo del hardware GPIO del microcontrolador
  * @version 0.1
  * @date 2022-01-12
  * 

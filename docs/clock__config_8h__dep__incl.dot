@@ -3,13 +3,13 @@ digraph "Core/simo/include/clock_config.h"
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="Core/simo/include/clock\l_config.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [label="Core/simo/include/clock\l_config.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Driver para configuracion del clock del sistema."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Core/simo/clock_config.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$clock__config_8c.html",tooltip=" "];
+  Node2 [label="Core/simo/clock_config.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$clock__config_8c.html",tooltip="Implementacion de la api para configurar el clock del sistema."];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="Core/simo/rtc.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rtc_8c.html",tooltip=" "];
+  Node3 [label="Core/simo/rtc.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rtc_8c.html",tooltip="Implementacion del driver de manejo del RTC."];
   Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="Core/simo/spi.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$spi_8c.html",tooltip="Driver para abstraer el hardware SPI."];
+  Node4 [label="Core/simo/spi.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$spi_8c.html",tooltip="Implementacion del driver para el manejo del hardware SPI."];
   Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="Core/simo/timer.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$timer_8c.html",tooltip=" "];
+  Node5 [label="Core/simo/timer.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$timer_8c.html",tooltip="Implementacion del driver para el manejo de timers por hardware."];
 }

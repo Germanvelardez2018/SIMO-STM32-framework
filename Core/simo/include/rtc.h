@@ -1,7 +1,7 @@
 /**
  * @file rtc.h
  * @author German Velardez (germanvelardez16@gmail.com)
- * @brief  Abstracion para utilizar el hardware RTC
+ * @brief  Driver  para manejar  el hardware RTC
  * @version 0.1
  * @date 2022-01-18
  * 

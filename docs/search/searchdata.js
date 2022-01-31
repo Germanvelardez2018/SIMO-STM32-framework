@@ -5,8 +5,8 @@ var indexSectionsWithContent =
   2: "hrs",
   3: "s",
   4: "c",
-  5: "st",
-  6: "nstu",
+  5: "s",
+  6: "nsu",
   7: "_cnsu",
   8: "mw"
 };

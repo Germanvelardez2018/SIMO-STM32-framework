@@ -33,7 +33,6 @@ var menudata={children:[
 {text:"n",url:"globals_n.html#index_n"},
 {text:"r",url:"globals_r.html#index_r"},
 {text:"s",url:"globals_s.html#index_s"},
-{text:"t",url:"globals_t.html#index_t"},
 {text:"u",url:"globals_u.html#index_u"}]},
 {text:"Funciones",url:"globals_func.html",children:[
 {text:"h",url:"globals_func.html#index_h"},
@@ -45,7 +44,6 @@ var menudata={children:[
 {text:"Valores de enumeraciones",url:"globals_eval.html",children:[
 {text:"n",url:"globals_eval.html#index_n"},
 {text:"s",url:"globals_eval.html#index_s"},
-{text:"t",url:"globals_eval.html#index_t"},
 {text:"u",url:"globals_eval.html#index_u"}]},
 {text:"defines",url:"globals_defs.html",children:[
 {text:"_",url:"globals_defs.html#index__5F"},

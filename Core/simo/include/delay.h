@@ -1,7 +1,7 @@
 /**
  * @file delay.h
  * @author GErman Velardez (germanvelardez16@gmail.com)
- * @brief  Abstraccion de funcion delay bloqueante
+ * @brief  Driver para manejo de retardos bloqueantes
  * @version 0.1
  * @date 2022-01-17
  * 

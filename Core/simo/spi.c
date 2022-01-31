@@ -1,7 +1,7 @@
 /**
  * @file spi.c
  * @author German Velardez (germanvelardez16@gmail.com)
- * @brief  Driver para abstraer el hardware SPI
+ * @brief  Implementacion del driver para el manejo del hardware SPI
  * @version 0.1
  * @date 2022-01-11
  * 

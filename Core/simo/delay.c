@@ -1,7 +1,7 @@
 /**
  * @file delay.c
- * @author your name (you@domain.com)
- * @brief 
+ * @author German Velardez (germanvelardez16@gmail.com)
+ * @brief  Implementacion de la funcion de delay bloqueante
  * @version 0.1
  * @date 2022-01-17
  * 
