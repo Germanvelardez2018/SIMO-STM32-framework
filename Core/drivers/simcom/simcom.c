@@ -22,21 +22,12 @@
 
 
 
-
-                    //,SIMO_GPIO_EXT_IT_RISING//! Interrupcion por flanco ascendente 
-                    //,SIMO_GPIO_EXT_IT_FALLING//! Interrupcion por flanco descendente
-                    //,SIMO_GPIO_EXT_IT_RISING_FALLING//! Interrupcion por flanco ascendente y descendent
-    /**USART1 GPIO Configuration
-            PA9     ------> USART1_TX
-            PA10     ------> USART1_RX
-            */
-
 #define SIMCOM_AT_UART             UART_B       //! Pin A10  (TX) y A9 (RX)
 #define SIMCOM_DEBUG_UART          UART_A        //! Pin A3 (RX)  y A2 (TX)
-#define SIMCOM_BAUDRATE           115200
+#define SIMCOM_BAUDRATE            115200
 
 
-#define SIMCOM_BUFFER_SIZE          100
+#define SIMCOM_BUFFER_SIZE          150
 
 
 
@@ -57,23 +48,21 @@ static void __init_debug(){
 }
 
 static  uint32_t __debug_print(uint8_t* buff,uint32_t len, uint32_t timeout){
-    uint32_t ret = simo_uart_write(SIMCOM_DEBUG_UART,buff,len,timeout,0);
-    return ret;
+     return simo_uart_write(SIMCOM_DEBUG_UART,buff,len,timeout,0);
+    
 }
 
-
 static  uint32_t __write(uint8_t* buff,uint32_t len, uint32_t timeout){
-     uint32_t ret =    simo_uart_write(SIMCOM_AT_UART,buff,len,timeout,0);
-    return ret;
-
+         return simo_uart_write(SIMCOM_AT_UART,buff,len,timeout,0);
+    
 
 }
 
 
 static  uint32_t __read(uint8_t* buff,uint32_t len, uint32_t timeout){
-    uint32_t ret =  simo_uart_read(SIMCOM_AT_UART,buff,len,timeout,0);
+      return simo_uart_read(SIMCOM_AT_UART,buff,len,timeout,0);
 
-    return ret;
+    
 
 }
 
@@ -90,7 +79,6 @@ uint32_t sim_init(){
     ,__init_debug,__debug_print
     #endif
     );
-   
     if(__SIMCOM__ != NULL) {
        cmd_init_device(__SIMCOM__);
        
@@ -120,12 +108,65 @@ uint32_t sim_get_version(){
 
      uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
-        #define CMD_GETVERSION      "AT+GMR\r\n"
+        #define CMD_GETVERSION      "ATI\r\n"
          res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),3000);
     }
     return  res;
 
 }
+
+
+
+uint32_t sim_set_echo(uint32_t ena){
+    uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_ECHO_ON         "ATE1\r\n"
+        #define CMD_ECHO_OFF        "ATE0\r\n"
+        if(ena == 0){
+            res = cmd_send_cmd(__SIMCOM__,CMD_ECHO_OFF,strlen(CMD_ECHO_OFF),1000);
+        }
+         else{
+            res = cmd_send_cmd(__SIMCOM__,CMD_ECHO_ON,strlen(CMD_ECHO_ON),1000);
+         }
+    }
+    return  res;
+
+}
+
+
+
+
+
+
+
+
+uint32_t sim_set_pwr_gps(uint32_t ena){
+    uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_PWR_GPS_ON         "AT+CGNSPWR=1\r\n"
+        #define CMD_PWR_GPS_OFF        "AT+CGNSPWR=0\r\n"
+        if(ena == 0){
+            res = cmd_send_cmd(__SIMCOM__,CMD_PWR_GPS_OFF,strlen(CMD_PWR_GPS_OFF),1000);
+        }
+         else{
+            res = cmd_send_cmd(__SIMCOM__,CMD_PWR_GPS_ON,strlen(CMD_PWR_GPS_ON),1000);
+         }
+    }
+    return  res;
+
+}
+
+
+uint32_t sim_get_gps_info(){
+
+    uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GETGPSINFO      "AT+CGNSINF\r\n"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETGPSINFO,strlen(CMD_GETGPSINFO),3000);
+    }
+    return  res;
+}
+
 
 
 

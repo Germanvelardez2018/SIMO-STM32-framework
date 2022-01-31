@@ -70,14 +70,26 @@ int main(void)
  
 
   setup();
+
+  sim_set_pwr_gps(1);
+  sim_get_version();
+
+
+  uint32_t ena = 1;  // en modo debug ena = 1 ,
     
   while(1){
 
-   
+    // Habilito o deshabilito el echo en la respuesta
+  //   sim_set_echo(ena);
+
       HAL_Delay(2500);
-      sim_check_at();
+     
       simo_gpio_toogle(SIMO_GPIO_18);
-      sim_get_version();
+      HAL_Delay(1000);
+
+    
+    sim_get_gps_info();
+    HAL_Delay(10000);
 
       
 
