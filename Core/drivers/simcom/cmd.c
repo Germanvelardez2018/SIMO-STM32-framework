@@ -16,6 +16,7 @@
 
 #include "uart.h"
 #include "gpio.h"
+#include "string.h"
 
 
 
@@ -87,12 +88,12 @@ uint32_t cmd_send_cmd(cmd_device_t* device,uint8_t* cmd_string, uint32_t len_cmd
 
     device->write(cmd_string,len_cmd,100);
     device->read(device->buff,device->buff,timeout);
-   // simo_uart_read(UART_B,f,10,2000,0);
     #if CMD_DEBUG_PRINT == 1
         device->debug_print("\r\n<--",5,timeout);
         device->debug_print(device->buff,strlen(device->buff),timeout);
     #endif 
-    device->buff[0]=0;
+    memset(device->buff,0,strlen(device->buff));
+    
     return 1;
 
 }

@@ -58,6 +58,13 @@ static void setup(void){
 
 
 
+#define MQTT_TOPIC                "X1111"
+#define MQTT_BROKER2               "simointi.cloud.shiftr.io"
+#define MQTT_PASS                  "fdZY5b69OhOVsAns"
+#define MQTT_ID                    "simointi"
+#define MQTT_QOS                    "0"
+
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -65,33 +72,43 @@ static void setup(void){
 int main(void)
 {
 
- 
+ uint32_t ena = 0;
 
  
 
   setup();
 
+  //sim_get_version();  
+  //sim_get_default();
+
+
+  HAL_Delay(5000);
+  sim_set_echo(0);
   sim_set_pwr_gps(1);
-  sim_get_version();
 
 
-  uint32_t ena = 1;  // en modo debug ena = 1 ,
-    
+  sim_get_operator();
+  sim_get_signal_level();
+  sim_open_apn();
+  ena =  sim_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
+
+  
   while(1){
 
     // Habilito o deshabilito el echo en la respuesta
-  //   sim_set_echo(ena);
-
       HAL_Delay(2500);
      
-      simo_gpio_toogle(SIMO_GPIO_18);
+      if(ena == 1)simo_gpio_toogle(SIMO_GPIO_18);
       HAL_Delay(1000);
 
     
-    sim_get_gps_info();
-    HAL_Delay(10000);
+      sim_get_gps_info();
+      #define MSG_PUBLISHED     "Hola desde micro stm32 \r\n"
 
-      
+      sim_mqtt_publish(MQTT_TOPIC,MSG_PUBLISHED,strlen(MSG_PUBLISHED));
+
+      HAL_Delay(10000);
+
 
   }
   

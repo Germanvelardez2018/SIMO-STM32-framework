@@ -12,7 +12,7 @@
 
 #include "simcom.h"
 
-
+#include "stdio.h"
 #include "cmd.h"
 #include "uart.h"
 #include "gpio.h"
@@ -33,6 +33,24 @@
 
 
 
+
+
+
+
+
+//! Configuracion MQTT
+ #define CMD_MQTT               "AT+SMCONF="
+ #define CMD_MQTT_URL           " \"URL\""
+ #define CMD_MQTT_USER          "\"USERNAME\""
+ #define CMD_MQTT_PASSWORD      "\"PASSWORD\""
+ #define CMD_MQTT_QOS           "\"QOS\""
+ #define CMD_MQTT_COMMIT        "AT+SMCONN\r\n"
+ #define CMD_MQTT_PUBLISH       "AT+SMPUB=\"%s\",\"%d\",1,1 \r\n"    // PARAMS 1TOPIC, 2LENMESSAGE
+
+
+
+
+
 static cmd_device_t* __SIMCOM__;
 
 static uint8_t __buffer[SIMCOM_BUFFER_SIZE];
@@ -48,22 +66,16 @@ static void __init_debug(){
 }
 
 static  uint32_t __debug_print(uint8_t* buff,uint32_t len, uint32_t timeout){
-     return simo_uart_write(SIMCOM_DEBUG_UART,buff,len,timeout,0);
-    
+     return simo_uart_write(SIMCOM_DEBUG_UART,buff,len,timeout,0);    
 }
 
 static  uint32_t __write(uint8_t* buff,uint32_t len, uint32_t timeout){
          return simo_uart_write(SIMCOM_AT_UART,buff,len,timeout,0);
-    
-
 }
 
 
 static  uint32_t __read(uint8_t* buff,uint32_t len, uint32_t timeout){
       return simo_uart_read(SIMCOM_AT_UART,buff,len,timeout,0);
-
-    
-
 }
 
 //---------------------------------------------------------------------
@@ -136,7 +148,16 @@ uint32_t sim_set_echo(uint32_t ena){
 
 
 
+uint32_t sim_get_signal_level(){
 
+     uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GETVERSION      "AT+CSQ\r\n"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),3000);
+    }
+    return  res;
+
+}
 
 
 
@@ -169,6 +190,37 @@ uint32_t sim_get_gps_info(){
 
 
 
+uint32_t sim_get_operator(){
+     uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GETOPERATOR      "AT+COPS?\r\n"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETOPERATOR,strlen(CMD_GETOPERATOR),3000);
+    }
+    return  res;
+
+}
+
+
+
+uint32_t sim_open_apn(){
+      uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_OPEN_APN      "AT+CNACT=1,\"internet.movil\"\r\n"
+         res = cmd_send_cmd(__SIMCOM__,CMD_OPEN_APN,strlen(CMD_OPEN_APN),3000);
+    }
+    return  res;
+
+}
+
+
+uint32_t sim_get_apn(){
+      uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+            #define CMD_GET_APN    "AT+CNACT?"       
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_APN,strlen(CMD_GET_APN),2000);
+    }
+    return  res;
+}
 
 
 uint8_t sim_deinit(){
@@ -176,6 +228,83 @@ uint8_t sim_deinit(){
 }
 
 
+uint32_t sim_get_default(){
+       uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GET_DEFAULT      "ATZ"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
+    }
+    return  res;
+
+}
+
+static uint32_t __mqtt_set_url(char* url){
+       uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GET_DEFAULT      "ATZ"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
+    }
+    return  res;
+
+}
+
+static uint32_t __mqtt_set_username(char* name){
+       uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GET_DEFAULT      "ATZ"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
+    }
+    return  res;
+
+}
+
+static uint32_t __mqtt_set_password(char* password){
+       uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        #define CMD_GET_DEFAULT      "ATZ"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
+    }
+    return  res;
+
+}
+
+uint32_t sim_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos){
+
+    uint32_t res = 1;
+    // Si algun argumento es invalido, devolvemos 0.
+   // if( (url == NULL) || (user == NULL) ||
+    //    (password == NULL) || (qos == NULL) )return 0;
+     
+    if ( __SIMCOM__ != NULL){
+         
+        u_int8_t buffer[50]={};
+        sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_URL,url);    
+        res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
+         sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_USER,user);    
+        res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
+         sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_PASSWORD,password);    
+        res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
+         sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_QOS,qos);    
+        res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
+        res = cmd_send_cmd(__SIMCOM__,CMD_MQTT_COMMIT,strlen(CMD_MQTT_COMMIT),10000);
+    }
+
+    return res;
+
+}
 
 
 
+
+uint32_t sim_mqtt_publish(char* topic, char* payload,uint16_t len_payload){
+
+    uint32_t res = 0;
+    if ( __SIMCOM__ != NULL){
+        u_int8_t buffer[150]={};
+        sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
+        res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
+        res = cmd_send_cmd(__SIMCOM__,payload,strlen(payload),2000);
+
+    }
+    return res;
+}
