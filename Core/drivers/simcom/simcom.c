@@ -17,7 +17,7 @@
 #include "uart.h"
 #include "gpio.h"
 #include "string.h"
-
+#include "delay.h"
 
 
 
@@ -34,8 +34,10 @@
 
 
 
-
-
+//! Pins para manejar el modulo SIM
+#define PIN_SIM_BAT                       SIMO_GPIO_28//PB12
+#define PIN_SIM_PWRUP                     SIMO_GPIO_29//PB13
+#define PIN_SIM_IRQ                     
 
 
 //! Configuracion MQTT
@@ -92,9 +94,21 @@ uint32_t sim_init(){
     #endif
     );
     if(__SIMCOM__ != NULL) {
-       cmd_init_device(__SIMCOM__);
-       
-        res =1;
+        // iniciamos los pines correspondientes
+      simo_gpio_set(PIN_SIM_BAT,SIMO_GPIO_OUT);
+      simo_gpio_set(PIN_SIM_PWRUP,SIMO_GPIO_OUT);
+      res = cmd_init_device(__SIMCOM__);
+
+      simo_gpio_write(PIN_SIM_BAT,1);
+      
+      simo_gpio_write(PIN_SIM_PWRUP,1);
+
+    
+
+
+
+    
+    
     }
     return res;
 
@@ -121,7 +135,7 @@ uint32_t sim_get_version(){
      uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
         #define CMD_GETVERSION      "ATI\r\n"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),3000);
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),2000);
     }
     return  res;
 
@@ -153,7 +167,7 @@ uint32_t sim_get_signal_level(){
      uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
         #define CMD_GETVERSION      "AT+CSQ\r\n"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),3000);
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETVERSION,strlen(CMD_GETVERSION),2000);
     }
     return  res;
 
@@ -194,7 +208,7 @@ uint32_t sim_get_operator(){
      uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
         #define CMD_GETOPERATOR      "AT+COPS?\r\n"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GETOPERATOR,strlen(CMD_GETOPERATOR),3000);
+         res = cmd_send_cmd(__SIMCOM__,CMD_GETOPERATOR,strlen(CMD_GETOPERATOR),2500);
     }
     return  res;
 
@@ -231,42 +245,14 @@ uint8_t sim_deinit(){
 uint32_t sim_get_default(){
        uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
-        #define CMD_GET_DEFAULT      "ATZ"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
+        #define CMD_GET_DEFAULT      "ATZ\r\n"
+         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),2500);
     }
     return  res;
 
 }
 
-static uint32_t __mqtt_set_url(char* url){
-       uint32_t res = 0;
-    if ( __SIMCOM__ != NULL){
-        #define CMD_GET_DEFAULT      "ATZ"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
-    }
-    return  res;
 
-}
-
-static uint32_t __mqtt_set_username(char* name){
-       uint32_t res = 0;
-    if ( __SIMCOM__ != NULL){
-        #define CMD_GET_DEFAULT      "ATZ"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
-    }
-    return  res;
-
-}
-
-static uint32_t __mqtt_set_password(char* password){
-       uint32_t res = 0;
-    if ( __SIMCOM__ != NULL){
-        #define CMD_GET_DEFAULT      "ATZ"
-         res = cmd_send_cmd(__SIMCOM__,CMD_GET_DEFAULT,strlen(CMD_GET_DEFAULT),5000);
-    }
-    return  res;
-
-}
 
 uint32_t sim_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos){
 
@@ -277,7 +263,7 @@ uint32_t sim_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t
      
     if ( __SIMCOM__ != NULL){
          
-        u_int8_t buffer[50]={};
+        u_int8_t buffer[100]={};
         sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_URL,url);    
         res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
          sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_USER,user);    
@@ -286,7 +272,7 @@ uint32_t sim_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t
         res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
          sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_QOS,qos);    
         res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
-        res = cmd_send_cmd(__SIMCOM__,CMD_MQTT_COMMIT,strlen(CMD_MQTT_COMMIT),10000);
+        res = cmd_send_cmd(__SIMCOM__,CMD_MQTT_COMMIT,strlen(CMD_MQTT_COMMIT),3000);
     }
 
     return res;
@@ -300,11 +286,16 @@ uint32_t sim_mqtt_publish(char* topic, char* payload,uint16_t len_payload){
 
     uint32_t res = 0;
     if ( __SIMCOM__ != NULL){
-        u_int8_t buffer[150]={};
+        u_int8_t buffer[250]={};
         sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
         res = cmd_send_cmd(__SIMCOM__,buffer,strlen(buffer),2000);
         res = cmd_send_cmd(__SIMCOM__,payload,strlen(payload),2000);
-
     }
     return res;
+}
+
+
+
+uint8_t* sim_get_buffer(){
+    return &__buffer[0];
 }

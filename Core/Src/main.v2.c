@@ -35,11 +35,7 @@
 #define STOP_MODE             0    // Si es 0 entramos en modo SLEEP, sino modo Stop
 #define ISR_ONLY              1
 #define BAUDRATE              115200
-#define DEVICE_IRQ_MODE       SIMO_GPIO_EXT_IT_FALLING
 
-                    //  SIMO_GPIO_EXT_IT_RISING//! Interrupcion por flanco ascendente 
-                    //  SIMO_GPIO_EXT_IT_FALLING//! Interrupcion por flanco descendente
-                    //  SIMO_GPIO_EXT_IT_RISING_FALLING//! Interrupcion por flanco ascendente y descendent
 
 /* USER CODE END Includes */
 

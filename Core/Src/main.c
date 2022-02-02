@@ -51,10 +51,13 @@ static void setup(void){
   simo_clock_config();
   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
   
-  sim_init();
+ 
   
 
 }
+
+
+
 
 
 
@@ -77,10 +80,10 @@ int main(void)
  
 
   setup();
+  sim_init();
+  HAL_Delay(60000);
 
-  //sim_get_version();  
-  //sim_get_default();
-
+  sim_get_default();
 
   HAL_Delay(5000);
   sim_set_echo(0);
@@ -92,6 +95,8 @@ int main(void)
   sim_open_apn();
   ena =  sim_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
 
+  char* p_gps_info;
+  uint8_t nmea[100];
   
   while(1){
 
@@ -99,15 +104,18 @@ int main(void)
       HAL_Delay(2500);
      
       if(ena == 1)simo_gpio_toogle(SIMO_GPIO_18);
-      HAL_Delay(1000);
+      HAL_Delay(10000);
 
     
       sim_get_gps_info();
-      #define MSG_PUBLISHED     "Hola desde micro stm32 \r\n"
 
+      p_gps_info = (char*)sim_get_buffer();
+      strncpy((char*)nmea,p_gps_info,strlen(p_gps_info));
+      //#define MSG_PUBLISHED     "Hola desde micro stm32 \r\n"
+      #define MSG_PUBLISHED       (nmea) // correr dos posiciones
       sim_mqtt_publish(MQTT_TOPIC,MSG_PUBLISHED,strlen(MSG_PUBLISHED));
 
-      HAL_Delay(10000);
+      HAL_Delay(40000);
 
 
   }

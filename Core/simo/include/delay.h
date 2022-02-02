@@ -16,5 +16,11 @@
 
 #ifndef __SIMO_DELAY_H
 #define __SIMO_DELAY_H
+/**
+ * @brief Delay basado en Systick
+ * 
+ * @param time 
+ * @return ** void 
+ */
     void simo_delay_ms(uint32_t time);
 #endif

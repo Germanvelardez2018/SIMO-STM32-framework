@@ -34,13 +34,21 @@
 
      typedef enum{
 
+        //!DIVISOR DE CLOCK
          SIMO_SPI_PRESCALER_2 =   2
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_4 =   4
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_8 =   8
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_16 =  16
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_32 =  32
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_64 =  64
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_128 = 128
+        //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_256 = 256
 
     } simo_spi_prescaler;
@@ -63,10 +71,6 @@
      * @return ** uint32_t 
      */
     uint32_t simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
-
-
-
-
 
 
 

@@ -51,3 +51,7 @@ uint32_t sim_get_default();
 uint32_t sim_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos);
 
 uint32_t sim_mqtt_publish(char* topic, char* payload,uint16_t len_payload);
+
+
+
+uint8_t* sim_get_buffer();

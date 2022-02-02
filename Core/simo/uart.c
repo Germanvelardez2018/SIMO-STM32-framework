@@ -15,7 +15,7 @@
 
 #if SIMO_UART_ENA == 1
 
-    // Estructuras
+    
 
     #if NUM_SIMO_UART >0
         UART_HandleTypeDef huart1;
