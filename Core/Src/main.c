@@ -1,34 +1,21 @@
-/* USER CODE BEGIN Header */
 /**
- ******************************************************************************
- * @file           : main.c
- * @brief          : Main program body
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2022 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
+ * @file main.c  ( manejo del modulo SIM7000G)
+ * @author your name (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-02-03
+ * 
+ * @copyright Copyright (c) 2022
+ * 
  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 
 // Simo
 #include "stdio.h"
 #include "uart.h"
-#include "spi.h"
 #include "config.h"
-#include "timer.h"
 #include "gpio.h"
 #include "clock_config.h"
-#include "rtc.h"
-#include "power_save.h"
 #include "simcom.h"
 #include "string.h"
 
@@ -51,9 +38,6 @@ static void setup(void){
   simo_clock_config();
   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
   
- 
-  
-
 }
 
 
@@ -72,24 +56,19 @@ static void setup(void){
  * @brief  The application entry point.
  * @retval int
  */
+
 int main(void)
 {
 
  uint32_t ena = 0;
 
- 
-
   setup();
   sim_init();
   HAL_Delay(60000);
-
   sim_get_default();
-
   HAL_Delay(5000);
   sim_set_echo(0);
   sim_set_pwr_gps(1);
-
-
   sim_get_operator();
   sim_get_signal_level();
   sim_open_apn();
@@ -105,18 +84,15 @@ int main(void)
      
       if(ena == 1)simo_gpio_toogle(SIMO_GPIO_18);
       HAL_Delay(10000);
-
-    
       sim_get_gps_info();
 
-      p_gps_info = (char*)sim_get_buffer();
-      strncpy((char*)nmea,p_gps_info,strlen(p_gps_info));
-      //#define MSG_PUBLISHED     "Hola desde micro stm32 \r\n"
+      p_gps_info = (char*)sim_get_buffer(); // Devuelve el puntero al buffer rx que recibe las respuesta del SIM7000G
+      strncpy((char*)nmea,p_gps_info,strlen(p_gps_info));  // Copio este buffer rx. 
+                                                          // Porque al ejecutarse un nuevo comandos se borrara la info anterior
       #define MSG_PUBLISHED       (nmea) // correr dos posiciones
       sim_mqtt_publish(MQTT_TOPIC,MSG_PUBLISHED,strlen(MSG_PUBLISHED));
 
       HAL_Delay(40000);
-
 
   }
   

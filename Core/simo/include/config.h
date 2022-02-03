@@ -21,7 +21,7 @@
 //!Habilita el uso hardware SPI
 #define C_SIMO_SPI_ENA                          1
 //!Habilita el uso hardware Timer                 
-#define C_SIMO_TIMER_ENA                        0
+#define C_SIMO_TIMER_ENA                        1
 //!Habilita el uso hardware GPIO                 
 #define C_SIMO_GPIO_ENA                         1
 

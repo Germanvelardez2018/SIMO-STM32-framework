@@ -11,6 +11,7 @@
         "stm32f1xx_hal.h": "c",
         "stm32f1xx_hal_rtc.h": "c",
         "cmd.h": "c",
-        "delay.h": "c"
+        "delay.h": "c",
+        "pwd.h": "c"
     }
 }
