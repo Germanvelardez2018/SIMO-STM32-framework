@@ -55,3 +55,7 @@ uint32_t sim_mqtt_publish(char* topic, char* payload,uint16_t len_payload);
 
 
 uint8_t* sim_get_buffer();
+
+
+
+uint32_t sim_low_pwr_mode(uint32_t ena );

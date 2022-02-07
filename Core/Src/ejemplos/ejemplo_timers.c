@@ -74,6 +74,7 @@ static void setup(void){
 
   // Configuracion del timer A
   simo_timer_config(TIMER_A,TIME_MS,500);
+  
   simo_timer_set_event_callback(TIMER_A,__CALBACK_TIMERA);
 
 
