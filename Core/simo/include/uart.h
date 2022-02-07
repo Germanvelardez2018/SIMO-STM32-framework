@@ -71,6 +71,15 @@
     uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate);
 
 
+    /**
+     * @brief Desconfigura el puerto UART.
+     * 
+     * @param uart 
+     * @return ** void 
+     */
+    void simo_uart_deinit(SIMO_UART uart);
+
+
     #if SIMO_UART_IRQ   == 1
 
         //Activo o desactivo las interrupciones

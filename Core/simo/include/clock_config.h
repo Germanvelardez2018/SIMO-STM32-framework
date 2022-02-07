@@ -57,11 +57,20 @@
 
 
 
+  /**
+   * @brief Obtengo el valor del clock source del BUS APB1
+   * 
+   * @return ** uint32_t 
+   */
 
   uint32_t simo_clock_get_APB1();
 
 
-
+  /**
+   * @brief Obtengo el valor del clock source del BUS APB2
+   * 
+   * @return ** uint32_t 
+   */
   uint32_t simo_clock_get_APB2();
 
 

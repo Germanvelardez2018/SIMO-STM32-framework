@@ -130,8 +130,10 @@ while(1){
         simo_rtc_get_time(&h,&m,&s);
 
         #define FORMAT_MSG      "Proxima alarma: %d : %d : %d\r\n"
+        char buffer[50];
         m = m +1 ; // alarma cada un minuto
         sprintf(buffer,FORMAT_MSG,h,m,s);
+        simo_uart_write(UART_A,buffer,strlen(buffer),TIMEROUT,ENA_INTERRUPTION);
         ena = 0;
         simo_rtc_set_alarm(h,m,s);
         simo_pwr_before_change_mode(); // Se llama antes de cambiar de modod NORMAL a sleep

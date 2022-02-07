@@ -19,15 +19,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 #if SIMO_SPI_ENA == 1
 
     //Señal de reloj maxima soportada por el hardware SPI.Se calcula con el clock base del spi (SPI1 APB1 y SP2 APB2 )y el valor del prescaler
@@ -273,6 +264,13 @@ uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler){
 
 
 
+void simo_spi_deinit(SIMO_SPI spi){
+    SPI_HandleTypeDef* simo_SPI = __get_spi(spi);   
+    HAL_SPI_DeInit(simo_SPI);
+}
+
+
+
 
 
 
@@ -328,7 +326,6 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
         GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-       
     }
     #endif
    
@@ -375,13 +372,6 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
 
 
-
-
-
-
-
-
-
     #if SIMO_SPI_IRQ   == 1
         void simo_spi_ena_irq(SIMO_SPI spi,uint32_t ena){
                 IRQn_Type __SPI= 0;
@@ -389,21 +379,17 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                     #if NUM_SIMO_SPI >0
                         case SPI_A:
                         __SPI= SPI1_IRQn;
-            
                         break;
                     #endif
                     #if NUM_SIMO_SPI >1
                         case SPI_B:
                         __SPI= SPI2_IRQn;
-            
                         break;
-                    #endif
-                   
+                    #endif  
                         default:
                         __SPI= SPI1_IRQn; // por default, evita errores
                         break;
                 }
-
                 if(ena){
                     HAL_NVIC_SetPriority(__SPI, 0, 0);
                     HAL_NVIC_EnableIRQ(__SPI);
@@ -432,7 +418,6 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                             __SPI2_TX_IRQ__ = callback;
                             break;
                         #endif
-                     
                             default:
                             res= 0;
                             break;

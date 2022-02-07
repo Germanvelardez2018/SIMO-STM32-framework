@@ -36,6 +36,16 @@
          */
         uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time);
 
+
+        /**
+        * @brief Desconfigura el timer, liberando recursos asociados
+        * 
+        * @param timer timer a utilizar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER
+
+        * @return ** void 
+         */
+        void simo_timer_deconfig(SIMO_TIMER timer);
+
         /**
          * @brief Activa el timer y la interrupcion asociada. Si no se configura  la interrupcion el evento  no llama  a la funcion callback
          * 

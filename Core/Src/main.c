@@ -32,7 +32,8 @@
 
 static volatile uint32_t ena = 0;  // Si ena =1 entonces estamos en modo NORMAL, sino en modo sleep
 
-
+#define     PIN_BAT         SIMO_GPIO_28//PB12
+#define     PIN_PWRSIM      SIMO_GPIO_29//PB13
 
 // Callback para el RTC
 
@@ -58,10 +59,17 @@ static void setup(void){
   HAL_Init();
   simo_clock_config();
   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
+  simo_gpio_set(PIN_BAT,SIMO_GPIO_OUT);
+  simo_gpio_set(PIN_PWRSIM,SIMO_GPIO_OUT);
+
+  simo_gpio_write(PIN_BAT,1);  // Habilito alimentacion de bateria
+  simo_gpio_write(PIN_PWRSIM,1); //Enciende en pulso bajo
 
 
   // Configuracion SIMCOM
+  
   sim_init();
+  while(sim_check_at() != 1);
   sim_get_default(); 
   sim_set_echo(0);
   sim_set_pwr_gps(1);
@@ -69,7 +77,7 @@ static void setup(void){
   sim_get_signal_level();
   sim_open_apn();
   sim_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
-  while(sim_check_at() != 1); 
+   
   #define MSG_PUBLISHED    "SIMO LISTO \r\n"
   sim_mqtt_publish(MQTT_TOPIC,MSG_PUBLISHED,strlen(MSG_PUBLISHED));
   sim_low_pwr_mode(1); // A dormir

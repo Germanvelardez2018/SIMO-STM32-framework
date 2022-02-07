@@ -24,16 +24,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "core.h"
 
-
-
-
-
-
 #if SIMO_SPI_ENA == 1
 
-
      typedef enum{
-
         //!DIVISOR DE CLOCK
          SIMO_SPI_PRESCALER_2 =   2
         //!DIVISOR DE CLOCK
@@ -50,14 +43,7 @@
         ,SIMO_SPI_PRESCALER_128 = 128
         //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_256 = 256
-
     } simo_spi_prescaler;
-
-
-
-
-
-
 
 
      /**
@@ -113,6 +99,15 @@
      * @return ** uint32_t 
      */
     uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler);
+
+
+    /**
+     * @brief Desconfigura el puerto SPI. Libera recursos asociados
+     * 
+     * @param spi 
+     * @return ** void 
+     */
+    void simo_spi_deinit(SIMO_SPI spi);
 
 
     #if SIMO_SPI_IRQ   == 1

@@ -181,11 +181,11 @@
 
 
         /**
-         * @brief 
+         * @brief Configura el pin seleccionado
          * 
          * @param pin  Pin a configurar
          *                  
-         * @param mode 
+         * @param mode Modo de funcionamiento
          * @return ** uint32_t 
          */
         void simo_gpio_set(SIMO_GPIO_PIN simo_pin, simo_gpio_mode mode);
@@ -214,9 +214,9 @@
          * 
          * @param pin pin simo gpio a utilizar
          * @param mode El modo de funcionamiento del pin. Puede ser entrada, salida o pin de interrupcion externa
-         * @return ** uint32_t 
+         * @return ** void 
          */
-        uint32_t simo_gpio_deinit(SIMO_GPIO_PIN pin, simo_gpio_mode mode);
+        void simo_gpio_deinit(SIMO_GPIO_PIN pin);
 
 
 

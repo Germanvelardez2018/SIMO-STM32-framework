@@ -118,6 +118,18 @@ static void __get_pin(SIMO_GPIO_PIN simo_pin,__pin__ *pin )
     HAL_GPIO_Init(pin.port, &GPIO_InitStruct);
 }
 
+
+void simo_gpio_deinit(SIMO_GPIO_PIN simo_pin){
+    // Se podria hacer mas simple?. Probablemente.
+    __pin__ pin = {0};
+    __get_pin(simo_pin,&pin);
+    HAL_GPIO_DeInit(pin.port,pin.index);
+}
+
+
+
+
+
 void simo_gpio_write(SIMO_GPIO_PIN simo_pin, uint32_t value){
    __pin__ pin = {0};
    __get_pin(simo_pin,&pin);
@@ -138,9 +150,6 @@ void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
 
 
 
- uint32_t simo_gpio_deinit(SIMO_GPIO_PIN pin, simo_gpio_mode mode){
-     return 0;
- }
 
 
 

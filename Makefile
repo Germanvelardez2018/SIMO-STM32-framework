@@ -41,6 +41,7 @@ Core/drivers/simcom/cmd.c \
 Core/drivers/memory/AT45DB041E.c \
 Core/drivers/memory/memory_store.c \
 Core/simo/power_save.c \
+Core/simo/i2c.c \
 Core/simo/delay.c \
 Core/simo/rtc.c \
 Core\simo/clock_config.c \
@@ -68,6 +69,7 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c \
 Core/Src/system_stm32f1xx.c
 
 # ASM sources

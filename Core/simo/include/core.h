@@ -34,6 +34,7 @@
 
     #define SIMO_UART_ENA               C_SIMO_UART_ENA
     #define SIMO_SPI_ENA                C_SIMO_SPI_ENA
+    #define SIMO_I2C_ENA                C_SIMO_I2C_ENA
     #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA
     #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA                         
 
@@ -41,6 +42,7 @@
 
     // Cantidad de instancias
     #define NUM_SIMO_UART               C_NUM_SIMO_UART
+    #define NUM_SIMO_I2C                C_NUM_SIMO_I2C
     #define NUM_SIMO_SPI                C_NUM_SIMO_SPI
     #define NUM_SIMO_GPIO               C_NUM_SIMO_GPIO
     #define NUM_SIMO_TIMER              C_NUM_SIMO_TIMER
@@ -61,6 +63,22 @@
             #define SIMO_UART_TX_IRQ     0
             #define SIMO_UART_RX_IRQ     0
         #endif
+
+
+
+    #define SIMO_I2C_IRQ            C_SIMO_I2C_IRQ
+
+        #if SIMO_I2C_IRQ == 1
+            #define  SIMO_I2C_MASTER_IRQ        C_SIMO_I2C_MASTER_IRQ                       
+            #define  SIMO_I2C_SLAVE_IRQ         C_SIMO_I2C_SLAVE_IRQ
+        #else                         
+            #define  SIMO_I2C_MASTER_IRQ         0                       
+            #define  SIMO_I2C_SLAVE_IRQ          0
+
+
+        #endif
+
+
 
 
 
@@ -161,6 +179,20 @@
 
 
 
+    //CORE I2C
+    #if SIMO_I2C_ENA == 1
+        typedef enum {
+        #if NUM_SIMO_I2C >0
+            I2C_A,
+        #endif
+        #if NUM_SIMO_I2C >1
+            I2C_B,
+        #endif
+        } SIMO_I2C;
+    #endif
+
+
+
 
     // CORE SPI 
 
@@ -172,7 +204,6 @@
         #if NUM_SIMO_SPI >1
             SPI_B,
         #endif
-    
         } SIMO_SPI;
 
 

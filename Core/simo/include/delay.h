@@ -17,7 +17,7 @@
 #ifndef __SIMO_DELAY_H
 #define __SIMO_DELAY_H
 /**
- * @brief Delay basado en Systick
+ * @brief Delay basado en Systick y HAL STM32
  * 
  * @param time 
  * @return ** void 

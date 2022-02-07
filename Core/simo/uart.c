@@ -102,35 +102,16 @@ static UART_HandleTypeDef* __get_uart(SIMO_UART uart_enum)
 }
 
 
-
-
-
-
-
-    uint8_t simo_uart_rx_available(SIMO_UART uart,uint32_t timeout){
-        uint8_t data = 0;
-        UART_HandleTypeDef* simo_uart = __get_uart(uart);
-        if(simo_uart != NULL)  HAL_UART_Receive(simo_uart,&data,1,timeout);      
-        return data;
-    }
-
-
-
-
-/**
- * @brief 
- * 
- * @param uart 
- * @param data 
- * @param len 
- * @param timeout 
- * @return ** uint32_t 
- */
+uint8_t simo_uart_rx_available(SIMO_UART uart,uint32_t timeout){
+    uint8_t data = 0;
+    UART_HandleTypeDef* simo_uart = __get_uart(uart);
+    if(simo_uart != NULL)  HAL_UART_Receive(simo_uart,&data,1,timeout);      
+    return data;
+}
 
 
 uint32_t simo_uart_write(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback ){
     uint32_t res = 0;  // retorna error por defecto
-
         UART_HandleTypeDef* simo_uart = __get_uart(uart);
         if(simo_uart != NULL) {  
             if (ena_callback == 1){
@@ -143,27 +124,13 @@ uint32_t simo_uart_write(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t tim
                 res = 1; // EXITO EN LA CONFIGURACION
                 }
             }
-
-           
     }
     return res;
 }
 
 
-
-/**
- * @brief 
- * 
- * @param uart 
- * @param data 
- * @param len 
- * @param timeout 
- * @return ** uint32_t 
- */
-
 uint32_t simo_uart_read(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
     uint32_t res = 0;  // retorna error por defecto
-
         UART_HandleTypeDef* simo_uart = __get_uart(uart);
         if(simo_uart != NULL) {  
             if (ena_callback == 1){
@@ -175,25 +142,11 @@ uint32_t simo_uart_read(SIMO_UART uart,uint8_t* data,uint32_t len, uint32_t time
                  if(HAL_UART_Receive(simo_uart,data,len,timeout) == HAL_OK){
                 res = 1; // EXITO EN LA CONFIGURACION
                 }
-            }
-
-           
+            }           
     }
-    return res;
-           
-   
+    return res;          
 }
 
-
-
-
-/**
- * @brief 
- * 
- * @param uart 
- * @param baudrate 
- * @return ** uint32_t 
- */
 
 uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate){
         uint32_t res = 0;  // retorna error por defecto
@@ -208,8 +161,7 @@ uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate){
         simo_uart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
         simo_uart->Init.OverSampling = UART_OVERSAMPLING_16;
         if (HAL_UART_Init(simo_uart) == HAL_OK){
-            res = 1; // EXITO EN LA CONFIGURACION
-            
+            res = 1; // EXITO EN LA CONFIGURACION    
         }    
     }
     return res;
@@ -217,21 +169,18 @@ uint32_t simo_uart_init(SIMO_UART uart,uint32_t baudrate){
 
 
 
+void simo_uart_deinit(SIMO_UART uart){
+    UART_HandleTypeDef* simo_uart = __get_uart(uart);
+    HAL_UART_DeInit( simo_uart);
+}
 
 
 
 
 
-/**
-* @brief UART MSP Initialization
-* This function configures the hardware resources used in this example
-* @param huart: UART handle pointer
-* @retval None
-*/
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-
     #if NUM_SIMO_UART >0
     if(huart->Instance==USART1)
         {
@@ -303,9 +252,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 */
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
-
-
-
     #if NUM_SIMO_UART >0
     if(huart->Instance==USART1)
         {
@@ -344,20 +290,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
             */
             HAL_GPIO_DeInit(GPIOB, GPIO_PIN_10|GPIO_PIN_11);
         }
-    #endif
-    
- 
+    #endif 
 }
-
-
-
-
-
-
-
-
-
-
     #if SIMO_UART_IRQ   == 1
         void simo_uart_ena_irq(SIMO_UART uart,uint32_t ena){
                 IRQn_Type __uart= 0;
@@ -365,38 +299,34 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
                     #if NUM_SIMO_UART >0
                         case UART_A:
                         __uart= USART1_IRQn;
-            
                         break;
                     #endif
                     #if NUM_SIMO_UART >1
                         case UART_B:
                         __uart= USART2_IRQn;
-            
                         break;
                     #endif
                     #if NUM_SIMO_UART >2
                         case UART_C:
-                        
                         __uart= USART3_IRQn;
-        
                         break;
                     #endif
                         default:
                         __uart= USART1_IRQn; // por default, evita errores
                         break;
                 }
-
                 if(ena){
+                    //Activo interrupciones
                     HAL_NVIC_SetPriority(__uart, 0, 0);
                     HAL_NVIC_EnableIRQ(__uart);
                 }
                 else{
+                    //Desactivo interrupciones
                     HAL_NVIC_DisableIRQ(__uart);
                 }
         }
 
-        #if SIMO_UART_TX_IRQ == 1
-            
+        #if SIMO_UART_TX_IRQ == 1        
             uint32_t simo_uart_set_tx_callback(SIMO_UART uart,callback_irq callback)
             {
                 uint32_t res = 0;
@@ -423,44 +353,36 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
                             res= 0;
                             break;
                     }
-
             }
                 return res;
             }
 
             void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
-
             #if NUM_SIMO_UART >0
                 if(huart == &huart1){
                 //funcion callback UART1
                 if(__UART1_TX_IRQ__ != NULL) __UART1_TX_IRQ__();
-                }
-                
+                }    
             #endif
             #if NUM_SIMO_UART >1
                 if(huart == &huart2){
                 // funcion callbacl UART2
                 if(__UART2_TX_IRQ__ != NULL) __UART2_TX_IRQ__();
                 }
-            
             #endif
             #if NUM_SIMO_UART >2
                 if(huart == &huart3){
                 // Funcion callback UART3
                 if(__UART3_TX_IRQ__ != NULL) __UART3_TX_IRQ__();
                 }
-        
             #endif
-
             }
 
         #endif // SIMO_UART_TX_IRQ
 
         
         #if SIMO_UART_RX_IRQ == 1
-
             void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-
                     #if NUM_SIMO_UART >0
                         if(huart == &huart1){
                         //funcion callback UART1
@@ -481,11 +403,10 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
                     #endif
             }
         
-        
             uint32_t simo_uart_set_rx_callback(SIMO_UART uart,callback_irq callback)
             {
                 uint32_t res = 0;
-            if (callback != NULL){
+                if(callback != NULL){
                     res = 1;
                     switch (uart)
                     {
@@ -511,10 +432,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
             }
                 return res;
             }
-        #endif // SIMO_UART_RX_IRQ
+        #endif       // SIMO_UART_RX_IRQ
 
-        
-        
         #endif      // SIMO_UART_IRQ
 #endif  // SIMO_UART_ENA 
 
