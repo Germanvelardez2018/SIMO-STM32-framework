@@ -1,24 +1,25 @@
 /**
- * @file main.c  ( manejo del modulo SIM7000G)
- * @author your name (you@domain.com)
+ * @file olessd130g.c
+ * @author German Velardez (germanvelardez16@gmail.com)
  * @brief 
  * @version 0.1
- * @date 2022-02-03
+ * @date 2022-02-10
  * 
  * @copyright Copyright (c) 2022
  * 
  */
 
+
+
+
 #include "main.h"
 // Simo
 #include "delay.h"
 #include "stdio.h"
-#include "uart.h"
+
 #include "config.h"
 #include "gpio.h"
 #include "clock_config.h"
-#include "simcom.h"
-#include "string.h"
 #include "ssd1306_tests.h"
 
 
@@ -27,9 +28,6 @@
 #include "ssd1306.h"
 
 
-
-#define     PIN_BAT         SIMO_GPIO_28//PB12
-#define     PIN_PWRSIM      SIMO_GPIO_29//PB13
 
 /**
  * @brief Funcion de inicio de perifericos. 
@@ -44,8 +42,6 @@ static void setup(void){
   simo_gpio_set(SIMO_GPIO_18,SIMO_GPIO_OUT);
 
 
-
- 
   
 }
 
@@ -79,15 +75,8 @@ setup();
 
     
     ssd1306_TestAll();
-   
-    
-    
     simo_gpio_toogle(SIMO_GPIO_18);
     simo_delay_ms(500);
-    
-
-
-
     
   }
     

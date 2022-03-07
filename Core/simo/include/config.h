@@ -27,20 +27,24 @@
 #define C_SIMO_TIMER_ENA                        1
 //!Habilita el uso hardware GPIO                 
 #define C_SIMO_GPIO_ENA                         1
+//! Habilita el hardware ADC
+#define C_SIMO_ADC_ENA                          1
 
 
 //! Cantidad de instancias
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 3 instancias 
-#define C_NUM_SIMO_TIMER                        3    
+#define C_NUM_SIMO_TIMER                        1    
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 3 instancias 
 #define C_NUM_SIMO_UART                         3    
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3 
-#define C_NUM_SIMO_SPI                          2
+#define C_NUM_SIMO_SPI                          1
 //! Numero de instancias disponibles. Verificar valores maximos y conclictos. Maximo: 2 instancias
-#define C_NUM_SIMO_I2C                          2  
+#define C_NUM_SIMO_I2C                          1     //Tiene 2 I2C pero genera conclicto con UART3
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos 
 #define C_NUM_SIMO_GPIO                         47   // 48 Pines,0 ....al 47
-#define C_SIMO_GPIO_ADC_ENA                      0
+
+#define C_NUM_SIMO_ADC                          2
+
 
 
 // Interrupciones
@@ -63,13 +67,11 @@
 
 
 
-
+#define C_SIMO_I2C_MASTER_ENA                       1
+#define C_SIMO_I2C_SLAVE_ENA                        0
 //I2C GLOBAL   IRQ
-
 #define C_SIMO_I2C_IRQ                              1
-
-#define C_SIMO_I2C_MASTER_IRQ                       1
-#define C_SIMO_I2C_SLAVE_IRQ                        1
+#define C_SIMO_I2C_ERROR_IRQ                        1
 
 
 
@@ -87,6 +89,7 @@
 
 
 #define C_SIMO_GPIO_EXT_IRQ                        1
+#define C_SIMO_ADC_IRQ                             1
 
 
 

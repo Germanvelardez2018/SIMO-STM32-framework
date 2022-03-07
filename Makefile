@@ -40,6 +40,9 @@ Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \
 Core/drivers/memory/AT45DB041E.c \
 Core/drivers/memory/memory_store.c \
+Core/drivers/displays/ssd1306.c \
+Core/drivers/displays/ssd1306_fonts.c \
+Core/drivers/displays/ssd1306_tests.c \
 Core/simo/power_save.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \
@@ -49,6 +52,7 @@ Core/simo/timer.c\
 Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
+Core/simo/adc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -70,6 +74,7 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c \
 Core/Src/system_stm32f1xx.c
 
 # ASM sources
@@ -130,6 +135,7 @@ C_INCLUDES =  \
 -ICore/simo/include \
 -ICore/drivers/include/memory\
 -ICore/drivers/include/simcom \
+-ICore/drivers/include/displays \
 -ICore/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \

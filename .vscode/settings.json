@@ -12,6 +12,10 @@
         "stm32f1xx_hal_rtc.h": "c",
         "cmd.h": "c",
         "delay.h": "c",
-        "pwd.h": "c"
+        "pwd.h": "c",
+        "i2c.h": "c",
+        "ssd1306.h": "c",
+        "stm32f1xx.h": "c",
+        "stm32f1xx_hal_conf.h": "c"
     }
 }

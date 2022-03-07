@@ -36,7 +36,8 @@
     #define SIMO_SPI_ENA                C_SIMO_SPI_ENA
     #define SIMO_I2C_ENA                C_SIMO_I2C_ENA
     #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA
-    #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA                         
+    #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA  
+    #define SIMO_ADC_ENA                C_SIMO_ADC_ENA                       
 
 
 
@@ -46,6 +47,7 @@
     #define NUM_SIMO_SPI                C_NUM_SIMO_SPI
     #define NUM_SIMO_GPIO               C_NUM_SIMO_GPIO
     #define NUM_SIMO_TIMER              C_NUM_SIMO_TIMER
+    #define NUM_SIMO_ADC                C_NUM_SIMO_ADC
 
 
 
@@ -54,28 +56,31 @@
 
 
     // Interrupciones
-    #define SIMO_UART_IRQ           C_SIMO_UART_IRQ
+    #define SIMO_UART_IRQ                       C_SIMO_UART_IRQ
         #if SIMO_UART_IRQ == 1
             //Habilite configuracion para generar interrupciones UART
-            #define SIMO_UART_TX_IRQ     C_SIMO_UART_TX_IRQ
-            #define SIMO_UART_RX_IRQ     C_SIMO_UART_RX_IRQ
+            #define SIMO_UART_TX_IRQ            C_SIMO_UART_TX_IRQ
+            #define SIMO_UART_RX_IRQ            C_SIMO_UART_RX_IRQ
             #else
             #define SIMO_UART_TX_IRQ     0
             #define SIMO_UART_RX_IRQ     0
         #endif
 
 
-
-    #define SIMO_I2C_IRQ            C_SIMO_I2C_IRQ
+    #define SIMO_I2C_IRQ                        C_SIMO_I2C_IRQ
+    #define SIMO_I2C_ERROR_IRQ                  C_SIMO_I2C_ERROR_IRQ
 
         #if SIMO_I2C_IRQ == 1
-            #define  SIMO_I2C_MASTER_IRQ        C_SIMO_I2C_MASTER_IRQ                       
-            #define  SIMO_I2C_SLAVE_IRQ         C_SIMO_I2C_SLAVE_IRQ
+            #define  SIMO_I2C_MASTER_ENA        C_SIMO_I2C_MASTER_ENA                       
+            #define  SIMO_I2C_SLAVE_ENA         C_SIMO_I2C_SLAVE_ENA
         #else                         
-            #define  SIMO_I2C_MASTER_IRQ         0                       
-            #define  SIMO_I2C_SLAVE_IRQ          0
+            #define  SIMO_I2C_MASTER_ENA         0                       
+            #define  SIMO_I2C_SLAVE_ENA          0
+        #endif
 
 
+        #if  (SIMO_I2C_MASTER_ENA + SIMO_I2C_SLAVE_ENA) == 0
+            #define    SIMO_I2C_ENA   0
         #endif
 
 
@@ -84,11 +89,11 @@
 
     #define SIMO_SPI_IRQ                C_SIMO_SPI_IRQ
         #if SIMO_SPI_IRQ == 1
-            //Habilite configuracion para generar interrupciones SPI
+        //Habilite configuracion para generar interrupciones SPI
             #define SIMO_SPI_TX_IRQ         C_SIMO_SPI_TX_IRQ
             #define SIMO_SPI_RX_IRQ         C_SIMO_SPI_RX_IRQ
             #define SIMO_SPI_TX_RX_IRQ      C_SIMO_SPI_TX_RX_IRQ
-            #else
+        #else
             #define SIMO_SPI_TX_IRQ     0
             #define SIMO_SPI_RX_IRQ     0
         #endif
@@ -96,11 +101,11 @@
 
 #define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ 
 #define SIMO_GPIO_ADC_ENA               C_SIMO_GPIO_ADC_ENA
+#define SIMO_ADC_IRQ                    C_SIMO_ADC_IRQ
 
 
 #if SIMO_GPIO_EXT_IRQ == 1
     typedef void (*callback_gpio_ext_it)(uint16_t);
-
 #endif 
 
 #define SIMO_TIMER_IRQ                  C_SIMO_TIMER_IRQ
@@ -116,7 +121,9 @@
         #define    SIMO_UART_ENA   0
     #endif
 
-
+    #if NUM_SIMO_I2C == 0
+        #define    SIMO_I2C_ENA   0
+    #endif
 
     #if NUM_SIMO_UART == 0
         #define    SIMO_UART_ENA   0
@@ -158,7 +165,6 @@
 
     //CORE UART
     #if SIMO_UART_ENA == 1
-
         typedef enum {
         #if NUM_SIMO_UART >0
             UART_A,
@@ -170,10 +176,6 @@
             UART_C
         #endif
         } SIMO_UART;
-
-
-     
-
     #endif
 
 
@@ -183,10 +185,10 @@
     #if SIMO_I2C_ENA == 1
         typedef enum {
         #if NUM_SIMO_I2C >0
-            I2C_A,
+            I2C_A
         #endif
         #if NUM_SIMO_I2C >1
-            I2C_B,
+            ,I2C_B
         #endif
         } SIMO_I2C;
     #endif
