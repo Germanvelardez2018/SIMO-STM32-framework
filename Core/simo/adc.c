@@ -278,7 +278,7 @@ uint32_t simo_adc_config_channel(SIMO_ADC adc, uint32_t channel ){
 
       ADC_ChannelConfTypeDef sConfig = {0};
 
-      sConfig.Rank = ADC_REGULAR_RANK_1;
+      itsConfig.Rank = ADC_REGULAR_RANK_1;
       sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
    
       sConfig.Channel = __get_channel(channel);

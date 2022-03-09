@@ -43,6 +43,7 @@ Core/drivers/memory/memory_store.c \
 Core/drivers/displays/ssd1306.c \
 Core/drivers/displays/ssd1306_fonts.c \
 Core/drivers/displays/ssd1306_tests.c \
+Core/drivers/sensors/mpu_6500.c \
 Core/simo/power_save.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \
@@ -136,6 +137,7 @@ C_INCLUDES =  \
 -ICore/drivers/include/memory\
 -ICore/drivers/include/simcom \
 -ICore/drivers/include/displays \
+-Icore/drivers/include/sensors\
 -ICore/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \
