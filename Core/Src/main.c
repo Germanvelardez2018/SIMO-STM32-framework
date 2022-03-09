@@ -98,7 +98,7 @@ static void setup(void){
  * @retval int
  */
 
-int main(void)
+int main2(void)
 {
 
 
