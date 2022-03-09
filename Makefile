@@ -53,7 +53,6 @@ Core/simo/timer.c\
 Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
-Core/simo/adc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -137,7 +136,7 @@ C_INCLUDES =  \
 -ICore/drivers/include/memory\
 -ICore/drivers/include/simcom \
 -ICore/drivers/include/displays \
--Icore/drivers/include/sensors\
+-ICore/drivers/include/sensors\
 -ICore/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc \
 -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy \

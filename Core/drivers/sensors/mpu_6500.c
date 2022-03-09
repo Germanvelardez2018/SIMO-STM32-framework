@@ -10,9 +10,9 @@
 
 
 
-
-#define MPU6500_I2C_ADDR                         (I2CAddress)
-#define ACELEROMETRO_ADDRESS                     (I2CAddress << 1 )
+#define MPU6500_ADDR                              0xD0
+#define MPU6500_I2C_ADDR                         (MPU6500_ADDR)
+#define ACELEROMETRO_ADDRESS                     (MPU6500_ADDR << 1 )
 #define ACELEROMETRO_I2C                         I2C_A
 #define ACELEROMETRO_SPEED                       (100000)
 #define ACELEROMETRO_7BITS_ADDRESS               (1)
@@ -66,7 +66,7 @@ void mpu6500_pwm(uint32_t wake_up){
     if( wake_up){
         //wake up
 
-    data = 0; // Escribir 0 despierta el mpu6500 y lo configura en 8Mhz
+    uint8_t data = 0; // Escribir 0 despierta el mpu6500 y lo configura en 8Mhz
     simo_i2c_mem_write( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (0x6b),
@@ -87,7 +87,7 @@ void mpu6500_pwm(uint32_t wake_up){
 void mpu6500_set_sample_div(uint8_t freq_div){
 
     // Set DATA RATE of 1KHz by writing SMPLRT_DIV register in 7
-    Data = freq_div;
+    uint8_t data = freq_div;
     simo_i2c_mem_write(     ACELEROMETRO_I2C,
                             ACELEROMETRO_ADDRESS,
                             (0x19),
