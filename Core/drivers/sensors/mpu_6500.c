@@ -236,7 +236,7 @@
 #define XA_OFFS_H                           (0x77)              
 #define XA_OFFS_H                           (0x77)              
 
-
+#define USE_CALLBACK                         (0x00)  //! No modificar, codigo imcompatible con i2c irq
 
 /**
  * @brief Para calibrar de manera horizontal
@@ -249,27 +249,54 @@
 
 
 
+// x = 0 , y= 0 z= 16384
 
 static void _mpu6500_calibration(int16_t x_e, int16_t y_e, int16_t z_e){
 
 
+#define TIMES       400
+
+
 int16_t x,y,z ;
+int16_t delta_x = 0;
+int16_t delta_y = 0;
+int16_t delta_z = 0;
+
+int16_t x_offset=0;
+int16_t y_offset = 0;
+int16_t z_offset = 0;
+
+
+for(int16_t i= 0; i< TIMES; i++){
+
+
 mpu6500_get_aceleration(&x,&y,&z);
 
-int16_t delta_x = x_e - x;
-int16_t delta_y = y_e - y;
-int16_t delta_z = z_e - z;
+ delta_x = x_e - x;
+ delta_y = y_e - y;
+ delta_z = z_e - z;
 
-
-int16_t x_offset, y_offset, z_offset;
-// leo los offset
-x_offset = (delta_x >0)? (x_offset+1): (x_offset-0);
-y_offset = (delta_y >0)? (y_offset+1): (y_offset-0);
-z_offset = (delta_z >0)? (z_offset+1): (z_offset-0);
+// offset en cero
+mpu_6500_set_offset(&x_offset,&y_offset,&z_offset);
+//corrijo los offset
+x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
+y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
+z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
 //recargo los offset
+mpu_6500_set_offset(&x_offset, &y_offset, &z_offset);
+
 }
 
 
+
+
+}
+
+
+
+void mpu_6500_calibration(){
+    _mpu6500_calibration(0,0,16384);
+}
 
 
 /**
@@ -291,7 +318,7 @@ static void _mpu6500_set_scala(){
                         &data,
                         1,
                         ACELEROMETRO_TIMEOUT,
-                        0);
+                        USE_CALLBACK);
     simo_i2c_mem_write( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (0x1C),
@@ -299,7 +326,7 @@ static void _mpu6500_set_scala(){
                         &data,
                         1,
                         ACELEROMETRO_TIMEOUT,
-                        0);
+                        USE_CALLBACK);
 
     }
     else{
@@ -332,14 +359,14 @@ uint32_t  mpu6500_check(){
 
     uint32_t res = 0;
     uint8_t check = 0;
-    uint8_t callback = 0;
+    
     
     // HAL_I2C_Mem_Read (&hi2c1, MPU6050_ADDR,WHO_AM_I_REG,1, &check, 1, );
     simo_i2c_mem_read(ACELEROMETRO_I2C,
                       ACELEROMETRO_ADDRESS,
                       0x75,1,&check,1,
                       ACELEROMETRO_TIMEOUT,
-                      callback);
+                      USE_CALLBACK);
     res = (check == 0x70)?1:0;   // 1 OK, 0 ERROR, NO DISPONIBLE
 
     return res;
@@ -391,6 +418,98 @@ void mpu6500_set_config(){
 
 }
 
+
+
+
+
+
+// stm32 es little endian
+// int16_t    |H [0x01]      |L [0x00] |
+uint32_t mpu_6500_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
+uint32_t res = 1;
+    int8_t x_buff[2] = {0}; // h and l
+    x_buff[0] = (int8_t) (*x_offset >> 8); // parte alta
+    x_buff[1] = (int8_t) (*x_offset ); // parte baja
+
+    int8_t y_buff[2] = {0}; // h and l
+    y_buff[0] = (int8_t) (*y_offset >> 8); // parte alta
+    y_buff[1] = (int8_t) (*y_offset ); // parte baja
+    
+    int8_t z_buff[2] = {0}; // h and l
+    z_buff[0] = (int8_t) (*z_offset >> 8); // parte alta
+    z_buff[1] = (int8_t) (*z_offset ); // parte baja
+
+
+
+   
+    simo_i2c_mem_write(     ACELEROMETRO_I2C,
+                            ACELEROMETRO_ADDRESS,
+                            0x77//XA_OFFSET
+                            ,1,
+                            x_offset,
+                            2,
+                            ACELEROMETRO_TIMEOUT,
+                            0);
+    simo_i2c_mem_write(     ACELEROMETRO_I2C,
+                            ACELEROMETRO_ADDRESS,
+                            0x7A//YA_OFFSET
+                            ,1,
+                            y_offset,
+                            2,
+                            ACELEROMETRO_TIMEOUT,
+                            0);
+    simo_i2c_mem_write(     ACELEROMETRO_I2C,
+                            ACELEROMETRO_ADDRESS,
+                            0x7D//ZA_OFFSET
+                            ,1,
+                            z_offset,
+                            2,
+                            ACELEROMETRO_TIMEOUT,
+                            0);
+
+
+    
+return res;
+}
+
+
+
+
+
+uint32_t mpu_6500_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
+uint32_t res = 1;
+
+
+    
+    uint8_t Rec_Data[2]={0};
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      0x77//XA_OFFSET
+                      ,1,&Rec_Data,2,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+    //! Primera posicion de memoria del vector, parte alta del int16_t
+    (*x_offset) = (int16_t)(Rec_Data[0] << 8 | Rec_Data [1]);
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      0x7A //YA_OFFSET
+                      ,1,&Rec_Data,2,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+    //! Primera posicion de memoria del vector, parte alta del int16_t
+    (*y_offset) = (int16_t)(Rec_Data[0] << 8 | Rec_Data [1]);
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      0x7D //ZA_OFFSET
+                      ,1,&Rec_Data,2,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+    //! Primera posicion de memoria del vector, parte alta del int16_t
+    (*z_offset) = (int16_t)(Rec_Data[0] << 8 | Rec_Data [1]);
+return res;
+}
+
+
 uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
 
@@ -398,28 +517,18 @@ uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
     // Read 6 BYTES of data starting from ACCEL_XOUT_H register
 
     uint8_t VALUE_ADDRESS =0x3B;
-    uint8_t callback = 0;
+    
     uint8_t Rec_Data[6]={0};
     // HAL_I2C_Mem_Read (&hi2c1, MPU6050_ADDR,WHO_AM_I_REG,1, &check, 1, );
     simo_i2c_mem_read(ACELEROMETRO_I2C,
                       ACELEROMETRO_ADDRESS,
                       VALUE_ADDRESS,1,&Rec_Data,6,
                       ACELEROMETRO_TIMEOUT,
-                      callback);
+                      USE_CALLBACK);
 
     (*x) = (int16_t)(Rec_Data[0] << 8 | Rec_Data [1]);
     (*y) = (int16_t)(Rec_Data[2] << 8 | Rec_Data [3]);
     (*z) = (int16_t)(Rec_Data[4] << 8 | Rec_Data [5]);
-
-   
-        /*** convert the RAW values into acceleration in 'g'
-             we have to divide according to the Full scale value set in FS_SEL
-            I have configured FS_SEL = 0. So I am dividing by 16384.0
-            for more details check ACCEL_CONFIG Register              ****/
-
-        //x = Accel_X_RAW/16384.0;  // get the float g
-       // y = Accel_Y_RAW/16384.0;
-        //z = Accel_Z_RAW/16384.0;
 
     return res;
 

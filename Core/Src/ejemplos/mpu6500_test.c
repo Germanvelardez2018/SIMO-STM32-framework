@@ -38,13 +38,6 @@
 
 
 
-
-
-
-
-
-
-
 /**
  * @brief Funcion de inicio de perifericos. 
  * 
@@ -56,7 +49,6 @@ static void setup(void){
   HAL_Init();
   simo_clock_config();
   simo_uart_init(UART_TX,BAUDRATE);
-
   //! Configuracion inicial de GPIO
   simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
 
@@ -104,9 +96,15 @@ simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),TIMEOUT,modo_tx_irq);
 int16_t x;
 int16_t y;
 int16_t z;
+int16_t x_offset;
+int16_t y_offset;
+int16_t z_offset;
 
+//mpu_6500_calibration();
 char buffer[100]={0};
 #define format      "x:%3.2f  y:%.2f  z:%.2f\r\n"
+#define lowformat   "x:%ld y:%ld z:%ld \r\n"
+#define lowoffset   "(offset)x:%ld y:%ld z:%ld \r\n"
 while(1){
 
     mpu6500_get_aceleration(&x,&y,&z);
@@ -118,8 +116,13 @@ while(1){
     mpu6500_check();
     simo_delay_ms(4500);
     sprintf(buffer,format,_x,_y,_z);
+   // sprintf(buffer,lowformat,x,y,z);
     simo_gpio_toogle(SIMO_GPIO_18);
     simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
+    mpu_6500_get_offset(&x_offset,&y_offset,&z_offset);
+    sprintf(buffer,lowoffset,x_offset,y_offset,z_offset);
+    simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
+
 
 }
   
