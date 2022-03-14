@@ -9,8 +9,7 @@ void mpu6500_reset();
 void mpu6500_init(void);
 
 uint32_t  mpu6500_check(void);
-
-void mpu6500_sleep(uint32_t wake_up);
+void mpu6500_sleep(uint32_t sleep);
   
 void mpu6500_set_sample_div(uint8_t freq_div);
 

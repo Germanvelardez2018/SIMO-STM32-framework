@@ -274,7 +274,7 @@ void __mpu6500_set_lposc(_FREQ_LOWPWR freq){
 
 
 
-void __mpu6500_disabled_sensors(int32_t on){
+void __mpu6500_config_sensors(int32_t off){
      int8_t old_config =0;
 
     // Leemos configuracion
@@ -285,7 +285,7 @@ void __mpu6500_disabled_sensors(int32_t on){
                       USE_CALLBACK);
 
     int8_t config = 0;
-        if (on != 0){
+        if (off!= 0){
         config = old_config | 0x3F;//disabled
         }
         else{
@@ -380,9 +380,9 @@ mpu6500_get_aceleration(&x,&y,&z);
 // offset en cero
 mpu_6500_set_offset(&x_offset,&y_offset,&z_offset);
 //corrijo los offset
-x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
-y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
-z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
+if(delta_x !=0)x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
+if(delta_y !=0)y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
+if(delta_z !=0)z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
 //recargo los offset
 mpu_6500_set_offset(&x_offset, &y_offset, &z_offset);
 
@@ -456,7 +456,6 @@ uint32_t  mpu6500_check(){
     uint8_t check = 0;
     
     
-    // HAL_I2C_Mem_Read (&hi2c1, MPU6050_ADDR,WHO_AM_I_REG,1, &check, 1, );
     simo_i2c_mem_read(ACELEROMETRO_I2C,
                       ACELEROMETRO_ADDRESS,
                       0x75,1,&check,1,
@@ -471,8 +470,6 @@ uint32_t  mpu6500_check(){
 
 void mpu6500_sleep(uint32_t sleep){
     
-    
-
     int8_t old_config =0;
 
     // Leemos configuracion
@@ -484,8 +481,8 @@ void mpu6500_sleep(uint32_t sleep){
 
     int8_t config = (sleep != 0)?   
                     (old_config| (1 << 6)) // entro en modo sleep
-                    :(old_config & 0xBF ); // salgo del modo sleep
-       
+                     :(old_config & 0x00 ); // salgo del modo sleep
+                    
     //Modificamos configuracion
     simo_i2c_mem_write( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
@@ -498,26 +495,18 @@ void mpu6500_sleep(uint32_t sleep){
 
 
     
-    if( 1){
+    if( sleep != 0){
         //wake up
 
-    uint8_t data = 0; // Escribir 0 despierta el mpu6500 y lo configura en 8Mhz
-    simo_i2c_mem_write( ACELEROMETRO_I2C,
-                        ACELEROMETRO_ADDRESS,
-                        (0x6b),
-                        1,
-                        &data,
-                        1,
-                        ACELEROMETRO_TIMEOUT,
-                        0);
+    //disabled sensors
+    __mpu6500_config_sensors(1);
 
 
+    }
     _mpu6500_set_scala();
 
-    }
-    else{
-        //sleep
-    }
+    
+   
 
 }
 
@@ -525,7 +514,6 @@ void mpu6500_sleep(uint32_t sleep){
 
 
 void mpu6500_set_sample_div(uint8_t freq_div){
-
     // Set DATA RATE of 1KHz by writing SMPLRT_DIV register in 7
     uint8_t data = freq_div;
     simo_i2c_mem_write(     ACELEROMETRO_I2C,
@@ -592,8 +580,6 @@ uint32_t res = 1;
                             ACELEROMETRO_TIMEOUT,
                             0);
 
-
-    
 return res;
 }
 
@@ -663,5 +649,8 @@ uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
 
 void mpu6500_deinit(){
+
+
+    simo_i2c_deinit(I2C_A);
 
 }
