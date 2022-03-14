@@ -53,6 +53,7 @@ static void setup(void){
   simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
 
   //! Inicio el sensor mpu6500
+  mpu6500_reset();
   mpu6500_init();
   if(mpu6500_check() != 0){
     simo_uart_write(UART_TX,"mpu6500 ready \r\n",strlen("mpu6500 ready \r\n"),TIMEOUT,modo_tx_irq);
@@ -61,7 +62,7 @@ static void setup(void){
     simo_uart_write(UART_TX,"mpu6500 Error \r\n",strlen("mpu6500 Error \r\n"),TIMEOUT,modo_tx_irq);
 
   }
-    mpu6500_pwm(1);
+    mpu6500_sleep(1);
     mpu6500_set_sample_div(7); //1khz
 
 
@@ -100,7 +101,7 @@ int16_t x_offset;
 int16_t y_offset;
 int16_t z_offset;
 
-//mpu_6500_calibration();
+mpu_6500_calibration();
 char buffer[100]={0};
 #define format      "x:%3.2f  y:%.2f  z:%.2f\r\n"
 #define lowformat   "x:%ld y:%ld z:%ld \r\n"
@@ -122,7 +123,6 @@ while(1){
     mpu_6500_get_offset(&x_offset,&y_offset,&z_offset);
     sprintf(buffer,lowoffset,x_offset,y_offset,z_offset);
     simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
-
 
 }
   

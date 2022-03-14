@@ -238,6 +238,106 @@
 
 #define USE_CALLBACK                         (0x00)  //! No modificar, codigo imcompatible con i2c irq
 
+
+//! Configuracion de freq de muestreo en bajo consumo
+typedef enum 
+{
+     LOW =0        //!    0.24 Hz (  0  )
+    ,MEDIUM= 7     //!    41.25Hz (  7  )
+    ,HIGH = 11    //!    500Hz   ( 11  )
+
+
+}_FREQ_LOWPWR;
+
+
+
+/**
+ * @brief Configura la frecuencia de muestreo en modo sleep
+ * 
+ * @param freq 
+ * @return ** void 
+ */
+
+void __mpu6500_set_lposc(_FREQ_LOWPWR freq){
+
+     int8_t config = freq;
+    simo_i2c_mem_write( ACELEROMETRO_I2C,
+                        ACELEROMETRO_ADDRESS,
+                        (ACCEL_LOWPOWER_CONTROL),
+                        1,
+                        &config,
+                        1,
+                        ACELEROMETRO_TIMEOUT,
+                        USE_CALLBACK);
+
+}
+
+
+
+void __mpu6500_disabled_sensors(int32_t on){
+     int8_t old_config =0;
+
+    // Leemos configuracion
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      PWR_MGMT_2,1,&old_config,1,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+
+    int8_t config = 0;
+        if (on != 0){
+        config = old_config | 0x3F;//disabled
+        }
+        else{
+        config = old_config & 0xC0;  //  enabled 1100 0000 
+        }
+
+    //Modificamos configuracion
+    simo_i2c_mem_write( ACELEROMETRO_I2C,
+                        ACELEROMETRO_ADDRESS,
+                        (PWR_MGMT_2),
+                        1,
+                        &config,
+                        1,
+                        ACELEROMETRO_TIMEOUT,
+                        USE_CALLBACK);
+
+
+}
+
+void mpu6500_reset(){
+
+
+     int8_t old_config =0;
+
+    // Leemos configuracion
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      PWR_MGMT_1,1,&old_config,1,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+
+    int8_t config =old_config| (1 << 7); // 1 en bit7, reseteo
+       
+    //Modificamos configuracion
+    simo_i2c_mem_write( ACELEROMETRO_I2C,
+                        ACELEROMETRO_ADDRESS,
+                        (PWR_MGMT_1),
+                        1,
+                        &config,
+                        1,
+                        ACELEROMETRO_TIMEOUT,
+                        USE_CALLBACK);
+
+}
+
+
+
+
+
+
+
+
 /**
  * @brief Para calibrar de manera horizontal
  *      -aceleración: p_ax=0 , p_ay=0 , p_az=+16384
@@ -246,6 +346,7 @@
         Estas son las medidas deseada que debemos tener
  * 
  */
+
 
 
 
@@ -307,8 +408,7 @@ void mpu_6500_calibration(){
 
 
 static void _mpu6500_set_scala(){
-    if( 1){
-        //wake up
+    
 
     uint8_t data = 0; // Escribir 0 despierta el mpu6500 y lo configura en 8Mhz
     simo_i2c_mem_write( ACELEROMETRO_I2C,
@@ -327,11 +427,6 @@ static void _mpu6500_set_scala(){
                         1,
                         ACELEROMETRO_TIMEOUT,
                         USE_CALLBACK);
-
-    }
-    else{
-        //sleep
-    }
 
 }
 
@@ -374,7 +469,35 @@ uint32_t  mpu6500_check(){
 
 }
 
-void mpu6500_pwm(uint32_t wake_up){
+void mpu6500_sleep(uint32_t sleep){
+    
+    
+
+    int8_t old_config =0;
+
+    // Leemos configuracion
+    simo_i2c_mem_read(ACELEROMETRO_I2C,
+                      ACELEROMETRO_ADDRESS,
+                      PWR_MGMT_1,1,&old_config,1,
+                      ACELEROMETRO_TIMEOUT,
+                      USE_CALLBACK);
+
+    int8_t config = (sleep != 0)?   
+                    (old_config| (1 << 6)) // entro en modo sleep
+                    :(old_config & 0xBF ); // salgo del modo sleep
+       
+    //Modificamos configuracion
+    simo_i2c_mem_write( ACELEROMETRO_I2C,
+                        ACELEROMETRO_ADDRESS,
+                        (PWR_MGMT_1),
+                        1,
+                        &config,
+                        1,
+                        ACELEROMETRO_TIMEOUT,
+                        USE_CALLBACK);
+
+
+    
     if( 1){
         //wake up
 
@@ -387,6 +510,8 @@ void mpu6500_pwm(uint32_t wake_up){
                         1,
                         ACELEROMETRO_TIMEOUT,
                         0);
+
+
     _mpu6500_set_scala();
 
     }
