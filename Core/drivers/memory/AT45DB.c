@@ -1,0 +1,313 @@
+
+
+#include "AT45DB.h"
+#include "delay.h"
+#include "stdlib.h"
+#include "stdio.h"
+
+
+
+
+
+#define MEMORY_SPI_PRESCALER    SIMO_SPI_PRESCALER_2
+
+
+static  SIMO_GPIO_PIN __chip_select;
+static  SIMO_SPI __port ;
+
+#define TIMEOUT_SPI     100
+
+
+
+#define RESUME_CMD                  0xAB                      //salgo del deep sleep_us
+#define PG_PER_BLOCK        (8)
+#define PG_PER_SECTOR       (256)
+
+#define AT45DB_RDDEVID 0x9f /* Product ID, Manufacturer ID and density read */
+#define AT45DB_RDSR    0xd7 /* SR */
+#define AT45DB_RESUME  0xab /* Resume flash */
+
+#define AT45DB_MANUFACT_ATMEL 0x1F /* Atmel manufacturer */
+#define AT45DB_DENSITY_MSK    0x1f /* Density Mask */
+#define AT45DB_FAM_MSK        0xe0 /* Family Mask */
+#define AT45DB_FAM_DATAFLASH  0x20 /* DataFlash device */
+#define AT45DB_DENSITY_64MBIT 0x08 /* AT45DB641 */
+/* Read */
+#define AT45DB_RDARRAYHF 0x0b /* Continuous array read (high frequency) */
+/* Erase */
+#define AT45DB_PGERASE   0x81 /* Page Erase */
+#define AT45DB_MNTHRUBF1 0x82 /* Main memory page program through buffer 1 */
+
+/* PageSize reporgramming sequence */
+#define AT45DB_PGSIZE_SIZE 4
+static const uint8_t at45db_pgsize_cmd[] = {
+    0x3D, 0x2A, 0x80, 0xA6
+};
+
+#define MANUFACTURER_ID           0x1F    //id byte  1
+#define DEVICE_ID_1               0x24    //id byte  2
+#define DEVICE_ID_2               0x00    //id byte  3
+#define EDI                       0x01    // id byte 4
+
+
+#define AT45DB_STATUS_PGSIZE  (1 << 0) /* PAGE SIZE */
+#define AT45DB_STATUS_PROTECT (1 << 1) /* PROTECT */
+#define AT45DB_STATUS_COMP    (1 << 6) /* COMP */
+#define AT45DB_STATUS_READY   (1 << 7) /* RDY/BUSY */
+#define AT45DB_TIMEOUT          1000
+
+
+static flash_storage_t __flash;
+
+static inline uint8_t __at45db_rdsr(void);
+static inline uint8_t __at45db_bsy(void);
+static inline void __at45db_page_write(const uint8_t *buf, size_t pg_num);
+static inline void __at45db_page_erase(uint32_t sector);
+
+
+
+
+
+
+
+
+
+
+
+
+static void __set_AT45DB641E(at45db_page_size page_size){
+    #define AT45DB641E_PAGES_DEFAULT    32768
+
+    uint8_t offset = page_size - 8 ;     // ejemplo si las pag sno 1024, tenemos en total page_default ( 2 a la offset) 
+    /* TODO: Add other densities, atm only AT45DB641E */
+    __flash.pg_shifts     = page_size;                     //Lo que hace es paginas de 1024 bytes potencia(2,10)
+    __flash.pg_num        = AT45DB641E_PAGES_DEFAULT / (1 << offset) ;                    //pagina de 1024 son 8192
+    __flash.block_sz      = 1 << __flash.pg_shifts;  // Una pagina(1024) por block?
+    __flash.erase_sz      = __flash.block_sz;
+    __flash.n_eraseblocks = __flash.pg_num;
+
+    
+}
+static void __set_AT45DB041E(at45db_page_size page_size){
+    #define AT45DB041E_PAGES_DEFAULT    512
+    uint8_t offset = page_size - 8 ;     // ejemplo si las pag sno 1024, tenemos en total page_default ( 2 a la offset) 
+
+    /* TODO: Add other densities, atm only AT45DB041E*/
+    __flash.pg_shifts     = page_size;                     //Lo que hace es paginas de 1024 bytes potencia(2,10)
+    __flash.pg_num        = AT45DB041E_PAGES_DEFAULT / (1 << offset) ;                    //512 PAGINAS DE 256 BYTES
+    __flash.block_sz      = 1 << __flash.pg_shifts;  // Una pagina(1024) por block?
+    __flash.erase_sz      = __flash.block_sz;
+    __flash.n_eraseblocks = __flash.pg_num;
+
+    
+}
+
+
+
+
+/**
+ * @brief  Espero que la memoria este disponible y retorno el primer byte de status
+ * 
+ * @param mem  objeto memoria
+ * @return ** uint32_t 
+ */
+static inline uint32_t __AT45DB041E_is_bussy()
+{
+    uint32_t ret;
+    uint32_t counter= 0;
+    while(!((ret =__AT45DB041E_get_status(__port,__chip_select)) & AT45DB_STATUS_READY) || !(counter > AT45DB_TIMEOUT))  //mientras este ocupado, espere
+    {
+        //simo_delay_ms(1);
+        counter+=1;
+    }
+    return ret;  //es el primer byte del registro de estados
+}
+
+
+
+uint32_t AT45DB_init(   SIMO_SPI port,
+                        SIMO_GPIO_PIN chip_select,
+                        simo_spi_prescaler prescaler){
+    uint32_t ret = 0;
+//! verifico parametros del usuario
+    ret = simo_spi_init(port,prescaler);
+    simo_gpio_set(chip_select,SIMO_GPIO_OUT);
+
+    __port =  port;
+    __chip_select = chip_select;
+
+return ret;    
+}
+
+
+
+
+
+uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size)
+{
+    simo_gpio_write(__chip_select,1);
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write(__port,(uint8_t*)RESUME_CMD,1,TIMEOUT_SPI,0);
+    simo_gpio_write(__chip_select,1);
+
+
+    wait(50); /* Actually should be >35 ns */
+
+    uint32_t ret = 1;
+    uint8_t  cmd[5]= {AT45DB_RDDEVID,0,0,0,0};
+    uint8_t  data[5]={0,0,0,0,0};
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write_read(__port,cmd,data,5,TIMEOUT_SPI,0); // Transaccion sin IT
+    simo_gpio_write(__chip_select,1);
+
+
+    //checkeo respuesta correcta
+    if( data[1] != AT45DB_MANUFACT_ATMEL    
+        || data[2] != DEVICE_ID_1        
+        || data[3] != DEVICE_ID_2        
+        || data[4] != EDI) {
+        return 0;  //fallo checkeo de ID
+    }
+ 
+   /* 
+    * Configuro en modo 256 por pagina
+     */
+
+    if(!(__AT45DB041E_is_bussy(__port,__chip_select) & AT45DB_STATUS_PGSIZE)) 
+    //pregunto si page_size es 264. Si es true, configuro en 256
+    {
+        simo_gpio_write(__chip_select,0);
+        simo_spi_write(__port,(uint8_t*)at45db_pgsize_cmd,AT45DB_PGSIZE_SIZE,TIMEOUT_SPI,0);
+        simo_gpio_write(__chip_select,1);
+    }
+    if( mem_size ==  AT45DB_4MB){
+        __set_AT45DB041E(page_size);
+    }
+    else{
+        __set_AT45DB641E(page_size);
+    }
+
+    
+
+    return 0;
+}
+
+
+
+
+
+
+
+void AT45DB_erase_full(void){
+
+    uint8_t cmd[4];
+
+    cmd[0] = 0xc7;
+    cmd[1] = 0x94;
+    cmd[2] = 0x80;
+    cmd[3] = 0x9a;
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write(__port,(uint8_t*)cmd,4,TIMEOUT_SPI,0);
+    simo_gpio_write(__chip_select,1);
+    __AT45DB041E_is_bussy(__port,__chip_select);
+
+}
+
+
+
+
+
+
+
+
+static inline void __at45db_page_erase(uint32_t sector)
+{
+    uint8_t cmd[4];
+    uint32_t off;
+
+    off = sector << __flash.pg_shifts;
+
+    cmd[0] = AT45DB_PGERASE;
+    cmd[1] = (off >> 16) & 0xff;
+    cmd[2] = (off >> 8) & 0xff;
+    cmd[3] = off & 0xff;
+
+    spi_select(1);
+    spi_exchange_dma(cmd, NULL, 4);
+    spi_select(0);
+
+    __at45db_bsy();
+}
+
+
+
+
+uint32_t AT45DB_start(void){
+return 0;    
+}
+
+
+void AT45DB_write_page(uint8_t data, uint8_t len_data,uint32_t page){
+    // CONS 256 PAGEADDRESS[15]|DUMMY[1]|BUFFERADDRES[8]
+        uint32_t offset = page << __flash.pg_shifts;
+        uint8_t cmd[4] ;    
+        cmd[0] = AT45DB_MNTHRUBF1;
+        cmd[1] = (offset >> 16)  & 0xff;
+        cmd[2] = (offset >> 8)   & 0xff;
+        cmd[3] = offset & 0xff;
+        //inicia (pulso en bajo)
+        simo_gpio_write(__chip_select, 0); 
+        simo_spi_write(__port,cmd,4,TIMEOUT_SPI,0);   // envio comandos
+        simo_spi_write(__port,data,(uint32_t)len_data,TIMEOUT_SPI,0); // escribo en memoria
+        // finaliza (pulso en alto)
+        simo_gpio_write(__chip_select, 1); 
+        __AT45DB041E_is_bussy(__port,__chip_select);
+
+}
+
+void AT45DB_read_memory(uint8_t data, uint8_t len_data,uint32_t page, uint32_t pos){
+
+  
+        // CONS 256 PAGEADDRESS[23]|DUMMY[8]
+
+        uint8_t cmd[5] ;    
+     
+        uint32_t offset = page << __flash.pg_shifts;
+        cmd[0] = AT45DB_RDARRAYHF;
+        cmd[1] = (offset >> 16) & 0xff;
+        cmd[2] = (offset >> 8) & 0xff;
+        cmd[3] = offset & 0xff;
+        cmd[4] = 0;
+        //inicia (pulso en bajo)
+        simo_gpio_write(__chip_select, 0); 
+        simo_spi_write(__port,cmd,5,TIMEOUT_SPI,0);    //  Envio secuencia de commandos
+        simo_spi_read(__port,data,len_data,TIMEOUT_SPI,0);    //data a escribir
+        // finaliza (pulso en alto)
+        simo_gpio_write(__chip_select, 1); 
+         __AT45DB041E_is_bussy(__port,__chip_select);
+
+
+}
+
+
+
+
+
+
+void AT45DB_sleep(void);
+
+
+void AT45DB_stop(void);
+
+
+
+
+void AT45DB_erase_block(void){
+
+}
+void AT45DB_erase_page(void){
+
+}
+void AT45DB_erase_sector(void){
+
+}

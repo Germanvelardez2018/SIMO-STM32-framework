@@ -151,7 +151,7 @@ uint32_t check_id(SIMO_SPI port, SIMO_GPIO_PIN chip_select);
  * @param chip_select 
  * @return ** void 
  */
-void AT45DB041E_start_config(SIMO_SPI port, SIMO_GPIO_PIN chip_select);
+void AT45DB041E_start_config(SIMO_SPI port, SIMO_GPIO_PIN chip_select,simo_spi_prescaler prescaler){
 
 
 /**

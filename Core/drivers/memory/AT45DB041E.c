@@ -19,7 +19,9 @@
 #if SIMO_SPI_ENA == 1   // Sin SPI no hay memoria
 
 
-
+static inline uint32_t __init_hardware_spi(  SIMO_SPI port,
+                                             SIMO_GPIO_PIN chip_select,
+                                             uint32_t freq);
 
 
 static inline  void __AT45DB041E_start(SIMO_SPI port, SIMO_GPIO_PIN chip_select);
@@ -34,7 +36,14 @@ static inline uint32_t __AT45DB041E_is_bussy(SIMO_SPI port, SIMO_GPIO_PIN chip_s
 
 
 
-
+static inline uint32_t __init_hardware_spi(  SIMO_SPI port,
+                                             SIMO_GPIO_PIN chip_select,
+                                             uint32_t prescaler){
+    uint32_t ret = 0;
+    ret = simo_spi_init(port,prescaler);
+    if( ret == 1) simo_gpio_set(chip_select,SIMO_GPIO_OUT);
+    return ret;
+    }
 
 
 
@@ -45,8 +54,12 @@ static inline uint32_t __AT45DB041E_is_bussy(SIMO_SPI port, SIMO_GPIO_PIN chip_s
  * @param mem 
  * @return ** void 
  */
-static inline void  __AT45DB041E_start(SIMO_SPI port, SIMO_GPIO_PIN chip_select)
+static inline void  __AT45DB041E_start(SIMO_SPI port, SIMO_GPIO_PIN chip_select, simo_spi_prescaler prescaler)
 {
+
+uint32_t ret =  __init_hardware_spi( port,chip_select,prescaler);
+
+
     simo_gpio_write(chip_select,1);
     simo_gpio_write(chip_select,0);
     simo_spi_write(port,(uint8_t*)RESUME_CMD,1,TIMEOUT_SPI,0);
@@ -108,12 +121,10 @@ static inline uint8_t __AT45DB041E_get_status(SIMO_SPI port, SIMO_GPIO_PIN chip_
 {
     uint8_t cmd[2]={GETSTATUS_CMD,0};
     uint8_t status[2]={0,0};
-
-            //flanco ascendente 
+    //flanco ascendente 
      //en alto el CS Pin
     simo_gpio_write(chip_select,0);
     simo_spi_write_read(port,cmd,status,2,TIMEOUT_SPI,0);    //leo el primer byte del registro estado
-
      //en alto el CS Pin
     simo_gpio_write(chip_select,1);
     return  status[1];
@@ -129,7 +140,6 @@ static inline uint8_t __AT45DB041E_get_status(SIMO_SPI port, SIMO_GPIO_PIN chip_
 static inline uint32_t __AT45DB041E_is_bussy(SIMO_SPI port, SIMO_GPIO_PIN chip_select)
 {
     uint32_t ret;
-
     uint32_t counter= 0;
     while(!((ret =__AT45DB041E_get_status(port,chip_select)) & AT45DB_STATUS_READY) || !(counter > AT45DB_TIMEOUT))  //mientras este ocupado, espere
     {
@@ -146,8 +156,8 @@ static inline uint32_t __AT45DB041E_is_bussy(SIMO_SPI port, SIMO_GPIO_PIN chip_s
 
 
 
-void AT45DB041E_start_config(SIMO_SPI port, SIMO_GPIO_PIN chip_select){
-    __AT45DB041E_start(port,chip_select);
+void AT45DB041E_start_config(SIMO_SPI port, SIMO_GPIO_PIN chip_select,simo_spi_prescaler prescaler){
+    __AT45DB041E_start(port,chip_select,prescaler);
 }
 
 
@@ -156,7 +166,6 @@ void AT45DB041E_full_erase(SIMO_SPI port, SIMO_GPIO_PIN chip_select)
     simo_gpio_write(chip_select,0);    
     simo_spi_write(port,erase_cmd,ERASE_SECUENCE_LEN,ERASE_SECUENCE_LEN*TIMEOUT_SPI,0);
     simo_gpio_write(chip_select,1);
-
 }
 
 
@@ -167,33 +176,21 @@ void AT45DB041E_full_erase(SIMO_SPI port, SIMO_GPIO_PIN chip_select)
                                     uint32_t page,
                                     uint32_t position_page)
     {
-
-
         // cmd escribir | 3bytes de direccion(  11 bits pagina (0 a 2048| 8 bytes posicion de la pagina | 5 dummy bits)
-
         uint32_t _page = (uint32_t) (page << PAGE_OFFSET);
         uint32_t _pos = (uint32_t)  (position_page << POS_OFFSET);
         uint32_t address = (uint32_t)  _page + _pos;
-        
         uint8_t cmd[4] ;    
-        
-
         cmd[0] = WRITE_BUFF1_CMD;
         cmd[1] = (address >> 24)  & 0xff;
         cmd[2] = (address >> 16)  & 0xff;
         cmd[3] = (address >> 8)& 0xff;
-
         //inicia (pulso en bajo)
-
         simo_gpio_write(chip_select, 0); 
-    
         simo_spi_write(port,cmd,4,TIMEOUT_SPI,0);   // envio comandos
-
-        
         simo_spi_write(port,buffer,(uint32_t)buffer_len,TIMEOUT_SPI,0); // escribo en memoria
         // finaliza (pulso en alto)
         simo_gpio_write(chip_select, 1); 
-
          __AT45DB041E_is_bussy(port,chip_select);
 
     }
@@ -208,28 +205,21 @@ void AT45DB041E_full_erase(SIMO_SPI port, SIMO_GPIO_PIN chip_select)
     {
 
         // cmd escribir | 3bytes de direccion(  11 bits pagina (0 a 2048| 8 bytes posicion de la pagina | 5 dummy bits)
-
         uint32_t _page = (uint32_t) (page << PAGE_OFFSET);
         uint32_t _pos = (uint32_t)  (position_page << POS_OFFSET);
         uint32_t address = (uint32_t)  _page + _pos;
         uint8_t cmd[5] ;    
-        
         cmd[0] = CMD_FAST_READ;
         cmd[1] = (address >> 24) & 0xff;
         cmd[2] = (address >> 16) & 0xff;
         cmd[3] = (address >> 8)  & 0xff;
         cmd[4] = 0;
         //inicia (pulso en bajo)
-
         simo_gpio_write(chip_select, 0); 
-        
-        
         simo_spi_write(port,cmd,5,TIMEOUT_SPI,0);    //  Envio secuencia de commandos
-
         simo_spi_read(port,buffer,buffer_len,TIMEOUT_SPI,0);    //buffer a escribir
         // finaliza (pulso en alto)
         simo_gpio_write(chip_select, 1); 
-
          __AT45DB041E_is_bussy(port,chip_select);
 
     }

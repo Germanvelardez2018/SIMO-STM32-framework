@@ -112,7 +112,6 @@ while(1){
 
    
 
-    if((counter  > 0) && (counter >= 250)){
 
     mpu6500_get_aceleration(&x,&y,&z);
     float _x = x/16384.0;  
@@ -128,17 +127,13 @@ while(1){
     sprintf(buffer,lowoffset,x_offset,y_offset,z_offset);
     simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
 
-    }
+    
 
 }
   
 
   
 }
-
-
-
-
 
 
 

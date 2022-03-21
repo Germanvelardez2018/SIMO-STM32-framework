@@ -622,13 +622,9 @@ return res;
 
 
 uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
-
-
     uint32_t res = 0;
     // Read 6 BYTES of data starting from ACCEL_XOUT_H register
-
     uint8_t VALUE_ADDRESS =0x3B;
-    
     uint8_t Rec_Data[6]={0};
     // HAL_I2C_Mem_Read (&hi2c1, MPU6050_ADDR,WHO_AM_I_REG,1, &check, 1, );
     simo_i2c_mem_read(ACELEROMETRO_I2C,
@@ -636,7 +632,6 @@ uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
                       VALUE_ADDRESS,1,&Rec_Data,6,
                       ACELEROMETRO_TIMEOUT,
                       USE_CALLBACK);
-
     (*x) = (int16_t)(Rec_Data[0] << 8 | Rec_Data [1]);
     (*y) = (int16_t)(Rec_Data[2] << 8 | Rec_Data [3]);
     (*z) = (int16_t)(Rec_Data[4] << 8 | Rec_Data [5]);

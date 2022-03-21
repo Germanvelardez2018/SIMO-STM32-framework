@@ -39,7 +39,7 @@ C_SOURCES =  \
 Core/Src/ejemplos/mpu6500_test.c \
 Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \
-Core/drivers/memory/AT45DB041E.c \
+Core/drivers/memory/AT45DB.c \
 Core/drivers/memory/memory_store.c \
 Core/drivers/displays/ssd1306.c \
 Core/drivers/displays/ssd1306_fonts.c \

@@ -2,8 +2,12 @@
 #include "memory_store.h" // Necesario para almacenar los datos en memoria flash externa
 #include "power_save.h"   //Necesario para almacenar datos en backup register del RTC
 #include "fsm.h"
+#include "spi.h"
+#include "gpio.h"
 
 
+#define FSM_SPI                 SPI_A
+#define FSM_SPI_CS              GPIO_10
 
 
 
