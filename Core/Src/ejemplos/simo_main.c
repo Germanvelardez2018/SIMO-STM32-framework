@@ -12,9 +12,6 @@
 #include "main.h"
 // Simo
 
-#include "memory_store.h" // Necesario para almacenar los datos en memoria flash externa
-#include "power_save.h"   //Necesario para almacenar datos en backup register del RTC
-
 
 
 

@@ -56,18 +56,20 @@ uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size);
 
 
 
-void AT45DB_read_page(uint8_t data, uint8_t len_data,uint32_t page);
+
+void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page);
 
 
 
 
-void AT45DB_write_page(uint8_t data, uint8_t len_data,uint32_t page);
+void AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page);
 
 
 
-void AT45DB_erase_block(void);
-void AT45DB_erase_page(void);
-void AT45DB_erase_sector(void);
+
+
+
+
 void AT45DB_erase_full(void);
 
 

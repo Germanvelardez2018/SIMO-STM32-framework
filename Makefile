@@ -36,7 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-Core/Src/ejemplos/mpu6500_test.c \
+Core/Src/ejemplos/ejemplo_flash_ext.c \
 Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \
 Core/drivers/memory/AT45DB.c \
