@@ -65,9 +65,7 @@ void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page);
 void AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page);
 
 
-
-
-
+void AT45DB_resumen(void);
 
 
 void AT45DB_erase_full(void);

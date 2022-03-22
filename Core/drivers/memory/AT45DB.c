@@ -52,7 +52,11 @@ static const uint8_t at45db_pgsize_cmd[] = {
 #define AT45DB_STATUS_COMP                  (1 << 6) /* COMP */
 #define AT45DB_STATUS_READY                 (1 << 7) /* RDY/BUSY */
 
+#define AT45DB_LOW_POWER                    (0x9B)  // INTO LOW POWER
 
+
+
+inline void __at45db_resumen(void);
 
 static inline uint8_t __at45db_bsy(void);
 static inline uint8_t __at45db_get_status(void);
@@ -128,10 +132,8 @@ return ret;
 
 uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size)
 {
-    simo_gpio_write(__chip_select,1);
-    simo_gpio_write(__chip_select,0);
-    simo_spi_write(__port,(uint8_t*)RESUME_CMD,1,TIMEOUT_SPI,0);
-    simo_gpio_write(__chip_select,1);
+
+    __at45db_resumen();
     simo_delay_ms(1); // deberia ser del orde de los 50/35 ns
 
     uint32_t ret = 1;
@@ -163,7 +165,7 @@ uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size)
     else{
         __set_AT45DB641E(page_size);
     }
-    return 1; // Exito
+    return ret; // Exito
 }
 
 
@@ -202,11 +204,15 @@ static inline void __at45db_page_erase(uint32_t sector)
     cmd[2] = (off >> 8) & 0xff;
     cmd[3] = off & 0xff;
 
-    spi_select(1);
-    spi_exchange_dma(cmd, NULL, 4);
-    spi_select(0);
+  
 
+    simo_gpio_write(__chip_select,1);
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write(__port,(uint8_t*)cmd,4,TIMEOUT_SPI,0);
+    simo_gpio_write(__chip_select,1);
     __at45db_bsy();
+
+
 }
 
 
@@ -258,15 +264,6 @@ void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
         simo_gpio_write(__chip_select, 1); 
         __at45db_bsy();
        
-       /*
-        data[0]= 'h';
-        data[1]='o';
-        data[2]='l';
-        data[3]='a';
-        data[4]=0;
-        */
-
-
 }
 
 
@@ -274,10 +271,32 @@ void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
 
 
 
+inline void __at45db_resumen(void){
+    simo_gpio_write(__chip_select,1);
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write(__port,(uint8_t*)RESUME_CMD,1,TIMEOUT_SPI,0);
+    simo_gpio_write(__chip_select,1);
+    __at45db_bsy();
+
+}
 
 
 
-void AT45DB_sleep(void);
+
+void AT45DB_resumen(void){
+    __at45db_resumen();
+}
+
+
+void AT45DB_sleep(void){
+
+    simo_gpio_write(__chip_select,1);
+    simo_gpio_write(__chip_select,0);
+    simo_spi_write(__port,(uint8_t*)AT45DB_LOW_POWER,1,TIMEOUT_SPI,0);
+    simo_gpio_write(__chip_select,1);
+    __at45db_bsy();
+
+}
 
 
 void AT45DB_stop(void);

@@ -142,8 +142,10 @@ sprintf(buffer,MSG_FORMAT,counter,"sram");
 simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
 
 // guardar en memoria
-#define PAGE_DEFAULT        0
-AT45DB_write_page(buffer,strlen(buffer)+1,PAGE_DEFAULT);
+#define PAGE_DEFAULT       0
+
+
+//AT45DB_write_page(buffer,strlen(buffer)+1,PAGE_DEFAULT);
 
 //lEER EL DATO DESDE MEMORIA
 
@@ -151,6 +153,10 @@ AT45DB_read_page(buffer_mem,strlen(buffer),PAGE_DEFAULT);
 simo_uart_write(UART_TX,"[from memory]=>",strlen("[from memory]=>"),TIMEOUT,modo_tx_irq);
 
 simo_uart_write(UART_TX,buffer_mem,strlen(buffer_mem),TIMEOUT,modo_tx_irq);
+AT45DB_sleep();     // entramos en sleep
+
+simo_delay_ms(10000);
+AT45DB_resumen();  // volvemos del sleep
 
 
 counter ++;
