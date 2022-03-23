@@ -210,14 +210,14 @@ return 0;
 }
 
 
-uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page){
+uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
     // CONS 256 11 ADRRES | 8 BITES POSICION
 
 
     uint32_t ret = 0;
         if(page < __flash.pg_num){
 
-            uint32_t offset = page << __flash.pg_shifts;
+            uint32_t offset = (page << __flash.pg_shifts) |((uint32_t)pos);
 
             uint8_t cmd[4] ;    
             cmd[0] = AT45DB_MNTHRUBF1;
@@ -239,7 +239,7 @@ uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page){
 
 }
 
-uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
+uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
      
 
 
@@ -293,7 +293,7 @@ uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
             //posicion valida
 
         uint8_t cmd[5] ;    
-        uint32_t offset = page << __flash.pg_shifts; // 01 << 8 (256 bytes x pag) o 01 <<10 (1024 bytes x pag)
+        uint32_t offset = (page << __flash.pg_shifts)|((uint32_t)pos); // 01 << 8 (256 bytes x pag) o 01 <<10 (1024 bytes x pag)
    
         cmd[0] = AT45DB_RDARRAYHF;
         cmd[1] = (offset >> 11) & 0xff;

@@ -56,12 +56,12 @@ uint32_t at45db_start( at45db_page_size page_size);
 
 
 
-uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page);
+uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
 
 
 
 
-uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page);
+uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
 
 
 void AT45DB_resumen(void);

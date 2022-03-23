@@ -20,6 +20,7 @@
         "ssd1306_conf.h": "c",
         "memory_store.h": "c",
         "mpu_6500.h": "c",
-        "config.h": "c"
+        "config.h": "c",
+        "fsm.h": "c"
     }
 }

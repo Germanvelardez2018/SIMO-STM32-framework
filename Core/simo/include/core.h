@@ -218,6 +218,15 @@
     typedef void (*callback_irq)(void);
 
     
+    //! Estados del sistema
+    typedef enum {
+      FSM_UNDEFINED        = 2
+    , FSM_WITHOUT_CONFIG   =3         //! Sin configuracion
+    , FSM_ON_FIELD         =4      //! Transmicion desde campo
+    , FSM_MEMORY_DOWNLOAD  =5    //! Transmicion desde memoria
+
+    } fsm_devices;
+
 
 
 #endif

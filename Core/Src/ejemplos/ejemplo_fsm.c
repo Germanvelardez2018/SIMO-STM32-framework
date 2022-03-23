@@ -23,7 +23,7 @@
 #include "gpio.h"
 #include "clock_config.h"
 #include "delay.h"
-#include "AT45DB.h"
+#include "fsm.h"
 
 /* USER CODE END Includes */
 
@@ -47,37 +47,7 @@
 #define  modo_tx_irq  0
 
 
- /**SPI1 GPIO Configuration
-        PB3     ------> SPI1_SCK
-        PB4     ------> SPI1_MISO
-        PB5     ------> SPI1_MOSI
-        PB6     ------> CS (SIMO_GPIO_22)
-        */
 
-
-
-static void init_memory(){
-    AT45DB_init(   SPI_A,SIMO_GPIO_22,SIMO_SPI_PRESCALER_2);
-   // AT45DB_erase_full();
-    simo_delay_ms(1000);
-    uint32_t success = at45db_start( pg_256byte);
-    if(success != 0){
-
-simo_uart_write(UART_TX,
-                    "inicio exitosamente la memoria \r\n",
-                    strlen("inicio exitosamente la memoria \r\n")
-                    ,TIMEOUT,modo_tx_irq);
-    } 
-    else{
-        simo_uart_write(UART_TX,
-                    "fallo la memoria \r\n",
-                    strlen("fallo la memoria \r\n")
-                    ,TIMEOUT,modo_tx_irq);
-    }
-
-
-
-}
 
 
 
@@ -97,7 +67,6 @@ static void setup(void){
 
   //! Configuracion inicial de GPIO
   simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
-  init_memory();
 }
 
 
@@ -108,7 +77,7 @@ static void setup(void){
  * @brief  The application entry point.
  * @retval int
  */
-int main3(void)
+int main(void)
 {
 
 //Levanto la HAL y Configuro todos los perifericos
@@ -127,8 +96,13 @@ simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),TIMEOUT,modo_tx_irq);
 
 uint32_t counter = 0;
 char    buffer[100];
-char    buffer_mem[100] = {0};
 #define MSG_FORMAT      "counter: %d from %s\r\n"
+
+//inicio FSM (INICIO FLASH TAMBIEN)
+fsm_init();
+
+fsm_devices DEVICE;
+DEVICE = fsm_load_flash();
 
 while(1){
 
@@ -139,21 +113,40 @@ simo_uart_write(UART_TX,"[from sram]=>",strlen("[from sram]=>"),TIMEOUT,modo_tx_
 sprintf(buffer,MSG_FORMAT,counter,"sram");
 
 simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
+//fsm_set_state(FSM_MEMORY_DOWNLOAD);
+DEVICE = fsm_get_state();
+switch (DEVICE)
+{
+case FSM_WITHOUT_CONFIG:
+    simo_uart_write(UART_TX,"\r\nFSM:WITHOUT CONFIG\r\n",strlen("\r\nFSM:WITHOUT CONFIG\r\n"),TIMEOUT,modo_tx_irq);
 
-// guardar en memoria
-#define PAGE_DEFAULT       0
+    break;
+
+case FSM_ON_FIELD:
+    simo_uart_write(UART_TX,"\r\nFSM:ON FIELD\r\n",strlen("\r\nFSM:ON FIELD\r\n"),TIMEOUT,modo_tx_irq);
+
+    break;
+
+case FSM_MEMORY_DOWNLOAD:
+    simo_uart_write(UART_TX,"\r\nFSM: DONWLOAD\r\n",strlen("\r\nFSM: DONWLOAD\r\n"),TIMEOUT,modo_tx_irq);
+
+    break;
+
+case FSM_UNDEFINED:
+    simo_uart_write(UART_TX,"\r\nFSM: UNDEFINED\r\n",strlen("\r\nFSM: UNDEFINED\r\n"),TIMEOUT,modo_tx_irq);
+
+    break;
 
 
-AT45DB_write_page(buffer,strlen(buffer)+1,PAGE_DEFAULT,0);
-//lEER EL DATO DESDE MEMORIA
-AT45DB_read_page(buffer_mem,strlen(buffer),PAGE_DEFAULT,0);
-simo_uart_write(UART_TX,"[from memory]=>",strlen("[from memory]=>"),TIMEOUT,modo_tx_irq);
+default:
+    simo_uart_write(UART_TX,"\r\nFSM:default\r\n",strlen("\r\nFSM:default\r\n"),TIMEOUT,modo_tx_irq);
 
-simo_uart_write(UART_TX,buffer_mem,strlen(buffer_mem),TIMEOUT,modo_tx_irq);
-AT45DB_sleep();     // entramos en sleep
+    break;
+}
+
+
 
 simo_delay_ms(10000);
-AT45DB_resumen();  // volvemos del sleep
 
 
 counter ++;
