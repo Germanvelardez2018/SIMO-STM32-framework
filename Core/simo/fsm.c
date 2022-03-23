@@ -6,8 +6,7 @@
 #include "gpio.h"
 
 
-#define FSM_SPI                 SPI_A
-#define FSM_SPI_CS              GPIO_10
+
 
 
 

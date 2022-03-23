@@ -34,7 +34,7 @@
  * @return ** simo_spi_prescaler 
  */
 static simo_spi_prescaler __set_prescaler_spi( memory_mode mode){
-
+    
     simo_spi_prescaler prescaler = SIMO_SPI_PRESCALER_256;
 
     switch (mode)
@@ -55,6 +55,7 @@ static simo_spi_prescaler __set_prescaler_spi( memory_mode mode){
 
     
 memory_t* memory_create(SIMO_SPI port, SIMO_GPIO_PIN chip_select, memory_mode mode){
+    
     memory_t* __mem = (memory_t*) malloc(sizeof(memory_t));
     if(__mem == NULL) return NULL;   // fallo en asignar memoria a objeto
     __mem->cs_pin = chip_select;

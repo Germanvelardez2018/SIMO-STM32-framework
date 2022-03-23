@@ -60,7 +60,7 @@ static void init_memory(){
     AT45DB_init(   SPI_A,SIMO_GPIO_22,SIMO_SPI_PRESCALER_2);
    // AT45DB_erase_full();
     simo_delay_ms(1000);
-    uint32_t success = at45db_start(AT45DB_4MB, pg_256byte);
+    uint32_t success = at45db_start( pg_256byte);
     if(success != 0){
 
 simo_uart_write(UART_TX,
@@ -132,7 +132,6 @@ char    buffer_mem[100] = {0};
 
 while(1){
 
-simo_delay_ms(1500);
 simo_gpio_toogle(SIMO_GPIO_18);
 
 simo_uart_write(UART_TX,"[from sram]=>",strlen("[from sram]=>"),TIMEOUT,modo_tx_irq);
@@ -145,7 +144,7 @@ simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
 #define PAGE_DEFAULT       0
 
 
-//AT45DB_write_page(buffer,strlen(buffer)+1,PAGE_DEFAULT);
+AT45DB_write_page(buffer,strlen(buffer)+1,PAGE_DEFAULT);
 
 //lEER EL DATO DESDE MEMORIA
 

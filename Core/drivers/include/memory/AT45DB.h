@@ -15,6 +15,8 @@
 #include "spi.h"
 
 
+#define OFFSET_4MB
+
 typedef struct __flash_storage
 {
     int pg_num;
@@ -27,10 +29,7 @@ typedef struct __flash_storage
 
 
 
-typedef enum {
-     AT45DB_4MB          //! AT45DB041E
-    ,AT45DB_64MB        //! AT45DB641E
-} ATDB45_DENSITY;
+
 
 /**
  * @brief Define el tamanio en bytes de la pagina a utilizar 
@@ -51,18 +50,18 @@ uint32_t AT45DB_init(   SIMO_SPI port,
                         SIMO_GPIO_PIN chip_select,
                         simo_spi_prescaler prescaler);
 
-uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size);
+uint32_t at45db_start( at45db_page_size page_size);
 
 
 
 
 
-void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page);
+uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page);
 
 
 
 
-void AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page);
+uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page);
 
 
 void AT45DB_resumen(void);

@@ -62,16 +62,6 @@ static inline uint8_t __at45db_bsy(void);
 static inline uint8_t __at45db_get_status(void);
 
 
-static void __set_AT45DB641E(at45db_page_size page_size){
-    #define AT45DB641E_PAGES_DEFAULT    32768
-    uint8_t offset = page_size - 8 ;     // ejemplo si las pag sno 1024, tenemos en total page_default ( 2 a la offset) 
-    /* TODO: Add other densities, atm only AT45DB641E */
-    __flash.pg_shifts     = page_size;                     //Lo que hace es paginas de 1024 bytes potencia(2,10)
-    __flash.pg_num        = AT45DB641E_PAGES_DEFAULT / (1 << offset) ;                    //pagina de 1024 son 8192
-    __flash.block_sz      = 1 << __flash.pg_shifts;  // Una pagina(1024) por block?
-    __flash.erase_sz      = __flash.block_sz;
-    __flash.n_eraseblocks = __flash.pg_num;    
-}
 
 
 static void __set_AT45DB041E(at45db_page_size page_size){
@@ -130,12 +120,11 @@ return ret;
 
 
 
-uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size)
+uint32_t at45db_start( at45db_page_size page_size)
 {
 
     __at45db_resumen();
     simo_delay_ms(1); // deberia ser del orde de los 50/35 ns
-
     uint32_t ret = 1;
     uint8_t  cmd[5]= {AT45DB_RDDEVID,0,0,0,0};
     uint8_t  data[5]={0,0,0,0,0};
@@ -159,12 +148,10 @@ uint32_t at45db_start(ATDB45_DENSITY mem_size, at45db_page_size page_size)
         simo_spi_write(__port,(uint8_t*)at45db_pgsize_cmd,AT45DB_PGSIZE_SIZE,TIMEOUT_SPI,0);
         simo_gpio_write(__chip_select,1);
     }
-    if( mem_size ==  AT45DB_4MB){
+   
         __set_AT45DB041E(page_size);
-    }
-    else{
-        __set_AT45DB641E(page_size);
-    }
+    
+    
     return ret; // Exito
 }
 
@@ -223,38 +210,95 @@ return 0;
 }
 
 
-void AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page){
-    // CONS 256 PAGEADDRESS[15]|DUMMY[1]|BUFFERADDRES[8]
-        uint32_t offset = page << __flash.pg_shifts;
-                //uint32_t offset = page << 9;
+uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page){
+    // CONS 256 11 ADRRES | 8 BITES POSICION
 
-        uint8_t cmd[4] ;    
-        cmd[0] = AT45DB_MNTHRUBF1;
-        cmd[1] = (offset >> 16)  & 0xff;
-        cmd[2] = (offset >> 8)   & 0xff;
-        cmd[3] = offset & 0xff;
+
+    uint32_t ret = 0;
+        if(page < __flash.pg_num){
+
+            uint32_t offset = page << __flash.pg_shifts;
+
+            uint8_t cmd[4] ;    
+            cmd[0] = AT45DB_MNTHRUBF1;
+            cmd[1] = (offset >> 11)  & 0xff;
+            cmd[2] = (offset >> 3)   & 0xff;
+            cmd[3] = (offset << 5)   & 0xff;
         //inicia (pulso en bajo)
-        simo_gpio_write(__chip_select, 0); 
-        simo_spi_write(__port,cmd,4,TIMEOUT_SPI,0);   // envio comandos
-        simo_spi_write(__port,data,(uint32_t)len_data,TIMEOUT_SPI,0); // escribo en memoria
+            simo_gpio_write(__chip_select, 0); 
+            simo_spi_write(__port,cmd,4,TIMEOUT_SPI,0);   // envio comandos
+            simo_spi_write(__port,data,(uint32_t)len_data,TIMEOUT_SPI,0); // escribo en memoria
         // finaliza (pulso en alto)
-        simo_gpio_write(__chip_select, 1); 
-        __at45db_bsy();
+            simo_gpio_write(__chip_select, 1); 
+            __at45db_bsy();
+
+            ret = 1;
+
+        }
+    return ret;      
 
 }
 
-void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
+uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
+     
 
-        // CONS 256 PAGEADDRESS[23]| DUMMY[1]|DUMMY[8]
+
+      // 
+     /**
+      * @brief  ejemplo quiero pagina 4 (256 bytes por pag)
+      *     page = 4 << __flash.pg_shitfs(8) = 0[8] | 0000 0ppp | pppp p1pp | 0[0]|
+      *     xxxx xxxx posicion dentro de la pagina
+      * 
+      *     page = page << __flash.pg_shitfs(8) + posicion en page
+      *     page = 0000 0000 | 0000 0ppp | pppp p1pp | xxxx xxxx | 
+      * 
+      *     comando para pagina 4
+      *    CMD | pppp pppp| 1ppx  xxxx | xxx0  0000 | 0000 0000|
+      * 
+      *     cmd | page | pos | 5 bites dumy | y byte dumi
+      *     cmd[0] = CMD
+      *     cmd[1] = page >> 11   = pppp pppp
+      *     cmd[2] = page >> 3    = 1ppx xxxx
+      *     cmd[3] = page << 5    = xxx0 0000  // 5 dumies bites
+      *     cmd[4]                = 0000 0000  // 1 byte dumy
+     
+
+       
+         @brief 
+         ejemplo quiero pagina 4 (1024 bytes por pag)
+         
+       
+        page = 4 << __flash.pg_shitfs(10) = 0[8] | 0000 0ppp | ppp1 0000 | 0[0]|
+      *     xxxx xxxx posicion dentro de la pagina
+      * 
+      *     page = page << __flash.pg_shitfs(8) + posicion en page
+      *     page = 0000 0000 | 0000 0ppp | ppp1 0000 | xxxx xxxx | 
+      *  | 
+      * 
+      * 
+      *    CMD | pppp pp10| 000x  xxxx |xxx0  0000 | 0000 0000|
+      * 
+            cmd | page | pos | 5 bites dumy | y byte dumi
+      *     cmd[0] = CMD
+      *     cmd[1] = page >> 11   = pppp pp10
+      *     cmd[2] = page >> 3    = 000x xxxx
+      *     cmd[3] = page << 5    = xxx0 0000  // 5 dumies bites
+      *     cmd[4]                = 0000 0000  // 1 byte dumy
+      *
+      * */
+
+     uint32_t ret= 0; //fallo por defecto
+
+        if(page < __flash.pg_num ){
+            //posicion valida
 
         uint8_t cmd[5] ;    
-        //uint32_t offset = page << 9;
-
-        uint32_t offset = page << __flash.pg_shifts;
+        uint32_t offset = page << __flash.pg_shifts; // 01 << 8 (256 bytes x pag) o 01 <<10 (1024 bytes x pag)
+   
         cmd[0] = AT45DB_RDARRAYHF;
-        cmd[1] = (offset >> 16) & 0xff;
-        cmd[2] = (offset >> 8) & 0xff;
-        cmd[3] = offset & 0xff;
+        cmd[1] = (offset >> 11) & 0xff;
+        cmd[2] = (offset >> 3) & 0xff;
+        cmd[3] = (offset << 5) & 0xff;
         cmd[4] = 0;
         //inicia (pulso en bajo)
         simo_gpio_write(__chip_select, 0); 
@@ -263,7 +307,10 @@ void AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page){
         // finaliza (pulso en alto)
         simo_gpio_write(__chip_select, 1); 
         __at45db_bsy();
-       
+        ret = 1; // success
+        }
+
+       return ret;
 }
 
 
