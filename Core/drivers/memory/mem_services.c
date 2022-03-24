@@ -24,6 +24,12 @@ uint32_t mem_services_init(void){
 }
 
 
+void mem_services_deinit(void){
+    AT45DB_deinit();
+}
+
+
+
 
 fsm_devices mem_services_get_fsm(void){
     AT45DB_resumen();     // resumen
@@ -103,4 +109,34 @@ static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
 
  uint32_t mem_services_get_pass_origen(char* buffer,uint8_t len){
     return __get_string(buffer,len,MQTT_ORIGEN_PASS);
+}
+
+
+
+
+
+ uint32_t mem_services_set_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+     if(topic_pos >= TOPICS_MAX) return 0;
+     return __set_string(buffer,len,(PUB_TOPICS_0 + topic_pos));
+}
+
+
+ uint32_t mem_services_get_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+    if(topic_pos >= TOPICS_MAX) return 0;
+    return __get_string(buffer,len,(PUB_TOPICS_0 + topic_pos));
+}
+
+
+
+
+
+ uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+     if(topic_pos >= TOPICS_MAX) return 0;
+     return __set_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
+}
+
+
+ uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+    if(topic_pos >= TOPICS_MAX) return 0;
+    return __get_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
 }

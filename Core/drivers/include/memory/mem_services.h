@@ -41,21 +41,34 @@
  #define MQTT_OPT_1                     (6)    
  #define MQTT_OPT_2                     (7)
  #define MQTT_OPT_3                     (8)
+
  #define MQTT_ORIGEN_ID                 (9)
- #define MQTT_ORIGEN_PASS               (10)
- #define MQTT_OPT1_ID                   (11)
- #define MQTT_OPT1_PASS                 (12)
- #define MQTT_OPT2_ID                   (13)
- #define MQTT_OPT2_PASS                 (14)
- #define MQTT_OPT3_ID                   (15)
+ #define MQTT_OPT1_ID                   (10)
+ #define MQTT_OPT2_ID                   (11)
+ #define MQTT_OPT3_ID                   (12)
+
+
+ #define MQTT_ORIGEN_PASS               (13)
+ #define MQTT_OPT1_PASS                 (14)
+ #define MQTT_OPT2_PASS                 (15)
  #define MQTT_OPT3_PASS                 (16)
 
- #define TOPICS_1                       (20)
- #define TOPICS_2                       (21)
- #define TOPICS_3                       (22)
- #define TOPICS_4                       (23)
- #define TOPICS_5                       (24)
 
+
+//! pub 
+ #define PUB_TOPICS_0                   (20)
+ #define PUB_TOPICS_1                   (21)
+ #define PUB_TOPICS_2                   (22)
+ #define PUB_TOPICS_3                   (23)
+ #define PUB_TOPICS_4                   (24)
+
+ //! sub
+ #define SUB_TOPICS_0                   (25)
+ #define SUB_TOPICS_1                   (26)
+ #define SUB_TOPICS_2                   (27)
+ #define SUB_TOPICS_3                   (28)
+ #define SUB_TOPICS_4                   (29)
+#define  TOPICS_MAX                     (5)
 
 /**
  * @brief Defino mapa de memoria de la aplicacion
@@ -92,6 +105,9 @@ uint32_t mem_services_init(void);
 
 
 
+void mem_services_deinit(void);
+
+
 
 /**
  * @brief  retorna el valor actual de la 
@@ -100,8 +116,6 @@ uint32_t mem_services_init(void);
  * @return ** fsm_devices 
  */
 fsm_devices mem_services_get_fsm(void);
-
-
 
 
 /**
@@ -140,4 +154,15 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
 
 
 
+ uint32_t mem_services_set_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+
+
+ uint32_t mem_services_get_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+
+
+
+ uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+
+
+ uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
 

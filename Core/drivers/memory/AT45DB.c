@@ -65,7 +65,6 @@ static inline uint8_t __at45db_get_status(void);
 
 
 static void __set_AT45DB041E(at45db_page_size page_size){
-    #define AT45DB041E_PAGES_DEFAULT    512
     uint8_t offset = page_size - 8 ;     // ejemplo si las pag sno 1024, tenemos en total page_default ( 2 a la offset) 
     /* TODO: Add other densities, atm only AT45DB041E*/
     __flash.pg_shifts     = page_size;                     //Lo que hace es paginas de 1024 bytes potencia(2,10)
@@ -117,12 +116,15 @@ return ret;
 }
 
 
+void AT45DB_deinit(){
+    simo_spi_deinit(__port);
+    simo_gpio_deinit(__chip_select);
 
+}
 
 
 uint32_t at45db_start( at45db_page_size page_size)
 {
-
     __at45db_resumen();
     simo_delay_ms(1); // deberia ser del orde de los 50/35 ns
     uint32_t ret = 1;
@@ -131,8 +133,6 @@ uint32_t at45db_start( at45db_page_size page_size)
     simo_gpio_write(__chip_select,0);
     simo_spi_write_read(__port,cmd,data,5,TIMEOUT_SPI,0); // Transaccion sin IT
     simo_gpio_write(__chip_select,1);
-
-
     //checkeo respuesta correcta, este es solo para AT45DB041E, reformular
     if( data[1] != AT45DB_MANUFACT_ATMEL    
         || data[2] != DEVICE_ID_1        
@@ -140,15 +140,13 @@ uint32_t at45db_start( at45db_page_size page_size)
         || data[4] != EDI) {
         return 0;  //fallo checkeo de ID
     }
- 
-   /* Configuro en modo 256 por pagina*/
-    if(!(__at45db_bsy() & AT45DB_STATUS_PGSIZE)) 
-    {   //pregunto si page_size es 264. Si es true, configuro en 256
+  
+    if(!(__at45db_bsy() & AT45DB_STATUS_PGSIZE)) /* Configuro en modo 256 por pagina*/
+    {   
         simo_gpio_write(__chip_select,0);
         simo_spi_write(__port,(uint8_t*)at45db_pgsize_cmd,AT45DB_PGSIZE_SIZE,TIMEOUT_SPI,0);
         simo_gpio_write(__chip_select,1);
     }
-   
         __set_AT45DB041E(page_size);
     
     
@@ -190,9 +188,6 @@ static inline void __at45db_page_erase(uint32_t sector)
     cmd[1] = (off >> 16) & 0xff;
     cmd[2] = (off >> 8) & 0xff;
     cmd[3] = off & 0xff;
-
-  
-
     simo_gpio_write(__chip_select,1);
     simo_gpio_write(__chip_select,0);
     simo_spi_write(__port,(uint8_t*)cmd,4,TIMEOUT_SPI,0);
@@ -346,7 +341,6 @@ void AT45DB_sleep(void){
 }
 
 
-void AT45DB_stop(void);
 
 
 
