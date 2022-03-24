@@ -1,16 +1,56 @@
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-x64"
-        }
-    ],
-    "version": 4
+	"version": 4,
+	"env":
+	{
+		"_USER_DEF_START_": "",
+		"userDefines": 
+		[
+		],
+		"_USER_DEF_END_": "",
+
+		"_USER_INC_PATHS_START_": "",
+		"userIncPaths": 
+		[
+		],
+		"_USER_INC_PATHS_END_": "",
+
+		"_USER_SRC_PATHS_START_": "",
+		"userSrcPaths": 
+		[
+		],
+		"_USER_SRC_PATHS_END_": ""
+	},
+	"configurations":
+	[
+		{
+			"name": "simo",
+			"intelliSenseMode": "gcc-arm",
+			"cStandard": "c99",
+			"cppStandard": "c++17",
+			"compilerPath": "home/ggvelardez/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/ArmGcc/bin/arm-none-eabi-gcc.exe",
+			"defines":
+			[
+				"${userDefines}",
+				"USE_HAL_DRIVER", 
+				"STM32F103xB"
+			],
+			"includePath":
+			[
+				"${userIncPaths}",
+				"${workspaceFolder}",
+				"home/ggvelardez/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/ArmGcc/lib/gcc/arm-none-eabi/9.2.1/include",
+				"Core/simo/include", 
+				"Core/drivers/include/fsm", 
+				"Core/drivers/include/memory", 
+				"Core/drivers/include/simcom", 
+				"Core/drivers/include/displays", 
+				"Core/drivers/include/sensors", 
+				"Core/Inc", 
+				"Drivers/STM32F1xx_HAL_Driver/Inc", 
+				"Drivers/STM32F1xx_HAL_Driver/Inc/Legacy", 
+				"Drivers/CMSIS/Device/ST/STM32F1xx/Include", 
+				"Drivers/CMSIS/Include"
+			]
+		}
+	]
 }

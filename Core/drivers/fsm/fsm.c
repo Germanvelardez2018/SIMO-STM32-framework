@@ -45,7 +45,6 @@ void fsm_set_state(fsm_devices new_state){
 
     //Cargo el nuevo valor de estado  en flash
     __FSM_DEVICE_ = mem_services_set_fsm(new_state);
-    //__FSM_DEVICE_ = new_state;
     
 }
 

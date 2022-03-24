@@ -1,26 +1,4 @@
 {
-    "files.associations": {
-        "main.h": "c",
-        "uart.h": "c",
-        "core.h": "c",
-        "stm32f1xx_hal_uart.h": "c",
-        "clock_config.h": "c",
-        "stimer.h": "c",
-        "gpio.h": "c",
-        "rtc.h": "c",
-        "stm32f1xx_hal.h": "c",
-        "stm32f1xx_hal_rtc.h": "c",
-        "cmd.h": "c",
-        "delay.h": "c",
-        "pwd.h": "c",
-        "i2c.h": "c",
-        "ssd1306.h": "c",
-        "stm32f1xx.h": "c",
-        "stm32f1xx_hal_conf.h": "c",
-        "ssd1306_conf.h": "c",
-        "memory_store.h": "c",
-        "mpu_6500.h": "c",
-        "config.h": "c",
-        "fsm.h": "c"
-    }
+	"cortex-debug.armToolchainPath": "",
+	"cortex-debug.openocdPath": "/home/ggvelardez/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9\\OpenOCD\\bin\\openocd"
 }

@@ -15,6 +15,17 @@
 
 
 
+/**
+ * @brief NUNCA USAR FUNCIONES AT45DB fuera de este modulo
+ * 
+ */
+
+
+
+
+
+
+
 #define MODULO_FLASH                     "AT45DB041E"
 #define MEMORY_SIZE                      "4MB"
 #define N_PAGES                           AT45DB041E_PAGES_DEFAULT //! AT45DB041E 2048
@@ -71,15 +82,59 @@
 
 
 
-
+/**
+ * @brief Iniciamos los servicios de almacenamiento 
+ *        en memoria flash externa. 
+ * 
+ * @return ** uint32_t 
+ */
 uint32_t mem_services_init(void);
 
 
+
+
+/**
+ * @brief  retorna el valor actual de la 
+ * FSM directo desde memoria flash (address FSM_ADDRESS )
+ * 
+ * @return ** fsm_devices 
+ */
 fsm_devices mem_services_get_fsm(void);
 
 
 
+
+/**
+ * @brief Escribe en memoria el estado de la FSM. 
+ * Retorna el valor escrito y leido en la memoria FSM_ADDRESS
+ * 
+ * @param value 
+ * @return ** fsm_devices 
+ */
 fsm_devices mem_services_set_fsm(fsm_devices value);
+
+
+
+
+
+
+
+ uint32_t mem_services_set_mqtt_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_mqtt_origen(char* buffer,uint8_t len);
+
+
+
+
+
+
+ uint32_t mem_services_set_id_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_id_origen(char* buffer,uint8_t len);
+
+
+
+
+ uint32_t mem_services_set_pass_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_pass_origen(char* buffer,uint8_t len);
 
 
 
