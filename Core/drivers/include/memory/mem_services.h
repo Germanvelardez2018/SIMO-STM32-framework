@@ -104,8 +104,20 @@
 uint32_t mem_services_init(void);
 
 
-
+/**
+ * @brief Cerramos todos los servicios de memoria flash externa.
+ * 
+ * @return ** void 
+ */
 void mem_services_deinit(void);
+
+
+/**
+ * @brief Borrar todos los datos almacenados en memoria flash externa
+ * 
+ * @return ** void 
+ */
+void mem_services_clear_all(void);
 
 
 

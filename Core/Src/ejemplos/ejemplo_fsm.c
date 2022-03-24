@@ -106,8 +106,9 @@ fsm_init();
 fsm_devices DEVICE;
 DEVICE = fsm_load_flash();
 
-
-//mem_services_set_mqtt_origen(MQTT_ORIGEN_URL,LEN_ORIGEN_URL);
+//mem_services_clear_all();
+simo_delay_ms(5000);
+mem_services_set_mqtt_origen(MQTT_ORIGEN_URL,LEN_ORIGEN_URL);
 char buff_origin[50]={0};
 mem_services_get_mqtt_origen(buff_origin,50);
 

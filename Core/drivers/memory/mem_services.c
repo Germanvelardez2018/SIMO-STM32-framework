@@ -28,7 +28,9 @@ void mem_services_deinit(void){
     AT45DB_deinit();
 }
 
-
+void mem_services_clear_all(void){
+    AT45DB_erase_full();
+}
 
 
 fsm_devices mem_services_get_fsm(void){
