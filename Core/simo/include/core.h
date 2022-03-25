@@ -228,6 +228,16 @@
     } fsm_devices;
 
 
+    //! Modos del sistema
+
+typedef enum {
+        RUN_MODE = 0     //! Normal mode (default)
+    ,   SLEEP_ONLY_ISR_MODE    
+    ,   SLEEP_MODE       //! CPU OFF, Peripherals funcionando
+    ,   STOP_MODE        //! CPU OFF, Peripherals off, all clocks are stopped
+    ,   STANDBY_MODE     //! 1.2 V domain powered off
+}pwr_modes;
+
 
 #endif
 

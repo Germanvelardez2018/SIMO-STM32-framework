@@ -47,6 +47,7 @@ Core/drivers/displays/ssd1306.c \
 Core/drivers/displays/ssd1306_fonts.c \
 Core/drivers/displays/ssd1306_tests.c \
 Core/drivers/sensors/mpu_6500.c \
+Core/simo/power_modes.c \
 Core/simo/power_save.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \

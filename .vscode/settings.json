@@ -1,4 +1,9 @@
 {
 	"cortex-debug.armToolchainPath": "",
-	"cortex-debug.openocdPath": "/home/ggvelardez/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9\\OpenOCD\\bin\\openocd"
+	"cortex-debug.openocdPath": "/home/ggvelardez/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9\\OpenOCD\\bin\\openocd",
+	"files.associations": {
+		"power_save.h": "c",
+		"power_modes.h": "c",
+		"rtc.h": "c"
+	}
 }

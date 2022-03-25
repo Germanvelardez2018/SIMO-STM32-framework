@@ -162,7 +162,7 @@
 /**
  * @brief  Escribe un registro del backup
  * 
- * @param addres_reg direccion del registro. Direccuion maxima 10
+ * @param addres_reg direccion del registro. Direccuion maxima 5
  * @param data  dato a escribir
  * @return ** void 
  */
@@ -174,7 +174,7 @@
   /**
    * @brief Lee un registro de backup
    * 
-   * @param addres_reg  direccion del registro. Direccuion maxima 10
+   * @param addres_reg  direccion del registro. Direccuion maxima 5
    * @return ** uint32_t 
    */
   uint32_t simo_rtc_read_backup_reg(uint32_t addres_reg);
