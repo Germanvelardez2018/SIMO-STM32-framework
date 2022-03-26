@@ -4,12 +4,7 @@
 
 
 
-
-
-
-callback_irq __IRQ_POWER_MODE_EXIT__ = NULL ;
-
-static pwr_modes _DEV_PWR_MODE_ = RUN_MODE; //! Por defecto
+static pwr_modes _DEV_PWR_MODE_ = RESUMEN_RUN; //! Por defecto
 
 
 
@@ -24,20 +19,8 @@ pwr_modes power_mode_get_state(void){
 
 
 
-void power_mode_set_callback(callback_irq callback){
-    if(callback != NULL) __IRQ_POWER_MODE_EXIT__ = callback;
-}
 
 
-
-
-
- void power_mode_get_callback(void){
-    HAL_ResumeTick();
-    if(__IRQ_POWER_MODE_EXIT__ != NULL)  __IRQ_POWER_MODE_EXIT__();
-;
-    
-}
 
 
 
@@ -46,9 +29,9 @@ void power_mode_set( pwr_modes mode){
 
     switch (mode)
     {
-        case RUN_MODE:
+        case RESUMEN_RUN:
         HAL_ResumeTick();
-        _DEV_PWR_MODE_ = RUN_MODE;
+        _DEV_PWR_MODE_ = RESUMEN_RUN;
 
         break;
 

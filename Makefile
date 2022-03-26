@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/ejemplos/ejemplo_rtc.c \
 Core/Src/ejemplos/ejemplo_flash_ext.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
 Core/drivers/simcom/simcom.c \

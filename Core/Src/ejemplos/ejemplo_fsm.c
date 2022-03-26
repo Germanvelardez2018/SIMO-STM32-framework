@@ -77,7 +77,7 @@ static void setup(void){
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
+int main2(void)
 {
 
 //Levanto la HAL y Configuro todos los perifericos

@@ -20,69 +20,103 @@
 
 
 
-#include "stdio.h"
-#include "main.h"
-
-// Simo
-#include "uart.h"
-#include "rtc.h"
+#include "power_modes.h" // ! Gestiona el consumo de energia del micro
 #include "gpio.h"
-#include "clock_config.h"
+#include "uart.h"
 #include "delay.h"
-#include "power_save.h"
+#include "rtc.h"
+// Simo
+
 
 
 /* USER CODE END Includes */
 
 
-#define LED_TOOGLE    SIMO_GPIO_18 // PB2
-#define BAUDRATE      115200
+ /**USART2 GPIO Configuration
+        PA2     ------> USART2_TX
+        PA3     ------> USART2_RX
+        */
+
+
+#define LED_TOOGLE            SIMO_GPIO_18 // PB2
+#define BAUDRATE              115200
+#define UART_TX               UART_B
+#define BUFFER_SIZE           100
+
+
+#define STEP_MINUTES   1
+
+
+#define MSG_INIT      "Iniciamos aplicacion \r\n"
+
+#define MSG_ROUTINE   "Realizando rutina \r\n"
 
 
 
-static volatile uint32_t ena = 0;  // Si ena =1 entonces estamos en modo NORMAL, sino en modo sleep
+//Configura la alarma
+  #define HOURS       10
+  #define MINUTES     30
+  #define SECONDS      0
 
 
-// Callback para el RTC
+
+
+  uint8_t h= HOURS;
+  uint8_t m = MINUTES;
+  uint8_t s = SECONDS;
 
 static void __CALLBACK_RTC(void){
- 
-
-    simo_pwr_return_normal_mode(); // Siempre debe llamarse en el callback de rtc. 
-                                    //Sirve para reanudar el micro
-    #define CALLBACK_MSG            "CALLBACK RTC \r\n"
-    #define ENA_INTERRUPTION        0 
-    #define TIMEROUT                500    // Si ENA_INTERRUPTION es 1 entonces no hay timeout  
-    simo_uart_write(UART_A,CALLBACK_MSG,strlen(CALLBACK_MSG),TIMEROUT,ENA_INTERRUPTION);
-    ena = 1;
+// ! No hacemos nada. 
+// ! Si quisieramos agregar una rutina deberiamos iniciar Systick antes
 
 }
 
 
 
 
+static void setup(){
 
-/**
- * @brief Funcion de inicio de perifericos. 
- * 
- * @return ** void 
- */
-static void setup(void){
-
-  #define BAUDRATE      115200
-  #define UART           UART_A     
 
   // Aqui va la configuracion inicial
   HAL_Init();
   simo_clock_config();
-  simo_uart_init(UART, BAUDRATE);
 
-  //! Configuracion inicial de GPIO
-  simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT); 
+  // Configura el led blink
+
+   //! Configuracion inicial de GPIO
+  simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
+
+
+  //! Configura el uart
+  simo_uart_init(UART_TX,BAUDRATE);
+
+
+
+  simo_rtc_set_alarm_callback(__CALLBACK_RTC);
+  simo_rtc_ena_irq(1);
+
+
+   // Inicio el RTC
+  simo_rtc_init();
+  
+  
+  // COnfigura el reloj
+  simo_rtc_set_time(HOURS,MINUTES,SECONDS);
+
+  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+10);
+
+ 
+
+  simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
+
+
+
+
+
+
+
 
 }
-
-
 
 
 
@@ -90,95 +124,49 @@ static void setup(void){
  * @brief  The application entry point.
  * @retval int
  */
+
 int main(void)
 {
 
-//Levanto la HAL y Configuro todos los perifericos
-setup();
-#define HOURS       0
-#define MINUTES     0
-#define SECONDS     0
-
-#define MSG_INIT    "EJEMPLO RTC \r\n"
-simo_uart_write(UART_A,MSG_INIT,strlen(MSG_INIT),TIMEROUT,ENA_INTERRUPTION);
-
-simo_rtc_set_alarm_callback(__CALLBACK_RTC);
-simo_rtc_ena_irq(1);
-simo_rtc_init();
-simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+15);
-simo_pwr_before_change_mode(); // Se llama antes de cambiar de modod NORMAL a sleep
-simo_pwr_enter_sleep_mode(); // Entramos a modo sleep
+     // Configuracion
+    setup();
+    // Estado del dispositivo, 
+    // transmicion en vivo o transmicion desde memoria memoria.
 
 
-//! Activo los timers
+ 
 
 
-while(1){
+    while(1){
     
-  // Solo entramoa a este rutina si ena = 1 , 
-  // es decir despues de ejecutado el callback del rtc
-    if(ena == 1){
-        simo_gpio_toogle(SIMO_GPIO_18);
-        simo_delay_ms(500);
-        simo_gpio_toogle(SIMO_GPIO_18);
-        #define NORMAL_MODE_MSG            "Volvemos a modo SLEEP \r\n"
-        #define ENA_INTERRUPTION        0 
-        #define TIMEROUT                500    // Si ENA_INTERRUPTION es 1 entonces no hay timeout  
-        uint8_t h,m,s;
-        simo_uart_write(UART_A,NORMAL_MODE_MSG,strlen(NORMAL_MODE_MSG),TIMEROUT,ENA_INTERRUPTION);
-        simo_rtc_get_time(&h,&m,&s);
+    // Dormir el microcontrolador
 
-        #define FORMAT_MSG      "Proxima alarma: %d : %d : %d\r\n"
-        char buffer[50];
-        m = m +1 ; // alarma cada un minuto
-        sprintf(buffer,FORMAT_MSG,h,m,s);
-        simo_uart_write(UART_A,buffer,strlen(buffer),TIMEROUT,ENA_INTERRUPTION);
-        ena = 0;
-        simo_rtc_set_alarm(h,m,s);
-        simo_pwr_before_change_mode(); // Se llama antes de cambiar de modod NORMAL a sleep
-        simo_pwr_enter_sleep_mode(); // Entramos a modo sleep
+    power_mode_set( SLEEP_MODE);
 
+
+
+
+    // Despierta mediante interrupcion RTC
+    power_mode_set( RESUMEN_RUN);
+
+
+    //Rutina de trabajo
+
+
+    simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
+
+    simo_gpio_toogle(SIMO_GPIO_18);
+    simo_delay_ms(100);
+    simo_gpio_toogle(SIMO_GPIO_18);
+
+
+    // Me preparo para volver a dormir
+    simo_rtc_get_time(&h,&m,&s);
+
+    //Configura la alarma
+    simo_rtc_set_alarm(h,(m+STEP_MINUTES),s);
     }
 
+
+    
 }
-  
-
-  
-}
-
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
-
-/**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
-  /* USER CODE END Error_Handler_Debug */
-}
-
-#ifdef USE_FULL_ASSERT
-/**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
-}
-#endif /* USE_FULL_ASSERT */

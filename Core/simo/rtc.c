@@ -11,7 +11,6 @@
 
 
 #include "rtc.h"
-#include "power_modes.h" // ! Necesario para llamar a rutinas de wake up
 #include "main.h"
 #include "clock_config.h" // para activar clock rtc
 
@@ -38,17 +37,7 @@ void RTC_Alarm_IRQHandler(void)
 
 
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
-
-
     if(__RTC_ALARM_IRQ__ != NULL) __RTC_ALARM_IRQ__();
-    pwr_modes state =  power_mode_get_state();
-    //! TERMINO LA IRQ, estamos en modo run;
-     if(state != RUN_MODE )
-     // si estamos modo diferente a Run Mode
-     power_mode_get_callback();
-
-
-
 }
 
 

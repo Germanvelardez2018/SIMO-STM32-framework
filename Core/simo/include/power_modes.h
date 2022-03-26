@@ -36,23 +36,16 @@
  */
 
 
-/**
- * @brief Funcion de callback. Se acciona al despertar el micro
- * 
- * @param callback 
- * @return ** void 
- */
-void power_mode_set_callback(callback_irq callback);
 
 
 
-void power_mode_get_callback(void);
+
 
 
 void power_mode_set( pwr_modes mode);
 
 
-void power_mode_get_callback(void );
+
 
 
 pwr_modes power_mode_get_state(void);
