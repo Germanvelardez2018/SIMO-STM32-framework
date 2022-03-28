@@ -1,5 +1,5 @@
 /**
- * @file mpu6500_test.c
+ * @file accelerometer_test.c
  * @author German Velardez (germanvelardez16@gmail.com)
  * @brief  
  * @version 0.1
@@ -53,16 +53,16 @@ static void setup(void){
   simo_gpio_set(SIMO_GPIO_18, SIMO_GPIO_OUT);
 
   //! Inicio el sensor mpu6500
-  mpu6500_init();
-  if(mpu6500_check() != 0){
+  accelerometer_init();
+  if(accelerometer_check() != 0){
     simo_uart_write(UART_TX,"mpu6500 ready \r\n",strlen("mpu6500 ready \r\n"),TIMEOUT,modo_tx_irq);
   }
   else{
     simo_uart_write(UART_TX,"mpu6500 Error \r\n",strlen("mpu6500 Error \r\n"),TIMEOUT,modo_tx_irq);
 
   }
-    mpu6500_sleep(0);
-    mpu6500_set_sample_div(7); //1khz
+    accelerometer_sleep(0);
+    accelerometer_set_sample_div(7); //1khz
 
 
 
@@ -100,7 +100,7 @@ int16_t x_offset;
 int16_t y_offset;
 int16_t z_offset;
 
-mpu_6500_calibration();
+accelerometer_calibration();
 char buffer[100]={0};
 #define format      "x:%3.2f  y:%.2f  z:%.2f\r\n"
 #define lowformat   "x:%ld y:%ld z:%ld \r\n"
@@ -113,11 +113,11 @@ while(1){
    
 
 
-    mpu6500_get_aceleration(&x,&y,&z);
+    accelerometer_get_aceleration(&x,&y,&z);
     float _x = x/16384.0;  
     float _y = y/16384.0;
     float _z = z/16384.0;
-  //  mpu6500_check();
+  //  accelerometer_check();
     simo_delay_ms(4500);
     sprintf(buffer,format,_x,_y,_z);
    // sprintf(buffer,lowformat,x,y,z);

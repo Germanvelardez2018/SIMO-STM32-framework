@@ -10,9 +10,9 @@
 
 
 
-#define MPU6500_ADDR                              0xD0
-#define MPU6500_I2C_ADDR                         (MPU6500_ADDR)
-#define ACELEROMETRO_ADDRESS                     (MPU6500_ADDR )
+#define accelerometer_ADDR                       0xD0
+#define accelerometer_I2C_ADDR                   (accelerometer_ADDR)
+#define ACELEROMETRO_ADDRESS                     (accelerometer_ADDR )
 #define ACELEROMETRO_I2C                         I2C_A
 #define ACELEROMETRO_SPEED                       (50000)
 #define ACELEROMETRO_7BITS_ADDRESS               (1)
@@ -223,7 +223,7 @@
 #define FIFO_R_W                            (0x74)  //! Dirreccion de escritura o lectura de FIFO
 
 #define MPU_WHO_IAM                         (0x75) //! Valor predeterminado 0x70
-#define MPU6500_USE_I2C
+#define accelerometer_USE_I2C
 
 
 #define XA_OFFS_H                           (0x77)        
@@ -305,7 +305,7 @@ void __mpu6500_config_sensors(int32_t off){
 
 }
 
-void mpu6500_reset(){
+void accelerometer_reset(){
 
 
      int8_t old_config =0;
@@ -395,7 +395,7 @@ mpu_6500_set_offset(&x_offset, &y_offset, &z_offset);
 
 
 
-void mpu_6500_calibration(){
+void accelerometer_calibration(){
     _mpu6500_calibration(0,0,16384);
 }
 
@@ -445,12 +445,12 @@ static void __MPU6500_deinit(){
 }
 
 
-void mpu6500_init(void){
+void accelerometer_init(void){
     __MPU6500_init();
 }
 
 
-uint32_t  mpu6500_check(){
+uint32_t  accelerometer_check(){
 
     uint32_t res = 0;
     uint8_t check = 0;
@@ -468,7 +468,7 @@ uint32_t  mpu6500_check(){
 
 }
 
-void mpu6500_sleep(uint32_t sleep){
+void accelerometer_sleep(uint32_t sleep){
     
     int8_t old_config =0;
 
@@ -513,7 +513,7 @@ void mpu6500_sleep(uint32_t sleep){
 
 
 
-void mpu6500_set_sample_div(uint8_t freq_div){
+void accelerometer_set_sample_div(uint8_t freq_div){
     // Set DATA RATE of 1KHz by writing SMPLRT_DIV register in 7
     uint8_t data = freq_div;
     simo_i2c_mem_write(     ACELEROMETRO_I2C,
@@ -527,18 +527,12 @@ void mpu6500_set_sample_div(uint8_t freq_div){
 
 }
 
-void mpu6500_set_config(){
+void accelerometer_set_config(){
 
 }
 
 
-
-
-
-
-// stm32 es little endian
-// int16_t    |H [0x01]      |L [0x00] |
-uint32_t mpu_6500_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
+uint32_t accelerometer_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
 uint32_t res = 1;
     int8_t x_buff[2] = {0}; // h and l
     x_buff[0] = (int8_t) (*x_offset >> 8); // parte alta
@@ -587,10 +581,8 @@ return res;
 
 
 
-uint32_t mpu_6500_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
+uint32_t accelerometer_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
 uint32_t res = 1;
-
-
     
     uint8_t Rec_Data[2]={0};
     simo_i2c_mem_read(ACELEROMETRO_I2C,
@@ -621,7 +613,7 @@ return res;
 }
 
 
-uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
+uint32_t accelerometer_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
     uint32_t res = 0;
     // Read 6 BYTES of data starting from ACCEL_XOUT_H register
     uint8_t VALUE_ADDRESS =0x3B;
@@ -643,9 +635,31 @@ uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
 
 
-void mpu6500_deinit(){
-
-
+void accelerometer_deinit(){
     simo_i2c_deinit(I2C_A);
 
+}
+
+
+
+
+uint32_t accelerometer_get_measure(char* buffer, uint8_t len){
+
+    #define format      "x:%3.2f  y:%.2f  z:%.2f\r\n"
+    uint32_t ret = 0;
+    int16_t x;
+    int16_t y;
+    int16_t z;
+
+    ret = accelerometer_get_aceleration(&x,&y,&z);
+    if( ret != 0){
+        float _x = x/16384.0;  
+        float _y = y/16384.0;
+        float _z = z/16384.0;
+        sprintf(buffer,format,_x,_y,_z);
+        ret = strlen(buffer); // devuelve la ultima posicion utilizada del array
+    }
+    
+
+    return ret;
 }

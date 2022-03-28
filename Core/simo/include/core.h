@@ -231,12 +231,35 @@
     //! Modos del sistema
 
 typedef enum {
-        RESUMEN_RUN = 0     //! Normal mode (default)
-    ,   SLEEP_ONLY_ISR_MODE    
-    ,   SLEEP_MODE       //! CPU OFF, Peripherals funcionando
-    ,   STOP_MODE        //! CPU OFF, Peripherals off, all clocks are stopped
+        RESUMEN_RUN = 0     //! Normal modo de operacion (default)
+    ,   SLEEP_ONLY_ISR_MODE   //! Sleep, despierta para realizar IQR y vuelve a dormir 
+    ,   SLEEP_MODE       //! CPU OFF, Perifericos funcionando
+    ,   STOP_MODE        //! CPU OFF, Perifericos OFF,Todos las fuentes de clock off
     ,   STANDBY_MODE     //! 1.2 V domain powered off
 }pwr_modes;
+
+
+typedef enum {
+    S_OUTPUT_INT
+    ,S_OUTPUT_FLOAT
+    ,S_OUTPUT_STRING
+} sensor_output;
+
+
+typedef struct{
+    char *format;
+    uint8_t len;
+} sensor_format;
+
+
+typedef uint32_t (*check_sensor)(sensor_format);
+
+
+
+
+
+
+
 
 
 #endif

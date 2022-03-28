@@ -4,6 +4,9 @@
 	"files.associations": {
 		"power_save.h": "c",
 		"power_modes.h": "c",
-		"rtc.h": "c"
+		"rtc.h": "c",
+		"mem_services.h": "c",
+		"sensor_services.h": "c",
+		"core.h": "c"
 	}
 }

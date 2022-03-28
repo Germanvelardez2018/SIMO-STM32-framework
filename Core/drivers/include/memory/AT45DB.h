@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#ifndef __AT45DB__H
-#define __AT45DB__H
+#ifndef __mem__H
+#define __mem__H
 #include "core.h"
 #include "gpio.h"
 #include "spi.h"
@@ -40,7 +40,7 @@ typedef enum {
     ,pg_512bytes    =  9
     ,pg_1024byte    =  10
     ,pg_2048bytes   = 11
-}at45db_page_size;
+}mem_page_size;
 
 
 
@@ -53,7 +53,7 @@ typedef enum {
  * @param prescaler 
  * @return ** uint32_t 
  */
-uint32_t AT45DB_init(   SIMO_SPI port,
+uint32_t mem_init(   SIMO_SPI port,
                         SIMO_GPIO_PIN chip_select,
                         simo_spi_prescaler prescaler);
 
@@ -63,7 +63,7 @@ uint32_t AT45DB_init(   SIMO_SPI port,
  * 
  * @return ** void
  */
-void AT45DB_deinit();
+void mem_deinit();
 
 /**
  * @brief 
@@ -71,7 +71,7 @@ void AT45DB_deinit();
  * @param page_size 
  * @return ** uint32_t 
  */
-uint32_t at45db_start( at45db_page_size page_size);
+uint32_t mem_start( mem_page_size page_size);
 
 
 
@@ -85,7 +85,7 @@ uint32_t at45db_start( at45db_page_size page_size);
  * @param pos           posicion 256
  * @return ** uint32_t 
  */
-uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
+uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
 
 
 
@@ -98,21 +98,21 @@ uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t 
  * @param pos           posicion 256 
  * @return ** uint32_t 
  */
-uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
+uint32_t mem_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos);
 
 /**
  * @brief  salir de modo bajo consumo
  * 
  * @return ** void 
  */
-void AT45DB_resumen(void);
+void mem_resumen(void);
 
 /**
  * @brief   borrar el chip
  * 
  * @return ** void 
  */
-void AT45DB_erase_full(void);
+void mem_erase_full(void);
 
 
 /**
@@ -120,7 +120,7 @@ void AT45DB_erase_full(void);
  * 
  * @return ** void 
  */
-void AT45DB_sleep(void);
+void mem_sleep(void);
 
 
 

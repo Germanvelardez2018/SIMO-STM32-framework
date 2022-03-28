@@ -64,7 +64,7 @@ static inline uint8_t __at45db_get_status(void);
 
 
 
-static void __set_AT45DB041E(at45db_page_size page_size){
+static void __set_AT45DB041E(mem_page_size page_size){
     uint8_t offset = page_size - 8 ;     // ejemplo si las pag sno 1024, tenemos en total page_default ( 2 a la offset) 
     /* TODO: Add other densities, atm only AT45DB041E*/
     __flash.pg_shifts     = page_size;                     //Lo que hace es paginas de 1024 bytes potencia(2,10)
@@ -102,7 +102,7 @@ static inline uint8_t __at45db_bsy(void){
 
 
 
-uint32_t AT45DB_init(   SIMO_SPI port,
+uint32_t mem_init(   SIMO_SPI port,
                         SIMO_GPIO_PIN chip_select,
                         simo_spi_prescaler prescaler){
     uint32_t ret = 0;
@@ -116,14 +116,14 @@ return ret;
 }
 
 
-void AT45DB_deinit(){
+void mem_deinit(){
     simo_spi_deinit(__port);
     simo_gpio_deinit(__chip_select);
 
 }
 
 
-uint32_t at45db_start( at45db_page_size page_size)
+uint32_t mem_start( mem_page_size page_size)
 {
     __at45db_resumen();
     simo_delay_ms(1); // deberia ser del orde de los 50/35 ns
@@ -155,7 +155,7 @@ uint32_t at45db_start( at45db_page_size page_size)
 
 
 
-void AT45DB_erase_full(void){
+void mem_erase_full(void){
 
     uint8_t cmd[4];
 
@@ -200,12 +200,9 @@ static inline void __at45db_page_erase(uint32_t sector)
 
 
 
-uint32_t AT45DB_start(void){
-return 0;    
-}
 
 
-uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
+uint32_t mem_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
     // CONS 256 11 ADRRES | 8 BITES POSICION
 
 
@@ -234,7 +231,7 @@ uint32_t AT45DB_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t
 
 }
 
-uint32_t AT45DB_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
+uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
      
 
 
@@ -325,12 +322,12 @@ inline void __at45db_resumen(void){
 
 
 
-void AT45DB_resumen(void){
+void mem_resumen(void){
     __at45db_resumen();
 }
 
 
-void AT45DB_sleep(void){
+void mem_sleep(void){
 
     simo_gpio_write(__chip_select,1);
     simo_gpio_write(__chip_select,0);

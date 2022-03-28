@@ -40,9 +40,7 @@ static volatile uint32_t ena = 0;  // Si ena =1 entonces estamos en modo NORMAL,
 static void __CALLBACK_RTC(void){
   simo_pwr_return_normal_mode(); // Siempre debe llamarse en el callback de rtc. 
                                     //Sirve para reanudar el micro
-  //simo_gpio_toogle(SIMO_GPIO_18);
-  //HAL_Delay(50);
-  //simo_gpio_toogle(SIMO_GPIO_18);
+ 
   ena = 1;
 
 }

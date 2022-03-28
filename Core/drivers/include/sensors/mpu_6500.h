@@ -1,26 +1,31 @@
 
 
 
-    #include "core.h"
-
-void mpu6500_reset();
+#include "core.h"
 
 
-void mpu6500_init(void);
 
-uint32_t  mpu6500_check(void);
+void accelerometer_reset();
 
-void mpu6500_sleep(uint32_t sleep);
+
+void accelerometer_init(void);
+
+uint32_t  accelerometer_check(void);
+
+void accelerometer_sleep(uint32_t sleep);
   
-void mpu6500_set_sample_div(uint8_t freq_div);
+void accelerometer_set_sample_div(uint8_t freq_div);
 
-uint32_t mpu6500_get_aceleration(int16_t* x, int16_t* y , int16_t* z);
+uint32_t accelerometer_get_aceleration(int16_t* x, int16_t* y , int16_t* z);
 
-void mpu6500_deinit();
+void accelerometer_deinit();
 
-void mpu_6500_calibration();
+void accelerometer_calibration();
 
 
-uint32_t mpu_6500_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
+uint32_t accelerometer_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
 
-uint32_t mpu_6500_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
+uint32_t accelerometer_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
+
+
+uint32_t accelerometer_get_measure(char* buffer, uint8_t len);

@@ -9,6 +9,12 @@
  * 
  */
 
+
+
+
+#ifndef __SIMO_POWER_MODES_H
+#define __SIMO_POWER_MODES_H
+
 #include "core.h"
 
 
@@ -34,18 +40,16 @@
  * @param mode 
  * @return ** void 
  */
-
-
-
-
-
-
-
-
 void power_mode_set( pwr_modes mode);
 
 
 
 
-
+/**
+ * @brief Devuelve el modo de consumo actual.
+ * 
+ * @return ** pwr_modes 
+ */
 pwr_modes power_mode_get_state(void);
+
+#endif
