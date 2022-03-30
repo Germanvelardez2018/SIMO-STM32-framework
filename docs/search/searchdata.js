@@ -1,12 +1,12 @@
 var indexSectionsWithContent =
 {
-  0: "_cdghmnprstuw",
-  1: "cdgprstu",
-  2: "hrs",
+  0: "_acdfghimnprstuw",
+  1: "acdgiprstu",
+  2: "hprs",
   3: "s",
   4: "c",
-  5: "s",
-  6: "nsu",
+  5: "fpst",
+  6: "afinrstu",
   7: "_cnsu",
   8: "mw"
 };

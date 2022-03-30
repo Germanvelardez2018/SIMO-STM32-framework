@@ -5,5 +5,7 @@ digraph "Core/simo/include/rtc.h"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="Core/simo/include/rtc.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Driver para manejar el hardware RTC."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Core/simo/rtc.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rtc_8c.html",tooltip="Implementacion del driver de manejo del RTC."];
+  Node2 [label="Core/simo/power_modes.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$power__modes_8c.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Core/simo/rtc.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$rtc_8c.html",tooltip="Implementacion del driver de manejo del RTC."];
 }

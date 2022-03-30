@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timer_5funit_327',['TIMER_UNIT',['../timer_8h.html#a1ff33d7c0529133f1f46217f10833713',1,'timer.h']]]
+  ['pwr_5fmodes_420',['pwr_modes',['../core_8h.html#a8b935d4c243b80e83a6365404214af3b',1,'core.h']]]
 ];

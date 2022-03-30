@@ -95,19 +95,19 @@ Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumeraciones</h2></td></tr>
-<tr class="memitem:a5b6846f748988ecc78b4bb6535daa782"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782">simo_spi_prescaler</a> { <br />
-&#160;&#160;<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782ab25e11b1907bdf4af4a144b55a8b1be6">SIMO_SPI_PRESCALER_2</a> = 2, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782a47f624611719727056c4dc18e0af1132">SIMO_SPI_PRESCALER_4</a> = 4, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782a95eef205f204039ca7596b60ab473673">SIMO_SPI_PRESCALER_8</a> = 8, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782aa2416de11a56ddbc356539848ec210a4">SIMO_SPI_PRESCALER_16</a> = 16, 
+<tr class="memitem:aeb05ec05367bd0a324f8b69acf060ad3"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3">SIMO_SPI_PRESCALER</a> { <br />
+&#160;&#160;<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3ab25e11b1907bdf4af4a144b55a8b1be6">SIMO_SPI_PRESCALER_2</a> = 2, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3a47f624611719727056c4dc18e0af1132">SIMO_SPI_PRESCALER_4</a> = 4, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3a95eef205f204039ca7596b60ab473673">SIMO_SPI_PRESCALER_8</a> = 8, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3aa2416de11a56ddbc356539848ec210a4">SIMO_SPI_PRESCALER_16</a> = 16, 
 <br />
-&#160;&#160;<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782a1697af6de96abb4cc87dc8db612cbf28">SIMO_SPI_PRESCALER_32</a> = 32, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782a835b5de14948e417b276e49b7af21b33">SIMO_SPI_PRESCALER_64</a> = 64, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782ac552bdcb15f17d521490d999e0194b51">SIMO_SPI_PRESCALER_128</a> = 128, 
-<a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782a179802880e7a9a253115c9adb0756e50">SIMO_SPI_PRESCALER_256</a> = 256
+&#160;&#160;<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3a1697af6de96abb4cc87dc8db612cbf28">SIMO_SPI_PRESCALER_32</a> = 32, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3a835b5de14948e417b276e49b7af21b33">SIMO_SPI_PRESCALER_64</a> = 64, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3ac552bdcb15f17d521490d999e0194b51">SIMO_SPI_PRESCALER_128</a> = 128, 
+<a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3a179802880e7a9a253115c9adb0756e50">SIMO_SPI_PRESCALER_256</a> = 256
 <br />
  }</td></tr>
-<tr class="separator:a5b6846f748988ecc78b4bb6535daa782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aeb05ec05367bd0a324f8b69acf060ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funciones</h2></td></tr>
@@ -120,9 +120,12 @@ Funciones</h2></td></tr>
 <tr class="memitem:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#aeeb1ca026ff6fc9e8f45400adecfe486">simo_spi_write_read</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, uint8_t *buffer_tx, uint8_t *buffer_rx, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
 <tr class="memdesc:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enviar y recibir un buffer de datos mediante puerto SPI.  <a href="spi_8h.html#aeeb1ca026ff6fc9e8f45400adecfe486">Más...</a><br /></td></tr>
 <tr class="separator:aeeb1ca026ff6fc9e8f45400adecfe486"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bf9cb2fc3385c31362c243fe33948fc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a9bf9cb2fc3385c31362c243fe33948fc">simo_spi_init</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> SPI, <a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782">simo_spi_prescaler</a> prescaler)</td></tr>
-<tr class="memdesc:a9bf9cb2fc3385c31362c243fe33948fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el puerto SPI.  <a href="spi_8h.html#a9bf9cb2fc3385c31362c243fe33948fc">Más...</a><br /></td></tr>
-<tr class="separator:a9bf9cb2fc3385c31362c243fe33948fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96a8a9f57fddfc6559877335acd2ea5f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a96a8a9f57fddfc6559877335acd2ea5f">simo_spi_init</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> SPI, <a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3">SIMO_SPI_PRESCALER</a> prescaler)</td></tr>
+<tr class="memdesc:a96a8a9f57fddfc6559877335acd2ea5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el puerto SPI.  <a href="spi_8h.html#a96a8a9f57fddfc6559877335acd2ea5f">Más...</a><br /></td></tr>
+<tr class="separator:a96a8a9f57fddfc6559877335acd2ea5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b33c27519b003e43b0abfe4c34ea323"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a5b33c27519b003e43b0abfe4c34ea323">simo_spi_deinit</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi)</td></tr>
+<tr class="memdesc:a5b33c27519b003e43b0abfe4c34ea323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desconfigura el puerto SPI. Libera recursos asociados.  <a href="spi_8h.html#a5b33c27519b003e43b0abfe4c34ea323">Más...</a><br /></td></tr>
+<tr class="separator:a5b33c27519b003e43b0abfe4c34ea323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf9bd23308882931ca043fd353dd3e34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#adf9bd23308882931ca043fd353dd3e34">simo_spi_ena_irq</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, uint32_t ena)</td></tr>
 <tr class="separator:adf9bd23308882931ca043fd353dd3e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dc766afa1b1426befb9c0826fc7ed79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spi_8h.html#a3dc766afa1b1426befb9c0826fc7ed79">simo_spi_set_tx_callback</a> (<a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a> spi, <a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback)</td></tr>
@@ -142,32 +145,59 @@ Funciones</h2></td></tr>
 <dl class="section date"><dt>Fecha</dt><dd>2022-01-10</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
 </div><h2 class="groupheader">Documentación de las enumeraciones</h2>
-<a id="a5b6846f748988ecc78b4bb6535daa782"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b6846f748988ecc78b4bb6535daa782">&#9670;&nbsp;</a></span>simo_spi_prescaler</h2>
+<a id="aeb05ec05367bd0a324f8b69acf060ad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb05ec05367bd0a324f8b69acf060ad3">&#9670;&nbsp;</a></span>SIMO_SPI_PRESCALER</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782">simo_spi_prescaler</a></td>
+          <td class="memname">enum <a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3">SIMO_SPI_PRESCALER</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782ab25e11b1907bdf4af4a144b55a8b1be6"></a>SIMO_SPI_PRESCALER_2&#160;</td><td class="fielddoc"><p>DIVISOR DE CLOCK. </p>
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3ab25e11b1907bdf4af4a144b55a8b1be6"></a>SIMO_SPI_PRESCALER_2&#160;</td><td class="fielddoc"><p>DIVISOR DE CLOCK. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782a47f624611719727056c4dc18e0af1132"></a>SIMO_SPI_PRESCALER_4&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782a95eef205f204039ca7596b60ab473673"></a>SIMO_SPI_PRESCALER_8&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782aa2416de11a56ddbc356539848ec210a4"></a>SIMO_SPI_PRESCALER_16&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782a1697af6de96abb4cc87dc8db612cbf28"></a>SIMO_SPI_PRESCALER_32&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782a835b5de14948e417b276e49b7af21b33"></a>SIMO_SPI_PRESCALER_64&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782ac552bdcb15f17d521490d999e0194b51"></a>SIMO_SPI_PRESCALER_128&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a5b6846f748988ecc78b4bb6535daa782a179802880e7a9a253115c9adb0756e50"></a>SIMO_SPI_PRESCALER_256&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3a47f624611719727056c4dc18e0af1132"></a>SIMO_SPI_PRESCALER_4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3a95eef205f204039ca7596b60ab473673"></a>SIMO_SPI_PRESCALER_8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3aa2416de11a56ddbc356539848ec210a4"></a>SIMO_SPI_PRESCALER_16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3a1697af6de96abb4cc87dc8db612cbf28"></a>SIMO_SPI_PRESCALER_32&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3a835b5de14948e417b276e49b7af21b33"></a>SIMO_SPI_PRESCALER_64&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3ac552bdcb15f17d521490d999e0194b51"></a>SIMO_SPI_PRESCALER_128&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aeb05ec05367bd0a324f8b69acf060ad3a179802880e7a9a253115c9adb0756e50"></a>SIMO_SPI_PRESCALER_256&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a5b33c27519b003e43b0abfe4c34ea323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b33c27519b003e43b0abfe4c34ea323">&#9670;&nbsp;</a></span>simo_spi_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_spi_deinit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a>&#160;</td>
+          <td class="paramname"><em>spi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desconfigura el puerto SPI. Libera recursos asociados. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spi</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
 <a id="adf9bd23308882931ca043fd353dd3e34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf9bd23308882931ca043fd353dd3e34">&#9670;&nbsp;</a></span>simo_spi_ena_irq()</h2>
 
@@ -196,8 +226,8 @@ Funciones</h2></td></tr>
 
 </div>
 </div>
-<a id="a9bf9cb2fc3385c31362c243fe33948fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bf9cb2fc3385c31362c243fe33948fc">&#9670;&nbsp;</a></span>simo_spi_init()</h2>
+<a id="a96a8a9f57fddfc6559877335acd2ea5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96a8a9f57fddfc6559877335acd2ea5f">&#9670;&nbsp;</a></span>simo_spi_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,7 +241,7 @@ Funciones</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="spi_8h.html#a5b6846f748988ecc78b4bb6535daa782">simo_spi_prescaler</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="spi_8h.html#aeb05ec05367bd0a324f8b69acf060ad3">SIMO_SPI_PRESCALER</a>&#160;</td>
           <td class="paramname"><em>prescaler</em>&#160;</td>
         </tr>
         <tr>

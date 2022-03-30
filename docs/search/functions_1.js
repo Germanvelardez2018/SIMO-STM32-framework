@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rtc_5falarm_5firqhandler_253',['RTC_Alarm_IRQHandler',['../rtc_8c.html#a4da4fb52ec579671d337938e78f9a207',1,'rtc.c']]]
+  ['power_5fmode_5fget_5fstate_339',['power_mode_get_state',['../power__modes_8h.html#afdd939d13ea778683beee4680ccfc938',1,'power_mode_get_state(void):&#160;power_modes.c'],['../power__modes_8c.html#afdd939d13ea778683beee4680ccfc938',1,'power_mode_get_state(void):&#160;power_modes.c']]],
+  ['power_5fmode_5fset_340',['power_mode_set',['../power__modes_8h.html#a1d2875603c8337049979eb87b5e9727a',1,'power_mode_set(pwr_modes mode):&#160;power_modes.c'],['../power__modes_8c.html#a1d2875603c8337049979eb87b5e9727a',1,'power_mode_set(pwr_modes mode):&#160;power_modes.c']]]
 ];

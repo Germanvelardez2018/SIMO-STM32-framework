@@ -77,191 +77,278 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">//INCLUDES DE C STANDAR</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">    #include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">    #include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="config_8h.html">config.h</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">    #include &quot;<a class="code" href="config_8h.html">config.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">    #include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    #include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="core_8h.html#a16ba4c98b26c8cd1e234fac98a8080a2">   30</a></span>&#160;<span class="preprocessor">    #define CLOCK_TIMER                 4000000</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="core_8h.html#a86b12ec043af758129ead69123128ed1">   31</a></span>&#160;<span class="preprocessor">    #define SIMO_RTC_ENA                C_SIMO_RTC_ENA</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="core_8h.html#a018dce838a8fcb0c01df271ca9207121">   35</a></span>&#160;<span class="preprocessor">    #define SIMO_UART_ENA               C_SIMO_UART_ENA</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="core_8h.html#ae6ed9226e2981af10a2c48ac15e7ea5f">   36</a></span>&#160;<span class="preprocessor">    #define SIMO_SPI_ENA                C_SIMO_SPI_ENA</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="core_8h.html#abadab96dfdc27281408d3e9cdf1002bb">   37</a></span>&#160;<span class="preprocessor">    #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="core_8h.html#a1dfae98ec5c2b174f63685d00982fba0">   38</a></span>&#160;<span class="preprocessor">    #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA                         </span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="core_8h.html#a16ba4c98b26c8cd1e234fac98a8080a2">   35</a></span>&#160;<span class="preprocessor">    #define CLOCK_TIMER                 4000000</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="core_8h.html#a86b12ec043af758129ead69123128ed1">   36</a></span>&#160;<span class="preprocessor">    #define SIMO_RTC_ENA                C_SIMO_RTC_ENA</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Cantidad de instancias</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="core_8h.html#a58a3db1ad53bbb091eb8827337e4266f">   43</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_UART               C_NUM_SIMO_UART</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="core_8h.html#a3e707160916bec55bd018b9dc93edca3">   44</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_SPI                C_NUM_SIMO_SPI</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="core_8h.html#ad2a09d42a4ee199829f449707ec3e3ff">   45</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_GPIO               C_NUM_SIMO_GPIO</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="core_8h.html#a1c8da23240ffdae993d709ae79f02b80">   46</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_TIMER              C_NUM_SIMO_TIMER</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="core_8h.html#a018dce838a8fcb0c01df271ca9207121">   40</a></span>&#160;<span class="preprocessor">    #define SIMO_UART_ENA               C_SIMO_UART_ENA</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="core_8h.html#ae6ed9226e2981af10a2c48ac15e7ea5f">   41</a></span>&#160;<span class="preprocessor">    #define SIMO_SPI_ENA                C_SIMO_SPI_ENA</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="core_8h.html#a2bf892818ca402fb4df5e1035ea2ad8a">   42</a></span>&#160;<span class="preprocessor">    #define SIMO_I2C_ENA                C_SIMO_I2C_ENA</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="core_8h.html#abadab96dfdc27281408d3e9cdf1002bb">   43</a></span>&#160;<span class="preprocessor">    #define SIMO_TIMER_ENA              C_SIMO_TIMER_ENA</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="core_8h.html#a1dfae98ec5c2b174f63685d00982fba0">   44</a></span>&#160;<span class="preprocessor">    #define SIMO_GPIO_ENA               C_SIMO_GPIO_ENA  </span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="core_8h.html#a5bacc8b9cc9dd194eaa3ebd2587be3ee">   45</a></span>&#160;<span class="preprocessor">    #define SIMO_ADC_ENA                C_SIMO_ADC_ENA                       </span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// Interrupciones</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="core_8h.html#a270762019061e3c8ae3e11b31af6d954">   55</a></span>&#160;<span class="preprocessor">    #define SIMO_UART_IRQ           C_SIMO_UART_IRQ</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">        #if SIMO_UART_IRQ == 1</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="comment">//Habilite configuracion para generar interrupciones UART</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="core_8h.html#a8705a58069351513e3d86050bc82f9ef">   58</a></span>&#160;<span class="preprocessor">            #define SIMO_UART_TX_IRQ     C_SIMO_UART_TX_IRQ</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="core_8h.html#a0bc21e4e2eda2209a169a31aa6a461e6">   59</a></span>&#160;<span class="preprocessor">            #define SIMO_UART_RX_IRQ     C_SIMO_UART_RX_IRQ</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">            #else</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">            #define SIMO_UART_TX_IRQ     0</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">            #define SIMO_UART_RX_IRQ     0</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="core_8h.html#a50f2633d94840b9306afff04c9852a61">   67</a></span>&#160;<span class="preprocessor">    #define SIMO_SPI_IRQ                C_SIMO_SPI_IRQ</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">        #if SIMO_SPI_IRQ == 1</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="comment">//Habilite configuracion para generar interrupciones SPI</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="core_8h.html#afeb297dd69b0517c6f68c3b3b8ee3006">   70</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_IRQ         C_SIMO_SPI_TX_IRQ</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="core_8h.html#a165d1202922d707d33a35562e2592b23">   71</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_RX_IRQ         C_SIMO_SPI_RX_IRQ</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="core_8h.html#a07588e5d9afd89fc5b21b54816e6bf24">   72</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_RX_IRQ      C_SIMO_SPI_TX_RX_IRQ</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">            #else</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_IRQ     0</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">            #define SIMO_SPI_RX_IRQ     0</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// Cantidad de instancias</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="core_8h.html#a58a3db1ad53bbb091eb8827337e4266f">   50</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_UART               C_NUM_SIMO_UART</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="core_8h.html#a54f41abeab9ab58de61eb40491392093">   51</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_I2C                C_NUM_SIMO_I2C</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="core_8h.html#a3e707160916bec55bd018b9dc93edca3">   52</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_SPI                C_NUM_SIMO_SPI</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="core_8h.html#ad2a09d42a4ee199829f449707ec3e3ff">   53</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_GPIO               C_NUM_SIMO_GPIO</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="core_8h.html#a1c8da23240ffdae993d709ae79f02b80">   54</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_TIMER              C_NUM_SIMO_TIMER</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="core_8h.html#aaf99fbfae993fd3b97bcd0f3eae0b7ad">   55</a></span>&#160;<span class="preprocessor">    #define NUM_SIMO_ADC                C_NUM_SIMO_ADC</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// Interrupciones</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="core_8h.html#a270762019061e3c8ae3e11b31af6d954">   64</a></span>&#160;<span class="preprocessor">    #define SIMO_UART_IRQ                       C_SIMO_UART_IRQ</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">        #if SIMO_UART_IRQ == 1</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="comment">//Habilite configuracion para generar interrupciones UART</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="core_8h.html#a8705a58069351513e3d86050bc82f9ef">   67</a></span>&#160;<span class="preprocessor">            #define SIMO_UART_TX_IRQ            C_SIMO_UART_TX_IRQ</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="core_8h.html#a0bc21e4e2eda2209a169a31aa6a461e6">   68</a></span>&#160;<span class="preprocessor">            #define SIMO_UART_RX_IRQ            C_SIMO_UART_RX_IRQ</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">            #else</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">            #define SIMO_UART_TX_IRQ     0</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">            #define SIMO_UART_RX_IRQ     0</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="core_8h.html#af24db7a33e574566e3b7545e045abc99">   75</a></span>&#160;<span class="preprocessor">    #define SIMO_I2C_IRQ                        C_SIMO_I2C_IRQ</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="core_8h.html#ab3bac0e8faa5cf35af850ed048788e23">   76</a></span>&#160;<span class="preprocessor">    #define SIMO_I2C_ERROR_IRQ                  C_SIMO_I2C_ERROR_IRQ</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="core_8h.html#a6eeb1e7e8f2f9063ef6db2b034c24b81">   79</a></span>&#160;<span class="preprocessor">#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ </span></div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="core_8h.html#a84489d8ea22ca14f8d0882e56cf3940b">   80</a></span>&#160;<span class="preprocessor">#define SIMO_GPIO_ADC_ENA               C_SIMO_GPIO_ADC_ENA</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#if SIMO_GPIO_EXT_IRQ == 1</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">   84</a></span>&#160;    <span class="keyword">typedef</span> void (*<a class="code" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a>)(uint16_t);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">        #if SIMO_I2C_IRQ == 1</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="core_8h.html#af74c5544f58a3ab2e33b4e1468996686">   79</a></span>&#160;<span class="preprocessor">            #define  SIMO_I2C_MASTER_ENA        C_SIMO_I2C_MASTER_ENA                       </span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="core_8h.html#a00b3e7d9672aea9b95ef1df179be2e9e">   80</a></span>&#160;<span class="preprocessor">            #define  SIMO_I2C_SLAVE_ENA         C_SIMO_I2C_SLAVE_ENA</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">        #else                         </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">            #define  SIMO_I2C_MASTER_ENA         0                       </span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">            #define  SIMO_I2C_SLAVE_ENA          0</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="core_8h.html#a23ae99b72739dc0b4105015b817f71a3">   88</a></span>&#160;<span class="preprocessor">#define SIMO_TIMER_IRQ                  C_SIMO_TIMER_IRQ</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">        #if  (SIMO_I2C_MASTER_ENA + SIMO_I2C_SLAVE_ENA) == 0</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">            #define    SIMO_I2C_ENA   0</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="comment">// Deshabilitamos si valores de instancias son 0</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">    #if NUM_SIMO_TIMER == 0</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">        #define    SIMO_UART_ENA   0</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">    #if NUM_SIMO_UART == 0</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">        #define    SIMO_UART_ENA   0</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="core_8h.html#a50f2633d94840b9306afff04c9852a61">   95</a></span>&#160;<span class="preprocessor">    #define SIMO_SPI_IRQ                C_SIMO_SPI_IRQ</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">        #if SIMO_SPI_IRQ == 1</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">//Habilite configuracion para generar interrupciones SPI</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="core_8h.html#afeb297dd69b0517c6f68c3b3b8ee3006">   98</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_IRQ         C_SIMO_SPI_TX_IRQ</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="core_8h.html#a165d1202922d707d33a35562e2592b23">   99</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_RX_IRQ         C_SIMO_SPI_RX_IRQ</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="core_8h.html#a07588e5d9afd89fc5b21b54816e6bf24">  100</a></span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_RX_IRQ      C_SIMO_SPI_TX_RX_IRQ</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">        #else</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">            #define SIMO_SPI_TX_IRQ     0</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">            #define SIMO_SPI_RX_IRQ     0</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">    #if NUM_SIMO_SPI == 0</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">        #define    SIMO_SPI_ENA   0</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="core_8h.html#a6eeb1e7e8f2f9063ef6db2b034c24b81">  107</a></span>&#160;<span class="preprocessor">#define SIMO_GPIO_EXT_IRQ               C_SIMO_GPIO_EXT_IRQ </span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="core_8h.html#a84489d8ea22ca14f8d0882e56cf3940b">  108</a></span>&#160;<span class="preprocessor">#define SIMO_GPIO_ADC_ENA               C_SIMO_GPIO_ADC_ENA</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="core_8h.html#ad3f3fbea6538d1ae3f33505bd1e3e061">  109</a></span>&#160;<span class="preprocessor">#define SIMO_ADC_IRQ                    C_SIMO_ADC_IRQ</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#if SIMO_GPIO_EXT_IRQ == 1</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">  113</a></span>&#160;    <span class="keyword">typedef</span> void (*<a class="code" href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a>)(uint16_t);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif </span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="core_8h.html#a23ae99b72739dc0b4105015b817f71a3">  116</a></span>&#160;<span class="preprocessor">#define SIMO_TIMER_IRQ                  C_SIMO_TIMER_IRQ</span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// CORE TIMER </span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">    #if SIMO_TIMER_ENA == 1</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;0</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            TIMER_A,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;1</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            TIMER_B,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;2</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            TIMER_C</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        } SIMO_TIMER;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;       </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="comment">// Deshabilitamos si valores de instancias son 0</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">    #if NUM_SIMO_TIMER == 0</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">        #define    SIMO_UART_ENA   0</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">    #if NUM_SIMO_I2C == 0</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">        #define    SIMO_I2C_ENA   0</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">    #if NUM_SIMO_UART == 0</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">        #define    SIMO_UART_ENA   0</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">//CORE UART</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">    #if SIMO_UART_ENA == 1</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">    #if NUM_SIMO_SPI == 0</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">        #define    SIMO_SPI_ENA   0</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">  144</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;0</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">  146</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">UART_A</a>,</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;1</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">  149</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">UART_B</a>,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;2</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">  152</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">UART_C</a></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        } <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;     </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">// CORE TIMER </span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">    #if SIMO_TIMER_ENA == 1</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">  152</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;0</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">  154</a></span>&#160;            <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">TIMER_A</a>,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;1</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            TIMER_B,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">        #if NUM_SIMO_TIMER &gt;2</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            TIMER_C</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        } <a class="code" href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a>;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="comment">// CORE SPI </span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">    #if SIMO_SPI_ENA == 1</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">  168</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">        #if NUM_SIMO_SPI &gt;0</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">  170</a></span>&#160;            <a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">SPI_A</a>,</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">        #if NUM_SIMO_SPI &gt;1</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11">  173</a></span>&#160;            <a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11">SPI_B</a>,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">        #endif</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        } <a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">  185</a></span>&#160;    <span class="keyword">typedef</span> void (*<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a>)(void);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;       </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="comment">//CORE UART</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">    #if SIMO_UART_ENA == 1</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">  173</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;0</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">  175</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">UART_A</a>,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;1</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">  178</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">UART_B</a>,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">        #if NUM_SIMO_UART &gt;2</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">  181</a></span>&#160;            <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">UART_C</a></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        } <a class="code" href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">//CORE I2C</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">    #if SIMO_I2C_ENA == 1</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">  191</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor">        #if NUM_SIMO_I2C &gt;0</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6efae54791ee7950d305d7207c887958a975">  193</a></span>&#160;            <a class="code" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6efae54791ee7950d305d7207c887958a975">I2C_A</a></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor">        #if NUM_SIMO_I2C &gt;1</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            ,I2C_B</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        } <a class="code" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="comment">// CORE SPI </span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">    #if SIMO_SPI_ENA == 1</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">  207</a></span>&#160;        <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">        #if NUM_SIMO_SPI &gt;0</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">  209</a></span>&#160;            <a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">SPI_A</a>,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="preprocessor">        #if NUM_SIMO_SPI &gt;1</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            SPI_B,</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor">        #endif</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        } <a class="code" href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;      </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">  223</a></span>&#160;    <span class="keyword">typedef</span> void (*<a class="code" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a>)(void);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    </div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9">  227</a></span>&#160;    <span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a4217f2e9e350b4d1323c38588c5594fe">  228</a></span>&#160;      <a class="code" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a4217f2e9e350b4d1323c38588c5594fe">FSM_UNDEFINED</a>        = 2</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a28862c6c8f13ede42e818e20a4f30a84">  229</a></span>&#160;    , <a class="code" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a28862c6c8f13ede42e818e20a4f30a84">FSM_WITHOUT_CONFIG</a>   =3         </div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9aec64cf6f6656ee8f0b953488f22327d6">  230</a></span>&#160;    , <a class="code" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9aec64cf6f6656ee8f0b953488f22327d6">FSM_ON_FIELD</a>         =4      </div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9afc19493dbe41363c913a80ea07264de7">  231</a></span>&#160;    , <a class="code" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9afc19493dbe41363c913a80ea07264de7">FSM_MEMORY_DOWNLOAD</a>  =5    </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    } <a class="code" href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9">fsm_devices</a>;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3b">  238</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba4d50598f33fa77b85015ea551e65e5b8">  239</a></span>&#160;        <a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba4d50598f33fa77b85015ea551e65e5b8">RESUMEN_RUN</a> = 0     </div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba72d5c82c8680bd6bf9980e96050a57dc">  240</a></span>&#160;    ,   <a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba72d5c82c8680bd6bf9980e96050a57dc">SLEEP_ONLY_ISR_MODE</a>   </div>
+<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3bad1486bda2c3e55fd939260a6b7e38020">  241</a></span>&#160;    ,   <a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3bad1486bda2c3e55fd939260a6b7e38020">SLEEP_MODE</a>       </div>
+<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3bafc8ed23ec94a8e0c642921ccc9caa811">  242</a></span>&#160;    ,   <a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3bafc8ed23ec94a8e0c642921ccc9caa811">STOP_MODE</a>        </div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba6cc2183e0159e2fcbdfd85156b263ec0">  243</a></span>&#160;    ,   <a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba6cc2183e0159e2fcbdfd85156b263ec0">STANDBY_MODE</a>     </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}<a class="code" href="core_8h.html#a8b935d4c243b80e83a6365404214af3b">pwr_modes</a>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0">  247</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0ab560cdce7ed94050e4392489e3d8d130">  248</a></span>&#160;    <a class="code" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0ab560cdce7ed94050e4392489e3d8d130">S_OUTPUT_INT</a></div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0aca1f543cd611c87bf19d324aa7546be1">  249</a></span>&#160;    ,<a class="code" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0aca1f543cd611c87bf19d324aa7546be1">S_OUTPUT_FLOAT</a></div>
+<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0afc56363e7115d663939e3cdbe1b1e649">  250</a></span>&#160;    ,<a class="code" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0afc56363e7115d663939e3cdbe1b1e649">S_OUTPUT_STRING</a></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;} <a class="code" href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0">sensor_output</a>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="core_8h.html#ac571b1dd36168331419ce5c231c0ae63">  255</a></span>&#160;<span class="keyword">typedef</span> uint32_t (*<a class="code" href="core_8h.html#ac571b1dd36168331419ce5c231c0ae63">check_sensor</a>)(sensor_format);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">SPI_A</a></div><div class="ttdeci">@ SPI_A</div><div class="ttdef"><b>Definition:</b> core.h:170</div></div>
-<div class="ttc" id="acore_8h_html_a029315ea37cb1b9a1c3445f7574418fc"><div class="ttname"><a href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a></div><div class="ttdeci">void(* callback_gpio_ext_it)(uint16_t)</div><div class="ttdef"><b>Definition:</b> core.h:84</div></div>
-<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">UART_B</a></div><div class="ttdeci">@ UART_B</div><div class="ttdef"><b>Definition:</b> core.h:149</div></div>
-<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">UART_A</a></div><div class="ttdeci">@ UART_A</div><div class="ttdef"><b>Definition:</b> core.h:146</div></div>
-<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">UART_C</a></div><div class="ttdeci">@ UART_C</div><div class="ttdef"><b>Definition:</b> core.h:152</div></div>
-<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587d"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a></div><div class="ttdeci">SIMO_UART</div><div class="ttdef"><b>Definition:</b> core.h:144</div></div>
-<div class="ttc" id="acore_8h_html_acc9b7711c2ddc24116b0231383b54636"><div class="ttname"><a href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a></div><div class="ttdeci">void(* callback_irq)(void)</div><div class="ttdoc">Funcion callback asociada a una interupcion por hardware.</div><div class="ttdef"><b>Definition:</b> core.h:185</div></div>
-<div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
-<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaa6f7cb70675b291f4dc6bb1caa561ff11">SPI_B</a></div><div class="ttdeci">@ SPI_B</div><div class="ttdef"><b>Definition:</b> core.h:173</div></div>
-<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41eca"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a></div><div class="ttdeci">SIMO_SPI</div><div class="ttdef"><b>Definition:</b> core.h:168</div></div>
+<div class="ttc" id="acore_8h_html_ac571b1dd36168331419ce5c231c0ae63"><div class="ttname"><a href="core_8h.html#ac571b1dd36168331419ce5c231c0ae63">check_sensor</a></div><div class="ttdeci">uint32_t(* check_sensor)(sensor_format)</div><div class="ttdef"><b>Definition:</b> core.h:255</div></div>
+<div class="ttc" id="acore_8h_html_ad32e30c08b05486c9651e0f5a57978e9"><div class="ttname"><a href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9">fsm_devices</a></div><div class="ttdeci">fsm_devices</div><div class="ttdoc">Estados del sistema.</div><div class="ttdef"><b>Definition:</b> core.h:227</div></div>
+<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41ecaae6af78ba107890fe4cd6f6cd51d78405">SPI_A</a></div><div class="ttdeci">@ SPI_A</div><div class="ttdef"><b>Definition:</b> core.h:209</div></div>
+<div class="ttc" id="acore_8h_html_a029315ea37cb1b9a1c3445f7574418fc"><div class="ttname"><a href="core_8h.html#a029315ea37cb1b9a1c3445f7574418fc">callback_gpio_ext_it</a></div><div class="ttdeci">void(* callback_gpio_ext_it)(uint16_t)</div><div class="ttdef"><b>Definition:</b> core.h:113</div></div>
+<div class="ttc" id="acore_8h_html_a2aa8b8815d61c8f3e748f462315de0f0ab560cdce7ed94050e4392489e3d8d130"><div class="ttname"><a href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0ab560cdce7ed94050e4392489e3d8d130">S_OUTPUT_INT</a></div><div class="ttdeci">@ S_OUTPUT_INT</div><div class="ttdef"><b>Definition:</b> core.h:248</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3ba72d5c82c8680bd6bf9980e96050a57dc"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba72d5c82c8680bd6bf9980e96050a57dc">SLEEP_ONLY_ISR_MODE</a></div><div class="ttdeci">@ SLEEP_ONLY_ISR_MODE</div><div class="ttdoc">Sleep, despierta para realizar IQR y vuelve a dormir.</div><div class="ttdef"><b>Definition:</b> core.h:240</div></div>
+<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191">UART_B</a></div><div class="ttdeci">@ UART_B</div><div class="ttdef"><b>Definition:</b> core.h:178</div></div>
+<div class="ttc" id="acore_8h_html_ad32e30c08b05486c9651e0f5a57978e9a28862c6c8f13ede42e818e20a4f30a84"><div class="ttname"><a href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a28862c6c8f13ede42e818e20a4f30a84">FSM_WITHOUT_CONFIG</a></div><div class="ttdeci">@ FSM_WITHOUT_CONFIG</div><div class="ttdef"><b>Definition:</b> core.h:229</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3ba6cc2183e0159e2fcbdfd85156b263ec0"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba6cc2183e0159e2fcbdfd85156b263ec0">STANDBY_MODE</a></div><div class="ttdeci">@ STANDBY_MODE</div><div class="ttdoc">1.2 V domain powered off</div><div class="ttdef"><b>Definition:</b> core.h:243</div></div>
+<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea">UART_A</a></div><div class="ttdeci">@ UART_A</div><div class="ttdef"><b>Definition:</b> core.h:175</div></div>
+<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723">UART_C</a></div><div class="ttdeci">@ UART_C</div><div class="ttdef"><b>Definition:</b> core.h:181</div></div>
+<div class="ttc" id="acore_8h_html_ad6ae352d1f8cd55226e04d00f362d6efae54791ee7950d305d7207c887958a975"><div class="ttname"><a href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6efae54791ee7950d305d7207c887958a975">I2C_A</a></div><div class="ttdeci">@ I2C_A</div><div class="ttdef"><b>Definition:</b> core.h:193</div></div>
+<div class="ttc" id="acore_8h_html_a42701597aee2248af5200c8dcdae587d"><div class="ttname"><a href="core_8h.html#a42701597aee2248af5200c8dcdae587d">SIMO_UART</a></div><div class="ttdeci">SIMO_UART</div><div class="ttdef"><b>Definition:</b> core.h:173</div></div>
+<div class="ttc" id="acore_8h_html_acc9b7711c2ddc24116b0231383b54636"><div class="ttname"><a href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a></div><div class="ttdeci">void(* callback_irq)(void)</div><div class="ttdoc">Funcion callback asociada a una interupcion por hardware.</div><div class="ttdef"><b>Definition:</b> core.h:223</div></div>
+<div class="ttc" id="acore_8h_html_ad6ae352d1f8cd55226e04d00f362d6ef"><div class="ttname"><a href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a></div><div class="ttdeci">SIMO_I2C</div><div class="ttdef"><b>Definition:</b> core.h:191</div></div>
+<div class="ttc" id="acore_8h_html_a2aa8b8815d61c8f3e748f462315de0f0aca1f543cd611c87bf19d324aa7546be1"><div class="ttname"><a href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0aca1f543cd611c87bf19d324aa7546be1">S_OUTPUT_FLOAT</a></div><div class="ttdeci">@ S_OUTPUT_FLOAT</div><div class="ttdef"><b>Definition:</b> core.h:249</div></div>
+<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2a179b1231f027eba52fa4ef94ec174598">TIMER_A</a></div><div class="ttdeci">@ TIMER_A</div><div class="ttdef"><b>Definition:</b> core.h:154</div></div>
+<div class="ttc" id="acore_8h_html_ad32e30c08b05486c9651e0f5a57978e9aec64cf6f6656ee8f0b953488f22327d6"><div class="ttname"><a href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9aec64cf6f6656ee8f0b953488f22327d6">FSM_ON_FIELD</a></div><div class="ttdeci">@ FSM_ON_FIELD</div><div class="ttdef"><b>Definition:</b> core.h:230</div></div>
+<div class="ttc" id="acore_8h_html_a85fea84c6a73ab7409e6b545ea749ff2"><div class="ttname"><a href="core_8h.html#a85fea84c6a73ab7409e6b545ea749ff2">SIMO_TIMER</a></div><div class="ttdeci">SIMO_TIMER</div><div class="ttdef"><b>Definition:</b> core.h:152</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3ba4d50598f33fa77b85015ea551e65e5b8"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3ba4d50598f33fa77b85015ea551e65e5b8">RESUMEN_RUN</a></div><div class="ttdeci">@ RESUMEN_RUN</div><div class="ttdef"><b>Definition:</b> core.h:239</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3b"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3b">pwr_modes</a></div><div class="ttdeci">pwr_modes</div><div class="ttdoc">Modos del sistema.</div><div class="ttdef"><b>Definition:</b> core.h:238</div></div>
+<div class="ttc" id="acore_8h_html_ad32e30c08b05486c9651e0f5a57978e9a4217f2e9e350b4d1323c38588c5594fe"><div class="ttname"><a href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9a4217f2e9e350b4d1323c38588c5594fe">FSM_UNDEFINED</a></div><div class="ttdeci">@ FSM_UNDEFINED</div><div class="ttdef"><b>Definition:</b> core.h:228</div></div>
+<div class="ttc" id="acore_8h_html_a2aa8b8815d61c8f3e748f462315de0f0afc56363e7115d663939e3cdbe1b1e649"><div class="ttname"><a href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0afc56363e7115d663939e3cdbe1b1e649">S_OUTPUT_STRING</a></div><div class="ttdeci">@ S_OUTPUT_STRING</div><div class="ttdef"><b>Definition:</b> core.h:250</div></div>
+<div class="ttc" id="acore_8h_html_a2aa8b8815d61c8f3e748f462315de0f0"><div class="ttname"><a href="core_8h.html#a2aa8b8815d61c8f3e748f462315de0f0">sensor_output</a></div><div class="ttdeci">sensor_output</div><div class="ttdef"><b>Definition:</b> core.h:247</div></div>
+<div class="ttc" id="acore_8h_html_ad32e30c08b05486c9651e0f5a57978e9afc19493dbe41363c913a80ea07264de7"><div class="ttname"><a href="core_8h.html#ad32e30c08b05486c9651e0f5a57978e9afc19493dbe41363c913a80ea07264de7">FSM_MEMORY_DOWNLOAD</a></div><div class="ttdeci">@ FSM_MEMORY_DOWNLOAD</div><div class="ttdef"><b>Definition:</b> core.h:231</div></div>
+<div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div><div class="ttdoc">Archivo para configurar el proyecto. Se basa en compilacion condicional y definiciones.</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3bad1486bda2c3e55fd939260a6b7e38020"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3bad1486bda2c3e55fd939260a6b7e38020">SLEEP_MODE</a></div><div class="ttdeci">@ SLEEP_MODE</div><div class="ttdoc">CPU OFF, Perifericos funcionando.</div><div class="ttdef"><b>Definition:</b> core.h:241</div></div>
+<div class="ttc" id="acore_8h_html_a0044c67d3f709cdbdf387f8aa1d41eca"><div class="ttname"><a href="core_8h.html#a0044c67d3f709cdbdf387f8aa1d41eca">SIMO_SPI</a></div><div class="ttdeci">SIMO_SPI</div><div class="ttdef"><b>Definition:</b> core.h:207</div></div>
+<div class="ttc" id="acore_8h_html_a8b935d4c243b80e83a6365404214af3bafc8ed23ec94a8e0c642921ccc9caa811"><div class="ttname"><a href="core_8h.html#a8b935d4c243b80e83a6365404214af3bafc8ed23ec94a8e0c642921ccc9caa811">STOP_MODE</a></div><div class="ttdeci">@ STOP_MODE</div><div class="ttdoc">CPU OFF, Perifericos OFF,Todos las fuentes de clock off.</div><div class="ttdef"><b>Definition:</b> core.h:242</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generado por &#160;<a href="http://www.doxygen.org/index.html">

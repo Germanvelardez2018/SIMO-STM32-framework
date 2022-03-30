@@ -83,6 +83,7 @@ $(function() {
 Dependencia gráfica adjunta para clock_config.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="clock__config_8c__incl.png" border="0" usemap="#_core_2simo_2clock__config_8c" alt=""/></div>
+<!-- MAP 0 -->
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -120,6 +121,9 @@ defines</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funciones</h2></td></tr>
+<tr class="memitem:a86afc0e78c548fd4cca888959c54c91d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__config_8c.html#a86afc0e78c548fd4cca888959c54c91d">simo_clock_init</a> (void)</td></tr>
+<tr class="memdesc:a86afc0e78c548fd4cca888959c54c91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iniciamos la HAL de bajo nivel del sistema.  <a href="clock__config_8c.html#a86afc0e78c548fd4cca888959c54c91d">Más...</a><br /></td></tr>
+<tr class="separator:a86afc0e78c548fd4cca888959c54c91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eb93be94c1c6a0f5ceb42861426c3d0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__config_8c.html#a1eb93be94c1c6a0f5ceb42861426c3d0">simo_clock_rtc</a> (void)</td></tr>
 <tr class="memdesc:a1eb93be94c1c6a0f5ceb42861426c3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura el rtc con el crista LSE de 32khz.  <a href="clock__config_8c.html#a1eb93be94c1c6a0f5ceb42861426c3d0">Más...</a><br /></td></tr>
 <tr class="separator:a1eb93be94c1c6a0f5ceb42861426c3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,8 +137,10 @@ Funciones</h2></td></tr>
 <tr class="memdesc:af95d12b359b5f7d4b69b577a26e3a02e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna el valor del clock base del funcionamiento de los timer. Por defecto es 40Mhz.  <a href="clock__config_8c.html#af95d12b359b5f7d4b69b577a26e3a02e">Más...</a><br /></td></tr>
 <tr class="separator:af95d12b359b5f7d4b69b577a26e3a02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9924cc19464970b6bd314f80abab2c80"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__config_8c.html#a9924cc19464970b6bd314f80abab2c80">simo_clock_get_APB1</a> ()</td></tr>
+<tr class="memdesc:a9924cc19464970b6bd314f80abab2c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtengo el valor del clock source del BUS APB1.  <a href="clock__config_8c.html#a9924cc19464970b6bd314f80abab2c80">Más...</a><br /></td></tr>
 <tr class="separator:a9924cc19464970b6bd314f80abab2c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d1207921ea1e11c180e1bcd5bb17784"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock__config_8c.html#a1d1207921ea1e11c180e1bcd5bb17784">simo_clock_get_APB2</a> ()</td></tr>
+<tr class="memdesc:a1d1207921ea1e11c180e1bcd5bb17784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtengo el valor del clock source del BUS APB2.  <a href="clock__config_8c.html#a1d1207921ea1e11c180e1bcd5bb17784">Más...</a><br /></td></tr>
 <tr class="separator:a1d1207921ea1e11c180e1bcd5bb17784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
@@ -393,6 +399,9 @@ Funciones</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Obtengo el valor del clock source del BUS APB1. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
 </div>
 </div>
 <a id="a1d1207921ea1e11c180e1bcd5bb17784"></a>
@@ -409,6 +418,9 @@ Funciones</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Obtengo el valor del clock source del BUS APB2. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
 
 </div>
 </div>
@@ -451,6 +463,27 @@ Funciones</h2></td></tr>
 
 <p>Retorna el valor del clock base del funcionamiento de los timer. Por defecto es 40Mhz. </p>
 <dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a86afc0e78c548fd4cca888959c54c91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86afc0e78c548fd4cca888959c54c91d">&#9670;&nbsp;</a></span>simo_clock_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_clock_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Iniciamos la HAL de bajo nivel del sistema. </p>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
 
 </div>
 </div>

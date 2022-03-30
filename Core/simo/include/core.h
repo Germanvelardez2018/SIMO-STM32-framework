@@ -251,11 +251,6 @@ typedef enum {
 } sensor_output;
 
 
-typedef struct{
-    char *format;
-    uint8_t len;
-} sensor_format;
-
 
 typedef uint32_t (*check_sensor)(sensor_format);
 

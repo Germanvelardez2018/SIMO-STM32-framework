@@ -1,13 +1,7 @@
 var searchData=
 [
-  ['uart_2ec_221',['uart.c',['../uart_8c.html',1,'']]],
-  ['uart_2eh_222',['uart.h',['../uart_8h.html',1,'']]],
-  ['uart_5fa_223',['UART_A',['../core_8h.html#a42701597aee2248af5200c8dcdae587da2c7926a88535bece938e4b773b6d9eea',1,'core.h']]],
-  ['uart_5fb_224',['UART_B',['../core_8h.html#a42701597aee2248af5200c8dcdae587dad2c9f2e633250f2773bcc76928152191',1,'core.h']]],
-  ['uart_5fc_225',['UART_C',['../core_8h.html#a42701597aee2248af5200c8dcdae587da964c60319df5902fbfcb0a9c995a5723',1,'core.h']]],
-  ['used_5fclock_5fapb1_5fdiv_226',['USED_CLOCK_APB1_DIV',['../clock__config_8c.html#a2cb7b2f5ee527b47385473d98090977c',1,'clock_config.c']]],
-  ['used_5fclock_5fapb2_5fdiv_227',['USED_CLOCK_APB2_DIV',['../clock__config_8c.html#a761c1588aeebed7eaa0aae86c8ce658e',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_228',['USED_CLOCK_LSI',['../clock__config_8c.html#ad19bce2ae485e9262faf97516e6455a1',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fdiv_229',['USED_CLOCK_LSI_DIV',['../clock__config_8c.html#a90099f42b08eea2256c8d8facc261b70',1,'clock_config.c']]],
-  ['used_5fclock_5flsi_5fmul_230',['USED_CLOCK_LSI_MUL',['../clock__config_8c.html#a409f940217d942b6919114b4ae51ed6e',1,'clock_config.c']]]
+  ['resumen_5frun_84',['RESUMEN_RUN',['../core_8h.html#a8b935d4c243b80e83a6365404214af3ba4d50598f33fa77b85015ea551e65e5b8',1,'core.h']]],
+  ['rtc_2ec_85',['rtc.c',['../rtc_8c.html',1,'']]],
+  ['rtc_2eh_86',['rtc.h',['../rtc_8h.html',1,'']]],
+  ['rtc_5falarm_5firqhandler_87',['RTC_Alarm_IRQHandler',['../rtc_8c.html#a4da4fb52ec579671d337938e78f9a207',1,'rtc.c']]]
 ];

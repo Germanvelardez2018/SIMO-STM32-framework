@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['minute_282',['minute',['../group___r_t_c___week_day___definitions.html#ga8ff981ec55c945940f4a0da7d8709b3c',1,'simo_time_t']]],
-  ['month_283',['month',['../group___r_t_c___week_day___definitions.html#ga3e00faf7fbf9805e9ec4d2edd6339050',1,'simo_date_t']]]
+  ['setup_5fconfig_421',['setup_config',['../power__save_8h.html#a4d3a525899564b564904f8d441208ff2',1,'power_save.h']]]
 ];

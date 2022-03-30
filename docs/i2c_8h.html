@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIMO: Referencia del Archivo Core/simo/include/i2c.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SIMO
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Framework de trabajo para STM32. La idea es simplificar el trabajo de configuracion y generacion de aplicaciones simples</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a class="el" href="dir_1ffac0d2630f4824660dea6691be9d7f.html">simo</a></li><li class="navelem"><a class="el" href="dir_51ae6caf7e11bae481ee121923f41a47.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo i2c.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Driver para manejar el hardware I2C.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="core_8h_source.html">core.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para i2c.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="i2c_8h__incl.png" border="0" usemap="#_core_2simo_2include_2i2c_8h" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="i2c_8h__dep__incl.png" border="0" usemap="#_core_2simo_2include_2i2c_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="i2c_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:af35049d8cf8aa04060ba9bd8128ad4b7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#af35049d8cf8aa04060ba9bd8128ad4b7">simo_i2c_init</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint32_t clock_speed, uint32_t address_7bits)</td></tr>
+<tr class="separator:af35049d8cf8aa04060ba9bd8128ad4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b7a443ad04aacbb507055fc792f646b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#a3b7a443ad04aacbb507055fc792f646b">simo_i2c_deinit</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> I2C)</td></tr>
+<tr class="memdesc:a3b7a443ad04aacbb507055fc792f646b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desconfigura el puerto I2C.  <a href="i2c_8h.html#a3b7a443ad04aacbb507055fc792f646b">Más...</a><br /></td></tr>
+<tr class="separator:a3b7a443ad04aacbb507055fc792f646b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9688b453018040b4b639c74b24ae5f5b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#a9688b453018040b4b639c74b24ae5f5b">simo_i2c_mem_write</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint16_t address, uint16_t mem_address, uint16_t mem_size, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
+<tr class="separator:a9688b453018040b4b639c74b24ae5f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcfd4b2361fb7148466ef0e8e3f7f53d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#afcfd4b2361fb7148466ef0e8e3f7f53d">simo_i2c_mem_read</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint16_t address, uint16_t mem_address, uint16_t mem_size, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
+<tr class="separator:afcfd4b2361fb7148466ef0e8e3f7f53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663718d3dc044c458035ff0413734dd5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#a663718d3dc044c458035ff0413734dd5">simo_i2c_master_read</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint16_t address, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
+<tr class="separator:a663718d3dc044c458035ff0413734dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd4ceb8da3d60718df548de4e4193e9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#abcd4ceb8da3d60718df548de4e4193e9">simo_i2c_master_write</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint16_t address, uint8_t *data, uint32_t len, uint32_t timeout, uint32_t ena_callback)</td></tr>
+<tr class="separator:abcd4ceb8da3d60718df548de4e4193e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a032c2a4e75be65b2dfd6da2e45e18da5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#a032c2a4e75be65b2dfd6da2e45e18da5">simo_i2c_set_master_rx_callback</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, <a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback)</td></tr>
+<tr class="separator:a032c2a4e75be65b2dfd6da2e45e18da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a353f66cd0c8eacde86bfa8fb9f1d0ebe"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#a353f66cd0c8eacde86bfa8fb9f1d0ebe">simo_i2c_set_master_tx_callback</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, <a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a> callback)</td></tr>
+<tr class="separator:a353f66cd0c8eacde86bfa8fb9f1d0ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab201ca551e2e8a2edaf6556d907d0f96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="i2c_8h.html#ab201ca551e2e8a2edaf6556d907d0f96">simo_i2c_ena_irq</a> (<a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a> i2c, uint32_t ena_ev_event, uint32_t ena_er_ev)</td></tr>
+<tr class="separator:ab201ca551e2e8a2edaf6556d907d0f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Driver para manejar el hardware I2C. </p>
+<dl class="section author"><dt>Autor</dt><dd>German Velardez (<a href="#" onclick="location.href='mai'+'lto:'+'ger'+'ma'+'nve'+'la'+'rde'+'z1'+'6@g'+'ma'+'il.'+'co'+'m'; return false;">germa<span style="display: none;">.nosp@m.</span>nvel<span style="display: none;">.nosp@m.</span>ardez<span style="display: none;">.nosp@m.</span>16@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2022-01-14</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
+</div><h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a3b7a443ad04aacbb507055fc792f646b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b7a443ad04aacbb507055fc792f646b">&#9670;&nbsp;</a></span>simo_i2c_deinit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_i2c_deinit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>I2C</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Desconfigura el puerto I2C. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">I2C</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="ab201ca551e2e8a2edaf6556d907d0f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab201ca551e2e8a2edaf6556d907d0f96">&#9670;&nbsp;</a></span>simo_i2c_ena_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simo_i2c_ena_irq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_ev_event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_er_ev</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">ena_ev_event</td><td></td></tr>
+    <tr><td class="paramname">ena_er_ev</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** void </dd></dl>
+
+</div>
+</div>
+<a id="af35049d8cf8aa04060ba9bd8128ad4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af35049d8cf8aa04060ba9bd8128ad4b7">&#9670;&nbsp;</a></span>simo_i2c_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>clock_speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>address_7bits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>I2C1 UNICO HARDWARE DISPONIBLE EN EL FRAMEWORK PB6 ---&mdash;&gt; I2C1_SCL PB7 ---&mdash;&gt; I2C1_SDA </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">clock_speed</td><td></td></tr>
+    <tr><td class="paramname">address_7bits</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a663718d3dc044c458035ff0413734dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663718d3dc044c458035ff0413734dd5">&#9670;&nbsp;</a></span>simo_i2c_master_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_master_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">address</td><td></td></tr>
+    <tr><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramname">len</td><td></td></tr>
+    <tr><td class="paramname">timeout</td><td></td></tr>
+    <tr><td class="paramname">ena_callback</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="abcd4ceb8da3d60718df548de4e4193e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcd4ceb8da3d60718df548de4e4193e9">&#9670;&nbsp;</a></span>simo_i2c_master_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_master_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">address</td><td></td></tr>
+    <tr><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramname">len</td><td></td></tr>
+    <tr><td class="paramname">timeout</td><td></td></tr>
+    <tr><td class="paramname">ena_callback</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="afcfd4b2361fb7148466ef0e8e3f7f53d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcfd4b2361fb7148466ef0e8e3f7f53d">&#9670;&nbsp;</a></span>simo_i2c_mem_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_mem_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mem_address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mem_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9688b453018040b4b639c74b24ae5f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9688b453018040b4b639c74b24ae5f5b">&#9670;&nbsp;</a></span>simo_i2c_mem_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_mem_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mem_address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>mem_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ena_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a032c2a4e75be65b2dfd6da2e45e18da5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a032c2a4e75be65b2dfd6da2e45e18da5">&#9670;&nbsp;</a></span>simo_i2c_set_master_rx_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_set_master_rx_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">callback</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+<a id="a353f66cd0c8eacde86bfa8fb9f1d0ebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353f66cd0c8eacde86bfa8fb9f1d0ebe">&#9670;&nbsp;</a></span>simo_i2c_set_master_tx_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t simo_i2c_set_master_tx_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="core_8h.html#ad6ae352d1f8cd55226e04d00f362d6ef">SIMO_I2C</a>&#160;</td>
+          <td class="paramname"><em>i2c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="core_8h.html#acc9b7711c2ddc24116b0231383b54636">callback_irq</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i2c</td><td></td></tr>
+    <tr><td class="paramname">callback</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>** uint32_t </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>

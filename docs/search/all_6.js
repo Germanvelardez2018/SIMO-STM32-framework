@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['normal_47',['NORMAL',['../power__save_8c.html#a286570be9a3f03292b380081e97254c9a50d1448013c6f17125caee18aa418af7',1,'power_save.c']]],
-  ['num_5fsimo_5fgpio_48',['NUM_SIMO_GPIO',['../core_8h.html#ad2a09d42a4ee199829f449707ec3e3ff',1,'core.h']]],
-  ['num_5fsimo_5fspi_49',['NUM_SIMO_SPI',['../core_8h.html#a3e707160916bec55bd018b9dc93edca3',1,'core.h']]],
-  ['num_5fsimo_5ftimer_50',['NUM_SIMO_TIMER',['../core_8h.html#a1c8da23240ffdae993d709ae79f02b80',1,'core.h']]],
-  ['num_5fsimo_5fuart_51',['NUM_SIMO_UART',['../core_8h.html#a58a3db1ad53bbb091eb8827337e4266f',1,'core.h']]]
+  ['hal_5frtc_5falarmaeventcallback_63',['HAL_RTC_AlarmAEventCallback',['../rtc_8c.html#a11aeff83fd498cddbed3bcddcf017e0a',1,'rtc.c']]],
+  ['hal_5frtc_5fmspdeinit_64',['HAL_RTC_MspDeInit',['../rtc_8c.html#a8767bc3a4d472d39a688090ab10ba6ce',1,'rtc.c']]],
+  ['hal_5frtc_5fmspinit_65',['HAL_RTC_MspInit',['../rtc_8c.html#aee6eddaa309c8c9829f1ca794d8f99c5',1,'rtc.c']]]
 ];
