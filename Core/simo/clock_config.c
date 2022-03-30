@@ -55,6 +55,12 @@
 
 
 
+void simo_clock_init(void){
+   // Aqui va la configuracion inicial
+  HAL_Init();
+}
+
+
 uint32_t simo_clock_rtc(void){
   uint32_t ret = 1;
     RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};

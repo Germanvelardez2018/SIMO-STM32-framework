@@ -19,6 +19,12 @@
 
     #include "core.h"
 
+  /**
+   * @brief Iniciamos la HAL de bajo nivel del sistema
+   * 
+   * @return ** void 
+   */
+   void simo_clock_init(void);
 
 
     /**

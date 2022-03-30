@@ -10,10 +10,7 @@
  */
 
 
-
  // Recordar configurar los siguientes elementos los flar para manejar UART (1 solo uart) y TIMER ( 2 timers)
-
-
 
 #include "stdio.h"
 #include "main.h"
@@ -24,7 +21,6 @@
 #include "clock_config.h"
 #include "delay.h"
 #include "fsm.h"
-#include "mem_services.h" // ! Llamar a los sensores
 
 /* USER CODE END Includes */
 
@@ -47,10 +43,6 @@
 
 #define  modo_tx_irq  0
 
-#define SENSOR_BUFFER_LEN   250
-
-
-static char _sensor_buffer[SENSOR_BUFFER_LEN];
 
 
 
@@ -104,19 +96,12 @@ uint32_t counter = 0;
 char    buffer[100];
 #define MSG_FORMAT      "counter: %d from %s\r\n"
 
-
-
 //inicio FSM (INICIO FLASH TAMBIEN)
 fsm_init();
 #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
 #define LEN_ORIGEN_URL              (strlen(MQTT_ORIGEN_URL)+1)
 fsm_devices DEVICE;
 DEVICE = fsm_load_flash();
-
-//! Inicio sensores
-
-sensor_services_init();
-
 
 //mem_services_clear_all();
 simo_delay_ms(5000);
@@ -150,9 +135,7 @@ case FSM_ON_FIELD:
     simo_uart_write(UART_TX,"\r\nFSM:ON FIELD\r\n"
                     ,strlen("\r\nFSM:ON FIELD\r\n")
                     ,TIMEOUT,modo_tx_irq);
-    
-    uint8_t pos= sensor_services_check(_sensor_buffer,SENSOR_BUFFER_LEN);
-    simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
+
     break;
 
 case FSM_MEMORY_DOWNLOAD:

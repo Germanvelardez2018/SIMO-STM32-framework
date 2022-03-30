@@ -3,7 +3,7 @@
 
 
 
-#include "mpu_6500.h"
+#include "accelerometer.h"
 #include "main.h"
 
 #include "i2c.h"
@@ -371,20 +371,20 @@ int16_t z_offset = 0;
 for(int16_t i= 0; i< TIMES; i++){
 
 
-mpu6500_get_aceleration(&x,&y,&z);
+accelerometer_get_aceleration(&x,&y,&z);
 
  delta_x = x_e - x;
  delta_y = y_e - y;
  delta_z = z_e - z;
 
 // offset en cero
-mpu_6500_set_offset(&x_offset,&y_offset,&z_offset);
+accelerometer_set_offset(&x_offset,&y_offset,&z_offset);
 //corrijo los offset
 if(delta_x !=0)x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
 if(delta_y !=0)y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
 if(delta_z !=0)z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
 //recargo los offset
-mpu_6500_set_offset(&x_offset, &y_offset, &z_offset);
+accelerometer_set_offset(&x_offset, &y_offset, &z_offset);
 
 }
 
@@ -614,12 +614,12 @@ return res;
 
 
 uint32_t accelerometer_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
-    uint32_t res = 0;
+    uint32_t ret = 0;
     // Read 6 BYTES of data starting from ACCEL_XOUT_H register
     uint8_t VALUE_ADDRESS =0x3B;
     uint8_t Rec_Data[6]={0};
     // HAL_I2C_Mem_Read (&hi2c1, MPU6050_ADDR,WHO_AM_I_REG,1, &check, 1, );
-    simo_i2c_mem_read(ACELEROMETRO_I2C,
+    ret =simo_i2c_mem_read(ACELEROMETRO_I2C,
                       ACELEROMETRO_ADDRESS,
                       VALUE_ADDRESS,1,&Rec_Data,6,
                       ACELEROMETRO_TIMEOUT,
@@ -628,7 +628,7 @@ uint32_t accelerometer_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
     (*y) = (int16_t)(Rec_Data[2] << 8 | Rec_Data [3]);
     (*z) = (int16_t)(Rec_Data[4] << 8 | Rec_Data [5]);
 
-    return res;
+    return ret;
 
 }
 
@@ -645,21 +645,26 @@ void accelerometer_deinit(){
 
 uint32_t accelerometer_get_measure(char* buffer, uint8_t len){
 
-    #define format      "x:%3.2f  y:%.2f  z:%.2f\r\n"
+    #define format      "accelerometer: x:%3.2f-y:%.2f-z:%.2f\r\n"
     uint32_t ret = 0;
     int16_t x;
     int16_t y;
     int16_t z;
+    if(accelerometer_check() == 0 ) {
+        sprintf(buffer,"sensor no disponible \r\n");  
+        return 0;  
+    }
 
     ret = accelerometer_get_aceleration(&x,&y,&z);
-    if( ret != 0){
-        float _x = x/16384.0;  
-        float _y = y/16384.0;
-        float _z = z/16384.0;
-        sprintf(buffer,format,_x,_y,_z);
-        ret = strlen(buffer); // devuelve la ultima posicion utilizada del array
+    if(ret != 0){
+        float fx = x/16384.0;  
+        float fy = y/16384.0;
+        float fz = z/16384.0;
+        sprintf(buffer,format,fx,fy,fz);
     }
-    
-
+    else{
+         sprintf(buffer,"error en medicion \r\n");    
+    }
+    ret = strlen(buffer); // devuelve la ultima posicion utilizada del array
     return ret;
 }

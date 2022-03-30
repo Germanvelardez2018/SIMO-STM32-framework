@@ -1,9 +1,10 @@
 
 
-#include "AT45DB.h"
+#include "memory.h" // ! AT45DB041E
 #include "delay.h"
-#include "stdlib.h"
-#include "stdio.h"
+#include "gpio.h"
+#include "spi.h"
+
 
 #define AT45DB_TIMEOUT          1000
 #define TIMEOUT_SPI             100
@@ -13,7 +14,6 @@
 static  SIMO_GPIO_PIN       __chip_select; //! Pin de Chip Select
 static  SIMO_SPI            __port ;       //! Port SPI Definido 
 static flash_storage_t      __flash;       //! Estructura de memoria. Depende de capacidad y tamaño de pagina 
-
 
 
 #define RESUME_CMD                          0xAB       //salgo del deep sleep_us
@@ -57,7 +57,6 @@ static const uint8_t at45db_pgsize_cmd[] = {
 
 
 inline void __at45db_resumen(void);
-
 static inline uint8_t __at45db_bsy(void);
 static inline uint8_t __at45db_get_status(void);
 
@@ -78,13 +77,12 @@ static void __set_AT45DB041E(mem_page_size page_size){
 static inline uint8_t __at45db_get_status(void){
     uint8_t cmd[2]={AT45DB_RDSR,0};
     uint8_t status[2]={0,0};
-    //flanco ascendente 
-     //en alto el CS Pin
+    //flanco descendente.En bajo el CS Pin
     simo_gpio_write(__chip_select,0);
     simo_spi_write_read(__port,cmd,status,2,TIMEOUT_SPI,0);    //leo el primer byte del registro estado
-     //en alto el CS Pin
+    //flanco ascendente.En alto el CS Pin
     simo_gpio_write(__chip_select,1);
-    return  status[1];
+    return  status[1];  // status[0] no tiene nada, se leyo antes de enviar comando
 }
 
 
@@ -93,7 +91,6 @@ static inline uint8_t __at45db_bsy(void){
     uint32_t counter= 0;
     while(!((ret =__at45db_get_status()) & AT45DB_STATUS_READY) || !(counter > AT45DB_TIMEOUT))  //mientras este ocupado, espere
     {
-        //simo_delay_ms(1);
         counter+=1;
     }
     return ret;  //es el primer byte del registro de estados
@@ -104,9 +101,8 @@ static inline uint8_t __at45db_bsy(void){
 
 uint32_t mem_init(   SIMO_SPI port,
                         SIMO_GPIO_PIN chip_select,
-                        simo_spi_prescaler prescaler){
+                        SIMO_SPI_PRESCALER prescaler){
     uint32_t ret = 0;
-//! verifico parametros del usuario
     ret = simo_spi_init(port,prescaler);
     simo_gpio_set(chip_select,SIMO_GPIO_OUT);
     __port =  port;
@@ -119,7 +115,6 @@ return ret;
 void mem_deinit(){
     simo_spi_deinit(__port);
     simo_gpio_deinit(__chip_select);
-
 }
 
 
@@ -149,16 +144,13 @@ uint32_t mem_start( mem_page_size page_size)
     }
         __set_AT45DB041E(page_size);
     
-    
     return ret; // Exito
 }
 
 
 
 void mem_erase_full(void){
-
     uint8_t cmd[4];
-
     cmd[0] = 0xc7;
     cmd[1] = 0x94;
     cmd[2] = 0x80;
@@ -167,7 +159,6 @@ void mem_erase_full(void){
     simo_spi_write(__port,(uint8_t*)cmd,4,TIMEOUT_SPI,0);
     simo_gpio_write(__chip_select,1);
     __at45db_bsy();
-
 }
 
 
@@ -181,9 +172,7 @@ static inline void __at45db_page_erase(uint32_t sector)
 {
     uint8_t cmd[4];
     uint32_t off;
-
     off = sector << __flash.pg_shifts;
-
     cmd[0] = AT45DB_PGERASE;
     cmd[1] = (off >> 16) & 0xff;
     cmd[2] = (off >> 8) & 0xff;
@@ -193,8 +182,6 @@ static inline void __at45db_page_erase(uint32_t sector)
     simo_spi_write(__port,(uint8_t*)cmd,4,TIMEOUT_SPI,0);
     simo_gpio_write(__chip_select,1);
     __at45db_bsy();
-
-
 }
 
 
@@ -204,13 +191,9 @@ static inline void __at45db_page_erase(uint32_t sector)
 
 uint32_t mem_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
     // CONS 256 11 ADRRES | 8 BITES POSICION
-
-
     uint32_t ret = 0;
         if(page < __flash.pg_num){
-
             uint32_t offset = (page << __flash.pg_shifts) |((uint32_t)pos);
-
             uint8_t cmd[4] ;    
             cmd[0] = AT45DB_MNTHRUBF1;
             cmd[1] = (offset >> 11)  & 0xff;
@@ -231,11 +214,7 @@ uint32_t mem_write_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t po
 
 }
 
-uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
-     
-
-
-      // 
+   // 
      /**
       * @brief  ejemplo quiero pagina 4 (256 bytes por pag)
       *     page = 4 << __flash.pg_shitfs(8) = 0[8] | 0000 0ppp | pppp p1pp | 0[0]|
@@ -279,14 +258,11 @@ uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos
       *
       * */
 
+uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos){
      uint32_t ret= 0; //fallo por defecto
-
         if(page < __flash.pg_num ){
-            //posicion valida
-
         uint8_t cmd[5] ;    
         uint32_t offset = (page << __flash.pg_shifts)|((uint32_t)pos); // 01 << 8 (256 bytes x pag) o 01 <<10 (1024 bytes x pag)
-   
         cmd[0] = AT45DB_RDARRAYHF;
         cmd[1] = (offset >> 11) & 0xff;
         cmd[2] = (offset >> 3) & 0xff;
@@ -301,7 +277,6 @@ uint32_t mem_read_page(uint8_t* data, uint8_t len_data,uint32_t page,uint8_t pos
         __at45db_bsy();
         ret = 1; // success
         }
-
        return ret;
 }
 
@@ -316,7 +291,6 @@ inline void __at45db_resumen(void){
     simo_spi_write(__port,(uint8_t*)RESUME_CMD,1,TIMEOUT_SPI,0);
     simo_gpio_write(__chip_select,1);
     __at45db_bsy();
-
 }
 
 
@@ -328,13 +302,11 @@ void mem_resumen(void){
 
 
 void mem_sleep(void){
-
     simo_gpio_write(__chip_select,1);
     simo_gpio_write(__chip_select,0);
     simo_spi_write(__port,(uint8_t*)AT45DB_LOW_POWER,1,TIMEOUT_SPI,0);
     simo_gpio_write(__chip_select,1);
     __at45db_bsy();
-
 }
 
 

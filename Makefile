@@ -37,15 +37,14 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/ejemplos/ejemplo_rtc.c \
-Core/Src/ejemplos/ejemplo_flash_ext.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
 Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \
-Core/drivers/memory/AT45DB.c \
+Core/drivers/memory/memory.c \
 Core/drivers/sensors/sensor_services.c \
 Core/drivers/memory/mem_services.c \
 Core/drivers/fsm/fsm.c \
-Core/drivers/sensors/mpu_6500.c \
+Core/drivers/sensors/accelerometer.c \
 Core/simo/power_modes.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \

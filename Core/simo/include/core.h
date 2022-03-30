@@ -16,11 +16,16 @@
 
 
     //INCLUDES DE C STANDAR
+
+    #include "config.h"
     #include <string.h>
     #include <stdint.h>
     #include <stdlib.h>
 
-    #include "config.h"
+
+ 
+
+  
 
     //Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
 
@@ -253,11 +258,6 @@ typedef struct{
 
 
 typedef uint32_t (*check_sensor)(sensor_format);
-
-
-
-
-
 
 
 

@@ -27,7 +27,6 @@
  * @note podemos usar WFI(wait for Interruption) o WFE (wait for Event)
  * . En este modulo siempre se usara WFI  
  * 
- * @note soporta  despertar el micro con RTC y PIN WAKE UP(PA0)
  * 
  */
 

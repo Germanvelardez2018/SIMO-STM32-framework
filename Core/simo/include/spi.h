@@ -43,7 +43,7 @@
         ,SIMO_SPI_PRESCALER_128 = 128
         //!DIVISOR DE CLOCK
         ,SIMO_SPI_PRESCALER_256 = 256
-    } simo_spi_prescaler;
+    } SIMO_SPI_PRESCALER;
 
 
      /**
@@ -98,7 +98,7 @@
      * Recordar que el maximo valor de clock de SPI es 10Mhz.Tambien SPI1 alimentado por APB1 y SP2 alimentado por APB2
      * @return ** uint32_t 
      */
-    uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler);
+    uint32_t simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler);
 
 
     /**
@@ -157,7 +157,7 @@
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ usart_H */
+#endif /*__ spi_H */
 
 
 

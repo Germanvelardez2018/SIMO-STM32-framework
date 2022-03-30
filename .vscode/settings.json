@@ -7,6 +7,9 @@
 		"rtc.h": "c",
 		"mem_services.h": "c",
 		"sensor_services.h": "c",
-		"core.h": "c"
+		"core.h": "c",
+		"memory.h": "c",
+		"gpio.h": "c",
+		"config.h": "c"
 	}
 }

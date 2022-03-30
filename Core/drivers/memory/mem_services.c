@@ -12,12 +12,12 @@
 
 #include "mem_services.h"
 
-#include "AT45DB.h" //!
+#include "memory.h" //!
 
 
 
 /**
- * @brief NUNCA USAR FUNCIONES AT45DB fuera de este modulo
+ * @brief NUNCA USAR FUNCIONES de memory.h fuera de este modulo 
  * 
  */
 
@@ -28,7 +28,7 @@
 
 
 #define MODULO_FLASH                     "AT45DB041E"
-#define MEMORY_SIZE                      "4MB"
+#define MEMORY_SIZE                      "4Megabits"
 #define N_PAGES                           AT45DB041E_PAGES_DEFAULT //! AT45DB041E 2048
 
 
@@ -93,11 +93,12 @@
 
 #define OFFSET_ESP_REG                  48
 #define DATA_PAGES_256                  2000
+#define CS_PIN                          SIMO_GPIO_25 //! PB8
 
 
 uint32_t mem_services_init(void){
     // Inicio memoria flash
-    mem_init( SPI_A,SIMO_GPIO_22,SIMO_SPI_PRESCALER_2);
+    mem_init( SPI_A,CS_PIN,SIMO_SPI_PRESCALER_2);
     simo_delay_ms(1000);
     uint32_t ret =mem_start( pg_256byte);
     mem_sleep();     // entramos en sleep

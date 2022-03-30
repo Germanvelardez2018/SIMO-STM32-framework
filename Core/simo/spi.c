@@ -77,7 +77,7 @@
  * @return ** SPI_HandleTypeDef* 
  */
 
-static uint32_t __get_prescaler(simo_spi_prescaler prescaler)
+static uint32_t __get_prescaler(SIMO_SPI_PRESCALER prescaler)
 {
     uint32_t _prescaler = 0;
         switch (prescaler)
@@ -234,7 +234,7 @@ uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx 
  * @return ** uint32_t 
  */
 
-uint32_t simo_spi_init(SIMO_SPI SPI,simo_spi_prescaler prescaler){
+uint32_t simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler){
         uint32_t res = 0;  // retorna error por defecto
         SPI_HandleTypeDef* simo_SPI = __get_spi(SPI);   
         uint32_t __prescaler = __get_prescaler(prescaler);     

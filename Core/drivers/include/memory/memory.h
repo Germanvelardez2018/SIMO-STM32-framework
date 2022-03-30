@@ -8,15 +8,20 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#ifndef __mem__H
-#define __mem__H
+#ifndef __MEMORY_H__
+#define __MEMORY_H__
 #include "core.h"
-#include "gpio.h"
-#include "spi.h"
+#include "spi.h"    //! Modulo SIMO necesario
+#include "gpio.h"   //! Modulo SIMO necesario
 
 
-#define AT45DB041E_PAGES_DEFAULT    2048
 
+
+#define AT45DB041E_PAGES_DEFAULT    2048   //! En paginas de 256
+
+
+
+//! Estrutuca con formato de la memoria, copiada de una libreria de github
 typedef struct __flash_storage
 {
     int pg_num;
@@ -36,11 +41,13 @@ typedef struct __flash_storage
  * 
  */
 typedef enum {
-     pg_256byte     =  8
-    ,pg_512bytes    =  9
-    ,pg_1024byte    =  10
-    ,pg_2048bytes   = 11
+     pg_256byte     =  8           //! 2048 Paginas totales  
+    ,pg_512bytes    =  9           //! 1024 Paginas totales
+    ,pg_1024byte    =  10          //! 512  Paginas Totales
+    ,pg_2048bytes   =  11          //! 256  Paginas Totales
 }mem_page_size;
+
+
 
 
 
@@ -54,8 +61,8 @@ typedef enum {
  * @return ** uint32_t 
  */
 uint32_t mem_init(   SIMO_SPI port,
-                        SIMO_GPIO_PIN chip_select,
-                        simo_spi_prescaler prescaler);
+                     SIMO_GPIO_PIN chip_select,
+                     SIMO_SPI_PRESCALER prescaler);
 
 
 /**

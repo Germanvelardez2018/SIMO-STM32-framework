@@ -23,21 +23,16 @@
     #if SIMO_GPIO_ENA == 1
             //! Modos de funcionamiento
              typedef enum{
-                  //! Salida digital
-                 SIMO_GPIO_OUT,
-                  //! Entrada digital
-                 SIMO_GPIO_IN, 
+                  
+                    SIMO_GPIO_OUT         //! Salida digital
+                  , SIMO_GPIO_IN          //! Entrada digital, 
                 #if SIMO_GPIO_ADC_ENA == 1
-                //! Entrada analogica
-                    SIMO_GPIO_ADC 
+                  , SIMO_GPIO_ADC      //! Entrada analogica
                 #endif 
                 #if SIMO_GPIO_EXT_IRQ == 1
-                //! Interrupcion por flanco ascendente 
-                    SIMO_GPIO_EXT_IT_RISING,
-                    //! Interrupcion por flanco descendente
-                    SIMO_GPIO_EXT_IT_FALLING,
-                    //! Interrupcion por flanco ascendente y descendente
-                    SIMO_GPIO_EXT_IT_RISING_FALLING,
+                  , SIMO_GPIO_EXT_IT_RISING //! Interrupcion por flanco ascendente
+                  , SIMO_GPIO_EXT_IT_FALLING //! Interrupcion por flanco descendente
+                  , SIMO_GPIO_EXT_IT_RISING_FALLING //! Interrupcion por flanco ascendente y descendente
                 #endif   
              }  simo_gpio_mode;
 
@@ -48,12 +43,10 @@
             //GPIOA
             #if NUM_SIMO_GPIO > 0  
 
-             //!En STM32 es PA0 
-             SIMO_GPIO_0,   
-             //! En STM32 es PA1
-            SIMO_GPIO_1 
-            , //! En STM32 es PA2
-            SIMO_GPIO_2
+             
+             SIMO_GPIO_0    //!En STM32 es PA0    
+            ,SIMO_GPIO_1    //! En STM32 es PA1
+            ,SIMO_GPIO_2     //! En STM32 es PA2
             , //! En STM32 es PA3
             SIMO_GPIO_3
             , //! En STM32 es PA4

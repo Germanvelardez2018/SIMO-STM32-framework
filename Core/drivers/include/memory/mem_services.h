@@ -12,7 +12,7 @@
 
 
 #ifndef __MEM_SERVICES_H__
-    #define __MEM_SERVICES_H__
+#define __MEM_SERVICES_H__
 
 #include "core.h"
 
@@ -64,43 +64,94 @@ fsm_devices mem_services_get_fsm(void);
 fsm_devices mem_services_set_fsm(fsm_devices value);
 
 
-
-
-
-
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_set_mqtt_origen(char* buffer,uint8_t len);
+
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_get_mqtt_origen(char* buffer,uint8_t len);
 
-
-
-
-
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_set_id_origen(char* buffer,uint8_t len);
+
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_get_id_origen(char* buffer,uint8_t len);
 
-
-
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_set_pass_origen(char* buffer,uint8_t len);
+
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_get_pass_origen(char* buffer,uint8_t len);
 
-
-
-
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_set_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
 
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_get_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
 
-
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
 
-
+ /**
+  * @brief 
+  * 
+  * @param buffer 
+  * @param len 
+  * @return ** uint32_t 
+  */
  uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
-
 
 #endif
