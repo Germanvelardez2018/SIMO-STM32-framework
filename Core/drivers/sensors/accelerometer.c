@@ -355,7 +355,7 @@ void accelerometer_reset(){
 static void _mpu6500_calibration(int16_t x_e, int16_t y_e, int16_t z_e){
 
 
-#define TIMES       400
+#define CALIBRATION_ITER       400
 
 
 int16_t x,y,z ;
@@ -368,8 +368,7 @@ int16_t y_offset = 0;
 int16_t z_offset = 0;
 
 
-for(int16_t i= 0; i< TIMES; i++){
-
+for(int16_t i= 0; i< CALIBRATION_ITER ; i++){
 
 accelerometer_get_aceleration(&x,&y,&z);
 
@@ -645,6 +644,11 @@ void accelerometer_deinit(){
 
 uint32_t accelerometer_get_measure(char* buffer, uint8_t len){
 
+
+   // accelerometer_sleep(0);  //! Sleep OFF
+
+
+
     #define format      "accelerometer: x:%3.2f-y:%.2f-z:%.2f\r\n"
     uint32_t ret = 0;
     int16_t x;
@@ -665,6 +669,9 @@ uint32_t accelerometer_get_measure(char* buffer, uint8_t len){
     else{
          sprintf(buffer,"error en medicion \r\n");    
     }
+
+   // accelerometer_sleep(1); // ! Sleep ON
+
     ret = strlen(buffer); // devuelve la ultima posicion utilizada del array
     return ret;
 }

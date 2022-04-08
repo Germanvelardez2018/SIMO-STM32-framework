@@ -63,7 +63,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 
-#define MSG_ROUTINE   "Realizando rutina \r\n"
+#define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
 
 
@@ -105,7 +105,7 @@ static void setup(){
   simo_uart_init(UART_TX,BAUDRATE);
 
    if(sensor_services_init() != 0){
-    simo_uart_write(UART_TX,"sensor services ready \r\n",strlen("sensor services ready \r\n"),TIMEOUT,modo_tx_irq);
+    simo_uart_write(UART_TX,"sensor services readyx \r\n",strlen("sensor services readyx \r\n"),TIMEOUT,modo_tx_irq);
   }
   else{
     simo_uart_write(UART_TX,"sensor services Error \r\n",strlen("sensor services Error \r\n"),TIMEOUT,modo_tx_irq);
@@ -175,6 +175,8 @@ int main(void)
 
     simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
     uint8_t pos= sensor_services_check(_sensor_buffer,SENSOR_BUFFER_LEN);
+    simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
+
     simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
 
     simo_gpio_toogle(LED_TOOGLE);

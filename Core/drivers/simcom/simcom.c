@@ -331,3 +331,32 @@ uint32_t sim_low_pwr_mode(uint32_t ena ){
     }
     return  res;
 }
+
+
+
+
+uint32_t sim_get_nmea(char* buffer, uint8_t len){
+    #define format_nmea       " GPS: %s\n\r"
+    #define format_error      "GPS: Error \n\r"
+    #define format_available  "GPS: NO DISPONIBLE \n\r"
+    uint32_t ret = 0;
+    ret = cmd_send_cmd(__SIMCOM__,CMD_LOW_PWR_OFF,strlen(CMD_LOW_PWR_OFF),1000);
+
+    if(sim_check_at() == 0 ) {
+        sprintf(buffer,format_available);  
+        return 0;  
+    }
+    char* p_nmea = sim_get_buffer();
+   // ret = accelerometer_get_aceleration(&x,&y,&z);
+    if(p_nmea != NULL){
+       
+        sprintf(buffer,format_nmea,p_nmea);
+    }
+    else{
+         sprintf(buffer,format_error);    
+    }
+    ret = strlen(buffer); // devuelve la ultima posicion utilizada del array
+    return ret;    
+        
+        
+    }
