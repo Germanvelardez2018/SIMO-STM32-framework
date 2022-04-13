@@ -93,13 +93,13 @@
 
 #define OFFSET_ESP_REG                  48
 #define DATA_PAGES_256                  2000
-#define CS_PIN                          SIMO_GPIO_25 //! PB8
+#define CS_PIN                          SIMO_GPIO_24 //! PB8
 
 
 uint32_t mem_services_init(void){
     // Inicio memoria flash
     mem_init( SPI_A,CS_PIN,SIMO_SPI_PRESCALER_2);
-    simo_delay_ms(1000);
+    simo_delay_ms(500);
     uint32_t ret =mem_start( pg_256byte);
     mem_sleep();     // entramos en sleep
     return ret;

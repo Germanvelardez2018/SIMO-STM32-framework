@@ -18,8 +18,8 @@
 
  // Recordar configurar los siguientes elementos los flar para manejar UART (1 solo uart) y TIMER ( 2 timers)
 
-
-#include "power_modes.h" // ! Gestiona el consumo de energia del micro
+#include "fsm.h"                 // ! Maquina de estados del sistema
+#include "power_modes.h"         // ! Gestiona el consumo de energia del micro
 #include "sensor_services.h"
 #include "uart.h"
 #include "delay.h"
@@ -79,6 +79,16 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
   uint8_t m = MINUTES;
   uint8_t s = SECONDS;
 
+
+  #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
+  #define LEN_ORIGEN_URL              (strlen(MQTT_ORIGEN_URL)+1)
+
+
+
+ // estado de la maquina en ram
+  fsm_devices DEVICE;
+
+
 static void __CALLBACK_RTC(void){
 // ! No hacemos nada. 
 // ! Si quisieramos agregar una rutina deberiamos iniciar Systick antes
@@ -104,18 +114,14 @@ static void setup(){
   //! Configura el uart
   simo_uart_init(UART_TX,BAUDRATE);
 
-   if(sensor_services_init() != 0){
+   if(sensor_services_init() != 0)
+   {
     simo_uart_write(UART_TX,"sensor services readyx \r\n",strlen("sensor services readyx \r\n"),TIMEOUT,modo_tx_irq);
   }
   else{
     simo_uart_write(UART_TX,"sensor services Error \r\n",strlen("sensor services Error \r\n"),TIMEOUT,modo_tx_irq);
 
   }
-
-
-
-
-
 
 
   simo_rtc_set_alarm_callback(__CALLBACK_RTC);
@@ -132,20 +138,6 @@ static void setup(){
   simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
 
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
-
-
-
- /**SPI1 GPIO Configuration
-        Iniciamos servicios de memoria
-        
-        PB3     ------> SPI1_SCK
-        PB4     ------> SPI1_MISO
-        PB5     ------> SPI1_MOSI
-        */
-
-
- uint32_t ret = mem_services_init();
-
 
 
 
@@ -175,58 +167,126 @@ int main(void)
 
 
 
+    /**SPI1 GPIO Configuration
+            Iniciamos servicios de memoria
+            
+            PB3     ------> SPI1_SCK
+            PB4     ------> SPI1_MISO
+            PB5     ------> SPI1_MOSI
+            PB8     ------   SPI1_CS  
+            */
 
- 
 
+
+
+
+
+      //if(mem_services_init() != 0)
+      if(1)
+      {
+        simo_uart_write(UART_TX,"memory services readyx \r\n",strlen("memory services readyx \r\n"),TIMEOUT,modo_tx_irq);
+      }
+      else{
+        simo_uart_write(UART_TX,"memory services Error \r\n",strlen("memory services Error \r\n"),TIMEOUT,modo_tx_irq);
+
+      }
+
+
+
+      //inicio FSM (INICIO FLASH TAMBIEN)
+      fsm_init();
+      
+      DEVICE = fsm_load_flash();
+
+
+
+     // fsm_set_state(FSM_ON_FIELD);
+      
+      // Leo el estado alojado en memoria externa
+      DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
+     
 
     while(1){
-    
-    // Dormir el microcontrolador
-
-    power_mode_set( SLEEP_MODE);
-
-
-
-
-    // Despierta mediante interrupcion RTC
-    power_mode_set( RESUMEN_RUN);
-
-
-    //Rutina de trabajo
-
-
-    simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-    uint8_t pos= sensor_services_check(_sensor_buffer);
-    simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
-
    
-
-   // Guardar datos en memoria
-
-
-    mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
-
-
-
-  // leo desde memoria
-  
-    simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+    switch (DEVICE)
+      {
+      case FSM_WITHOUT_CONFIG:
+          simo_uart_write(UART_TX,"FSM:WITHOUT CONFIG\r\n"
+                          ,strlen("FSM:WITHOUT CONFIG\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+                          //rutina para el dispositivo sin configuracion?
+          break;
 
 
 
-    counter ++;
+
+      case FSM_ON_FIELD:
+          simo_uart_write(UART_TX,"FSM:ON FIELD\r\n"
+                          ,strlen("FSM:ON FIELD\r\n")
+                          ,TIMEOUT,modo_tx_irq);  
+          // Dormir el microcontrolador
+          power_mode_set( SLEEP_MODE);
+          // Despierta mediante interrupcion RTC
+          power_mode_set( RESUMEN_RUN);
+          //Rutina de trabajo
+          simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
+          uint8_t pos= sensor_services_check(_sensor_buffer);
+          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+        
+        // Guardar datos en memoria
+
+          mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+
+        // leo desde memoria
+
+          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+          counter ++;
+          simo_gpio_toogle(LED_TOOGLE);
+          simo_delay_ms(100);
+          simo_gpio_toogle(LED_TOOGLE);
 
 
-    simo_gpio_toogle(LED_TOOGLE);
-    simo_delay_ms(100);
-    simo_gpio_toogle(LED_TOOGLE);
+          // Me preparo para volver a dormir
+          simo_rtc_get_time(&h,&m,&s);
+
+          //Configura la alarma
+          simo_rtc_set_alarm(h,m,s+10);
+          break;
 
 
-    // Me preparo para volver a dormir
-    simo_rtc_get_time(&h,&m,&s);
 
-    //Configura la alarma
-    simo_rtc_set_alarm(h,m,s+5);
+      case FSM_MEMORY_DOWNLOAD:
+          simo_uart_write(UART_TX,"FSM: DONWLOAD\r\n"
+                          ,strlen("FSM: DONWLOAD\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+
+          break;
+
+
+
+      case FSM_UNDEFINED:
+          simo_uart_write(UART_TX,"FSM: UNDEFINED\r\n"
+                          ,strlen("FSM: UNDEFINED\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+           simo_delay_ms(5000);
+          break;
+
+
+      default:
+          simo_uart_write(UART_TX,"FSM:default\r\n"
+                          ,strlen("FSM:default\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+          break;
+      }
+
+
+
+
+
+
+
+
+
     }
 
 

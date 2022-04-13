@@ -104,8 +104,8 @@ uint32_t counter = 0;
 char    buffer[100];
 #define MSG_FORMAT      "counter: %d from %s\r\n"
 
-
-
+// iniciamos servicios de memoria
+ uint32_t ret = mem_services_init();
 //inicio FSM (INICIO FLASH TAMBIEN)
 fsm_init();
 #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
@@ -139,52 +139,40 @@ simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
 DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
 switch (DEVICE)
 {
-case FSM_WITHOUT_CONFIG:
-    simo_uart_write(UART_TX,"\r\nFSM:WITHOUT CONFIG\r\n"
-                    ,strlen("\r\nFSM:WITHOUT CONFIG\r\n")
-                    ,TIMEOUT,modo_tx_irq);
+        case FSM_WITHOUT_CONFIG:
+            simo_uart_write(UART_TX,"\r\nFSM:WITHOUT CONFIG\r\n"
+                            ,strlen("\r\nFSM:WITHOUT CONFIG\r\n")
+                            ,TIMEOUT,modo_tx_irq);
+            break;
 
-    break;
+        case FSM_ON_FIELD:
+            simo_uart_write(UART_TX,"\r\nFSM:ON FIELD\r\n"
+                            ,strlen("\r\nFSM:ON FIELD\r\n")
+                            ,TIMEOUT,modo_tx_irq);
+            uint8_t pos= sensor_services_check(_sensor_buffer,SENSOR_BUFFER_LEN);
+            simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
+            break;
 
-case FSM_ON_FIELD:
-    simo_uart_write(UART_TX,"\r\nFSM:ON FIELD\r\n"
-                    ,strlen("\r\nFSM:ON FIELD\r\n")
-                    ,TIMEOUT,modo_tx_irq);
-    
-    uint8_t pos= sensor_services_check(_sensor_buffer,SENSOR_BUFFER_LEN);
-    simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
-    break;
+        case FSM_MEMORY_DOWNLOAD:
+            simo_uart_write(UART_TX,"\r\nFSM: DONWLOAD\r\n"
+                            ,strlen("\r\nFSM: DONWLOAD\r\n")
+                            ,TIMEOUT,modo_tx_irq);
 
-case FSM_MEMORY_DOWNLOAD:
-    simo_uart_write(UART_TX,"\r\nFSM: DONWLOAD\r\n"
-                    ,strlen("\r\nFSM: DONWLOAD\r\n")
-                    ,TIMEOUT,modo_tx_irq);
+            break;
 
-    break;
-
-case FSM_UNDEFINED:
-    simo_uart_write(UART_TX,"\r\nFSM: UNDEFINED\r\n"
-                    ,strlen("\r\nFSM: UNDEFINED\r\n")
-                    ,TIMEOUT,modo_tx_irq);
-    break;
+        case FSM_UNDEFINED:
+            simo_uart_write(UART_TX,"\r\nFSM: UNDEFINED\r\n"
+                            ,strlen("\r\nFSM: UNDEFINED\r\n")
+                            ,TIMEOUT,modo_tx_irq);
+            break;
 
 
-default:
-    simo_uart_write(UART_TX,"\r\nFSM:default\r\n"
-                    ,strlen("\r\nFSM:default\r\n")
-                    ,TIMEOUT,modo_tx_irq);
-    break;
+        default:
+            simo_uart_write(UART_TX,"\r\nFSM:default\r\n"
+                            ,strlen("\r\nFSM:default\r\n")
+                            ,TIMEOUT,modo_tx_irq);
+            break;
 }
-
-
-
-sprintf(buffer,"mqtt origin: %s\r\n",buff_origin);
-
-simo_uart_write(UART_TX,buffer
-                    ,strlen(buffer)
-                    ,TIMEOUT,modo_tx_irq);
-
-simo_delay_ms(10000);
 
 
 counter ++;
@@ -193,4 +181,4 @@ counter ++;
   
 
   
-}
+} // fin main
