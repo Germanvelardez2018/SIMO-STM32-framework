@@ -114,6 +114,10 @@ static void setup(){
 
 
 
+
+
+
+
   simo_rtc_set_alarm_callback(__CALLBACK_RTC);
   simo_rtc_ena_irq(1);
 
@@ -125,11 +129,22 @@ static void setup(){
   // COnfigura el reloj
   simo_rtc_set_time(HOURS,MINUTES,SECONDS);
 
-  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+10);
+  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
 
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
 
+
+ /**SPI1 GPIO Configuration
+        Iniciamos servicios de memoria
+        
+        PB3     ------> SPI1_SCK
+        PB4     ------> SPI1_MISO
+        PB5     ------> SPI1_MOSI
+        */
+
+
+ uint32_t ret = mem_services_init();
 
 
 
@@ -138,7 +153,11 @@ static void setup(){
 
 }
 
+ 
 
+char buffer_mem[250]= {0};
+
+uint8_t counter = 0;
 
 /**
  * @brief  The application entry point.
@@ -152,6 +171,9 @@ int main(void)
     setup();
     // Estado del dispositivo, 
     // transmicion en vivo o transmicion desde memoria memoria.
+
+
+
 
 
  
@@ -174,10 +196,26 @@ int main(void)
 
 
     simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-    uint8_t pos= sensor_services_check(_sensor_buffer,SENSOR_BUFFER_LEN);
-    simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
+    uint8_t pos= sensor_services_check(_sensor_buffer);
+    simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
 
-    simo_uart_write(UART_TX,_sensor_buffer,pos,TIMEOUT,modo_tx_irq);
+   
+
+   // Guardar datos en memoria
+
+
+    mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+
+
+
+  // leo desde memoria
+  
+    simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+
+
+
+    counter ++;
+
 
     simo_gpio_toogle(LED_TOOGLE);
     simo_delay_ms(100);
@@ -188,7 +226,7 @@ int main(void)
     simo_rtc_get_time(&h,&m,&s);
 
     //Configura la alarma
-    simo_rtc_set_alarm(h,(m+STEP_MINUTES),s);
+    simo_rtc_set_alarm(h,m,s+5);
     }
 
 

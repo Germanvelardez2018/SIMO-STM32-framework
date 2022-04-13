@@ -1,12 +1,25 @@
 #include "sensor_services.h"
 #include "accelerometer.h"
+#include "sensor_fake.h"   // sensor de prueba imaginario
 #include "simcom.h"
+
+
+
+
+
+
+#define  LEN_MAX_BUFFER                          (255)
+
+
 
 #define __ACCELEROMETER_ON__                (1)           
 
 #define __CALIBRATION_ON__                  (1)
 
 #define __SIM7000G_ON__                     (0)
+
+
+#define __SENSOR_FAKE_ON__                 (1)
 
 
 
@@ -27,12 +40,24 @@ static uint32_t __init_sensors(){
     #if (__ACCELEROMETER_ON__ == 1)                 
         accelerometer_init();
         ret = accelerometer_check();
-     //   accelerometer_sleep(0);
-        accelerometer_set_sample_div(7); //1khz
+  
         #if (__CALIBRATION_ON__ == 1)        
-      //  accelerometer_calibration();
+        accelerometer_calibration();
         #endif
     #endif
+
+
+//Iniciamos el SENSOR IMAGINARIO
+    #if (__SENSOR_FAKE_ON__ == 1)                 
+        sensor_fake_init();
+        ret = sensor_fake_check();
+  
+        #if (__CALIBRATION_ON__ == 1)        
+        sensor_fake_calibration();
+        #endif
+    #endif
+
+
 
     #if (__SIM7000G_ON__ == 1)      
         sim_init();    
@@ -71,17 +96,18 @@ void sensor_services_deinit(void){
 }
 
 
-uint32_t sensor_services_check(char* buffer, uint8_t len){
-    uint32_t ret = 0;
+uint8_t sensor_services_check(char* buffer){
+    uint8_t ret = 0;
+
     #if (__ACCELEROMETER_ON__ == 1)        
-        accelerometer_sleep(0);  //! Sleep OFF
-         ret =  accelerometer_get_measure(buffer,len);
-         // ret contiene la ultima posicion escrita en el buffer
+         ret = accelerometer_get_measure(buffer,LEN_MAX_BUFFER); 
 
-        accelerometer_sleep(1); // ! Sleep ON
+    #endif
 
+    #if (__SENSOR_FAKE_ON__ == 1)
 
-
+        if(ret == 1) ret = sensor_fake_get_measure(buffer,LEN_MAX_BUFFER); // 
+        
 
     #endif
 

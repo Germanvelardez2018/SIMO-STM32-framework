@@ -154,4 +154,14 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   */
  uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
 
+
+
+
+ uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag);
+
+
+
+  uint32_t mem_services_read_data(char* buffer, uint8_t len, uint16_t pag);
+
+
 #endif

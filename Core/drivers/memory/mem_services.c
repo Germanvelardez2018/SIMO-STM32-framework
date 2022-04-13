@@ -144,6 +144,36 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 
 
 
+
+static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+
+
+
+
+
+
+static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag){
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+
+
+
+
+
 static uint32_t __set_string(char* buffer,uint8_t len,uint8_t address){
     mem_resumen();     // resumen
     //escribo en memoria flash
@@ -224,3 +254,17 @@ static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
     if(topic_pos >= TOPICS_MAX) return 0;
     return __get_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
 }
+
+
+ uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag){
+
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = __write_data(buffer,len,pag);
+    mem_sleep();     // entramos en sleep
+    return ret;
+
+
+     return 0;
+ }

@@ -24,7 +24,7 @@
 #include "clock_config.h"
 #include "delay.h"
 
-#include "mpu_6500.h"
+#include "accelerometer.h"
 
 /* USER CODE END Includes */
 
@@ -76,7 +76,7 @@ static void setup(void){
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
+int main2(void)
 {
 
 //Levanto la HAL y Configuro todos los perifericos
@@ -123,7 +123,7 @@ while(1){
    // sprintf(buffer,lowformat,x,y,z);
     simo_gpio_toogle(SIMO_GPIO_18);
     simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
-    mpu_6500_get_offset(&x_offset,&y_offset,&z_offset);
+    accelerometer_get_offset(&x_offset,&y_offset,&z_offset);
     sprintf(buffer,lowoffset,x_offset,y_offset,z_offset);
     simo_uart_write(UART_TX,buffer,strlen(buffer),TIMEOUT,modo_tx_irq);
 

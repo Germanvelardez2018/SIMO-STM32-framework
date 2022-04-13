@@ -99,9 +99,9 @@ static inline uint8_t __at45db_bsy(void){
 
 
 
-uint32_t mem_init(   SIMO_SPI port,
-                        SIMO_GPIO_PIN chip_select,
-                        SIMO_SPI_PRESCALER prescaler){
+uint32_t mem_init(  SIMO_SPI port,
+                    SIMO_GPIO_PIN chip_select,
+                    SIMO_SPI_PRESCALER prescaler){
     uint32_t ret = 0;
     ret = simo_spi_init(port,prescaler);
     simo_gpio_set(chip_select,SIMO_GPIO_OUT);

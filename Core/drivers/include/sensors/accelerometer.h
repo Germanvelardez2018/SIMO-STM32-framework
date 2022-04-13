@@ -110,7 +110,7 @@ uint32_t accelerometer_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t*
  * @param len 
  * @return ** uint32_t 
  */
-uint32_t accelerometer_get_measure(char* buffer, uint8_t len);
+uint8_t accelerometer_get_measure(char* buffer, uint8_t len);
 
 
 #endif
