@@ -20,11 +20,6 @@
  */
 
 
-
-
-
-
-
 #define MODULO_FLASH                     "AT45DB041E"
 #define MEMORY_SIZE                      "4Megabits"
 #define N_PAGES                           AT45DB041E_PAGES_DEFAULT //! AT45DB041E 2048
@@ -91,13 +86,10 @@
 
 #define OFFSET_ESP_REG                  48
 #define DATA_PAGES_256                  2000
-#define CS_PIN                          SIMO_GPIO_4 //! PA4
-
-
+#define CS_PIN                          SIMO_GPIO_24 //! PB8
 
 
 static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
-
     mem_resumen();     // resumen
     //escribo en memoria flash
     uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,0);
@@ -144,7 +136,7 @@ static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
 uint32_t mem_services_init(void){
     // Inicio memoria flash
     mem_init( SPI_A,CS_PIN,SIMO_SPI_PRESCALER_2);
-    simo_delay_ms(500);
+    mem_resumen();     // resumen
     uint32_t ret =mem_start( pg_256byte);
     mem_sleep();     // entramos en sleep
     return ret;

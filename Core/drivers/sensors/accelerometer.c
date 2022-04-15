@@ -18,8 +18,7 @@
 #define ACELEROMETRO_I2C                         I2C_A
 #define ACELEROMETRO_SPEED                       (50000)
 #define ACELEROMETRO_7BITS_ADDRESS               (1)
-#define ACELEROMETRO_TIMEOUT                     (1000)
-
+#define ACELEROMETRO_TIMEOUT                     (500)
 
 
 // Registers

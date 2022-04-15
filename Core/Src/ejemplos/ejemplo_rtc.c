@@ -97,10 +97,9 @@ static void __CALLBACK_RTC(void){
 
 static void setup(){
 
-
+ // iniciamos configuracion de clock standar
   simo_clock_init();
 
-  simo_clock_config();
 
   // Configura el led blink
 
@@ -124,20 +123,20 @@ static void setup(){
 
   if(mem_services_init() != 0)
     {
-      simo_uart_write(UART_TX,"memory services readyx \r\n",strlen("memory services readyx \r\n"),TIMEOUT,modo_tx_irq);
+      simo_uart_write(UART_TX,"memory services ready \r\n",strlen("memory services ready \r\n"),TIMEOUT,modo_tx_irq);
     }
   else
     {
       simo_uart_write(UART_TX,"memory services Error \r\n",strlen("memory services Error \r\n"),TIMEOUT,modo_tx_irq);
     }
 
-  //simo_rtc_set_alarm_callback(__CALLBACK_RTC);
-  //simo_rtc_ena_irq(1);
+  simo_rtc_set_alarm_callback(__CALLBACK_RTC);
+  simo_rtc_ena_irq(1);
    // Inicio el RTC
-  //simo_rtc_init();
+  simo_rtc_init();
   // COnfigura el reloj
-  //simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-  //simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
+  simo_rtc_set_time(HOURS,MINUTES,SECONDS);
+  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
 
 
 
@@ -198,6 +197,7 @@ int main(void)
                           ,strlen("FSM:WITHOUT CONFIG\r\n")
                           ,TIMEOUT,modo_tx_irq);
                           //rutina para el dispositivo sin configuracion?
+                          //  Quiza preguntar al servidor mqtt?
           break;
 
 
@@ -207,19 +207,23 @@ int main(void)
           simo_uart_write(UART_TX,"FSM:ON FIELD\r\n"
                           ,strlen("FSM:ON FIELD\r\n")
                           ,TIMEOUT,modo_tx_irq);  
-          /*
+          
           // Dormir el microcontrolador
           power_mode_set( SLEEP_MODE);
           // Despierta mediante interrupcion RTC
           power_mode_set( RESUMEN_RUN);
           //Rutina de trabajo
           simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-          uint8_t pos= sensor_services_check(_sensor_buffer);
+          
+          //borramos buffer
+          memset(_sensor_buffer,0,BUFFER_SIZE);
+
+          sensor_services_check(_sensor_buffer);
           simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
         
         // Guardar datos en memoria
 
-          mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+     //     mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
 
         // leo desde memoria
 
@@ -236,7 +240,7 @@ int main(void)
           //Configura la alarma
           simo_rtc_set_alarm(h,m,s+10);
 
-          */
+          
           break;
 
 
@@ -247,10 +251,12 @@ int main(void)
                           ,TIMEOUT,modo_tx_irq);
 
           //descargo memoria y vuelvo a estado Field
+          
+          // borrar datos que ya se enviaron, y ajustar contador de datos a cero
+          // volver al modo datalog
           fsm_set_state(FSM_ON_FIELD);
 
-
-          simo_delay_ms(5000);
+          simo_delay_ms(1000);
 
 
           break;
@@ -261,7 +267,42 @@ int main(void)
           simo_uart_write(UART_TX,"FSM: UNDEFINED\r\n"
                           ,strlen("FSM: UNDEFINED\r\n")
                           ,TIMEOUT,modo_tx_irq);
-           simo_delay_ms(5000);
+          //simo_delay_ms(5000);
+ 
+          // Dormir el microcontrolador
+          power_mode_set( SLEEP_MODE);
+          // Despierta mediante interrupcion RTC
+          power_mode_set( RESUMEN_RUN);
+          //Rutina de trabajo
+          simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
+          memset(_sensor_buffer,0,BUFFER_SIZE);
+          sensor_services_check(_sensor_buffer);
+          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+        
+        // Guardar datos en memoria
+
+     //     mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+
+        // leo desde memoria
+
+          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
+          counter ++;
+          simo_gpio_toogle(LED_TOOGLE);
+          simo_delay_ms(100);
+          simo_gpio_toogle(LED_TOOGLE);
+
+
+          // Me preparo para volver a dormir
+          simo_rtc_get_time(&h,&m,&s);
+
+          //Configura la alarma
+          simo_rtc_set_alarm(h,m,s+10);
+
+      
+
+
+
+
           break;
 
 

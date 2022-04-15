@@ -12,9 +12,9 @@
 
 
 
-#define __ACCELEROMETER_ON__                (1)           
+#define __ACCELEROMETER_ON__                (0)           
 
-#define __CALIBRATION_ON__                  (1)
+#define __CALIBRATION_ON__                  (0)
 
 #define __SIM7000G_ON__                     (0)
 
@@ -99,6 +99,9 @@ void sensor_services_deinit(void){
 uint8_t sensor_services_check(char* buffer){
     uint8_t ret = 0;
 
+     //borramos buffer
+    memset(buffer,0,1);
+
     #if (__ACCELEROMETER_ON__ == 1)        
          ret = accelerometer_get_measure(buffer,LEN_MAX_BUFFER); 
 
@@ -106,7 +109,7 @@ uint8_t sensor_services_check(char* buffer){
 
     #if (__SENSOR_FAKE_ON__ == 1)
 
-        if(ret == 1) ret = sensor_fake_get_measure(buffer,LEN_MAX_BUFFER); // 
+        ret = sensor_fake_get_measure(buffer,LEN_MAX_BUFFER); // 
         
 
     #endif

@@ -43,14 +43,16 @@
             //GPIOA
             #if NUM_SIMO_GPIO > 0  
 
-             
-             SIMO_GPIO_0    //!En STM32 es PA0    
-            ,SIMO_GPIO_1    //! En STM32 es PA1
-            ,SIMO_GPIO_2     //! En STM32 es PA2
-            , //! En STM32 es PA3
-            SIMO_GPIO_3
+              //!En STM32 es PA0 
+             SIMO_GPIO_0   
+             , //! En STM32 es PA1   
+            SIMO_GPIO_1  
+             , //! En STM32 es PA2  
+            SIMO_GPIO_2     
+             ,//! En STM32 es PA3
+           SIMO_GPIO_3
             , //! En STM32 es PA4
-            SIMO_GPIO_4
+           SIMO_GPIO_4
             
             #endif
             #if NUM_SIMO_GPIO > 5

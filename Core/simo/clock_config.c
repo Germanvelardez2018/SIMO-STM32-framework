@@ -58,6 +58,8 @@
 void simo_clock_init(void){
    // Aqui va la configuracion inicial
   HAL_Init();
+  simo_clock_config();
+
 }
 
 
