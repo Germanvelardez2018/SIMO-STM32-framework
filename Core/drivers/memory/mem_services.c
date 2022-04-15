@@ -89,10 +89,10 @@
 #define CS_PIN                          SIMO_GPIO_24 //! PB8
 
 
-static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
+static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag, uint8_t pos){
     mem_resumen();     // resumen
     //escribo en memoria flash
-    uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,pos);
     mem_sleep();     // entramos en sleep
     return ret;
 }
@@ -103,11 +103,11 @@ static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
 
 
 
-static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag){
+static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag,uint8_t pos){
 
     mem_resumen();     // resumen
     //escribo en memoria flash
-    uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,pos);
     mem_sleep();     // entramos en sleep
     return ret;
 }
@@ -247,7 +247,13 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
  uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag){
     mem_resumen();     // resumen
     //escribo en memoria flash
-    uint32_t ret = __write_data(buffer,len,pag);
+
+    uint32_t ret = 0;
+    uint8_t __len=len;
+    // guardo el tamaño del buffer en primera posicion
+    ret = __write_data(&__len,1,pag,0);
+
+     ret= __write_data(buffer,len+1,pag,1);
     mem_sleep();     // entramos en sleep
     return ret;
  }
@@ -256,7 +262,11 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
  uint32_t mem_services_read_data(char* buffer, uint8_t len, uint16_t pag){
     mem_resumen();     // resumen
     //escribo en memoria flash
-    uint32_t ret = __read_data(buffer,len,pag);
+    uint32_t ret = 0;
+    uint8_t __len = 0;
+    ret = __read_data(&__len,1,pag,0);
+
+    ret = __read_data(buffer,__len+1,pag,1);
     mem_sleep();     // entramos en sleep
     return ret;
 

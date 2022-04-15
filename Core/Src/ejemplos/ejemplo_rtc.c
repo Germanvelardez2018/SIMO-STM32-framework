@@ -226,7 +226,6 @@ int main(void)
 
         // leo desde memoria
 
-          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
           counter ++;
           if(counter == MAX_COUNTER){
             fsm_set_state(FSM_MEMORY_DOWNLOAD);
@@ -267,16 +266,16 @@ int main(void)
                           ,strlen("\r\nlectura de memoria iniciada\r\n")
                           ,TIMEOUT,modo_tx_irq);
 
-          char buff[150];
+          char buff[250];
 
          
 
-          for( uint8_t i=0; i != 10; i++ ){
+          for( uint8_t i=0; i != MAX_COUNTER; i++ ){
 
-                    simo_uart_write(UART_TX,"\r\nread from mem:"
-                          ,strlen("\r\nread from mem:")
+                    simo_uart_write(UART_TX,"\r\nread from mem:\r\n"
+                          ,strlen("\r\nread from mem:\r\n")
                           ,TIMEOUT,modo_tx_irq);
-                    mem_services_read_data(buff,150,counter);
+                    mem_services_read_data(buff,250,i);
                    
                     simo_uart_write(UART_TX,buff
                     ,strlen(buff)
