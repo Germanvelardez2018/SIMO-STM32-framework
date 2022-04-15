@@ -9,9 +9,7 @@
  * 
  */
 
-
 #include "mem_services.h"
-
 #include "memory.h" //!
 
 
@@ -93,7 +91,54 @@
 
 #define OFFSET_ESP_REG                  48
 #define DATA_PAGES_256                  2000
-#define CS_PIN                          SIMO_GPIO_24 //! PB8
+#define CS_PIN                          SIMO_GPIO_4 //! PA4
+
+
+
+
+static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+
+
+
+
+
+
+static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag){
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,0);
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+
+static uint32_t __set_string(char* buffer,uint8_t len,uint8_t address){
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = mem_write_page(buffer,len,address,0);
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
+    mem_resumen();     // resumen
+    //leo en memoria flash
+    uint32_t ret = mem_read_page(buffer,len,address,0);
+    buffer[len]= 0;
+    mem_sleep();     // entramos en sleep
+    return ret;
+}
+
+
 
 
 uint32_t mem_services_init(void){
@@ -141,55 +186,6 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     // return siempre es el valor de FSM en SRAM
 }
 
-
-
-
-
-static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag){
-
-    mem_resumen();     // resumen
-    //escribo en memoria flash
-    uint32_t ret = mem_write_page(buffer,len,pag + OFFSET_ESP_REG,0);
-    mem_sleep();     // entramos en sleep
-    return ret;
-}
-
-
-
-
-
-
-
-static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag){
-
-    mem_resumen();     // resumen
-    //escribo en memoria flash
-    uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,0);
-    mem_sleep();     // entramos en sleep
-    return ret;
-}
-
-
-
-
-
-
-static uint32_t __set_string(char* buffer,uint8_t len,uint8_t address){
-    mem_resumen();     // resumen
-    //escribo en memoria flash
-    uint32_t ret = mem_write_page(buffer,len,address,0);
-    mem_sleep();     // entramos en sleep
-    return ret;
-}
-
-static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
-    mem_resumen();     // resumen
-    //leo en memoria flash
-    uint32_t ret = mem_read_page(buffer,len,address,0);
-    buffer[len]= 0;
-    mem_sleep();     // entramos en sleep
-    return ret;
-}
 
 
 
@@ -257,8 +253,6 @@ static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
 
 
  uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag){
-
-
     mem_resumen();     // resumen
     //escribo en memoria flash
     uint32_t ret = __write_data(buffer,len,pag);
@@ -266,5 +260,4 @@ static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
     return ret;
 
 
-     return 0;
  }

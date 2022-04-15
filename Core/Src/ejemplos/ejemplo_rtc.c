@@ -1,4 +1,3 @@
-
 /**
  * @file ejemplo_rtc.c 
  * @author German Velardez (germanvelardez@gmail.com)
@@ -25,14 +24,20 @@
 #include "delay.h"
 #include "rtc.h"
 #include "gpio.h"
-// Simo
 
 
-
-/* USER CODE END Includes */
-
+  /**SPI1 GPIO Configuration
+   * conexion memoria AT45DB041E
+            Iniciamos servicios de memoria
+            
+            PB3     ------> SPI1_SCK
+            PB4     ------> SPI1_MISO
+            PB5     ------> SPI1_MOSI
+            PA15     ------  SPI1_CS  
+            */
 
  /**USART2 GPIO Configuration
+  * Conexion Uart Debug
         PA2     ------> USART2_TX
         PA3     ------> USART2_RX
         */
@@ -44,11 +49,8 @@
 #define BUFFER_SIZE           100
 
 
-
 #define TIMEOUT     500
-
 #define  modo_tx_irq  0
-
 #define SENSOR_BUFFER_LEN   250
 
 
@@ -56,13 +58,8 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 
 
 
-
-
 #define STEP_MINUTES   1
-
-
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
-
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
 
@@ -124,18 +121,29 @@ static void setup(){
   }
 
 
-  simo_rtc_set_alarm_callback(__CALLBACK_RTC);
-  simo_rtc_ena_irq(1);
 
+  if(mem_services_init() != 0)
+    {
+      simo_uart_write(UART_TX,"memory services readyx \r\n",strlen("memory services readyx \r\n"),TIMEOUT,modo_tx_irq);
+    }
+  else
+    {
+      simo_uart_write(UART_TX,"memory services Error \r\n",strlen("memory services Error \r\n"),TIMEOUT,modo_tx_irq);
+    }
 
+  //simo_rtc_set_alarm_callback(__CALLBACK_RTC);
+  //simo_rtc_ena_irq(1);
    // Inicio el RTC
-  simo_rtc_init();
-  
-  
+  //simo_rtc_init();
   // COnfigura el reloj
-  simo_rtc_set_time(HOURS,MINUTES,SECONDS);
+  //simo_rtc_set_time(HOURS,MINUTES,SECONDS);
+  //simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
 
-  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
+
+
+
+
+
 
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
@@ -167,31 +175,6 @@ int main(void)
 
 
 
-    /**SPI1 GPIO Configuration
-            Iniciamos servicios de memoria
-            
-            PB3     ------> SPI1_SCK
-            PB4     ------> SPI1_MISO
-            PB5     ------> SPI1_MOSI
-            PB8     ------   SPI1_CS  
-            */
-
-
-
-
-
-
-      //if(mem_services_init() != 0)
-      if(1)
-      {
-        simo_uart_write(UART_TX,"memory services readyx \r\n",strlen("memory services readyx \r\n"),TIMEOUT,modo_tx_irq);
-      }
-      else{
-        simo_uart_write(UART_TX,"memory services Error \r\n",strlen("memory services Error \r\n"),TIMEOUT,modo_tx_irq);
-
-      }
-
-
 
       //inicio FSM (INICIO FLASH TAMBIEN)
       fsm_init();
@@ -199,10 +182,10 @@ int main(void)
       DEVICE = fsm_load_flash();
 
 
-
-     // fsm_set_state(FSM_ON_FIELD);
+      // Seteo el  estado alojado en memoria externa, sincroniza con sram
+      fsm_set_state(FSM_ON_FIELD);
       
-      // Leo el estado alojado en memoria externa
+      
       DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
      
 
@@ -224,6 +207,7 @@ int main(void)
           simo_uart_write(UART_TX,"FSM:ON FIELD\r\n"
                           ,strlen("FSM:ON FIELD\r\n")
                           ,TIMEOUT,modo_tx_irq);  
+          /*
           // Dormir el microcontrolador
           power_mode_set( SLEEP_MODE);
           // Despierta mediante interrupcion RTC
@@ -251,6 +235,8 @@ int main(void)
 
           //Configura la alarma
           simo_rtc_set_alarm(h,m,s+10);
+
+          */
           break;
 
 
@@ -259,6 +245,13 @@ int main(void)
           simo_uart_write(UART_TX,"FSM: DONWLOAD\r\n"
                           ,strlen("FSM: DONWLOAD\r\n")
                           ,TIMEOUT,modo_tx_irq);
+
+          //descargo memoria y vuelvo a estado Field
+          fsm_set_state(FSM_ON_FIELD);
+
+
+          simo_delay_ms(5000);
+
 
           break;
 
@@ -276,6 +269,8 @@ int main(void)
           simo_uart_write(UART_TX,"FSM:default\r\n"
                           ,strlen("FSM:default\r\n")
                           ,TIMEOUT,modo_tx_irq);
+          simo_delay_ms(5000);
+
           break;
       }
 
