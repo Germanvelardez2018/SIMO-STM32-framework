@@ -62,7 +62,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-
+#define MAX_COUNTER          5
 
 //Configura la alarma
   #define HOURS       10
@@ -215,20 +215,25 @@ int main(void)
           //Rutina de trabajo
           simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
           
-          //borramos buffer
-          memset(_sensor_buffer,0,BUFFER_SIZE);
+         
 
           sensor_services_check(_sensor_buffer);
           simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
         
         // Guardar datos en memoria
 
-     //     mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+          mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
 
         // leo desde memoria
 
           simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
           counter ++;
+          if(counter == MAX_COUNTER){
+            fsm_set_state(FSM_MEMORY_DOWNLOAD);
+             DEVICE = fsm_get_state();
+
+          } 
+      else{
           simo_gpio_toogle(LED_TOOGLE);
           simo_delay_ms(100);
           simo_gpio_toogle(LED_TOOGLE);
@@ -239,6 +244,9 @@ int main(void)
 
           //Configura la alarma
           simo_rtc_set_alarm(h,m,s+10);
+
+         }
+        
 
           
           break;
@@ -254,9 +262,50 @@ int main(void)
           
           // borrar datos que ya se enviaron, y ajustar contador de datos a cero
           // volver al modo datalog
-          fsm_set_state(FSM_ON_FIELD);
 
-          simo_delay_ms(1000);
+           simo_uart_write(UART_TX,"\r\nlectura de memoria iniciada\r\n"
+                          ,strlen("\r\nlectura de memoria iniciada\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+
+          char buff[150];
+
+         
+
+          for( uint8_t i=0; i != 10; i++ ){
+
+                    simo_uart_write(UART_TX,"\r\nread from mem:"
+                          ,strlen("\r\nread from mem:")
+                          ,TIMEOUT,modo_tx_irq);
+                    mem_services_read_data(buff,150,counter);
+                   
+                    simo_uart_write(UART_TX,buff
+                    ,strlen(buff)
+                    ,TIMEOUT,modo_tx_irq);
+
+
+          }
+
+          simo_uart_write(UART_TX,"\r\nlectura de moeria finalizada\r\n"
+                          ,strlen("\r\nlectura de moeria finalizada\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+    
+          counter = 0;
+        
+          fsm_set_state(FSM_ON_FIELD);
+          DEVICE = fsm_get_state();
+
+          // a dormir, activar rtc antes
+           simo_gpio_toogle(LED_TOOGLE);
+          simo_delay_ms(100);
+          simo_gpio_toogle(LED_TOOGLE);
+
+
+          // Me preparo para volver a dormir
+          simo_rtc_get_time(&h,&m,&s);
+
+          //Configura la alarma
+          simo_rtc_set_alarm(h,m,s+10);
+
 
 
           break;
@@ -275,13 +324,12 @@ int main(void)
           power_mode_set( RESUMEN_RUN);
           //Rutina de trabajo
           simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-          memset(_sensor_buffer,0,BUFFER_SIZE);
           sensor_services_check(_sensor_buffer);
           simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
         
         // Guardar datos en memoria
 
-     //     mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+        mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
 
         // leo desde memoria
 
@@ -298,7 +346,6 @@ int main(void)
           //Configura la alarma
           simo_rtc_set_alarm(h,m,s+10);
 
-      
 
 
 
