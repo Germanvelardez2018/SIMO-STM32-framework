@@ -1,25 +1,21 @@
 #include "sensor_services.h"
-#include "accelerometer.h"
+//#include "accelerometer.h"
+
+#include "mpu6050.h"
 #include "sensor_fake.h"   // sensor de prueba imaginario
 #include "simcom.h"
 
 
-
-
-
-
 #define  LEN_MAX_BUFFER                          (255)
 
+#define __ACCELEROMETER_ON__                    (1)           
+
+#define __CALIBRATION_ON__                      (0)
+
+#define __SIM7000G_ON__                         (0)
 
 
-#define __ACCELEROMETER_ON__                (0)           
-
-#define __CALIBRATION_ON__                  (0)
-
-#define __SIM7000G_ON__                     (0)
-
-
-#define __SENSOR_FAKE_ON__                 (1)
+#define __SENSOR_FAKE_ON__                      (1)
 
 
 
@@ -38,11 +34,14 @@ static uint32_t __init_sensors(){
     uint32_t ret = 0;
     //Iniciamos el acelerometro
     #if (__ACCELEROMETER_ON__ == 1)                 
-        accelerometer_init();
-        ret = accelerometer_check();
+        
+        ret = ACCEL_init();
+     
   
         #if (__CALIBRATION_ON__ == 1)        
-        accelerometer_calibration();
+        
+        ACCEL_calibration();
+        //accelerometer_calibration();
         #endif
     #endif
 
@@ -80,7 +79,9 @@ static uint32_t __init_sensors(){
 
 static void __deinit_sensors(){
     #if (__ACCELEROMETER_ON__ == 1)        
-        accelerometer_deinit();
+        //accelerometer_deinit();
+
+        ACCEL_deinit();
     #endif
 
 }
@@ -103,7 +104,8 @@ uint8_t sensor_services_check(char* buffer){
     memset(buffer,0,1);
 
     #if (__ACCELEROMETER_ON__ == 1)        
-         ret = accelerometer_get_measure(buffer,LEN_MAX_BUFFER); 
+         //ret = accelerometer_get_measure(buffer,LEN_MAX_BUFFER); 
+         ret = ACCEL_get_measure(buffer, LEN_MAX_BUFFER);
 
     #endif
 
@@ -113,8 +115,6 @@ uint8_t sensor_services_check(char* buffer){
         
 
     #endif
-
-
 
    return ret;
 

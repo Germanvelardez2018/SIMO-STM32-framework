@@ -456,7 +456,7 @@ void accelerometer_init(void){
 
 uint32_t  accelerometer_check(){
 
-    uint32_t res = 0;
+    uint32_t ret = 0;
     uint8_t check = 0;
     
     
@@ -465,9 +465,9 @@ uint32_t  accelerometer_check(){
                       MPU_WHO_IAM ,1,&check,1,
                       ACELEROMETRO_TIMEOUT,
                       USE_CALLBACK);
-    res = (check == 0x70)?1:0;   // 1 OK, 0 ERROR, NO DISPONIBLE
+    ret = (check == 0x70)?1:0;   // 1 OK, 0 ERROR, NO DISPONIBLE
 
-    return res;
+    return ret;
     
 
 }

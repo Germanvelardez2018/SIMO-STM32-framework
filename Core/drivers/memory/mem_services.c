@@ -265,8 +265,10 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     uint32_t ret = 0;
     uint8_t __len = 0;
     ret = __read_data(&__len,1,pag,0);
+    ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
 
-    ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;
+
+    //ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
 
     mem_sleep();     // entramos en sleep
     return ret;

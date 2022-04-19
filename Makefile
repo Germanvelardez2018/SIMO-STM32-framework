@@ -38,7 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/ejemplos/ejemplo_rtc.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
-Core/Src/sensors/MPU6050.c \
+Core/Src/sensors/mpu6050.c \
 Core/drivers/sensors/sensor_fake.c \
 Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \
@@ -47,7 +47,6 @@ Core/drivers/sensors/sensor_services.c \
 Core/drivers/memory/mem_services.c \
 Core/drivers/fsm/fsm.c \
 Core/drivers/mpu6500_test.c \
-Core/drivers/sensors/accelerometer.c \
 Core/simo/power_modes.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \

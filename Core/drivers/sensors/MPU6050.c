@@ -10,10 +10,10 @@
 #define USE_CALLBACK                             (0x00)  //! No modificar, codigo imcompatible con i2c irq
 
 
-#define accelerometer_ADDR                       0x68
+#define accelerometer_ADDR                       0xD0
 #define accelerometer_I2C_ADDR                   (accelerometer_ADDR)
 #define ACELEROMETRO_ADDRESS                     (accelerometer_ADDR )
-#define ACELEROMETRO_I2C                         I2C_A
+#define ACELEROMETRO_I2C                         I2C_B
 #define ACELEROMETRO_SPEED                       (50000)
 #define ACELEROMETRO_7BITS_ADDRESS               (1)
 #define ACELEROMETRO_TIMEOUT                     (500)
@@ -253,23 +253,23 @@
  * Valor de reset     0x68
  */
 
-
-#define MPU_WHO_IAM                         (0x75) //! Valor predeterminado 0x70
+ #define MPU6050_AVAILABLE                     (0x68)
+#define MPU_WHO_IAM                            (0x75) //! Valor predeterminado 0x70
 
 
 // OFFSET
-#define XA_OFFS_H                           (0x06)        
-#define XA_OFFS_L                           (0x07)              
-#define YA_OFFS_H                           (0x08)              
-#define YA_OFFS_L                           (0x09)              
-#define ZA_OFFS_H                           (0x0A)              
-#define ZA_OFFS_L                           (0x0B)     
+#define XA_OFFS_H                              (0x06)        
+#define XA_OFFS_L                              (0x07)              
+#define YA_OFFS_H                              (0x08)              
+#define YA_OFFS_L                              (0x09)              
+#define ZA_OFFS_H                              (0x0A)              
+#define ZA_OFFS_L                              (0x0B)     
 
 
-static uint8_t __MPU6050_read(uint8_t reg, uint8_t* value){
+static uint32_t __MPU6050_read(uint8_t reg, uint8_t* value){
 
     //Modificamos configuracion
-    uint8_t ret = simo_i2c_mem_read( ACELEROMETRO_I2C,
+    uint32_t ret = simo_i2c_mem_read( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (reg),
                         1,
@@ -282,10 +282,10 @@ static uint8_t __MPU6050_read(uint8_t reg, uint8_t* value){
 }
 
 
-static uint8_t __MPU6050_write(uint8_t reg, uint8_t* value){
+static uint32_t __MPU6050_write(uint8_t reg, uint8_t* value){
 
     //Modificamos configuracion
-    uint8_t ret = simo_i2c_mem_write( ACELEROMETRO_I2C,
+    uint32_t ret = simo_i2c_mem_write( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (reg),
                         1,
@@ -299,9 +299,9 @@ static uint8_t __MPU6050_write(uint8_t reg, uint8_t* value){
 
 
 
-static uint8_t __MPU6050_read_buffer(uint8_t reg, uint8_t* buffer, uint8_t len){
+static uint32_t __MPU6050_read_buffer(uint8_t reg, uint8_t* buffer, uint8_t len){
     //Modificamos configuracion
-    uint8_t ret = simo_i2c_mem_read( ACELEROMETRO_I2C,
+    uint32_t ret = simo_i2c_mem_read( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (reg),
                         1,
@@ -316,9 +316,9 @@ static uint8_t __MPU6050_read_buffer(uint8_t reg, uint8_t* buffer, uint8_t len){
 
 
 
-static uint8_t __MPU6050_write_buffer(uint8_t reg, uint8_t* buffer, uint8_t len){
+static uint32_t __MPU6050_write_buffer(uint8_t reg, uint8_t* buffer, uint8_t len){
     //Modificamos configuracion
-    uint8_t ret = simo_i2c_mem_write( ACELEROMETRO_I2C,
+    uint32_t ret = simo_i2c_mem_write( ACELEROMETRO_I2C,
                         ACELEROMETRO_ADDRESS,
                         (reg),
                         1,
@@ -336,7 +336,7 @@ static uint8_t __MPU6050_write_buffer(uint8_t reg, uint8_t* buffer, uint8_t len)
  * @param scala    valores validos 0 ,1 ,2 ,3
  * @return ** uint8_t 
  */
-static uint8_t  __MPU6050_set_scala( uint8_t scala){
+static uint32_t  __MPU6050_set_scala( uint8_t scala){
 
     uint8_t value = 0;
 
@@ -366,7 +366,7 @@ static uint8_t  __MPU6050_set_scala( uint8_t scala){
 
     //Modificamos configuracion
 
-   uint8_t ret = __MPU6050_write(ACCEL_CONFIG,&value); 
+   uint32_t ret = __MPU6050_write(ACCEL_CONFIG,&value); 
 
     return ret; 
 }
@@ -381,37 +381,81 @@ static uint8_t __MPU6060_set_int_pin(){
     // BIT_SET(value,3); // si es 1 el nivel logico de FSYNC PIN ES BAJO,SI ES 0 entones es ALTO
     // BIT_SET(value,2); // FSYNC INT ENABLE. Con 0 esta deshabilitado
     // BIT_SET(value,1); utilizado es usos complejos del sensor
+
+    uint32_t ret = __MPU6050_write(INT_PIN_CFG,&value);
+    return ret;
+}
+
+
+static uint32_t __MPU6050_reset(){
+
+    uint8_t value = 0;
+
+    BIT_SET(value,7); // 
+
+   uint32_t ret = __MPU6050_write(PWR_MGMT_1,&value);
+    return ret;
+}
+
+
+  /**I2C2 GPIO Configuration
+    PB10     ------> I2C2_SCL
+    PB11     ------> I2C2_SDA
+    */
+
+static uint32_t __MPU6050_init(void){
+    uint32_t ret = simo_i2c_init(ACELEROMETRO_I2C,ACELEROMETRO_SPEED,ACELEROMETRO_7BITS_ADDRESS);
+    return ret;
+
+}
+
+
+
+static void __MPU6050_deinit(){
+    simo_i2c_deinit(ACELEROMETRO_I2C);
+
+
 }
 
 
 
 
-void MPU6050_init(void){
+static uint32_t  __MPU6050_check(void){
+    uint8_t value = 0;
+    __MPU6050_read(MPU_WHO_IAM,&value);
+   
+    uint32_t ret = (value == MPU6050_AVAILABLE)? 1:0 ;
+    return ret;
 
 }
 
 
+static uint32_t  __MPU6050_resume(void){
 
-void MPU6050_deinit(){
+     uint8_t value =0;
 
-}
+    uint32_t ret = __MPU6050_read(PWR_MGMT_1,&value);
 
-
-void MPU6050_reset(){
-
-}
-
-
-uint32_t  MPU6050_check(void){
-
-}
-
-
-void MPU6050_resume(void){
+    if( ret != 0){
+        BIT_CLEAR(value,6); // ponemos el bit 6 a 1. Sleep
+        __MPU6050_write(PWR_MGMT_1,&value);
+    }
+    return ret;
 
 }
 
-void MPU6050_sleep(void){
+static uint32_t  __MPU6050_sleep(void){
+
+    uint8_t value =0;
+
+    uint32_t ret = __MPU6050_read(PWR_MGMT_1,&value);
+
+    if( ret != 0){
+        BIT_SET(value,6); // ponemos el bit 6 a 1. Sleep
+        __MPU6050_write(PWR_MGMT_1,&value);
+    }
+    return ret;   
+    
 
 }
 
@@ -424,7 +468,7 @@ void MPU6050_set_sample_div(uint8_t freq_div){
 
 
 
-uint32_t MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
+static uint32_t __MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
     uint8_t buffer[6] = {0};
     uint8_t ret = __MPU6050_read_buffer(ACCEL_XOUT_H,buffer,6);
@@ -443,23 +487,27 @@ uint32_t MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
 
 
-void MPU6050_calibration(){
-    return 0;
-}
+uint32_t MPU6050_set_offset(int16_t x_offset, int16_t y_offset, int16_t z_offset){
 
+    uint8_t buffer[6] = {0};
+    buffer[0]= (uint8_t)((x_offset) >> 8);
+    buffer[1]= (uint8_t)((x_offset));
+    buffer[2]= (uint8_t)((y_offset) >> 8);
+    buffer[3]= (uint8_t)((y_offset));
+    buffer[4]= (uint8_t)((z_offset) >> 8);
+    buffer[5]= (uint8_t)((z_offset));
+    uint32_t ret = __MPU6050_write_buffer(XA_OFFS_H,buffer,6);
+    return ret;
 
-uint32_t MPU6050_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
-    return 0;
 }
 
 
 uint32_t MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
 
 
-     uint8_t buffer[6] = {0};
-    uint8_t ret = __MPU6050_read_buffer(XA_OFFS_H,buffer,6);
+    uint8_t buffer[6] = {0};
+    uint32_t ret = __MPU6050_read_buffer(XA_OFFS_H,buffer,6);
 
-    
     //! Primera posicion de memoria del vector, parte alta del int16_t
     (*x_offset) = (int16_t)(buffer[0] << 8 | buffer[1]);   
     //! Primera posicion de memoria del vector, parte alta del int16_t
@@ -469,13 +517,168 @@ uint32_t MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_off
 
 
 
+    return ret;
+}
 
 
+static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
 
+    #define float_format  "%s:\r\n\tx:%.2f\t\r\n\ty:%.2f\t\r\n\tz:%.2f\t\r\n"
+
+    uint8_t last_pos = strlen(buffer);
+    char    buff[100];
+
+    uint32_t ret = 0;
+    int16_t x;
+    int16_t y;
+    int16_t z;
+    if(ACCEL_check() == 0 ) {
+        sprintf((buff),"%s: sensor no disponible \r\n",NAME_ACCELEROMETER);  
+        }
+    else{
+        ret = __MPU6050_get_aceleration(&x, &y , &z);
+
+        if(ret != 0){
+            float fx = (float) (x/(16384.0)); // ESCALA +_2G   16384  == +1G
+            float fy = (float) (y/(16384.0)); // ESCALA +_2G
+            float fz = (float) (z/(16384.0)); // ESCALA +_2G
+            sprintf(buff,float_format,NAME_ACCELEROMETER,fx,fy,fz);
+            
+        }
+        else{
+            sprintf((buff),"%s: error en medicion \r\n",NAME_ACCELEROMETER);    
+        }
+
+  
+    // verifico si  tengo espacio para grabar la informacion
+   if( (len - last_pos)  >  strlen(buff))
+ // if(1)
+    {
+        sprintf((buffer+last_pos),"%s",buff);    
+        ret = 1; // se grabo la nueva info
+    }
+
+       
+        return ret;
+    }
     return 0;
 }
 
 
-uint8_t MPU6050_get_measure(char* buffer, uint8_t len){
-    return 0;
+
+
+
+
+static void    __MPU6050_sensores_on(){
+
+    uint8_t value = 0;
+    __MPU6050_write(PWR_MGMT_2,&value);
+
+}
+
+
+//--------------------------------------------------
+
+
+/**
+ * @brief Inicio el hardware necesario para manejar acelerometro (I2C)
+ * 
+ * @return ** void 
+ */
+
+
+
+uint32_t ACCEL_init(void){
+    uint32_t ret = __MPU6050_init();
+     if(ret != 0) {
+         ret = __MPU6050_check();
+         __MPU6050_resume();
+         __MPU6050_set_scala(0);
+         __MPU6050_sensores_on();
+     } 
+
+    return ret;
+}
+
+
+/**
+ * @brief Desactivar el hardware
+ * 
+ * @return ** void 
+ */
+void ACCEL_deinit(){
+
+    __MPU6050_deinit();
+
+}
+
+
+
+/**
+ * @brief Reset la configuracion
+ * 
+ * @return ** void 
+ */
+void ACCEL_reset(){
+
+    __MPU6050_reset();
+
+}
+
+
+/**
+ * @brief Revisar disponibilidad del sensor
+ * 
+ * @return ** uint32_t 
+ */
+uint32_t  ACCEL_check(void){
+    return __MPU6050_check();
+}
+
+
+
+/**
+ * @brief Poner en modo sleep el sensor
+ * 
+ * @return ** void 
+ */
+void ACCEL_sleep(void){
+
+    __MPU6050_sleep();
+
+}
+
+
+/**
+ * @brief 
+ * 
+ * @return ** void 
+ */
+void ACCEL_resume(void){
+
+    __MPU6050_resume();
+
+}
+
+
+
+
+
+
+
+
+
+uint32_t ACCEL_get_measure(char* buffer, uint8_t len){
+    return  __MPU6050_get_measure( buffer, len);
+}
+
+
+
+/**
+ * @brief Calibrar el sensor
+ * 
+ * @return ** void 
+ */
+void ACCEL_calibration(){
+    
 }

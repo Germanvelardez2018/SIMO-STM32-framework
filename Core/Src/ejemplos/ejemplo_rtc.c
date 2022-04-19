@@ -62,7 +62,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-#define MAX_COUNTER          20
+#define MAX_COUNTER          5
 
 //Configura la alarma
   #define HOURS       10
@@ -136,7 +136,7 @@ static void setup(){
   simo_rtc_init();
   // COnfigura el reloj
   simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-  simo_rtc_set_alarm(HOURS,MINUTES+5,SECONDS);
+  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+10);
 
 
 
@@ -235,7 +235,7 @@ int main(void)
           simo_rtc_get_time(&h,&m,&s);
 
           //Configura la alarma
-          simo_rtc_set_alarm(h,m + 5,s);
+          simo_rtc_set_alarm(h,m,s+10);
 
          }
         

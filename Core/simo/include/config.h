@@ -48,7 +48,7 @@
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3 
 #define C_NUM_SIMO_SPI                          1
 //! Numero de instancias disponibles. Verificar valores maximos y conclictos. Maximo: 2 instancias
-#define C_NUM_SIMO_I2C                          1     //Tiene 2 I2C pero genera conclicto con UART3
+#define C_NUM_SIMO_I2C                          2     //Tiene 2 I2C pero genera conclicto con UART3
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos 
 #define C_NUM_SIMO_GPIO                         47   // 48 Pines,0 ....al 47
 

@@ -21,6 +21,7 @@
     #include <string.h>
     #include <stdint.h>
     #include <stdlib.h>
+    #include "stdio.h"
 
 
  
@@ -244,15 +245,7 @@ typedef enum {
 }pwr_modes;
 
 
-typedef enum {
-    S_OUTPUT_INT
-    ,S_OUTPUT_FLOAT
-    ,S_OUTPUT_STRING
-} sensor_output;
 
-
-
-typedef uint32_t (*check_sensor)(sensor_format);
 
 
 

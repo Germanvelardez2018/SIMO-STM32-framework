@@ -25,7 +25,7 @@
  * 
  * @return ** void 
  */
-void MPU6050_init(void);
+uint32_t  ACCEL_init(void);
 
 
 /**
@@ -33,7 +33,7 @@ void MPU6050_init(void);
  * 
  * @return ** void 
  */
-void MPU6050_deinit();
+void ACCEL_deinit();
 
 
 
@@ -42,7 +42,7 @@ void MPU6050_deinit();
  * 
  * @return ** void 
  */
-void MPU6050_reset();
+void ACCEL_reset();
 
 
 /**
@@ -50,7 +50,7 @@ void MPU6050_reset();
  * 
  * @return ** uint32_t 
  */
-uint32_t  MPU6050_check(void);
+uint32_t  ACCEL_check(void);
 
 
 
@@ -59,7 +59,7 @@ uint32_t  MPU6050_check(void);
  * 
  * @return ** void 
  */
-void MPU6050_sleep(void);
+void ACCEL_sleep(void);
 
 
 /**
@@ -67,15 +67,8 @@ void MPU6050_sleep(void);
  * 
  * @return ** void 
  */
-void MPU6050_resume(void);
+void ACCEL_resume(void);
 
-/**
- * @brief  frecuencia interna del sensor( posiblemente deberia ser static e invisible para UF)
- * 
- * @param freq_div 
- * @return ** void 
- */
-void MPU6050_set_sample_div(uint8_t freq_div);
 
 
 
@@ -87,7 +80,7 @@ void MPU6050_set_sample_div(uint8_t freq_div);
  * @param z 
  * @return ** uint32_t 
  */
-uint32_t MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z);
+uint32_t ACCEL_get_aceleration(int16_t* x, int16_t* y , int16_t* z);
 
 
 
@@ -96,40 +89,13 @@ uint32_t MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z);
  * 
  * @return ** void 
  */
-void MPU6050_calibration();
-
-
-/**
- * @brief  Setear un offset de la medicion del sensor
- * 
- * @param x_offset 
- * @param y_offset 
- * @param z_offset 
- * @return ** uint32_t 
- */
-uint32_t MPU6050_set_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
-
-
-/**
- * @brief Obtener el offset de la medicion del sensor
- * 
- * @param x_offset 
- * @param y_offset 
- * @param z_offset 
- * @return ** uint32_t 
- */
-uint32_t MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset);
+void ACCEL_calibration();
 
 
 
-/**
- * @brief 
- * 
- * @param buffer 
- * @param len 
- * @return ** uint32_t 
- */
-uint8_t MPU6050_get_measure(char* buffer, uint8_t len);
+
+uint32_t ACCEL_get_measure(char* buffer, uint8_t len);
+
 
 
 #endif
