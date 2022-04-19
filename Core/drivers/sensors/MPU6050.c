@@ -440,6 +440,7 @@ static uint32_t  __MPU6050_resume(void){
         BIT_CLEAR(value,6); // ponemos el bit 6 a 1. Sleep
         __MPU6050_write(PWR_MGMT_1,&value);
     }
+  
     return ret;
 
 }
@@ -449,11 +450,13 @@ static uint32_t  __MPU6050_sleep(void){
     uint8_t value =0;
 
     uint32_t ret = __MPU6050_read(PWR_MGMT_1,&value);
-
+/*
     if( ret != 0){
         BIT_SET(value,6); // ponemos el bit 6 a 1. Sleep
         __MPU6050_write(PWR_MGMT_1,&value);
     }
+
+  */  
     return ret;   
     
 
@@ -487,7 +490,7 @@ static uint32_t __MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
 
 
-uint32_t MPU6050_set_offset(int16_t x_offset, int16_t y_offset, int16_t z_offset){
+static uint32_t __MPU6050_set_offset(int16_t x_offset, int16_t y_offset, int16_t z_offset){
 
     uint8_t buffer[6] = {0};
     buffer[0]= (uint8_t)((x_offset) >> 8);
@@ -502,7 +505,7 @@ uint32_t MPU6050_set_offset(int16_t x_offset, int16_t y_offset, int16_t z_offset
 }
 
 
-uint32_t MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
+static uint32_t __MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16_t* z_offset){
 
 
     uint8_t buffer[6] = {0};
@@ -532,11 +535,15 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
     int16_t x;
     int16_t y;
     int16_t z;
+    __MPU6050_resume();
     if(ACCEL_check() == 0 ) {
         sprintf((buff),"%s: sensor no disponible \r\n",NAME_ACCELEROMETER);  
         }
     else{
         ret = __MPU6050_get_aceleration(&x, &y , &z);
+        __MPU6050_sleep();
+
+
 
         if(ret != 0){
             float fx = (float) (x/(16384.0)); // ESCALA +_2G   16384  == +1G
@@ -557,7 +564,7 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
         sprintf((buffer+last_pos),"%s",buff);    
         ret = 1; // se grabo la nueva info
     }
-
+   
        
         return ret;
     }
@@ -595,6 +602,7 @@ uint32_t ACCEL_init(void){
          __MPU6050_resume();
          __MPU6050_set_scala(0);
          __MPU6050_sensores_on();
+         __MPU6050_sleep();
      } 
 
     return ret;
@@ -674,11 +682,62 @@ uint32_t ACCEL_get_measure(char* buffer, uint8_t len){
 
 
 
+
+
+
 /**
  * @brief Calibrar el sensor
  * 
  * @return ** void 
  */
-void ACCEL_calibration(){
+static void __MPU6050_calibration(int16_t x_e, int16_t y_e, int16_t z_e){
+
+
+        // x_e, y_e, z_e son los valores esperando. En nuestro caso 0,0,g    
+    // para calibracion en superficie horizontal
+    #define CALIBRATION_ITER     700
+    int16_t x,y,z ;
+
+    int16_t delta_x = 0;
+    int16_t delta_y = 0;
+    int16_t delta_z = 0;
+
+    int16_t x_offset = 0;
+    int16_t y_offset = 0;
+    int16_t z_offset = 0;
+
+
+    // offset lo dejamos en cero
+    __MPU6050_get_offset(&x_offset,&y_offset,&z_offset);
+
+    for(int16_t i= 0; i< CALIBRATION_ITER ; i++){
+
+    __MPU6050_get_aceleration(&x,&y,&z);
+    
+    
+    delta_x = x_e - x;
+    delta_y = y_e - y;
+    delta_z = z_e - z;
+
+    // offset en cero
+    //corrijo los offset
+
+    if(delta_x !=0) x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
+
+    if(delta_y !=0) y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
+
+    if(delta_z !=0) z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
+    
+    //recargo los offset
+    __MPU6050_set_offset(x_offset, y_offset, z_offset);
+    }
+
     
 }
+
+
+
+
+ void ACCEL_calibration(){
+     __MPU6050_calibration(0,0,16384);
+ }
