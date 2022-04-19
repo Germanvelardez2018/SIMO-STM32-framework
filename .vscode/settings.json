@@ -11,6 +11,7 @@
 		"memory.h": "c",
 		"gpio.h": "c",
 		"config.h": "c",
-		"sensor_fake.h": "c"
+		"sensor_fake.h": "c",
+		"MPU6050.C": "cpp"
 	}
 }

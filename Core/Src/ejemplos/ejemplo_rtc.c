@@ -46,12 +46,12 @@
 #define LED_TOOGLE            SIMO_GPIO_18 // PB2
 #define BAUDRATE              115200
 #define UART_TX               UART_B
-#define BUFFER_SIZE           100
+#define BUFFER_SIZE           250
 
 
 #define TIMEOUT     500
 #define  modo_tx_irq  0
-#define SENSOR_BUFFER_LEN   250
+#define SENSOR_BUFFER_LEN   BUFFER_SIZE
 
 
 static char _sensor_buffer[SENSOR_BUFFER_LEN];
@@ -62,7 +62,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-#define MAX_COUNTER          5
+#define MAX_COUNTER          20
 
 //Configura la alarma
   #define HOURS       10
@@ -136,7 +136,7 @@ static void setup(){
   simo_rtc_init();
   // COnfigura el reloj
   simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+5);
+  simo_rtc_set_alarm(HOURS,MINUTES+5,SECONDS);
 
 
 
@@ -171,23 +171,16 @@ int main(void)
     // Estado del dispositivo, 
     // transmicion en vivo o transmicion desde memoria memoria.
 
-
-
-
-
-      //inicio FSM (INICIO FLASH TAMBIEN)
-      fsm_init();
+    //inicio FSM (INICIO FLASH TAMBIEN)
+    fsm_init();
       
-      DEVICE = fsm_load_flash();
+    DEVICE = fsm_load_flash();
 
-
-      // Seteo el  estado alojado en memoria externa, sincroniza con sram
-      fsm_set_state(FSM_ON_FIELD);
-      
-      
-      DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
+    // Seteo el  estado alojado en memoria externa, sincroniza con sram
+    fsm_set_state(FSM_ON_FIELD);
+       
+    DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
      
-
     while(1){
    
     switch (DEVICE)
@@ -242,7 +235,7 @@ int main(void)
           simo_rtc_get_time(&h,&m,&s);
 
           //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+10);
+          simo_rtc_set_alarm(h,m + 5,s);
 
          }
         
@@ -266,7 +259,9 @@ int main(void)
                           ,strlen("\r\nlectura de memoria iniciada\r\n")
                           ,TIMEOUT,modo_tx_irq);
 
-          char buff[250];
+
+          // buffer para los datos leidos en memoria
+          char buff[BUFFER_SIZE];
 
          
 
@@ -275,8 +270,9 @@ int main(void)
                     simo_uart_write(UART_TX,"\r\nread from mem:\r\n"
                           ,strlen("\r\nread from mem:\r\n")
                           ,TIMEOUT,modo_tx_irq);
+
+
                     mem_services_read_data(buff,250,i);
-                   
                     simo_uart_write(UART_TX,buff
                     ,strlen(buff)
                     ,TIMEOUT,modo_tx_irq);
@@ -294,7 +290,7 @@ int main(void)
           DEVICE = fsm_get_state();
 
           // a dormir, activar rtc antes
-           simo_gpio_toogle(LED_TOOGLE);
+          simo_gpio_toogle(LED_TOOGLE);
           simo_delay_ms(100);
           simo_gpio_toogle(LED_TOOGLE);
 
@@ -315,37 +311,9 @@ int main(void)
           simo_uart_write(UART_TX,"FSM: UNDEFINED\r\n"
                           ,strlen("FSM: UNDEFINED\r\n")
                           ,TIMEOUT,modo_tx_irq);
-          //simo_delay_ms(5000);
+          simo_delay_ms(5000);
  
-          // Dormir el microcontrolador
-          power_mode_set( SLEEP_MODE);
-          // Despierta mediante interrupcion RTC
-          power_mode_set( RESUMEN_RUN);
-          //Rutina de trabajo
-          simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-          sensor_services_check(_sensor_buffer);
-          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
-        
-        // Guardar datos en memoria
-
-        mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
-
-        // leo desde memoria
-
-          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
-          counter ++;
-          simo_gpio_toogle(LED_TOOGLE);
-          simo_delay_ms(100);
-          simo_gpio_toogle(LED_TOOGLE);
-
-
-          // Me preparo para volver a dormir
-          simo_rtc_get_time(&h,&m,&s);
-
-          //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+10);
-
-
+ 
 
 
 

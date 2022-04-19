@@ -87,8 +87,6 @@ uint8_t sensor_fake_get_measure(char* buffer, uint8_t len_max){
  
 
     if( (len_max - last_pos)   > ((uint8_t) strlen(PRINT_FAKE)))
-    
-   // if(1)
     {
 
         sprintf((buffer+last_pos),"%s",PRINT_FAKE);    

@@ -38,6 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/ejemplos/ejemplo_rtc.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
+Core/Src/sensors/MPU6050.c \
 Core/drivers/sensors/sensor_fake.c \
 Core/drivers/simcom/simcom.c \
 Core/drivers/simcom/cmd.c \

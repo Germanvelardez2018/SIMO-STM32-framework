@@ -259,14 +259,15 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
  }
 
  
- uint32_t mem_services_read_data(char* buffer, uint8_t len, uint16_t pag){
+ uint32_t mem_services_read_data(char* buffer, uint8_t len_buff, uint16_t pag){
     mem_resumen();     // resumen
     //escribo en memoria flash
     uint32_t ret = 0;
     uint8_t __len = 0;
     ret = __read_data(&__len,1,pag,0);
 
-    ret = __read_data(buffer,__len+1,pag,1);
+    ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;
+
     mem_sleep();     // entramos en sleep
     return ret;
 
