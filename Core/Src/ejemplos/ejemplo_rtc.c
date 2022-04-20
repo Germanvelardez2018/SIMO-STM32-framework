@@ -20,6 +20,8 @@
 #include "fsm.h"                 // ! Maquina de estados del sistema
 #include "power_modes.h"         // ! Gestiona el consumo de energia del micro
 #include "sensor_services.h"
+#include "comm_services.h"      // ! Servicis de comunicacion
+#include "comm.h"
 #include "uart.h"
 #include "delay.h"
 #include "rtc.h"
@@ -62,16 +64,16 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-#define MAX_COUNTER          5
+#define MAX_COUNTER          1
 
 //Configura la alarma
-  #define HOURS       10
-  #define MINUTES     30
-  #define SECONDS      0
-  #define MONTHS       3 // Abril
-  #define DAYS         20
-  #define YEAR         22  
-  #define WEEK         3
+  #define HOURS               13
+  #define MINUTES             8
+  #define SECONDS             0
+  #define MONTHS              3 // Abril
+  #define DAYS                20
+  #define YEAR                22  
+  #define WEEK                3
 
 
   uint8_t h= HOURS;
@@ -141,9 +143,12 @@ static void setup(){
    // Inicio el RTC
   simo_rtc_init();
   // COnfigura el reloj
-  simo_rtc_set_date(w,mo,d,y);
-  simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-  simo_rtc_set_alarm(HOURS,MINUTES+1,SECONDS);
+  //simo_rtc_set_date(w,mo,d,y);
+  //simo_rtc_set_time(HOURS,MINUTES,SECONDS);
+
+
+  simo_rtc_get_time(&h,&m,&s);
+  simo_rtc_set_alarm(h,m,s+10);
 
 
 
@@ -153,7 +158,8 @@ static void setup(){
 
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
-
+  // Mqtt services
+    comm_init();
 
 
 
@@ -184,8 +190,9 @@ int main(void)
     DEVICE = fsm_load_flash();
 
     // Seteo el  estado alojado en memoria externa, sincroniza con sram
-    fsm_set_state(FSM_ON_FIELD);
-       
+    //fsm_set_state(FSM_ON_FIELD);
+    fsm_set_state(FSM_UNDEFINED);
+ 
     DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
      
     while(1){
@@ -238,7 +245,6 @@ int main(void)
           if(counter == MAX_COUNTER){
             fsm_set_state(FSM_MEMORY_DOWNLOAD);
              DEVICE = fsm_get_state();
-
           } 
       else{
           simo_gpio_toogle(LED_TOOGLE);
@@ -250,20 +256,21 @@ int main(void)
           simo_rtc_get_time(&h,&m,&s);
 
           //Configura la alarma
-          simo_rtc_set_alarm(h,m+1,s);
+          simo_rtc_set_alarm(h,m,s+10);
 
-         }
-        
-
-          
+         }    
           break;
 
 
 
       case FSM_MEMORY_DOWNLOAD:
+
           simo_uart_write(UART_TX,"FSM: DONWLOAD\r\n"
                           ,strlen("FSM: DONWLOAD\r\n")
                           ,TIMEOUT,modo_tx_irq);
+          simo_delay_ms(1200);
+
+      
 
           //descargo memoria y vuelvo a estado Field
           
@@ -326,8 +333,15 @@ int main(void)
           simo_uart_write(UART_TX,"FSM: UNDEFINED\r\n"
                           ,strlen("FSM: UNDEFINED\r\n")
                           ,TIMEOUT,modo_tx_irq);
-          simo_delay_ms(5000);
+        
+
+          uint32_t comm_ready = comm_services_check();
+
+          if(comm_ready != 0)  simo_uart_write(UART_TX,"\r\nCOMM SERVICES READY\r\n"
+                          ,strlen("\r\nCOMM SERVICES READY\r\n")
+                          ,TIMEOUT,modo_tx_irq);
  
+            simo_delay_ms(2000);
  
 
 

@@ -374,11 +374,8 @@ static uint32_t  __MPU6050_set_scala( uint8_t scala){
         //value = 0;
         break;
     }
-
     //Modificamos configuracion
-
    uint32_t ret = __MPU6050_write(ACCEL_CONFIG,&value); 
-
     return ret; 
 }
 
@@ -392,7 +389,6 @@ static uint8_t __MPU6060_set_int_pin(){
     // BIT_SET(value,3); // si es 1 el nivel logico de FSYNC PIN ES BAJO,SI ES 0 entones es ALTO
     // BIT_SET(value,2); // FSYNC INT ENABLE. Con 0 esta deshabilitado
     // BIT_SET(value,1); utilizado es usos complejos del sensor
-
     uint32_t ret = __MPU6050_write(INT_PIN_CFG,&value);
     return ret;
 }
@@ -482,6 +478,20 @@ static void __MPU6050_set_sample_div(uint8_t freq_div){
 
 
 
+static uint32_t __MPU6050_get_temperature(int16_t* t){
+
+    uint8_t buffer[2]={0};
+    uint8_t ret= __MPU6050_read_buffer(TEMP_OUT_H,buffer,2);
+
+     //! Primera posicion de memoria del vector, parte alta del int16_t
+    (*t) = (int16_t)(buffer[0] << 8 | buffer[1]);   
+    
+    
+    return ret;
+}
+
+
+
 static uint32_t __MPU6050_get_aceleration(int16_t* x, int16_t* y , int16_t* z){
 
     uint8_t buffer[6] = {0};
@@ -537,7 +547,7 @@ static uint32_t __MPU6050_get_offset(int16_t* x_offset, int16_t* y_offset, int16
 
 static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
 
-    #define float_format  "%s:\r\n\tx:%.2f\t\r\n\ty:%.2f\t\r\n\tz:%.2f\t\r\n"
+    #define float_format  "%s:\r\n\ttemp:%.2f\t\r\n\tx:%.2f\t\r\n\ty:%.2f\t\r\n\tz:%.2f\t\r\n"
 
     uint8_t last_pos = strlen(buffer);
     char    buff[100];
@@ -546,6 +556,7 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
     int16_t x;
     int16_t y;
     int16_t z;
+    int16_t t;
     __MPU6050_resume();
     if(ACCEL_check() == 0 ) {
         sprintf((buff),"%s: sensor no disponible \r\n",NAME_ACCELEROMETER);  
@@ -553,13 +564,16 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
     else
       {
         ret = __MPU6050_get_aceleration(&x,&y,&z);
+        if (ret != 0) ret = __MPU6050_get_temperature(&t);
+
         __MPU6050_sleep();
 
         if(ret != 0){
+            float ft = (float)  ((t/340.0)+ 36.53);
             float fx = (float) (x/(16384.0)); // ESCALA +_2G   16384  == +1G
             float fy = (float) (y/(16384.0)); // ESCALA +_2G
             float fz = (float) (z/(16384.0)); // ESCALA +_2G
-            sprintf(buff,float_format,NAME_ACCELEROMETER,fx,fy,fz);
+            sprintf(buff,float_format,NAME_ACCELEROMETER,ft,fx,fy,fz);
             
         }
         else{
@@ -584,7 +598,6 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
 
 
 static void    __MPU6050_sensores_on(){
-
     uint8_t value = 0;
     __MPU6050_write(PWR_MGMT_2,&value);
 
@@ -611,7 +624,6 @@ uint32_t ACCEL_init(void){
          __MPU6050_sensores_on();
          __MPU6050_sleep();
      } 
-
     return ret;
 }
 
@@ -622,9 +634,7 @@ uint32_t ACCEL_init(void){
  * @return ** void 
  */
 void ACCEL_deinit(){
-
     __MPU6050_deinit();
-
 }
 
 
@@ -635,9 +645,7 @@ void ACCEL_deinit(){
  * @return ** void 
  */
 void ACCEL_reset(){
-
     __MPU6050_reset();
-
 }
 
 
@@ -658,9 +666,7 @@ uint32_t  ACCEL_check(void){
  * @return ** void 
  */
 void ACCEL_sleep(void){
-
     __MPU6050_sleep();
-
 }
 
 
@@ -670,9 +676,7 @@ void ACCEL_sleep(void){
  * @return ** void 
  */
 void ACCEL_resume(void){
-
     __MPU6050_resume();
-
 }
 
 
@@ -687,18 +691,12 @@ uint32_t ACCEL_get_measure(char* buffer, uint8_t len){
     return  __MPU6050_get_measure( buffer, len);
 }
 
-
-
-
-
-
 /**
  * @brief Calibrar el sensor
  * 
  * @return ** void 
  */
 static void __MPU6050_calibration(int16_t x_e, int16_t y_e, int16_t z_e){
-
 
         // x_e, y_e, z_e son los valores esperando. En nuestro caso 0,0,g    
     // para calibracion en superficie horizontal
@@ -708,38 +706,25 @@ static void __MPU6050_calibration(int16_t x_e, int16_t y_e, int16_t z_e){
     int16_t delta_x = 0;
     int16_t delta_y = 0;
     int16_t delta_z = 0;
-
     int16_t x_offset = 0;
     int16_t y_offset = 0;
     int16_t z_offset = 0;
 
-
     // offset lo dejamos en cero
     __MPU6050_get_offset(&x_offset,&y_offset,&z_offset);
-
     for(int16_t i= 0; i< CALIBRATION_ITER ; i++){
-
     __MPU6050_get_aceleration(&x,&y,&z);
-    
-    
     delta_x = x_e - x;
     delta_y = y_e - y;
     delta_z = z_e - z;
-
     // offset en cero
     //corrijo los offset
-
     if(delta_x !=0) x_offset = (delta_x >0)? (x_offset+1): (x_offset-1);
-
     if(delta_y !=0) y_offset = (delta_y >0)? (y_offset+1): (y_offset-1);
-
     if(delta_z !=0) z_offset = (delta_z >0)? (z_offset+1): (z_offset-1);
-    
     //recargo los offset
     __MPU6050_set_offset(x_offset, y_offset, z_offset);
-    }
-
-    
+    }    
 }
 
 

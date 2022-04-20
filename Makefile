@@ -40,8 +40,8 @@ Core/Src/ejemplos/ejemplo_rtc.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
 Core/Src/sensors/mpu6050.c \
 Core/drivers/sensors/sensor_fake.c \
-Core/drivers/simcom/simcom.c \
-Core/drivers/simcom/cmd.c \
+Core/drivers/simcom/comm_services.c \
+Core/drivers/simcom/comm.c \
 Core/drivers/memory/memory.c \
 Core/drivers/sensors/sensor_services.c \
 Core/drivers/memory/mem_services.c \
