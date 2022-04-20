@@ -4,9 +4,10 @@
 
 #include "i2c.h"
 #include "mpu6050.h"
+#include "mem_services.h" // Necesario para guardar la calibracion del sensor
 
 
-#define NAME_ACCELEROMETER                      "mpu6050"
+#define NAME_ACCELEROMETER                      "MPU6050"
 #define USE_CALLBACK                             (0x00)  //! No modificar, codigo imcompatible con i2c irq
 
 
@@ -257,6 +258,13 @@
 #define MPU_WHO_IAM                            (0x75) //! Valor predeterminado 0x70
 
 
+
+
+
+
+
+
+
 // OFFSET
 #define XA_OFFS_H                              (0x06)        
 #define XA_OFFS_L                              (0x07)              
@@ -329,6 +337,9 @@ static uint32_t __MPU6050_write_buffer(uint8_t reg, uint8_t* buffer, uint8_t len
     return ret; 
 
  }
+
+
+
 
 /**
  * @brief Configuramos la escala de medicion
@@ -437,7 +448,7 @@ static uint32_t  __MPU6050_resume(void){
     uint32_t ret = __MPU6050_read(PWR_MGMT_1,&value);
 
     if( ret != 0){
-        BIT_CLEAR(value,6); // ponemos el bit 6 a 1. Sleep
+        BIT_CLEAR(value,6); // ponemos el bit 6 a 0. Sleep
         __MPU6050_write(PWR_MGMT_1,&value);
     }
   
@@ -462,7 +473,7 @@ static uint32_t  __MPU6050_sleep(void){
 
 }
 
-void MPU6050_set_sample_div(uint8_t freq_div){
+static void __MPU6050_set_sample_div(uint8_t freq_div){
 
     uint8_t value = freq_div;
     __MPU6050_write(SMPLRT_DIV,&value);
@@ -538,12 +549,11 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
     __MPU6050_resume();
     if(ACCEL_check() == 0 ) {
         sprintf((buff),"%s: sensor no disponible \r\n",NAME_ACCELEROMETER);  
-        }
-    else{
-        ret = __MPU6050_get_aceleration(&x, &y , &z);
+      }
+    else
+      {
+        ret = __MPU6050_get_aceleration(&x,&y,&z);
         __MPU6050_sleep();
-
-
 
         if(ret != 0){
             float fx = (float) (x/(16384.0)); // ESCALA +_2G   16384  == +1G
@@ -564,11 +574,8 @@ static uint32_t __MPU6050_get_measure(char* buffer, uint8_t len){
         sprintf((buffer+last_pos),"%s",buff);    
         ret = 1; // se grabo la nueva info
     }
-   
-       
-        return ret;
     }
-    return 0;
+    return ret;
 }
 
 

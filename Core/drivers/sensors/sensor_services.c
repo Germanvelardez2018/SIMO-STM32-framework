@@ -6,6 +6,7 @@
 #include "simcom.h"
 
 
+
 #define  LEN_MAX_BUFFER                          (255)
 
 #define __ACCELEROMETER_ON__                    (1)           
@@ -97,23 +98,15 @@ void sensor_services_deinit(void){
 }
 
 
-uint8_t sensor_services_check(char* buffer){
-    uint8_t ret = 0;
-
-     //borramos buffer
-    memset(buffer,0,1);
+uint32_t sensor_services_check(char* buffer){
+    uint32_t ret = 0;
 
     #if (__ACCELEROMETER_ON__ == 1)        
-         //ret = accelerometer_get_measure(buffer,LEN_MAX_BUFFER); 
          ret = ACCEL_get_measure(buffer, LEN_MAX_BUFFER);
-
     #endif
 
     #if (__SENSOR_FAKE_ON__ == 1)
-
         ret = sensor_fake_get_measure(buffer,LEN_MAX_BUFFER); // 
-        
-
     #endif
 
    return ret;

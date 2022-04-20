@@ -29,7 +29,7 @@ void sensor_services_deinit(void);
  * @param len 
  * @return ** uint32_t 
  */
-uint8_t sensor_services_check(char* buffer);
+uint32_t sensor_services_check(char* buffer);
 
 
 #endif

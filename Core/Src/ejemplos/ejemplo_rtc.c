@@ -68,14 +68,20 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
   #define HOURS       10
   #define MINUTES     30
   #define SECONDS      0
-
-
+  #define MONTHS       3 // Abril
+  #define DAYS         20
+  #define YEAR         22  
+  #define WEEK         3
 
 
   uint8_t h= HOURS;
   uint8_t m = MINUTES;
   uint8_t s = SECONDS;
 
+  uint8_t w = WEEK;
+  uint8_t mo = MONTHS;
+  uint8_t d = DAYS;
+  uint8_t y = YEAR;
 
   #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
   #define LEN_ORIGEN_URL              (strlen(MQTT_ORIGEN_URL)+1)
@@ -135,8 +141,9 @@ static void setup(){
    // Inicio el RTC
   simo_rtc_init();
   // COnfigura el reloj
+  simo_rtc_set_date(w,mo,d,y);
   simo_rtc_set_time(HOURS,MINUTES,SECONDS);
-  simo_rtc_set_alarm(HOURS,MINUTES,SECONDS+10);
+  simo_rtc_set_alarm(HOURS,MINUTES+1,SECONDS);
 
 
 
@@ -207,14 +214,22 @@ int main(void)
           power_mode_set( RESUMEN_RUN);
           //Rutina de trabajo
           simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-          
-         
+          simo_rtc_get_time(&h,&m,&s);
+
+
+          simo_rtc_get_date(&w,&mo,&d,&y);
+            //borramos buffer
+          memset(_sensor_buffer,0,1);
+
+
+          sprintf(_sensor_buffer,"Date %d/%d/%d |%d:%d:%d|\r\n",mo,d,y,h,m,s);
 
           sensor_services_check(_sensor_buffer);
+          
           simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
-        
+  
         // Guardar datos en memoria
-
+  
           mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
 
         // leo desde memoria
@@ -235,7 +250,7 @@ int main(void)
           simo_rtc_get_time(&h,&m,&s);
 
           //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+10);
+          simo_rtc_set_alarm(h,m+1,s);
 
          }
         
