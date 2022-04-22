@@ -88,7 +88,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
   #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
   #define LEN_ORIGEN_URL              (strlen(MQTT_ORIGEN_URL)+1)
 
-
+    uint8_t __GPS_ON__ = 0;
 
  // estado de la maquina en ram
   fsm_devices DEVICE;
@@ -159,7 +159,29 @@ static void setup(){
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
   // Mqtt services
-    comm_init();
+  uint32_t comm_ready = 0;
+
+
+    comm_services_init();
+  
+  
+  
+    while (  comm_ready == 0){
+          comm_ready = comm_services_check();
+          simo_delay_ms(1000);
+
+       simo_uart_write(UART_TX,"\n\n---*---\n\n"
+                          ,strlen("\n\n---*---\n\n")
+                          ,TIMEOUT,modo_tx_irq);
+
+    }
+     simo_uart_write(UART_TX,"\r\nCOMM SERVICES READY\r\n"
+                          ,strlen("\r\nCOMM SERVICES READY\r\n")
+                          ,TIMEOUT,modo_tx_irq);
+    comm_services_open_apn();
+
+
+    
 
 
 
@@ -330,19 +352,37 @@ int main(void)
 
 
       case FSM_UNDEFINED:
-          simo_uart_write(UART_TX,"FSM: UNDEFINED\r\n"
-                          ,strlen("FSM: UNDEFINED\r\n")
+          simo_uart_write(UART_TX,"\r\nFSM: UNDEFINED\r\n"
+                          ,strlen("\r\nFSM: UNDEFINED\r\n")
                           ,TIMEOUT,modo_tx_irq);
         
 
-          uint32_t comm_ready = comm_services_check();
-
-          if(comm_ready != 0)  simo_uart_write(UART_TX,"\r\nCOMM SERVICES READY\r\n"
-                          ,strlen("\r\nCOMM SERVICES READY\r\n")
-                          ,TIMEOUT,modo_tx_irq);
+       
  
             simo_delay_ms(2000);
- 
+            char* p_buffer;
+
+
+            if(    __GPS_ON__ == 0){
+                 __GPS_ON__ = 1;
+                simo_delay_ms(5000);
+                comm_services_gps_init(1);
+            }
+
+
+            simo_uart_write(UART_TX,"\r\nNMEA:"
+                          ,strlen("\r\nNMEA:")
+                          ,TIMEOUT,modo_tx_irq);
+
+
+
+            comm_services_get_nmea(p_buffer);
+
+            simo_uart_write(UART_TX,p_buffer
+                          ,strlen(p_buffer)
+                          ,TIMEOUT,modo_tx_irq);
+
+
 
 
 

@@ -43,6 +43,31 @@ uint32_t comm_services_check(void);
 
 
 
+uint32_t comm_services_gps_init(uint32_t gps_on);
+
+
+uint32_t comm_services_get_nmea(char* p_buffer);
+
+uint32_t comm_services_open_apn();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /**
   * @brief 
   * 

@@ -70,4 +70,37 @@ void comm_sleep();
 void comm_resume();
 
 
+
+
+
+
+uint8_t* comm_get_buffer();
+
+
+uint32_t comm_get_signal();
+
+
+uint32_t comm_set_echo(uint8_t echo_on);
+
+
+
+
+
+uint32_t comm_set_pwr_gps(uint32_t gps_on);
+
+uint32_t comm_get_gps_info();
+
+uint32_t comm_get_operator(void);
+
+
+
+uint32_t comm_get_apn(void);
+
+
+uint32_t comm_open_apn(void);
+
+
+
+
+
 #endif
