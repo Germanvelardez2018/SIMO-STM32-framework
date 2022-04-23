@@ -45,6 +45,24 @@ void mem_services_clear_all(void);
 
 
 
+
+/**
+ * @brief Cantidad de muestras que se almacenan antes de enviarse por MQTT
+ * 
+ * @return ** uint8_t 
+ */
+uint8_t mem_services_get_data_counter();
+
+/**
+ * @brief  Cantidad de muestras que se almacenan antes de enviarse por MQTT
+ * 
+ * @param data_counter 
+ * @return ** uint8_t 
+ */
+uint8_t mem_services_set_data_counter(uint8_t data_counter);
+
+
+
 /**
  * @brief  retorna el valor actual de la 
  * FSM directo desde memoria flash (address FSM_ADDRESS )

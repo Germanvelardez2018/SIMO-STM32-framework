@@ -14,7 +14,7 @@
 
 
 #define SIMCOM_BUFFER_SIZE                 250
-#define SIMCOM_TIMEOUT_TX                  150
+#define SIMCOM_TIMEOUT_TX                  500
 #define SIMCOM_TIMEOUT_RX                  1000
 static uint8_t __comm_buffer[SIMCOM_BUFFER_SIZE] ={0};     //! Buffer para la respuesta
 
@@ -42,17 +42,41 @@ static uint8_t __comm_buffer[SIMCOM_BUFFER_SIZE] ={0};     //! Buffer para la re
 #define CMD_GETOPERATOR                       "AT+COPS?\r\n"
 
 
-#define CMD_OPEN_APN                          "AT+CNACT=1,\"internet.movil\"\r\n"
+
+//  !APNS
+//  !PERSONAL
+//!  APN_PERSONAL                 "datos.personal.com"
+//!  APN_USR_PASS_PERSONAL        "datos"
+//  !TUENTI
+//!  APN_TUENTI                   "internet.movil"
+//!  APN_USER_PASS_TUENTI         "internet"
+
+
+
+#define CMD_OPEN_APN_TUENTI                          "AT+CNACT=1,\"internet.movil\"\r\n"
+#define CMD_OPEN_APN_PERSONAL                        "AT+CNACT=1,\"datos.personal.com\"\r\n"
+
 #define CMD_GET_APN                           "AT+CNACT?"       
 
 
 
 
 
-
+// ! Modo sleep y resume
 #define CMD_LOW_PWR_ON                              "AT+CPSMS=1\r\n"
 #define CMD_LOW_PWR_OFF                             "AT+CPSMS=0\r\n"
       
+
+
+
+//! Configuracion MQTT
+ #define CMD_MQTT               "AT+SMCONF="
+ #define CMD_MQTT_URL           " \"URL\""
+ #define CMD_MQTT_USER          "\"USERNAME\""
+ #define CMD_MQTT_PASSWORD      "\"PASSWORD\""
+ #define CMD_MQTT_QOS           "\"QOS\""
+ #define CMD_MQTT_COMMIT        "AT+SMCONN\r\n"
+ #define CMD_MQTT_PUBLISH       "AT+SMPUB=\"%s\",\"%d\",1,1 \r\n" 
 
 
 
@@ -103,7 +127,7 @@ static uint8_t* __comm_get_buffer(){
  * @return ** uint32_t 
  */
 static  uint32_t __comm_read(void){
-        uint32_t ret = simo_uart_read(SIMCOM_AT_UART,SIMCOM_BUFFER_ARRAY,30,SIMCOM_TIMEOUT_RX,0);
+        uint32_t ret = simo_uart_read(SIMCOM_AT_UART,SIMCOM_BUFFER_ARRAY,SIMCOM_BUFFER_SIZE,SIMCOM_TIMEOUT_RX,0);
         
         return ret;
 }
@@ -164,17 +188,18 @@ uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
     int32_t ret = 1;
     // envio comando
     //BORRAMOS BUFFER DE RECEPCCION
-    memset(SIMCOM_BUFFER_ARRAY,0,1);
+    memset(SIMCOM_BUFFER_ARRAY,0,SIMCOM_BUFFER_SIZE);
     ret = __comm_write(cmd_string);
     // leo respuesta
    ret = __comm_read();
    #if (COMM_DEBUG == 1)
-      //  __comm_debug_write("\n STM32=>");
         __comm_debug_write(cmd_string); // commando
+        __comm_debug_write("\n");
 
    
         __comm_debug_write(SIMCOM_BUFFER_ARRAY);
-      //  __comm_debug_write("<== SIM7000G");
+        __comm_debug_write("\n");
+
     #endif
     // comparo respuesta con respuesta esperada
    ret = __comm_check_response(exp_response);
@@ -190,9 +215,37 @@ uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
 //-------------------------------------------------------------------------FUNCIONES PUBLICAS-----------------------------------------------
 
 
+
+
+
+uint32_t comm_mqtt_publish(char* topic, char* payload, uint8_t len_payload){
+
+    uint32_t ret = 0;
+    uint8_t  buffer[255]={0};
+    sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    simo_delay_ms(1000);
+    ret = __comm_cmd_send(payload,CMD_OK);
+
+    return ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 uint8_t* comm_get_buffer(){
     
-    return __comm_get_buffer();
+    return SIMCOM_BUFFER_ARRAY;
 }
 
 
@@ -205,7 +258,7 @@ uint32_t comm_get_apn(void){
 
 
 uint32_t comm_open_apn(void){
-    uint32_t ret = __comm_cmd_send(CMD_OPEN_APN,CMD_OK);
+    uint32_t ret = __comm_cmd_send(CMD_OPEN_APN_PERSONAL,CMD_OK);
     return ret;
 }
 
@@ -296,11 +349,42 @@ uint32_t comm_check(void){
 
 
 
+uint32_t comm_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos){
+    uint32_t ret =  0;
+    if ((url == NULL) || ( user == NULL) || (password == NULL) || (qos == NULL)) return 0;
+    u_int8_t buffer[120]={};
+    sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_URL,url);    
+    simo_delay_ms(500);
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_USER,user);    
+    simo_delay_ms(500);
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_PASSWORD,password);    
+    simo_delay_ms(500);
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_QOS,qos);    
+    simo_delay_ms(500);
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    simo_delay_ms(500);
+    ret = __comm_cmd_send(CMD_MQTT_COMMIT,CMD_OK);
+    simo_delay_ms(500);
+
+return ret;
+
+}
+
+
+
+
+
+
+
+
 uint32_t comm_init(void ){
     uint32_t ret = 0;
     // inicio  el hardware asociado
     ret =  __comm_init();
-    simo_delay_ms(2000);
+    simo_delay_ms(10000);
 
     return ret;
 }

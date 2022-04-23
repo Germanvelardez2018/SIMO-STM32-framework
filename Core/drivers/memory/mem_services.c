@@ -64,6 +64,9 @@
  #define SUB_TOPICS_4                   (29)
 #define  TOPICS_MAX                     (5)
 
+
+#define  COUNTER_DATA_MAX               (20)      
+
 /**
  * @brief Defino mapa de memoria de la aplicacion
  *    
@@ -160,6 +163,36 @@ fsm_devices mem_services_get_fsm(void){
     mem_sleep();     // entramos en sleep
     return (fsm_devices)ret; 
 }
+
+
+
+
+uint8_t mem_services_get_data_counter(){
+
+     mem_resumen();     // resumen
+    uint8_t ret = 0;
+    //read from memory
+    mem_read_page(&ret,1,COUNTER_DATA_MAX,0);
+    mem_sleep();     // entramos en sleep
+    return ret; 
+
+} 
+
+uint8_t mem_services_set_data_counter(uint8_t data_counter){
+
+     mem_resumen();     // resumen
+    uint8_t value = data_counter;
+    uint8_t ret = 0;
+    //read from memory
+    ret = mem_write_page(&value,1,COUNTER_DATA_MAX,0);
+    mem_sleep();     // entramos en sleep
+    return ret; 
+
+} 
+
+
+
+
 
 
 fsm_devices mem_services_set_fsm(fsm_devices value){

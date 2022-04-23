@@ -29,6 +29,7 @@
 
 #define SIMCOM_BUFFER_SIZE          150
 
+#define CMD_GET_DEFAULT             "ATZ\r\n"
 
 
 

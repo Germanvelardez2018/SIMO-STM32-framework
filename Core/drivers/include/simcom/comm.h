@@ -100,7 +100,10 @@ uint32_t comm_get_apn(void);
 uint32_t comm_open_apn(void);
 
 
+uint32_t comm_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos);
 
+
+uint32_t comm_mqtt_publish(char* topic, char* payload, uint8_t len_payload);
 
 
 #endif

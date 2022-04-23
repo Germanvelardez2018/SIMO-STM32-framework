@@ -26,6 +26,7 @@
 #include "delay.h"
 #include "rtc.h"
 #include "gpio.h"
+#include <string.h>
 
 
   /**SPI1 GPIO Configuration
@@ -64,7 +65,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-#define MAX_COUNTER          1
+#define MAX_COUNTER          5
 
 //Configura la alarma
   #define HOURS               13
@@ -148,13 +149,7 @@ static void setup(){
 
 
   simo_rtc_get_time(&h,&m,&s);
-  simo_rtc_set_alarm(h,m,s+10);
-
-
-
-
-
-
+  simo_rtc_set_alarm(h,m+1,s);
 
   simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
@@ -175,11 +170,32 @@ static void setup(){
                           ,TIMEOUT,modo_tx_irq);
 
     }
+
+
      simo_uart_write(UART_TX,"\r\nCOMM SERVICES READY\r\n"
                           ,strlen("\r\nCOMM SERVICES READY\r\n")
                           ,TIMEOUT,modo_tx_irq);
-    comm_services_open_apn();
 
+    comm_set_echo(0);
+    comm_get_operator();
+    simo_delay_ms(2000);
+    comm_services_open_apn();
+    simo_delay_ms(2000);
+
+    
+    #define MQTT_TOPIC                "X1111"
+    #define MQTT_BROKER2               "simointi.cloud.shiftr.io"
+    #define MQTT_PASS                  "fdZY5b69OhOVsAns"
+    #define MQTT_ID                    "simointi"
+    #define MQTT_QOS                    "0"
+
+
+    comm_services_gps_init(1);
+    comm_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
+
+
+   
+       
 
     
 
@@ -192,6 +208,7 @@ static void setup(){
 char buffer_mem[250]= {0};
 
 uint8_t counter = 0;
+uint8_t counter_max = 0;
 
 /**
  * @brief  The application entry point.
@@ -212,11 +229,23 @@ int main(void)
     DEVICE = fsm_load_flash();
 
     // Seteo el  estado alojado en memoria externa, sincroniza con sram
-    //fsm_set_state(FSM_ON_FIELD);
-    fsm_set_state(FSM_UNDEFINED);
+    fsm_set_state(FSM_ON_FIELD);
+    mem_services_set_data_counter(MAX_COUNTER); 
+
+    //fsm_set_state(FSM_UNDEFINED);
  
     DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
      
+
+    counter_max =  mem_services_get_data_counter(); // Cantidad de datos que se almacenan antes de enviar por mqtt
+
+    char b[20];
+    sprintf(b,"counter:%d\r\n",counter_max);
+    simo_uart_write(UART_TX,b
+                          ,strlen(b)
+                          ,TIMEOUT,modo_tx_irq);
+
+
     while(1){
    
     switch (DEVICE)
@@ -233,6 +262,8 @@ int main(void)
 
 
       case FSM_ON_FIELD:
+
+
           simo_uart_write(UART_TX,"FSM:ON FIELD\r\n"
                           ,strlen("FSM:ON FIELD\r\n")
                           ,TIMEOUT,modo_tx_irq);  
@@ -243,15 +274,19 @@ int main(void)
           power_mode_set( RESUMEN_RUN);
           //Rutina de trabajo
           simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-          simo_rtc_get_time(&h,&m,&s);
-
-
-          simo_rtc_get_date(&w,&mo,&d,&y);
+     
             //borramos buffer
           memset(_sensor_buffer,0,1);
 
 
-          sprintf(_sensor_buffer,"Date %d/%d/%d |%d:%d:%d|\r\n",mo,d,y,h,m,s);
+          char nmea[100]={0};
+
+
+          comm_services_get_nmea(nmea);
+
+
+          sprintf(_sensor_buffer,"SIMO DATA: \r\n\nGPS:%s\r\n",nmea);
+
 
           sensor_services_check(_sensor_buffer);
           
@@ -264,7 +299,7 @@ int main(void)
         // leo desde memoria
 
           counter ++;
-          if(counter == MAX_COUNTER){
+          if(counter == counter_max){
             fsm_set_state(FSM_MEMORY_DOWNLOAD);
              DEVICE = fsm_get_state();
           } 
@@ -322,6 +357,11 @@ int main(void)
                     ,TIMEOUT,modo_tx_irq);
 
 
+                  // enviamos el dato al servidor                    
+                  comm_mqtt_publish(MQTT_TOPIC,buff, strlen( buff));
+                  simo_delay_ms(4000);
+
+
           }
 
           simo_uart_write(UART_TX,"\r\nlectura de moeria finalizada\r\n"
@@ -356,31 +396,15 @@ int main(void)
                           ,strlen("\r\nFSM: UNDEFINED\r\n")
                           ,TIMEOUT,modo_tx_irq);
         
-
-       
- 
             simo_delay_ms(2000);
-            char* p_buffer;
-
-
-            if(    __GPS_ON__ == 0){
-                 __GPS_ON__ = 1;
-                simo_delay_ms(5000);
-                comm_services_gps_init(1);
-            }
-
-
-            simo_uart_write(UART_TX,"\r\nNMEA:"
-                          ,strlen("\r\nNMEA:")
-                          ,TIMEOUT,modo_tx_irq);
+           
+         
 
 
 
-            comm_services_get_nmea(p_buffer);
 
-            simo_uart_write(UART_TX,p_buffer
-                          ,strlen(p_buffer)
-                          ,TIMEOUT,modo_tx_irq);
+     
+
 
 
 
