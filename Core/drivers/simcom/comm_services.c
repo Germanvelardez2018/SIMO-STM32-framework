@@ -1,11 +1,11 @@
 #include "comm_services.h"
 #include "comm.h"
+#include "debug.h"
+#include "delay.h"
 
 
-
-
-
-
+#define MQTT_WAIT_MSG                   "Waiting for OK"
+#define MQTT_READY_MSG                  "COMM SERVICES READY"
 
 
 
@@ -20,7 +20,18 @@
 
 
 
+uint32_t comm_services_config_all(void){
+    
 
+   comm_set_echo(0);
+   comm_get_operator();
+   simo_delay_ms(1000);
+   comm_services_open_apn();
+   simo_delay_ms(1000);
+   comm_services_gps_init(1);
+   comm_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
+
+}
 
 uint32_t comm_services_open_apn(){
     uint32_t ret = comm_open_apn();
@@ -50,17 +61,22 @@ uint32_t comm_services_get_nmea(char* buffer){
 }
 
 
+uint32_t comm_services_wait_ok(void){
+    uint32_t ready = 0;
+    debug_print(MQTT_WAIT_MSG);
+    while(ready == 0){
+    ready =  comm_services_check();
+    simo_delay_ms(500);
 
+    }
+    debug_print(MQTT_READY_MSG);
+    return 1;
+}
 
 
 uint32_t comm_services_check(void){
 
-
     uint32_t ret =comm_check();
-
-    
-
-
     return ret;
 }
 

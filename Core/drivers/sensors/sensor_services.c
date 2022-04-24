@@ -1,10 +1,11 @@
 #include "sensor_services.h"
 //#include "accelerometer.h"
-
+#include "debug.h"
 #include "mpu6050.h"
 #include "sensor_fake.h"   // sensor de prueba imaginario
 #include "simcom.h"
-
+#define SERVICES_READY                    "Sensors services READY"
+#define SERVICES_ERROR                     "Sensors services ERROR"
 
 
 #define  LEN_MAX_BUFFER                          (255)
@@ -89,7 +90,10 @@ static void __deinit_sensors(){
 
 
 uint32_t sensor_services_init(void){
-    return __init_sensors();
+    uint32_t ret = __init_sensors();
+    if(ret == 1)debug_print(SERVICES_READY);
+
+    return ret;
 }
 
 

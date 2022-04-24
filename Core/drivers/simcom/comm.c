@@ -1,12 +1,12 @@
-
 #include "comm.h"
 #include "uart.h"
 #include "gpio.h"
+#include "debug.h"
 
 
 
-#define SIMCOM_AT_UART             UART_A       //! Pin A10  (TX) y A9 (RX)
-#define SIMCOM_DEBUG_UART          UART_B        //! Pin A3 (RX)  y A2 (TX)
+#define SIMCOM_AT_UART             UART_A            //! Pin A10  (TX) y A9 (RX)
+#define SIMCOM_DEBUG_UART          DEBUG_UART        //! Pin A3 (RX)  y A2 (TX)
 #define SIMCOM_BAUDRATE            115200
 
 
@@ -56,7 +56,7 @@ static uint8_t __comm_buffer[SIMCOM_BUFFER_SIZE] ={0};     //! Buffer para la re
 #define CMD_OPEN_APN_TUENTI                          "AT+CNACT=1,\"internet.movil\"\r\n"
 #define CMD_OPEN_APN_PERSONAL                        "AT+CNACT=1,\"datos.personal.com\"\r\n"
 
-#define CMD_GET_APN                           "AT+CNACT?"       
+#define CMD_GET_APN                                  "AT+CNACT?"       
 
 
 
@@ -115,7 +115,11 @@ static void __comm_deinit(){
 
 
 
-
+/**
+ * @brief Buffer de recepccion
+ * 
+ * @return ** uint8_t* 
+ */
 static uint8_t* __comm_get_buffer(){
     return SIMCOM_BUFFER_ARRAY;
 }
@@ -154,9 +158,9 @@ static  uint32_t __comm_write(uint8_t* buff){
  * @param len 
  * @return ** uint32_t 
  */
-static  uint32_t __comm_debug_write(uint8_t* buff){
-        uint32_t ret = simo_uart_write(SIMCOM_DEBUG_UART,buff,strlen(buff),SIMCOM_TIMEOUT_TX,0);
-        return ret;
+static  inline uint32_t __comm_debug_write(uint8_t* buff){
+    
+        return debug_print(buff);
 }
 
 
@@ -184,7 +188,7 @@ static uint32_t __comm_check_response(char* response){
  * @param len_cmd 
  * @return ** uint32_t 
  */
-uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
+static uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
     int32_t ret = 1;
     // envio comando
     //BORRAMOS BUFFER DE RECEPCCION
@@ -192,19 +196,10 @@ uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
     ret = __comm_write(cmd_string);
     // leo respuesta
    ret = __comm_read();
-   #if (COMM_DEBUG == 1)
-        __comm_debug_write(cmd_string); // commando
-        __comm_debug_write("\n");
-
-   
-        __comm_debug_write(SIMCOM_BUFFER_ARRAY);
-        __comm_debug_write("\n");
-
-    #endif
+    __comm_debug_write(cmd_string); // commando
+    __comm_debug_write(SIMCOM_BUFFER_ARRAY);
     // comparo respuesta con respuesta esperada
    ret = __comm_check_response(exp_response);
-
-
     return  ret;
 
 }
@@ -215,40 +210,20 @@ uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
 //-------------------------------------------------------------------------FUNCIONES PUBLICAS-----------------------------------------------
 
 
-
-
-
 uint32_t comm_mqtt_publish(char* topic, char* payload, uint8_t len_payload){
-
     uint32_t ret = 0;
     uint8_t  buffer[255]={0};
     sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
     ret = __comm_cmd_send(buffer,CMD_OK);
     simo_delay_ms(1000);
     ret = __comm_cmd_send(payload,CMD_OK);
-
     return ret;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 uint8_t* comm_get_buffer(){
-    
     return SIMCOM_BUFFER_ARRAY;
 }
-
-
 
 
 uint32_t comm_get_apn(void){
@@ -384,7 +359,7 @@ uint32_t comm_init(void ){
     uint32_t ret = 0;
     // inicio  el hardware asociado
     ret =  __comm_init();
-    simo_delay_ms(10000);
+    simo_delay_ms(1000);
 
     return ret;
 }

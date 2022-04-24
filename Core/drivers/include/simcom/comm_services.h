@@ -17,6 +17,7 @@
 #include "core.h"
 
 
+uint32_t comm_services_config_all(void);
 
 
 /**
@@ -40,7 +41,7 @@ void comm_services_deinit(void);
 uint32_t comm_services_check(void);
 
 
-
+uint32_t comm_services_wait_ok(void);
 
 
 uint32_t comm_services_gps_init(uint32_t gps_on);

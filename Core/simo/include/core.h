@@ -23,8 +23,8 @@
     #include <stdlib.h>
     #include "stdio.h"
 
-
- 
+    
+    
 
   
 
@@ -32,6 +32,10 @@
 
 
 
+    #define DEBUG_NAME                   C_DEBUG_NAME
+    #define DEBUG_PRINT                  C_DEBUG_PRINT
+    #define DEBUG_UART                   C_DEBUG_UART                
+    #define DEBUG_BAUDRATE               C_DEBUG_BAUDRATE
 
     #define CLOCK_TIMER                 4000000
     #define SIMO_RTC_ENA                C_SIMO_RTC_ENA

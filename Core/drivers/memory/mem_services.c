@@ -11,7 +11,7 @@
 
 #include "mem_services.h"
 #include "memory.h" //!
-
+#include "debug.h"
 
 
 /**
@@ -91,6 +91,9 @@
 #define DATA_PAGES_256                  2000
 #define CS_PIN                          SIMO_GPIO_24 //! PB8
 
+#define MEM_SERVICES_INIT               "MEM SERVICES READY"
+
+
 
 static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag, uint8_t pos){
     mem_resumen();     // resumen
@@ -142,6 +145,8 @@ uint32_t mem_services_init(void){
     mem_resumen();     // resumen
     uint32_t ret =mem_start( pg_256byte);
     mem_sleep();     // entramos en sleep
+
+    if( ret == 1) debug_print(MEM_SERVICES_INIT);
     return ret;
 }
 
@@ -169,7 +174,7 @@ fsm_devices mem_services_get_fsm(void){
 
 uint8_t mem_services_get_data_counter(){
 
-     mem_resumen();     // resumen
+    mem_resumen();     // resumen
     uint8_t ret = 0;
     //read from memory
     mem_read_page(&ret,1,COUNTER_DATA_MAX,0);
@@ -262,9 +267,6 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 }
 
 
-
-
-
  uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
      if(topic_pos >= TOPICS_MAX) return 0;
      return __set_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
@@ -298,11 +300,12 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     uint32_t ret = 0;
     uint8_t __len = 0;
     ret = __read_data(&__len,1,pag,0);
-    ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    //ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
 
 
-    //ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
-
+    ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    debug_print("mem service read:");
+    debug_print(buffer);
     mem_sleep();     // entramos en sleep
     return ret;
 

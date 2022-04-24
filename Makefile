@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/drivers/debug/debug.c \
 Core/Src/ejemplos/ejemplo_rtc.c \
 Core/Src/ejemplos/ejemplo_fsm.c \
 Core/Src/sensors/mpu6050.c \
@@ -136,6 +137,7 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -ICore/simo/include \
+-ICore/drivers/include/debug \
 -ICore/drivers/include/fsm \
 -ICore/drivers/include/memory\
 -ICore/drivers/include/simcom \

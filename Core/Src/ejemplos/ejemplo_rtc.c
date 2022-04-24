@@ -26,6 +26,7 @@
 #include "delay.h"
 #include "rtc.h"
 #include "gpio.h"
+#include "debug.h"
 #include <string.h>
 
 
@@ -48,7 +49,7 @@
 
 #define LED_TOOGLE            SIMO_GPIO_18 // PB2
 #define BAUDRATE              115200
-#define UART_TX               UART_B
+#define UART_TX               DEBUG_UART
 #define BUFFER_SIZE           250
 
 
@@ -58,6 +59,17 @@
 
 
 static char _sensor_buffer[SENSOR_BUFFER_LEN];
+
+
+
+
+
+#define MQTT_TOPIC                "X1111"
+#define MQTT_BROKER2               "simointi.cloud.shiftr.io"
+#define MQTT_PASS                  "fdZY5b69OhOVsAns"
+#define MQTT_ID                    "simointi"
+#define MQTT_QOS                    "0"
+
 
 
 
@@ -108,36 +120,14 @@ static void setup(){
 
  // iniciamos configuracion de clock standar
   simo_clock_init();
-
-
+  debug_init();
   // Configura el led blink
-
    //! Configuracion inicial de GPIO
   simo_gpio_set(LED_TOOGLE, SIMO_GPIO_OUT);
+  sensor_services_init();
+  mem_services_init();
 
 
-  //! Configura el uart
-  simo_uart_init(UART_TX,BAUDRATE);
-
-   if(sensor_services_init() != 0)
-   {
-    simo_uart_write(UART_TX,"sensor services readyx \r\n",strlen("sensor services readyx \r\n"),TIMEOUT,modo_tx_irq);
-  }
-  else{
-    simo_uart_write(UART_TX,"sensor services Error \r\n",strlen("sensor services Error \r\n"),TIMEOUT,modo_tx_irq);
-
-  }
-
-
-
-  if(mem_services_init() != 0)
-    {
-      simo_uart_write(UART_TX,"memory services ready \r\n",strlen("memory services ready \r\n"),TIMEOUT,modo_tx_irq);
-    }
-  else
-    {
-      simo_uart_write(UART_TX,"memory services Error \r\n",strlen("memory services Error \r\n"),TIMEOUT,modo_tx_irq);
-    }
 
   simo_rtc_set_alarm_callback(__CALLBACK_RTC);
   simo_rtc_ena_irq(1);
@@ -151,54 +141,19 @@ static void setup(){
   simo_rtc_get_time(&h,&m,&s);
   simo_rtc_set_alarm(h,m+1,s);
 
-  simo_uart_write(UART_TX,MSG_INIT,strlen(MSG_INIT),1000,0);
 
-  // Mqtt services
-  uint32_t comm_ready = 0;
-
+  
 
     comm_services_init();
   
   
-  
-    while (  comm_ready == 0){
-          comm_ready = comm_services_check();
-          simo_delay_ms(1000);
-
-       simo_uart_write(UART_TX,"\n\n---*---\n\n"
-                          ,strlen("\n\n---*---\n\n")
-                          ,TIMEOUT,modo_tx_irq);
-
-    }
+    comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
 
 
-     simo_uart_write(UART_TX,"\r\nCOMM SERVICES READY\r\n"
-                          ,strlen("\r\nCOMM SERVICES READY\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-
-    comm_set_echo(0);
-    comm_get_operator();
-    simo_delay_ms(2000);
-    comm_services_open_apn();
-    simo_delay_ms(2000);
-
-    
-    #define MQTT_TOPIC                "X1111"
-    #define MQTT_BROKER2               "simointi.cloud.shiftr.io"
-    #define MQTT_PASS                  "fdZY5b69OhOVsAns"
-    #define MQTT_ID                    "simointi"
-    #define MQTT_QOS                    "0"
-
-
-    comm_services_gps_init(1);
-    comm_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
+   comm_services_config_all();
 
 
    
-       
-
-    
-
 
 
 }
@@ -230,7 +185,7 @@ int main(void)
 
     // Seteo el  estado alojado en memoria externa, sincroniza con sram
     fsm_set_state(FSM_ON_FIELD);
-    mem_services_set_data_counter(MAX_COUNTER); 
+    //mem_services_set_data_counter(MAX_COUNTER); 
 
     //fsm_set_state(FSM_UNDEFINED);
  
@@ -239,21 +194,16 @@ int main(void)
 
     counter_max =  mem_services_get_data_counter(); // Cantidad de datos que se almacenan antes de enviar por mqtt
 
-    char b[20];
-    sprintf(b,"counter:%d\r\n",counter_max);
-    simo_uart_write(UART_TX,b
-                          ,strlen(b)
-                          ,TIMEOUT,modo_tx_irq);
 
-
+   // char b[20];
+   // sprintf(b,"counter:%d\r\n",counter_max);
+   // debug_print(b);
     while(1){
-   
     switch (DEVICE)
       {
       case FSM_WITHOUT_CONFIG:
-          simo_uart_write(UART_TX,"FSM:WITHOUT CONFIG\r\n"
-                          ,strlen("FSM:WITHOUT CONFIG\r\n")
-                          ,TIMEOUT,modo_tx_irq);
+          debug_print("FSM:WITHOUT CONFIG");
+         
                           //rutina para el dispositivo sin configuracion?
                           //  Quiza preguntar al servidor mqtt?
           break;
@@ -262,42 +212,23 @@ int main(void)
 
 
       case FSM_ON_FIELD:
-
-
-          simo_uart_write(UART_TX,"FSM:ON FIELD\r\n"
-                          ,strlen("FSM:ON FIELD\r\n")
-                          ,TIMEOUT,modo_tx_irq);  
-          
+          debug_print("FSM:ON FIELD");
           // Dormir el microcontrolador
           power_mode_set( SLEEP_MODE);
           // Despierta mediante interrupcion RTC
           power_mode_set( RESUMEN_RUN);
           //Rutina de trabajo
-          simo_uart_write(UART_TX,MSG_ROUTINE,strlen(MSG_ROUTINE),1000,0);
-     
+          debug_print(MSG_ROUTINE);
             //borramos buffer
           memset(_sensor_buffer,0,1);
-
-
           char nmea[100]={0};
-
-
           comm_services_get_nmea(nmea);
-
-
-          sprintf(_sensor_buffer,"SIMO DATA: \r\n\nGPS:%s\r\n",nmea);
-
-
+          sprintf(_sensor_buffer,"GPS:%s\r\n",nmea);
           sensor_services_check(_sensor_buffer);
-          
-          simo_uart_write(UART_TX,_sensor_buffer,strlen(_sensor_buffer),TIMEOUT,modo_tx_irq);
-  
+          debug_print(_sensor_buffer);
         // Guardar datos en memoria
-  
           mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
-
         // leo desde memoria
-
           counter ++;
           if(counter == counter_max){
             fsm_set_state(FSM_MEMORY_DOWNLOAD);
@@ -307,14 +238,10 @@ int main(void)
           simo_gpio_toogle(LED_TOOGLE);
           simo_delay_ms(100);
           simo_gpio_toogle(LED_TOOGLE);
-
-
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
-
           //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+10);
-
+          simo_rtc_set_alarm(h,m+1,s);
          }    
           break;
 
@@ -322,52 +249,25 @@ int main(void)
 
       case FSM_MEMORY_DOWNLOAD:
 
-          simo_uart_write(UART_TX,"FSM: DONWLOAD\r\n"
-                          ,strlen("FSM: DONWLOAD\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-          simo_delay_ms(1200);
-
-      
-
+          debug_print("FSM: DONWLOAD");
           //descargo memoria y vuelvo a estado Field
-          
           // borrar datos que ya se enviaron, y ajustar contador de datos a cero
           // volver al modo datalog
-
-           simo_uart_write(UART_TX,"\r\nlectura de memoria iniciada\r\n"
-                          ,strlen("\r\nlectura de memoria iniciada\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-
-
+          debug_print("lectura de memoria iniciada\r\n");
           // buffer para los datos leidos en memoria
           char buff[BUFFER_SIZE];
 
          
 
           for( uint8_t i=0; i != MAX_COUNTER; i++ ){
-
-                    simo_uart_write(UART_TX,"\r\nread from mem:\r\n"
-                          ,strlen("\r\nread from mem:\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-
-
-                    mem_services_read_data(buff,250,i);
-                    simo_uart_write(UART_TX,buff
-                    ,strlen(buff)
-                    ,TIMEOUT,modo_tx_irq);
-
-
+                debug_print("read from mem:\r\n");
+                mem_services_read_data(buff,250,i);
+                debug_print(buff);
                   // enviamos el dato al servidor                    
-                  comm_mqtt_publish(MQTT_TOPIC,buff, strlen( buff));
-                  simo_delay_ms(4000);
-
-
+                comm_mqtt_publish(MQTT_TOPIC,buff, strlen( buff));
+                simo_delay_ms(4000);
           }
-
-          simo_uart_write(UART_TX,"\r\nlectura de moeria finalizada\r\n"
-                          ,strlen("\r\nlectura de moeria finalizada\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-    
+          debug_print("lectura de memeria finalizada");
           counter = 0;
         
           fsm_set_state(FSM_ON_FIELD);
@@ -377,48 +277,23 @@ int main(void)
           simo_gpio_toogle(LED_TOOGLE);
           simo_delay_ms(100);
           simo_gpio_toogle(LED_TOOGLE);
-
-
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
-
           //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+10);
-
-
-
+          simo_rtc_set_alarm(h,m+1,s);
           break;
 
 
 
       case FSM_UNDEFINED:
-          simo_uart_write(UART_TX,"\r\nFSM: UNDEFINED\r\n"
-                          ,strlen("\r\nFSM: UNDEFINED\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-        
-            simo_delay_ms(2000);
-           
-         
-
-
-
-
-     
-
-
-
-
-
-
+          debug_print("FSM: UNDEFINED");
+          simo_delay_ms(2000);
           break;
 
 
       default:
-          simo_uart_write(UART_TX,"FSM:default\r\n"
-                          ,strlen("FSM:default\r\n")
-                          ,TIMEOUT,modo_tx_irq);
-          simo_delay_ms(5000);
-
+          debug_print("FSM: DEFAULT");
+          simo_delay_ms(2000);
           break;
       }
 
