@@ -31,7 +31,7 @@
     //Este archivo contiene  los recursos mas importantes disponibles en el microcontrolador.
 
 
-
+    #define DEBUG_ON                     C_DEBUG_ON
     #define DEBUG_NAME                   C_DEBUG_NAME
     #define DEBUG_PRINT                  C_DEBUG_PRINT
     #define DEBUG_UART                   C_DEBUG_UART                

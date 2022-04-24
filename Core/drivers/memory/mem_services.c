@@ -65,7 +65,8 @@
 #define  TOPICS_MAX                     (5)
 
 
-#define  COUNTER_DATA_MAX               (20)      
+#define  COUNTER_DATA_MAX                (30)
+#define  MQTT_QOS_ORIGIN                  (31)      
 
 /**
  * @brief Defino mapa de memoria de la aplicacion
@@ -95,6 +96,19 @@
 
 
 
+
+
+
+
+/**
+ * @brief Almacenamos datos en memoria
+ * 
+ * @param buffer 
+ * @param len 
+ * @param pag 
+ * @param pos 
+ * @return ** uint32_t 
+ */
 static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag, uint8_t pos){
     mem_resumen();     // resumen
     //escribo en memoria flash
@@ -103,12 +117,15 @@ static uint32_t __write_data(char* buffer, uint8_t len, uint16_t pag, uint8_t po
     return ret;
 }
 
-
-
-
-
-
-
+/**
+ * @brief Leemos datos desde memoria
+ * 
+ * @param buffer 
+ * @param len 
+ * @param pag 
+ * @param pos 
+ * @return ** uint32_t 
+ */
 static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag,uint8_t pos){
 
     mem_resumen();     // resumen
@@ -116,22 +133,69 @@ static uint32_t __read_data(char* buffer, uint8_t len, uint16_t pag,uint8_t pos)
     uint32_t ret = mem_read_page(buffer,len,pag + OFFSET_ESP_REG,pos);
     mem_sleep();     // entramos en sleep
     return ret;
+
+
+
+
+  
 }
 
 
-static uint32_t __set_string(char* buffer,uint8_t len,uint8_t address){
+
+
+static uint32_t __set_string(char* buffer,uint8_t len , uint8_t address){
+    //mem_resumen();     // resumen
+    //escribo en memoria flash
+    debug_print("writing string in memory:\r\n");
+    //uint32_t ret = mem_write_page(buffer,len,address,0);
+    //mem_sleep();     // entramos en sleep
+
+
     mem_resumen();     // resumen
     //escribo en memoria flash
-    uint32_t ret = mem_write_page(buffer,len,address,0);
+    debug_print("writing string in memory:\r\n");
+
+    uint32_t ret = 0;
+    uint8_t __len=len;
+    // guardo el tamaño del buffer en primera posicion
+    ret = __write_data(&__len,1,address,0);
+
+    ret= __write_data(buffer,len,address,1);
     mem_sleep();     // entramos en sleep
+    return ret;
+
+
+
+
+
+
+
+
+
     return ret;
 }
 
 static uint32_t __get_string(char* buffer,uint8_t len,uint8_t address){
-    mem_resumen();     // resumen
+   // mem_resumen();     // resumen
     //leo en memoria flash
-    uint32_t ret = mem_read_page(buffer,len,address,0);
-    buffer[len]= 0;
+   // uint32_t ret = mem_read_page(buffer,100,address,0);
+   // buffer[len]= 0;
+   // mem_sleep();     // entramos en sleep
+   // return ret;
+
+
+
+    mem_resumen();     // resumen
+    //escribo en memoria flash
+    uint32_t ret = 0;
+    uint8_t __len = 0;
+    debug_print( "reading string in memory\r\n");
+
+    ret = __read_data(&__len,1,address,0);
+    //ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    ret = ( __len  >= len )? __read_data(buffer,__len,address,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    debug_print("mem service read:\r\n");
+    debug_print(buffer);
     mem_sleep();     // entramos en sleep
     return ret;
 }
@@ -219,64 +283,77 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 
 
 
-
-
-
- uint32_t mem_services_set_mqtt_origen(char* buffer,uint8_t len){
-     return __set_string(buffer,len,MQTT_ORIGEN);
+ uint32_t mem_services_set_mqtt_qos_origen(char* buffer){
+     return __set_string(buffer,strlen(buffer),MQTT_QOS_ORIGIN);
 }
 
 
- uint32_t mem_services_get_mqtt_origen(char* buffer,uint8_t len){
-    return __get_string(buffer,len,MQTT_ORIGEN);
-}
-
-
- uint32_t mem_services_set_id_origen(char* buffer,uint8_t len){
-    return __set_string(buffer,len,MQTT_ORIGEN_ID);
-}
-
-
- uint32_t mem_services_get_id_origen(char* buffer,uint8_t len){
-    return __get_string(buffer,len,MQTT_ORIGEN_ID);
-}
-
-
- uint32_t mem_services_set_pass_origen(char* buffer,uint8_t len){
-    return __set_string(buffer,len,MQTT_ORIGEN_PASS);
-}
-
-
- uint32_t mem_services_get_pass_origen(char* buffer,uint8_t len){
-    return __get_string(buffer,len,MQTT_ORIGEN_PASS);
+ uint32_t mem_services_get_mqtt_qos_origen(char* buffer){
+    return __get_string(buffer,strlen(buffer),MQTT_QOS_ORIGIN);
 }
 
 
 
 
+ uint32_t mem_services_set_mqtt_origen(char* buffer){
+     return __set_string(buffer,strlen(buffer),MQTT_ORIGEN);
+}
 
- uint32_t mem_services_set_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+
+ uint32_t mem_services_get_mqtt_origen(char* buffer){
+    return __get_string(buffer,strlen(buffer),MQTT_ORIGEN);
+}
+
+
+ uint32_t mem_services_set_mqtt_id_origen(char* buffer){
+    return __set_string(buffer,strlen(buffer),MQTT_ORIGEN_ID);
+}
+
+
+ uint32_t mem_services_get_mqtt_id_origen(char* buffer){
+    return __get_string(buffer,strlen(buffer),MQTT_ORIGEN_ID);
+}
+
+
+ uint32_t mem_services_set_mqtt_pass_origen(char* buffer){
+    return __set_string(buffer,strlen(buffer),MQTT_ORIGEN_PASS);
+}
+
+
+ uint32_t mem_services_get_mqtt_pass_origen(char* buffer){
+    return __get_string(buffer,strlen(buffer),MQTT_ORIGEN_PASS);
+}
+
+
+
+
+
+ uint32_t mem_services_set_mqtt_pub_topics(char* buffer,uint8_t topic_pos){
      if(topic_pos >= TOPICS_MAX) return 0;
-     return __set_string(buffer,len,(PUB_TOPICS_0 + topic_pos));
+     return __set_string(buffer,strlen(buffer),(PUB_TOPICS_0 + topic_pos));
 }
 
 
- uint32_t mem_services_get_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+ uint32_t mem_services_get_mqtt_pub_topics(char* buffer,uint8_t topic_pos){
     if(topic_pos >= TOPICS_MAX) return 0;
-    return __get_string(buffer,len,(PUB_TOPICS_0 + topic_pos));
+    return __get_string(buffer,strlen(buffer),(PUB_TOPICS_0 + topic_pos));
 }
 
 
- uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+ uint32_t mem_services_set_mqtt_sub_topics(char* buffer,uint8_t topic_pos){
      if(topic_pos >= TOPICS_MAX) return 0;
-     return __set_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
+     return __set_string(buffer,strlen(buffer),(SUB_TOPICS_0 + topic_pos));
 }
 
 
- uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos){
+ uint32_t mem_services_get_mqtt_sub_topics(char* buffer,uint8_t topic_pos){
     if(topic_pos >= TOPICS_MAX) return 0;
-    return __get_string(buffer,len,(SUB_TOPICS_0 + topic_pos));
+    return __get_string(buffer,strlen(buffer),(SUB_TOPICS_0 + topic_pos));
 }
+
+
+
+
 
 
  uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag){
@@ -288,7 +365,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     // guardo el tamaño del buffer en primera posicion
     ret = __write_data(&__len,1,pag,0);
 
-     ret= __write_data(buffer,len+1,pag,1);
+     ret= __write_data(buffer,len,pag,1);
     mem_sleep();     // entramos en sleep
     return ret;
  }
@@ -301,10 +378,8 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     uint8_t __len = 0;
     ret = __read_data(&__len,1,pag,0);
     //ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
-
-
-    ret = ( __len  >= len_buff )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
-    debug_print("mem service read:");
+    ret = ( __len  >= len_buff )? __read_data(buffer,__len,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    debug_print("mem service read:\r\n");
     debug_print(buffer);
     mem_sleep();     // entramos en sleep
     return ret;

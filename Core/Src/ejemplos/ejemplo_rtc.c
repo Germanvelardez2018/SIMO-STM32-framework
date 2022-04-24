@@ -17,7 +17,8 @@
 
  // Recordar configurar los siguientes elementos los flar para manejar UART (1 solo uart) y TIMER ( 2 timers)
 
-#include "fsm.h"                 // ! Maquina de estados del sistema
+#include "fsm.h"                 // ! Maquina de estados del sistema 
+#include "mem_services.h"       // ! memoria para almacenar datos
 #include "power_modes.h"         // ! Gestiona el consumo de energia del micro
 #include "sensor_services.h"
 #include "comm_services.h"      // ! Servicis de comunicacion
@@ -40,21 +41,17 @@
             PA15     ------  SPI1_CS  
             */
 
- /**USART2 GPIO Configuration
-  * Conexion Uart Debug
-        PA2     ------> USART2_TX
-        PA3     ------> USART2_RX
-        */
+ 
 
+
+#define _WRITE_MQTT_            (0) // ! CON 1 grabo los parametros de mqtt en flash
 
 #define LED_TOOGLE            SIMO_GPIO_18 // PB2
-#define BAUDRATE              115200
-#define UART_TX               DEBUG_UART
+
 #define BUFFER_SIZE           250
 
 
-#define TIMEOUT     500
-#define  modo_tx_irq  0
+
 #define SENSOR_BUFFER_LEN   BUFFER_SIZE
 
 
@@ -64,12 +61,6 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 
 
 
-#define MQTT_TOPIC                "X1111"
-#define MQTT_BROKER2               "simointi.cloud.shiftr.io"
-#define MQTT_PASS                  "fdZY5b69OhOVsAns"
-#define MQTT_ID                    "simointi"
-#define MQTT_QOS                    "0"
-
 
 
 
@@ -77,7 +68,6 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 #define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
-#define MAX_COUNTER          5
 
 //Configura la alarma
   #define HOURS               13
@@ -98,13 +88,14 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
   uint8_t d = DAYS;
   uint8_t y = YEAR;
 
-  #define MQTT_ORIGEN_URL             "http://www.mqtt.simo.com"
-  #define LEN_ORIGEN_URL              (strlen(MQTT_ORIGEN_URL)+1)
-
-    uint8_t __GPS_ON__ = 0;
+  
 
  // estado de la maquina en ram
   fsm_devices DEVICE;
+  char buffer_mem[250]= {0};
+
+  uint8_t counter = 0;
+  uint8_t counter_max = 0;
 
 
 static void __CALLBACK_RTC(void){
@@ -128,6 +119,30 @@ static void setup(){
   mem_services_init();
 
 
+  //GRABO LA URL en memoria, hacer solo una vez
+  #if _WRITE_MQTT_ == 1
+
+  
+  #define MQTT_TOPIC                 "X1111"
+  #define MQTT_URL                   "simointi.cloud.shiftr.io" 
+  #define MQTT_PASS                  "fdZY5b69OhOVsAns" 
+  #define MQTT_ID                    "simointi"
+  #define MQTT_QOS                    "0"
+   mem_services_set_mqtt_origen( MQTT_URL);
+   mem_services_set_mqtt_id_origen(MQTT_ID);
+   mem_services_set_mqtt_pass_origen(MQTT_PASS);
+   mem_services_set_mqtt_pub_topics(MQTT_TOPIC,0);
+   mem_services_set_mqtt_qos_origen(MQTT_QOS);
+
+  #define MAX_COUNTER          5
+
+  //grabo contador maximo
+   mem_services_set_data_counter(MAX_COUNTER); 
+
+    // Seteo el  estado alojado en memoria externa, sincroniza con sram
+    fsm_set_state(FSM_ON_FIELD);
+
+  #endif
 
   simo_rtc_set_alarm_callback(__CALLBACK_RTC);
   simo_rtc_ena_irq(1);
@@ -140,30 +155,15 @@ static void setup(){
 
   simo_rtc_get_time(&h,&m,&s);
   simo_rtc_set_alarm(h,m+1,s);
-
-
-  
-
-    comm_services_init();
-  
-  
-    comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
-
-
-   comm_services_config_all();
-
-
-   
-
+  comm_services_init();  
+  comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
+  comm_services_config_all();
 
 }
 
- 
 
-char buffer_mem[250]= {0};
 
-uint8_t counter = 0;
-uint8_t counter_max = 0;
+
 
 /**
  * @brief  The application entry point.
@@ -177,39 +177,20 @@ int main(void)
     setup();
     // Estado del dispositivo, 
     // transmicion en vivo o transmicion desde memoria memoria.
-
     //inicio FSM (INICIO FLASH TAMBIEN)
     fsm_init();
-      
     DEVICE = fsm_load_flash();
-
-    // Seteo el  estado alojado en memoria externa, sincroniza con sram
-    fsm_set_state(FSM_ON_FIELD);
-    //mem_services_set_data_counter(MAX_COUNTER); 
-
-    //fsm_set_state(FSM_UNDEFINED);
- 
     DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
-     
-
     counter_max =  mem_services_get_data_counter(); // Cantidad de datos que se almacenan antes de enviar por mqtt
 
-
-   // char b[20];
-   // sprintf(b,"counter:%d\r\n",counter_max);
-   // debug_print(b);
     while(1){
     switch (DEVICE)
       {
       case FSM_WITHOUT_CONFIG:
           debug_print("FSM:WITHOUT CONFIG");
-         
-                          //rutina para el dispositivo sin configuracion?
-                          //  Quiza preguntar al servidor mqtt?
+          //rutina para el dispositivo sin configuracion?
+          //  Quiza preguntar al servidor mqtt?
           break;
-
-
-
 
       case FSM_ON_FIELD:
           debug_print("FSM:ON FIELD");
@@ -259,11 +240,13 @@ int main(void)
 
          
 
-          for( uint8_t i=0; i != MAX_COUNTER; i++ ){
+          for( uint8_t i=0; i != counter_max; i++ ){
                 debug_print("read from mem:\r\n");
                 mem_services_read_data(buff,250,i);
                 debug_print(buff);
-                  // enviamos el dato al servidor                    
+                  // enviamos el dato al servidor   
+                #define MQTT_TOPIC                 "X1111"
+                 
                 comm_mqtt_publish(MQTT_TOPIC,buff, strlen( buff));
                 simo_delay_ms(4000);
           }

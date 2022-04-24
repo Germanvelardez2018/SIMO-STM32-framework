@@ -16,7 +16,7 @@
 // ! Mensaje de debug
 
 #define C_DEBUG_NAME                                ("SIMO STM32")
-#define C_DEBUG_ON                                   (0)
+#define C_DEBUG_ON                                   (1)
 #define C_DEBUG_UART                              (UART_B)
 #define C_DEBUG_BAUDRATE                          (115200)
 

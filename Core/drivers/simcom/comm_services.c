@@ -1,20 +1,32 @@
 #include "comm_services.h"
+#include "mem_services.h"
 #include "comm.h"
 #include "debug.h"
 #include "delay.h"
 
 
-#define MQTT_WAIT_MSG                   "Waiting for OK"
-#define MQTT_READY_MSG                  "COMM SERVICES READY"
+#define MQTT_WAIT_MSG                   "Waiting for OK\r\n"
+#define MQTT_READY_MSG                  "COMM SERVICES READY\r\n"
+
+
+char MQTT_TOPIC[30]={0};
+char MQTT_URL[30]={0};
+char MQTT_PASS[30]={0};
+char MQTT_ID[30]={0};
+char MQTT_QOS[30]={0};
+
+
+
+#define MQTT_TOPIC                  (MQTT_TOPIC )
+#define MQTT_URL                    (MQTT_URL )
+#define MQTT_PASS                   (MQTT_PASS )
+#define MQTT_ID                     (MQTT_ID )
+#define MQTT_QOS                    (MQTT_QOS )
 
 
 
 
-#define MQTT_TOPIC                "X1111"
-#define MQTT_BROKER2               "simointi.cloud.shiftr.io"
-#define MQTT_PASS                  "fdZY5b69OhOVsAns"
-#define MQTT_ID                    "simointi"
-#define MQTT_QOS                    "0"
+
 
 
 
@@ -29,7 +41,20 @@ uint32_t comm_services_config_all(void){
    comm_services_open_apn();
    simo_delay_ms(1000);
    comm_services_gps_init(1);
-   comm_config_mqtt(MQTT_BROKER2,MQTT_ID,MQTT_PASS,MQTT_QOS);
+
+debug_print("configurando mqtt  con datos desde mem\r\n");
+   mem_services_get_mqtt_origen(MQTT_URL);
+
+   mem_services_get_mqtt_id_origen(MQTT_ID);
+   mem_services_get_mqtt_pass_origen(MQTT_PASS);
+   
+   mem_services_get_mqtt_pub_topics(MQTT_TOPIC,0);
+   
+   mem_services_get_mqtt_qos_origen(MQTT_QOS);
+
+
+   
+   comm_config_mqtt(MQTT_URL ,MQTT_ID,MQTT_PASS,MQTT_QOS);
 
 }
 
@@ -46,6 +71,10 @@ uint32_t comm_services_gps_init(uint32_t gps_on){
     
     return ret;
 }
+
+
+
+
 
 
 

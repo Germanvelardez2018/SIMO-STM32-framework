@@ -89,7 +89,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_set_mqtt_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_set_mqtt_origen(char* buffer);
 
  /**
   * @brief 
@@ -98,7 +98,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_get_mqtt_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_mqtt_origen(char* buffer);
 
  /**
   * @brief 
@@ -107,7 +107,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_set_id_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_set_mqtt_id_origen(char* buffer);
 
  /**
   * @brief 
@@ -116,7 +116,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_get_id_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_mqtt_id_origen(char* buffer);
 
  /**
   * @brief 
@@ -125,7 +125,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_set_pass_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_set_mqtt_pass_origen(char* buffer);
 
  /**
   * @brief 
@@ -134,7 +134,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_get_pass_origen(char* buffer,uint8_t len);
+ uint32_t mem_services_get_mqtt_pass_origen(char* buffer);
 
  /**
   * @brief 
@@ -143,7 +143,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_set_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+ uint32_t mem_services_set_mqtt_pub_topics(char* buffer,uint8_t topic_pos);
 
  /**
   * @brief 
@@ -152,7 +152,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_get_pub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+ uint32_t mem_services_get_mqtt_pub_topics(char* buffer,uint8_t topic_pos);
 
  /**
   * @brief 
@@ -161,7 +161,7 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_set_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+ uint32_t mem_services_set_mqtt_sub_topics(char* buffer,uint8_t topic_pos);
 
  /**
   * @brief 
@@ -170,9 +170,10 @@ fsm_devices mem_services_set_fsm(fsm_devices value);
   * @param len 
   * @return ** uint32_t 
   */
- uint32_t mem_services_get_sub_topics(char* buffer,uint8_t len,uint8_t topic_pos);
+ uint32_t mem_services_get_mqtt_sub_topics(char* buffer,uint8_t topic_pos);
 
-
+ uint32_t mem_services_set_mqtt_qos_origen(char* buffer);
+ uint32_t mem_services_get_mqtt_qos_origen(char* buffer);
 
 
  uint32_t mem_services_write_data(char* buffer, uint8_t len, uint16_t pag);

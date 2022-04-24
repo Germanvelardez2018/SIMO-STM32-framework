@@ -6,7 +6,11 @@
 
 
 
-
+/**USART2 GPIO Configuration
+  * Conexion Uart Debug
+        PA2     ------> USART2_TX
+        PA3     ------> USART2_RX
+        */
 
 
 #define DEBUG_PRINT_ON                                DEBUG_ON
@@ -30,7 +34,7 @@
 
 uint32_t debug_init(void){
         uint32_t ret = 0;
-   #if DEBUG-_PRINT_ON == 1    
+   #if DEBUG_PRINT_ON == 1    
         ret = simo_uart_init(DEBUG_PRINT_UART,DEBUG_PRINT_BAUDRATE);
         if(ret == 1 )__DEBUG_INIT__ = 1;
         debug_print(DEBUG_PRINT_MSG_INIT);
