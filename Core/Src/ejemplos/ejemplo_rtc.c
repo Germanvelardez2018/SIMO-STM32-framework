@@ -48,24 +48,21 @@
 
 #define LED_TOOGLE            SIMO_GPIO_18 // PB2
 
-#define BUFFER_SIZE           250
+#define BUFFER_SIZE           255
 
 
 
 #define SENSOR_BUFFER_LEN   BUFFER_SIZE
 
 
-static char _sensor_buffer[SENSOR_BUFFER_LEN];
+
+
+
+static char buffer[BUFFER_SIZE]={0};
 
 
 
 
-
-
-
-
-#define STEP_MINUTES   1
-#define MSG_INIT      "Iniciamos aplicacion \r\n"
 #define MSG_ROUTINE   "Realizando rutina  de medicion\r\n"
 
 
@@ -92,7 +89,7 @@ static char _sensor_buffer[SENSOR_BUFFER_LEN];
 
  // estado de la maquina en ram
   fsm_devices DEVICE;
-  char buffer_mem[250]= {0};
+  char buffer_mem[BUFFER_SIZE]= {0};
 
   uint8_t counter = 0;
   uint8_t counter_max = 0;
@@ -154,7 +151,7 @@ static void setup(){
 
 
   simo_rtc_get_time(&h,&m,&s);
-  simo_rtc_set_alarm(h,m+1,s);
+  simo_rtc_set_alarm(h,m,s+40);
   comm_services_init();  
   comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
   comm_services_config_all();
@@ -183,17 +180,19 @@ int main(void)
     DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
     counter_max =  mem_services_get_data_counter(); // Cantidad de datos que se almacenan antes de enviar por mqtt
 
+    //dejemos undefine
+
     while(1){
     switch (DEVICE)
       {
       case FSM_WITHOUT_CONFIG:
-          debug_print("FSM:WITHOUT CONFIG");
+          debug_print("WITHOUT CONFIG");
           //rutina para el dispositivo sin configuracion?
           //  Quiza preguntar al servidor mqtt?
           break;
 
       case FSM_ON_FIELD:
-          debug_print("FSM:ON FIELD");
+          debug_print("ON FIELD");
           // Dormir el microcontrolador
           power_mode_set( SLEEP_MODE);
           // Despierta mediante interrupcion RTC
@@ -201,14 +200,13 @@ int main(void)
           //Rutina de trabajo
           debug_print(MSG_ROUTINE);
             //borramos buffer
-          memset(_sensor_buffer,0,1);
-          char nmea[100]={0};
+          memset(buffer,0,BUFFER_SIZE);
+          char nmea[120]={0};
           comm_services_get_nmea(nmea);
-          sprintf(_sensor_buffer,"GPS:%s\r\n",nmea);
-          sensor_services_check(_sensor_buffer);
-          debug_print(_sensor_buffer);
+          sprintf(buffer,"%s",nmea);
+          sensor_services_check(buffer);
         // Guardar datos en memoria
-          mem_services_write_data(_sensor_buffer, strlen(_sensor_buffer),counter);
+          mem_services_write_data(buffer, strlen(buffer),counter);
         // leo desde memoria
           counter ++;
           if(counter == counter_max){
@@ -222,7 +220,7 @@ int main(void)
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
           //Configura la alarma
-          simo_rtc_set_alarm(h,m+1,s);
+          simo_rtc_set_alarm(h,m,s+10);
          }    
           break;
 
@@ -230,27 +228,26 @@ int main(void)
 
       case FSM_MEMORY_DOWNLOAD:
 
-          debug_print("FSM: DONWLOAD");
+          debug_print(" DONWLOAD\r\n");
           //descargo memoria y vuelvo a estado Field
           // borrar datos que ya se enviaron, y ajustar contador de datos a cero
           // volver al modo datalog
           debug_print("lectura de memoria iniciada\r\n");
           // buffer para los datos leidos en memoria
-          char buff[BUFFER_SIZE];
-
+        //borramos buffer
+          
          
 
           for( uint8_t i=0; i != counter_max; i++ ){
-                debug_print("read from mem:\r\n");
-                mem_services_read_data(buff,250,i);
-                debug_print(buff);
+                memset(buffer,0,BUFFER_SIZE);
+                mem_services_read_data(buffer,BUFFER_SIZE,i);
                   // enviamos el dato al servidor   
                 #define MQTT_TOPIC                 "X1111"
                  
-                comm_mqtt_publish(MQTT_TOPIC,buff, strlen( buff));
+                comm_mqtt_publish(MQTT_TOPIC,buffer, strlen( buffer));
                 simo_delay_ms(4000);
           }
-          debug_print("lectura de memeria finalizada");
+          debug_print("lectura de memeria finalizada\r\n");
           counter = 0;
         
           fsm_set_state(FSM_ON_FIELD);
@@ -263,19 +260,20 @@ int main(void)
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
           //Configura la alarma
-          simo_rtc_set_alarm(h,m+1,s);
+          simo_rtc_set_alarm(h,m,s+20);
           break;
 
 
 
       case FSM_UNDEFINED:
-          debug_print("FSM: UNDEFINED");
+          debug_print(" UNDEFINED\r\n");
+//          uint32_t  ret = comm_check();
           simo_delay_ms(2000);
           break;
 
 
       default:
-          debug_print("FSM: DEFAULT");
+          debug_print(" DEFAULT\r\n");
           simo_delay_ms(2000);
           break;
       }

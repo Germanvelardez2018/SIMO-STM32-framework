@@ -77,15 +77,9 @@ static uint8_t __comm_buffer[SIMCOM_BUFFER_SIZE] ={0};     //! Buffer para la re
  #define CMD_MQTT_QOS           "\"QOS\""
  #define CMD_MQTT_COMMIT        "AT+SMCONN\r\n"
  #define CMD_MQTT_PUBLISH       "AT+SMPUB=\"%s\",\"%d\",1,1 \r\n" 
+#define CMD_MQTT_SUBSCRIBE      "AT+SMSUB=\"%s\",%d \r\n"   // topic , QoS
 
-
-
-
-
-
-
-
-#define COMM_DEBUG                               (1)
+#define CMD_MQTT_TOPIC_CONFIG   "SIMO_CONFIG"
 
 /**
  * @brief Iniciamos el hardware asociado
@@ -175,7 +169,6 @@ static uint32_t __comm_check_response(char* response){
     uint32_t len_buffer = strlen(SIMCOM_BUFFER_ARRAY);
     uint32_t index = len_buffer - len_reponse ;  
     uint32_t res = (  strncmp(&(SIMCOM_BUFFER_ARRAY[index]),response,len_reponse) == IS_EQUAL)?1:0;
-   
     return res;
 }
 
@@ -201,7 +194,6 @@ static uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
     // comparo respuesta con respuesta esperada
    ret = __comm_check_response(exp_response);
     return  ret;
-
 }
 
 
@@ -247,7 +239,6 @@ uint32_t comm_open_apn(void){
 
 
 uint32_t comm_set_pwr_gps(uint32_t gps_on){
-
     uint32_t ret = 0;
     if(gps_on == 0){
         ret = __comm_cmd_send(CMD_PWR_GPS_OFF,CMD_OK);
@@ -255,16 +246,13 @@ uint32_t comm_set_pwr_gps(uint32_t gps_on){
     else{
         ret = __comm_cmd_send(CMD_PWR_GPS_ON,CMD_OK);
     }
-
     return ret;   
-
 }
 
 
 uint32_t comm_get_gps_info(){
     uint32_t ret = 0;
     ret = __comm_cmd_send(CMD_GETGPSINFO,CMD_OK);
-    
     return  ret;
 }
 
@@ -273,12 +261,9 @@ uint32_t comm_get_gps_info(){
 
 
 uint32_t comm_get_signal(){
-
-   uint32_t ret = 0;
+    uint32_t ret = 0;
     ret = __comm_cmd_send(CMD_GET_SIGNAL,CMD_OK);
-    
     return ret;
-
 }
 
 
@@ -298,11 +283,8 @@ uint32_t comm_set_echo(uint8_t echo_on){
     else{
         ret = __comm_cmd_send(CMD_ECHO_ON,CMD_OK);
     }
-
     return ret;
 }
-
-
 
 
 uint32_t comm_version(void){
@@ -311,17 +293,10 @@ uint32_t comm_version(void){
 }
 
 
-
 uint32_t comm_check(void){
-
     uint32_t ret = __comm_cmd_send(CMD_AT,CMD_OK);
-   
-   
     return ret;
 }
-
-
-
 
 
 uint32_t comm_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_t* qos){
@@ -329,30 +304,29 @@ uint32_t comm_config_mqtt(uint8_t* url, uint8_t* user, uint8_t* password, uint8_
     if ((url == NULL) || ( user == NULL) || (password == NULL) || (qos == NULL)) return 0;
     u_int8_t buffer[120]={};
     sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_URL,url);    
-    simo_delay_ms(500);
+    simo_delay_ms(1000);
     ret = __comm_cmd_send(buffer,CMD_OK);
     sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_USER,user);    
-    simo_delay_ms(500);
+    simo_delay_ms(1000);
     ret = __comm_cmd_send(buffer,CMD_OK);
     sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_PASSWORD,password);    
-    simo_delay_ms(500);
+    simo_delay_ms(1000);
     ret = __comm_cmd_send(buffer,CMD_OK);
     sprintf(buffer,"%s %s,\"%s\" \r\n",CMD_MQTT,CMD_MQTT_QOS,qos);    
-    simo_delay_ms(500);
+    simo_delay_ms(1000);
     ret = __comm_cmd_send(buffer,CMD_OK);
-    simo_delay_ms(500);
+    simo_delay_ms(1000);
+     // Nos subcribimos a topic de configuracion
+  
     ret = __comm_cmd_send(CMD_MQTT_COMMIT,CMD_OK);
-    simo_delay_ms(500);
+    simo_delay_ms(2000);
+    sprintf(buffer,CMD_MQTT_SUBSCRIBE,CMD_MQTT_TOPIC_CONFIG,0); 
+    ret = __comm_cmd_send(buffer,CMD_OK);
+    simo_delay_ms(1000);
 
-return ret;
 
+    return ret;
 }
-
-
-
-
-
-
 
 
 uint32_t comm_init(void ){
@@ -360,36 +334,21 @@ uint32_t comm_init(void ){
     // inicio  el hardware asociado
     ret =  __comm_init();
     simo_delay_ms(1000);
-
     return ret;
 }
 
 
 
-/**
- * @brief Poner en modo sleep el sensor
- * 
- * @param sleep 
- * @return ** void 
- */
+
 void comm_sleep(){
     uint32_t ret = __comm_cmd_send(CMD_LOW_PWR_ON,CMD_OK);
-   
-   
     return ret;
 }
 
 
-/**
- * @brief 
- * 
- * @return ** void 
- */
-void comm_resume(){
 
-      uint32_t ret = __comm_cmd_send(CMD_LOW_PWR_OFF,CMD_OK);
-   
-   
+void comm_resume(){
+    uint32_t ret = __comm_cmd_send(CMD_LOW_PWR_OFF,CMD_OK);
     return ret;
 
 }

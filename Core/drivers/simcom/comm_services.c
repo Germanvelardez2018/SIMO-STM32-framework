@@ -5,15 +5,15 @@
 #include "delay.h"
 
 
-#define MQTT_WAIT_MSG                   "Waiting for OK\r\n"
+#define MQTT_WAIT_MSG                   "Wait\r\n"
 #define MQTT_READY_MSG                  "COMM SERVICES READY\r\n"
 
 
-char MQTT_TOPIC[30]={0};
-char MQTT_URL[30]={0};
-char MQTT_PASS[30]={0};
-char MQTT_ID[30]={0};
-char MQTT_QOS[30]={0};
+char MQTT_TOPIC[35]={0};
+char MQTT_URL[35]={0};
+char MQTT_PASS[35]={0};
+char MQTT_ID[35]={0};
+char MQTT_QOS[35]={0};
 
 
 
@@ -33,27 +33,19 @@ char MQTT_QOS[30]={0};
 
 
 uint32_t comm_services_config_all(void){
-    
-
    comm_set_echo(0);
    comm_get_operator();
-   simo_delay_ms(1000);
+   simo_delay_ms(500);
    comm_services_open_apn();
-   simo_delay_ms(1000);
+   simo_delay_ms(500);
    comm_services_gps_init(1);
-
-debug_print("configurando mqtt  con datos desde mem\r\n");
+   debug_print("configurando mqtt  con datos desde mem\r\n");
    mem_services_get_mqtt_origen(MQTT_URL);
-
    mem_services_get_mqtt_id_origen(MQTT_ID);
    mem_services_get_mqtt_pass_origen(MQTT_PASS);
-   
    mem_services_get_mqtt_pub_topics(MQTT_TOPIC,0);
-   
    mem_services_get_mqtt_qos_origen(MQTT_QOS);
 
-
-   
    comm_config_mqtt(MQTT_URL ,MQTT_ID,MQTT_PASS,MQTT_QOS);
 
 }
@@ -88,6 +80,7 @@ uint32_t comm_services_get_nmea(char* buffer){
     comm_sleep();
     return ret;
 }
+
 
 
 uint32_t comm_services_wait_ok(void){

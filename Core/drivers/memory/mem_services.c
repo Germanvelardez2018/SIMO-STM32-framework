@@ -363,24 +363,32 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
     uint32_t ret = 0;
     uint8_t __len=len;
     // guardo el tamaño del buffer en primera posicion
-    ret = __write_data(&__len,1,pag,0);
+    ret = __write_data(&__len,1,pag+OFFSET_ESP_REG,0);
 
-     ret= __write_data(buffer,len,pag,1);
+    ret= __write_data(buffer,len,pag+OFFSET_ESP_REG,1);
+
+     debug_print("mem W init:\r\n");
+     debug_print(buffer);
+     debug_print("mem W end:\r\n");
+
     mem_sleep();     // entramos en sleep
     return ret;
  }
 
  
+
  uint32_t mem_services_read_data(char* buffer, uint8_t len_buff, uint16_t pag){
     mem_resumen();     // resumen
     //escribo en memoria flash
     uint32_t ret = 0;
     uint8_t __len = 0;
-    ret = __read_data(&__len,1,pag,0);
+    ret = __read_data(&__len,1,OFFSET_ESP_REG+pag,0);
     //ret = (1 )? __read_data(buffer,__len+1,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
-    ret = ( __len  >= len_buff )? __read_data(buffer,__len,pag,1): 0;  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
-    debug_print("mem service read:\r\n");
+    ret =  __read_data(buffer,__len,OFFSET_ESP_REG+pag,1);  // si el tamanio de datos a leer es mayou que el espacio en buffer, no leo y retorno ret=0
+    debug_print("mem  R init:\r\n");
     debug_print(buffer);
+    debug_print("mem  R end:\r\n");
+
     mem_sleep();     // entramos en sleep
     return ret;
 
