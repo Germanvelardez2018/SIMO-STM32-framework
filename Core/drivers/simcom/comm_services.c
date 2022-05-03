@@ -59,8 +59,6 @@ uint32_t comm_services_gps_init(uint32_t gps_on){
 
     uint32_t ret ;
     ret = comm_set_pwr_gps(gps_on);
-
-    
     return ret;
 }
 
