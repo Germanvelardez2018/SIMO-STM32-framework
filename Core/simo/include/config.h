@@ -44,7 +44,7 @@
 
 //! Cantidad de instancias
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 3 instancias 
-#define C_NUM_SIMO_TIMER                        1    
+#define C_NUM_SIMO_TIMER                        2    
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 3 instancias 
 #define C_NUM_SIMO_UART                         3    
 //! Numero de instancias disponibles. Verificar  valores maximos y conflictos. Maximo: 2 instancias. Con 2 instancias conflicto SPI2 y UART3 

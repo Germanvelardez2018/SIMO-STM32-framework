@@ -12,6 +12,17 @@
 		"gpio.h": "c",
 		"config.h": "c",
 		"sensor_fake.h": "c",
-		"MPU6050.C": "cpp"
+		"MPU6050.C": "cpp",
+		"wdt.h": "c",
+		"stm32f1xx_hal_def.h": "c",
+		"main.h": "c",
+		"stm32f1xx_hal.h": "c",
+		"stm32f1xx.h": "c",
+		"stm32f1xx_hal_conf.h": "c",
+		"stm32f1xx_hal_cortex.h": "c",
+		"stm32f103xb.h": "c",
+		"system_stm32f1xx.h": "c",
+		"stm32f1xx_hal_iwdg.h": "c",
+		"uart.h": "c"
 	}
 }

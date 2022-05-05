@@ -21,7 +21,7 @@
 #define DEBUG_PRINT_FORMAT                           "[%s] \t\t%s" //! DEBUG NAME , MESSAGE
 #define DEBUG_PRINT_TIMEOUT                           (1000)
 #define DEBUG_BUFFER_SIZE                             (300)
-#define DEBUG_PRINT_MSG_INIT                          "SE INICIO EL DEBUG PRINT"
+#define DEBUG_PRINT_MSG_INIT                          "DEBUG ON"
 
 
 #if DEBUG_PRINT_ON == 1
@@ -49,8 +49,11 @@ uint32_t debug_print(char* buff){
     uint32_t ret= 0;
     #if DEBUG_PRINT_ON == 1
         if(__DEBUG_INIT__ == 0) debug_init();
-        sprintf(__debug_buffer,DEBUG_PRINT_FORMAT,DEBUG_PRINT_NAME,(buff== NULL)?"NULL":buff);
-        ret =  simo_uart_write(DEBUG_PRINT_UART,__debug_buffer,strlen(__debug_buffer),DEBUG_PRINT_TIMEOUT,0);
+        if( buff != NULL){
+            sprintf(__debug_buffer,DEBUG_PRINT_FORMAT,DEBUG_PRINT_NAME,(buff== NULL)?"NULL":buff);
+            ret =  simo_uart_write(DEBUG_PRINT_UART,__debug_buffer,strlen(__debug_buffer),DEBUG_PRINT_TIMEOUT,0);
+        }
+        
     #endif
     
     return  ;

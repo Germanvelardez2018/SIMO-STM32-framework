@@ -125,7 +125,8 @@ static uint8_t* __comm_get_buffer(){
  * @return ** uint32_t 
  */
 static  uint32_t __comm_read(void){
-        uint32_t ret = simo_uart_read(SIMCOM_AT_UART,SIMCOM_BUFFER_ARRAY,SIMCOM_BUFFER_SIZE,SIMCOM_TIMEOUT_RX,0);
+        uint_fast32_t ret = 0;
+        ret = simo_uart_read(SIMCOM_AT_UART,SIMCOM_BUFFER_ARRAY,SIMCOM_BUFFER_SIZE,SIMCOM_TIMEOUT_RX,0);
         
         return ret;
 }
@@ -139,7 +140,8 @@ static  uint32_t __comm_read(void){
  * @return ** uint32_t 
  */
 static  uint32_t __comm_write(uint8_t* buff){
-        uint32_t ret = simo_uart_write(SIMCOM_AT_UART,buff,strlen(buff),SIMCOM_TIMEOUT_TX,0);
+            uint32_t ret = 0;
+        if(buff != NULL) ret = simo_uart_write(SIMCOM_AT_UART,buff,strlen(buff),SIMCOM_TIMEOUT_TX,0);
         return ret;
 }
 
@@ -165,6 +167,7 @@ static  inline uint32_t __comm_debug_write(uint8_t* buff){
  * @return ** uint32_t 
  */
 static uint32_t __comm_check_response(char* response){
+    if(response == NULL ) return 0;
     uint32_t len_reponse = strlen(response)  ;
     uint32_t len_buffer = strlen(SIMCOM_BUFFER_ARRAY);
     uint32_t index = len_buffer - len_reponse ;  
@@ -205,10 +208,14 @@ static uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
 uint32_t comm_mqtt_publish(char* topic, char* payload, uint8_t len_payload){
     uint32_t ret = 0;
     uint8_t  buffer[255]={0};
-    sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
-    ret = __comm_cmd_send(buffer,CMD_OK);
-    simo_delay_ms(1000);
-    ret = __comm_cmd_send(payload,CMD_OK);
+    if( (topic != NULL) || (payload != NULL)){
+        sprintf(buffer,CMD_MQTT_PUBLISH,topic,len_payload);    
+        ret = __comm_cmd_send(buffer,CMD_OK);
+        simo_delay_ms(1000);
+        ret = __comm_cmd_send(payload,CMD_OK);
+
+    }
+    
     return ret;
 }
 

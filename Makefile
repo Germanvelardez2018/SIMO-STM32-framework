@@ -37,7 +37,6 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/drivers/debug/debug.c \
-Core/Src/ejemplos/ejemplo_rtc.c \
 Core/drivers/sensors/sensor_fake.c \
 Core/Src/sensors/mpu6050.c \
 Core/drivers/simcom/comm_services.c \
@@ -46,7 +45,6 @@ Core/drivers/memory/memory.c \
 Core/drivers/sensors/sensor_services.c \
 Core/drivers/memory/mem_services.c \
 Core/drivers/fsm/fsm.c \
-Core/drivers/mpu6500_test.c \
 Core/simo/power_modes.c \
 Core/simo/i2c.c \
 Core/simo/delay.c \
@@ -56,6 +54,7 @@ Core/simo/timer.c\
 Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
+Core/simo/wdt.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -76,9 +75,11 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c \
 Core/Src/system_stm32f1xx.c
+
 
 # ASM sources
 ASM_SOURCES =  \

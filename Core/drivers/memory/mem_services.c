@@ -284,11 +284,13 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 
 
  uint32_t mem_services_set_mqtt_qos_origen(char* buffer){
+     if( buffer == NULL)return 0;
      return __set_string(buffer,strlen(buffer),MQTT_QOS_ORIGIN);
 }
 
 
  uint32_t mem_services_get_mqtt_qos_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __get_string(buffer,strlen(buffer),MQTT_QOS_ORIGIN);
 }
 
@@ -296,31 +298,37 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 
 
  uint32_t mem_services_set_mqtt_origen(char* buffer){
+     if( buffer == NULL)return 0;
      return __set_string(buffer,strlen(buffer),MQTT_ORIGEN);
 }
 
 
  uint32_t mem_services_get_mqtt_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __get_string(buffer,strlen(buffer),MQTT_ORIGEN);
 }
 
 
  uint32_t mem_services_set_mqtt_id_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __set_string(buffer,strlen(buffer),MQTT_ORIGEN_ID);
 }
 
 
  uint32_t mem_services_get_mqtt_id_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __get_string(buffer,strlen(buffer),MQTT_ORIGEN_ID);
 }
 
 
  uint32_t mem_services_set_mqtt_pass_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __set_string(buffer,strlen(buffer),MQTT_ORIGEN_PASS);
 }
 
 
  uint32_t mem_services_get_mqtt_pass_origen(char* buffer){
+     if( buffer == NULL)return 0;
     return __get_string(buffer,strlen(buffer),MQTT_ORIGEN_PASS);
 }
 
@@ -330,24 +338,28 @@ fsm_devices mem_services_set_fsm(fsm_devices value){
 
  uint32_t mem_services_set_mqtt_pub_topics(char* buffer,uint8_t topic_pos){
      if(topic_pos >= TOPICS_MAX) return 0;
+     if(buffer == NULL) return 0;
      return __set_string(buffer,strlen(buffer),(PUB_TOPICS_0 + topic_pos));
 }
 
 
  uint32_t mem_services_get_mqtt_pub_topics(char* buffer,uint8_t topic_pos){
     if(topic_pos >= TOPICS_MAX) return 0;
+    if(buffer == NULL) return 0;
     return __get_string(buffer,strlen(buffer),(PUB_TOPICS_0 + topic_pos));
 }
 
 
  uint32_t mem_services_set_mqtt_sub_topics(char* buffer,uint8_t topic_pos){
      if(topic_pos >= TOPICS_MAX) return 0;
+     if(buffer == NULL) return 0;
      return __set_string(buffer,strlen(buffer),(SUB_TOPICS_0 + topic_pos));
 }
 
 
  uint32_t mem_services_get_mqtt_sub_topics(char* buffer,uint8_t topic_pos){
     if(topic_pos >= TOPICS_MAX) return 0;
+    if(buffer == NULL) return 0;
     return __get_string(buffer,strlen(buffer),(SUB_TOPICS_0 + topic_pos));
 }
 
