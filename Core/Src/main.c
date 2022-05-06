@@ -155,7 +155,7 @@ static void setup(){
 
 
   simo_rtc_get_time(&h,&m,&s);
-  simo_rtc_set_alarm(h,m+5,s);
+  simo_rtc_set_alarm(h,m+10,s);
   comm_services_init();  
   comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
   comm_services_config_all();
@@ -173,7 +173,6 @@ static void __refresh_wdt(void){
 
 
    power_mode_set( RESUMEN_RUN);
-   //debug_print("trefresh wdt\r\n");
 
   //Refrescar el WDT
    simo_wdt_refresh();
@@ -274,7 +273,7 @@ int main(void)
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
           //Configura la alarma
-          simo_rtc_set_alarm(h,m+5,s);
+          simo_rtc_set_alarm(h,m+10,s);
          }    
           break;
 
