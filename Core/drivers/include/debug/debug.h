@@ -24,3 +24,6 @@ uint32_t debug_init(void);
 
 
 uint32_t debug_print(char* buff);
+
+
+uint32_t debug_print_raw(uint8_t buff, uint32_t len);

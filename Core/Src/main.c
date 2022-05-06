@@ -45,6 +45,8 @@
 
  
 
+#define UPDATE_SLEEP            h,m+30,s
+
 
 #define _WRITE_MQTT_            (0) // ! CON 1 grabo los parametros de mqtt en flash
 
@@ -155,7 +157,7 @@ static void setup(){
 
 
   simo_rtc_get_time(&h,&m,&s);
-  simo_rtc_set_alarm(h,m+10,s);
+  simo_rtc_set_alarm(UPDATE_SLEEP);
   comm_services_init();  
   comm_services_wait_ok(); // EN WHILE HASTA QUE EL CHIP DEVUELVA OK
   comm_services_config_all();
@@ -178,12 +180,6 @@ static void __refresh_wdt(void){
    simo_wdt_refresh();
   //reiniciar timer
  
-
-
-
-
-
-
 }
 
 
@@ -200,9 +196,8 @@ int main(void)
      // Configuracion
   setup();
 
-   //fsm_set_state(FSM_ON_FIELD);
 
-
+ // fsm_set_state(FSM_ON_FIELD);
 
   simo_wdt_init(4095,WDT_PRE_256); // contador de 12 bits
   debug_print("WDT CONFIGURADO");
@@ -220,8 +215,11 @@ int main(void)
     fsm_init();
     DEVICE = fsm_load_flash();
     DEVICE = fsm_get_state();  // leo desde variable sram sincronizada con mem flash externa
-    counter_max =  mem_services_get_data_counter(); // Cantidad de datos que se almacenan antes de enviar por mqtt
+  #define MAX_COUNTER          2
 
+  //grabo contador maximo
+   mem_services_set_data_counter(MAX_COUNTER); 
+   counter_max = mem_services_get_data_counter();
     //dejemos undefine
 
     while(1){
@@ -231,6 +229,8 @@ int main(void)
           debug_print("WITHOUT CONFIG");
           //rutina para el dispositivo sin configuracion?
           //  Quiza preguntar al servidor mqtt?
+ 
+          simo_delay_ms(10000);
           break;
 
       case FSM_ON_FIELD:
@@ -273,7 +273,7 @@ int main(void)
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
           //Configura la alarma
-          simo_rtc_set_alarm(h,m+10,s);
+          simo_rtc_set_alarm(UPDATE_SLEEP);
          }    
           break;
 
@@ -286,6 +286,7 @@ int main(void)
           // borrar datos que ya se enviaron, y ajustar contador de datos a cero
           // volver al modo datalog
           debug_print("lectura de memoria iniciada\r\n");
+
           // buffer para los datos leidos en memoria
         //borramos buffer
           
@@ -298,9 +299,14 @@ int main(void)
                 #define MQTT_TOPIC                 "X1111"
                  
                 comm_mqtt_publish(MQTT_TOPIC,buffer, strlen( buffer));
+                comm_send_mesage("se envio un nuevo frame de mediciones", "3856870066");
+
+
                 simo_delay_ms(4000);
           }
           debug_print("lectura de memeria finalizada\r\n");
+
+
           counter = 0;
         
           fsm_set_state(FSM_ON_FIELD);
@@ -313,7 +319,7 @@ int main(void)
           // Me preparo para volver a dormir
           simo_rtc_get_time(&h,&m,&s);
           //Configura la alarma
-          simo_rtc_set_alarm(h,m,s+20);
+          simo_rtc_set_alarm(UPDATE_SLEEP);
           break;
 
 

@@ -82,7 +82,7 @@ static void setup(void){
   simo_timer_config(TIMER_B,TIME_MS,2500);
   simo_timer_set_event_callback(TIMER_B,__CALLBACK_TIMERB);
 
-    //! Habilito las interrupciones (configuro EL NVIC)
+  //! Habilito las interrupciones (configuro EL NVIC)
   simo_timer_ena_irq(TIMER_A,1);
   simo_timer_ena_irq(TIMER_B,1);
  

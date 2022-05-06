@@ -81,6 +81,29 @@ static uint8_t __comm_buffer[SIMCOM_BUFFER_SIZE] ={0};     //! Buffer para la re
 
 #define CMD_MQTT_TOPIC_CONFIG   "SIMO_CONFIG"
 
+
+
+
+/**
+ * @brief Esribo por puerto asociado de salida
+ * 
+ * @param buff 
+ * @param len 
+ * @return ** uint32_t 
+ */
+static  inline uint32_t __comm_debug_write(uint8_t* buff){
+    
+        return debug_print(buff);
+}
+
+
+
+
+static inline uint32_t __comm_debug_write_raw(uint8_t buff, uint32_t len){
+    return debug_print_raw(buff, len);
+
+}
+
 /**
  * @brief Iniciamos el hardware asociado
  * 
@@ -125,10 +148,26 @@ static uint8_t* __comm_get_buffer(){
  * @return ** uint32_t 
  */
 static  uint32_t __comm_read(void){
-        uint_fast32_t ret = 0;
+        uint32_t ret = 0;
         ret = simo_uart_read(SIMCOM_AT_UART,SIMCOM_BUFFER_ARRAY,SIMCOM_BUFFER_SIZE,SIMCOM_TIMEOUT_RX,0);
         
         return ret;
+}
+
+
+
+
+
+static __comm_write_with_ch_end(char* buff,uint8_t ch_end ){
+     char buffer[250]={0};
+     strncpy(buffer,buff,strlen(buff));
+
+     uint8_t last_pos = strlen(buffer) ;
+     buffer[last_pos]=ch_end;
+    uint32_t ret = simo_uart_write(SIMCOM_AT_UART,buffer,last_pos +1   ,SIMCOM_TIMEOUT_TX,0);
+
+    
+    return ret;
 }
 
 
@@ -140,24 +179,14 @@ static  uint32_t __comm_read(void){
  * @return ** uint32_t 
  */
 static  uint32_t __comm_write(uint8_t* buff){
-            uint32_t ret = 0;
+        uint32_t ret = 0;
         if(buff != NULL) ret = simo_uart_write(SIMCOM_AT_UART,buff,strlen(buff),SIMCOM_TIMEOUT_TX,0);
         return ret;
 }
 
 
 
-/**
- * @brief Esribo por puerto asociado de salida
- * 
- * @param buff 
- * @param len 
- * @return ** uint32_t 
- */
-static  inline uint32_t __comm_debug_write(uint8_t* buff){
-    
-        return debug_print(buff);
-}
+
 
 
 /**
@@ -173,6 +202,25 @@ static uint32_t __comm_check_response(char* response){
     uint32_t index = len_buffer - len_reponse ;  
     uint32_t res = (  strncmp(&(SIMCOM_BUFFER_ARRAY[index]),response,len_reponse) == IS_EQUAL)?1:0;
     return res;
+}
+
+
+
+
+static uint32_t __comm_cmd_send_raw(char* cmd_string, uint8_t exp_response,uint8_t ch_end ){
+    int32_t ret = 1;
+    // envio comando
+    //BORRAMOS BUFFER DE RECEPCCION
+    memset(SIMCOM_BUFFER_ARRAY,0,SIMCOM_BUFFER_SIZE);
+    ret = __comm_write_raw(cmd_string,26);
+  
+    // leo respuesta
+   ret = __comm_read();
+    __comm_debug_write(cmd_string); // commando
+    __comm_debug_write(SIMCOM_BUFFER_ARRAY);
+    // comparo respuesta con respuesta esperada
+   ret = __comm_check_response(exp_response);
+    return  ret;
 }
 
 
@@ -200,10 +248,36 @@ static uint32_t __comm_cmd_send(uint8_t* cmd_string, uint8_t* exp_response){
 }
 
 
+static uint32_t __comm_cmd_send_with_ch_end(char* cmd_string, uint8_t* exp_response,uint8_t ch_end){
+    int32_t ret = 1;
+    // envio comando
+    //BORRAMOS BUFFER DE RECEPCCION
+    memset(SIMCOM_BUFFER_ARRAY,0,SIMCOM_BUFFER_SIZE);
+    ret = __comm_write_with_ch_end(cmd_string,ch_end);
+    // leo respuesta
+   ret = __comm_read();
+    __comm_debug_write(cmd_string); // commando
+    __comm_debug_write(SIMCOM_BUFFER_ARRAY);
+    // comparo respuesta con respuesta esperada
+   ret = __comm_check_response(exp_response);
+    return  ret;    
+    
+    return 0;
+}
+
+
+
+
 
 
 //-------------------------------------------------------------------------FUNCIONES PUBLICAS-----------------------------------------------
 
+
+
+uint32_t comm_config_irq(uint8_t value ){
+    
+    return 0;
+}
 
 uint32_t comm_mqtt_publish(char* topic, char* payload, uint8_t len_payload){
     uint32_t ret = 0;
@@ -359,3 +433,59 @@ void comm_resume(){
     return ret;
 
 }
+
+
+
+//-------------Message function
+
+#define CMD_LIST_SMS             "AT+CMGL \r\n"
+#define CMD_DELT_SMS             "AT+CMGD \r\n"
+#define CMD_SEND_SMS             "AT+CMGS \r\n"
+#define CMD_READ_SMS             "AT+CMGR \r\n"
+
+
+
+#define CMD_FORMAT_TEXT_SMS      "AT+CMGF=1"
+#define CMD_LIST_SMS_RECEIVED    "AT+CMGL = \"REC UNREAD\" \r\n "
+
+
+
+ #define CMD_SMS_FUNCTION            "AT+CMGF= 1 \r\n"
+ #define CMD_SMS_SEND                "AT+CMGS= \"%s\"\r\n"
+
+
+
+
+
+// Enviar un sms
+
+void comm_send_mesage(char* sms, char* cellphone){
+
+    uint32_t ret = 0;
+    if (cellphone == NULL) return 0;
+    if( sms == NULL )      return 0;
+     ret =   comm_set_echo(0);
+     char b[100];
+     sprintf(b,CMD_SMS_SEND,cellphone);
+
+    ret =  __comm_cmd_send(CMD_SMS_FUNCTION,CMD_OK);
+    simo_delay_ms(2000);
+    //sprintf(_buff,CMD_SMS_SEND,cellphone);
+    ret =  __comm_cmd_send(b,CMD_OK);
+
+
+    simo_delay_ms(2000);
+
+    ret = __comm_cmd_send_with_ch_end(sms,CMD_OK,26);
+
+
+    simo_delay_ms(2000);
+    
+    return ret;
+
+}
+
+
+ //Secuencia para enviar un mensaje
+ // CMD_SMS_FUNCTION    ,  CMD_SMS_SEND Y luego mensaje de texto
+// por ultimo necesitas enviar el caracter 26 (decimal) para completar el proceso

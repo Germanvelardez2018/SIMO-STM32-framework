@@ -56,5 +56,20 @@ uint32_t debug_print(char* buff){
         
     #endif
     
-    return  ;
+    return  ret;
+}
+
+
+
+
+uint32_t debug_print_raw(uint8_t buff, uint32_t len){
+    uint32_t ret= 0;
+    #if DEBUG_PRINT_ON == 1
+        if(__DEBUG_INIT__ == 0) debug_init();
+      
+        ret =  simo_uart_write(DEBUG_PRINT_UART,buff,len,DEBUG_PRINT_TIMEOUT,0);
+        
+    #endif
+    
+    return ret ;
 }

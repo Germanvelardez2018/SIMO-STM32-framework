@@ -71,6 +71,10 @@ void comm_resume();
 
 
 
+uint32_t comm_config_irq(uint8_t value );
+
+void comm_send_mesage(char* sms, char* cellphone);
+
 
 
 

@@ -1,7 +1,7 @@
 #include "wdt.h"
 #include "stm32f1xx_hal_iwdg.h"
 
-
+// Contador de 12 bits
 
 
 static IWDG_HandleTypeDef __hiwdg;
