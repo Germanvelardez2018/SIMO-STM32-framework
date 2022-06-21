@@ -94,11 +94,11 @@
 
             //setea el callback
 
-            uint32_t simo_adc_set_event_callback(SIMO_ADC adc,callback_irq callback)
+            simo_state simo_adc_set_event_callback(SIMO_ADC adc,callback_irq callback)
             {
-              uint32_t res = 0;
+              simo_state ret = SIMO_ERROR;
             if (callback != NULL){
-                    res = 1;
+                    ret = SIMO_OK;
                     switch (adc)
                     {
                         #if NUM_SIMO_ADC >0
@@ -113,157 +113,209 @@
                         #endif
                             default:
                             __ADC1_COMPLETE_CONVER_IRQ__ = callback;
-                            res= 0;
                             break;
                     }
             }
-                return res;
+                return ret;
             }
 
 
-    /**
-     * @brief Obtiene la instancia de TIM
-     * 
-     * @param timer_enum 
-     * @return ** TIM_HandleTypeDef* 
-     */
-    static ADC_HandleTypeDef* __get_adc(SIMO_ADC adc_enum)
+/**
+ * @brief Obtengo la instancia de hardware adc
+ * 
+ * @param adc 
+ * @return ** ADC_HandleTypeDef* 
+ */
+ static ADC_HandleTypeDef* __get_adc(SIMO_ADC adc){
+  ADC_HandleTypeDef* ret = NULL;
+
+
+    switch (adc)
     {
-        ADC_HandleTypeDef* adc = NULL;
-        switch (adc_enum)
-        {
-            #if NUM_SIMO_ADC >0
-                case ADC_A:
-                adc = &hadc1;
-                adc->Instance = ADC1;
-                break;
-            #endif
-            #if NUM_SIMO_ADC >1
-                case ADC_B:
-                adc = &hadc2;
-                adc->Instance = ADC2;
-                break;
-            #endif
-            
-                default:
-                adc = &hadc1;
-                adc->Instance = ADC1;
-                break;
-        }
-        return adc;
-    }
-
-
-  uint32_t __get_channel(uint32_t channel){
-    uint32_t __channel = 0;
-    switch (channel)
-    {
-
-
-      case  0:
-      __channel = ADC_CHANNEL_0 ;
-          break;                      
-      case  1:
-      __channel = ADC_CHANNEL_1 ;
-
-        break;      
-      case  2:
-      __channel = ADC_CHANNEL_2 ;
-
-        break;
-      case  3:
-      __channel = ADC_CHANNEL_3 ;
-
-        break;
-      case  4:
-      __channel = ADC_CHANNEL_4 ;
-
-        break;
-      case  5:
-      __channel = ADC_CHANNEL_5 ;
-
-        break;
-      case  6:
-      __channel = ADC_CHANNEL_6 ;
-
-        break;
-      case  7:
-      __channel = ADC_CHANNEL_7 ;
-
-        break;
-      case  8:
-      __channel = ADC_CHANNEL_8 ;
-
-        break;
-      case  9:
-      __channel = ADC_CHANNEL_9 ;
-
-        break;
-      case  10:
-      __channel = ADC_CHANNEL_10;
-
-        break;
+    case ADC_A:
+      /* code */
+      hadc1.Instance = ADC1;
+      ret = &hadc1;
+      break;
+    
+    case ADC_B:
+      hadc2.Instance = ADC2;
+      ret = &hadc2;
+      break;
+    
     default:
-      __channel = ADC_CHANNEL_0;
+      // hadc1 por defect
+      hadc1.Instance = ADC1;
+      ret= &hadc1;
       break;
     }
-    return __channel;
+
+    return ret;
+
+ }
+
+/**
+ * @brief Obtengo el canal del adc a utilizar
+ * 
+ * @param channel 
+ * @return ** uint32_t 
+ */
+static uint32_t __get_channel( SIMO_ADC_CHANNEL channel){
+
+  uint32_t ret = 0;
+
+  switch (CHANNEL_0)
+  {
+    case CHANNEL_0:
+      ret = ADC_CHANNEL_0 ;
+      break;
+    
+    case CHANNEL_1:
+      ret = ADC_CHANNEL_1 ;
+      break;
+    
+    case CHANNEL_2:
+      ret = ADC_CHANNEL_2 ;
+      break;
+    
+    case CHANNEL_3:
+      ret = ADC_CHANNEL_3 ;
+      break;
+
+    case CHANNEL_4:
+      ret = ADC_CHANNEL_4 ;
+      break;
+
+    #if NUM_SIMO_ADC_CHANNEL > 5  
+    
+      case CHANNEL_5:
+        ret = ADC_CHANNEL_5 ;
+        break;
+      
+      case CHANNEL_6:
+        ret = ADC_CHANNEL_6 ;
+        break;
+      
+      case CHANNEL_7:
+        ret = ADC_CHANNEL_7 ;
+        break;
+
+      
+      case CHANNEL_8:
+        ret = ADC_CHANNEL_8 ;
+        break;
+      
+      case CHANNEL_9:
+        ret = ADC_CHANNEL_9 ;
+        break;
+    #endif
+  
+  default:
+   ret = ADC_CHANNEL_0;
+    break;
   }
 
 
+  return ret;
+
+}
 
 
 
 
+uint32_t __get_trigger(simo_adc_trigger trigger){
+  uint32_t ret = 0;
+  switch (trigger)
+  {
+    case ADC_TIGGER_SOFTWARE:
+    /* code */
+      ret = ADC_SOFTWARE_START;
+    break;
+
+    #if ADC_TRIGGER_EXT == 1    //Falta implementar esta opcion de trigger.
+    case 0 ADC_TRIGGER_EXTERN:
+        ret = ADC_SOFTWARE_START;   
+    #endif
+
+    #if ADC_TRIGGER_TIMER == 1  // Falta implementar esta opcion de trigger
+    case 0 ADC_TRIGGER_TIMMER:
+        ret = ADC_SOFTWARE_START;
+    #endif
+  
+  default:
+      ret = ADC_SOFTWARE_START;
+    break;
+  }
+  return ret;
+}
 
 
 
 
+ simo_state    simo_adc_init(SIMO_ADC adc, SIMO_ADC_CHANNEL channel, simo_adc_trigger trigger){
 
-    uint32_t simo_adc_( SIMO_ADC adc, 
-                        uint32_t channel,
-                        uint32_t tigger,
-                        uint32_t continuos){
+        simo_state ret = SIMO_ERROR;
 
-      uint32_t ret = 1;
-      //ADC_ChannelConfTypeDef sConfig = {0};
-      ADC_HandleTypeDef hadc2;
-      hadc2.Instance = ADC2;
-      hadc2.Init.ScanConvMode = ADC_SCAN_DISABLE;
-      hadc2.Init.ContinuousConvMode = DISABLE;
-      hadc2.Init.DiscontinuousConvMode = DISABLE;
-      hadc2.Init.ExternalTrigConv = (tigger == ADC_TIGGER_SOFTWARE)?ADC_SOFTWARE_START : ADC_EXTERNALTRIGINJECCONV_T2_TRGO;
-      hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-      hadc2.Init.NbrOfConversion = 1;
-      if (HAL_ADC_Init(&hadc2) != HAL_OK)
-      {
-      ret = 0;
-      }
 
-      return ret;
+        return ret;
+
+
+        ADC_HandleTypeDef* ADC = __get_adc(adc);
+        ADC->Init.ScanConvMode = ADC_SCAN_DISABLE;
+        ADC->Init.ContinuousConvMode = DISABLE;
+        ADC->Init.DiscontinuousConvMode = DISABLE;
+        ADC->Init.ExternalTrigConv = __get_trigger(trigger);
+        ADC->Init.DataAlign = ADC_DATAALIGN_RIGHT;
+        ADC->Init.NbrOfConversion = 1;
+        if (HAL_ADC_Init(&hadc1) != HAL_OK)
+        {
+          Error_Handler();
+        }
+          ADC_ChannelConfTypeDef sConfig = {0};
+
+
+     
+        
+        sConfig.Channel =__get_channel(channel);
+        sConfig.Rank = ADC_REGULAR_RANK_1;
+        sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5; // Para usos de ADC lentos.
+        // DEberia implementarse teniendo en cuenta el main clock, el clock de ADC y
+        // el tiempo minimo necesario para la conversion
+        if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+        {
+          Error_Handler();
+        }
+
+
     }
 
 
 
 
 
+    
 
 
 
 
-uint32_t simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption){
 
-   uint32_t ret = 1;
+
+
+
+
+simo_state simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption){
+
+   simo_state ret = SIMO_ERROR;
    ADC_HandleTypeDef* __adc = __get_adc(adc);
     if(__adc != NULL) {  
             if (ena_interruption == 1){
                  if(HAL_ADC_Start_IT(__adc) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_ADC_Start(__adc) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
   return ret;
@@ -271,38 +323,21 @@ uint32_t simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption){
 }
 
 
-uint32_t simo_adc_config_channel(SIMO_ADC adc, uint32_t channel ){
-    uint32_t ret= 1;
-      ADC_HandleTypeDef* __adc = __get_adc(adc);
 
 
-      ADC_ChannelConfTypeDef sConfig = {0};
+simo_state simo_adc_stop(SIMO_ADC adc,uint32_t ena_interruption){
 
-      itsConfig.Rank = ADC_REGULAR_RANK_1;
-      sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-   
-      sConfig.Channel = __get_channel(channel);
-         if(HAL_ADC_ConfigChannel(__adc,&sConfig ) == HAL_OK){
-                ret = 0; // EXITO EN LA CONFIGURACION
-                }
-      return ;
-
-}
-
-
-uint32_t simo_adc_stop(SIMO_ADC adc,uint32_t ena_interruption){
-
-   uint32_t ret = 1;
+   simo_state ret = SIMO_ERROR;
    ADC_HandleTypeDef* __adc = __get_adc(adc);
     if(__adc != NULL) {  
             if (ena_interruption == 1){
                  if(HAL_ADC_Stop_IT(__adc) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_ADC_Stop(__adc) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
   return ret;

@@ -24,6 +24,20 @@
     #include "stdio.h"
 
     
+
+
+
+
+
+
+
+    typedef enum {
+        SIMO_ERROR,
+        SIMO_OK
+    } simo_state;
+
+
+
     
 
   

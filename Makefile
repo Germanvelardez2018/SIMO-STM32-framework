@@ -55,6 +55,7 @@ Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
 Core/simo/wdt.c \
+Core/simo/adc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \

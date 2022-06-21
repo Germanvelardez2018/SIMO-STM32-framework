@@ -23,42 +23,52 @@
 
     //!  ADC hardware esta en puerto APB2.. y tiene como CLOCK MAXIMO 12MHz
 
+
+    typedef enum {
+            CHANNEL_0,
+            CHANNEL_1,
+            CHANNEL_2,
+            CHANNEL_3,
+            CHANNEL_4,
+        #if NUM_SIMO_ADC_CHANNEL > 5  
+            CHANNEL_5,
+            CHANNEL_6,
+            CHANNEL_7,
+            CHANNEL_8,
+            CHANNEL_9,
+        #endif
+
+    }   SIMO_ADC_CHANNEL;
+
+
+
     typedef enum {
             ADC_A   //! ADC1        
            ,ADC_B   //! ADC2
     } SIMO_ADC;
 
     typedef enum {
-        ADC_TIGGER_SOFTWARE = 0,
-        ADC_TIGGER_TIMERB = 1,
-    } simo_adc_tigger_modes;
+        ADC_TIGGER_SOFTWARE  ,
+        #if ADC_TRIGGER_EXT == 1    //Algun dia lo implementare.
+        ADC_TRIGGER_EXTERN   ,
+        #endif
+        #if ADC_TRIGGER_TIMER == 1  // Algun dia lo implementare
+        ADC_TRIGGER_TIMMER,
+        #endif
+    } simo_adc_trigger;
 
 
-    /**
-     * @brief  Configuramos el hardware adc converter
-     * 
-     * @param adc 
-     * @param channel 
-     * @param tigger 
-     * @param continuos 
-     * @return ** uint32_t 
-     */
-    uint32_t simo_adc_config( SIMO_ADC adc, 
-                            uint32_t channel,
-                            uint32_t tigger,
-                            uint32_t continuos);
 
 
-    uint32_t simo_adc_set_channel(SIMO_ADC adc, uint32_t channel);
 
-    /**
-     * @brief 
-     * 
-     * @param adc 
-     * @param ena_interruption 
-     * @return ** uint32_t 
-     */
-    uint32_t simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption);
+
+    simo_state  simo_adc_init(SIMO_ADC adc, SIMO_ADC_CHANNEL channel, simo_adc_trigger trigger);
+
+
+
+
+
+    simo_state simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption);
 
 
     /**
@@ -66,9 +76,9 @@
      * 
      * @param adc 
      * @param ena_interruption 
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_adc_stop(SIMO_ADC adc,uint32_t ena_interruption);
+    simo_state simo_adc_stop(SIMO_ADC adc,uint32_t ena_interruption);
 
 
 
@@ -105,7 +115,7 @@
            * @param callback 
            * @return ** uint32_t 
            */
-            uint32_t simo_adc_set_event_callback(SIMO_ADC adc,callback_irq callback);
+            simo_state simo_adc_set_event_callback(SIMO_ADC adc,callback_irq callback);
         #endif
 
     #endif
