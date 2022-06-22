@@ -14,6 +14,7 @@
 
 
 #include "main.h"
+#include "core.h"
 
 
 
@@ -36,9 +37,9 @@ typedef enum {
  * 
  * @param reload_value 
  * @param prescaler 
- * @return ** uint32_t 
+ * @return ** simo_state 
  */
-uint32_t  simo_wdt_init(uint32_t reload_value, WDT_PRE prescaler );
+simo_state  simo_wdt_init(uint32_t reload_value, WDT_PRE prescaler );
 
 
 

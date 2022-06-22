@@ -51,13 +51,13 @@ static void  __set_parameter(WDT_PRE pre, uint32_t reload){
 
 
 
-uint32_t  simo_wdt_init(uint32_t reload_value, WDT_PRE prescaler ){
-    uint32_t ret = 0;
+simo_state  simo_wdt_init(uint32_t reload_value, WDT_PRE prescaler ){
+    simo_state ret = SIMO_ERROR;
     __hiwdg.Instance = IWDG;
     __set_parameter(prescaler,reload_value);
       if (HAL_IWDG_Init(&__hiwdg) == HAL_OK)
   {
-     ret = 1;
+     ret = SIMO_OK;
   }
   return ret;
 }
