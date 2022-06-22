@@ -267,13 +267,13 @@ void simo_gpio_toogle(SIMO_GPIO_PIN simo_pin){
 
 
          
-            uint32_t simo_gpio_set_extern_event_callback(callback_gpio_ext_it callback){
-                uint32_t res = 0;
+            simo_state simo_gpio_set_extern_event_callback(callback_gpio_ext_it callback){
+                simo_state ret = SIMO_ERROR;
                 if( callback != NULL) {
                 __GPIO_EXT_CALLBACK__= callback;
-                res = 1;
+                ret = SIMO_OK;
                 }
-                 return res;
+                 return ret;
             }
         #endif
 

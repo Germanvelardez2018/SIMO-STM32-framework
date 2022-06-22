@@ -231,9 +231,9 @@
              * @brief  Agregamos la funcion callback para atender interrupcion externa. 
              * Solo existe un callback para todas las interrupciones externas.
              * @param callback Esta funcion debe retornar void y recibir un uint16_t (pin).
-             * @return ** uint32_t 
+             * @return ** simo_state 
              */
-            uint32_t simo_gpio_set_extern_event_callback( callback_gpio_ext_it callback);
+            simo_state simo_gpio_set_extern_event_callback( callback_gpio_ext_it callback);
         
         #endif // SIMO_GPIO_EXT_IRQ
 
