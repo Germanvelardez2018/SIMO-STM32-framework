@@ -32,9 +32,9 @@
          * @param timer  timer a utilizar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER
          * @param unit   unidades del periodo seleccionado. MS(milisegundos) o US (microseg)
          * @param time   valor del periodo entre eventos
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time);
+        simo_state simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time);
 
 
         /**
@@ -50,18 +50,18 @@
          * @brief Activa el timer y la interrupcion asociada. Si no se configura  la interrupcion el evento  no llama  a la funcion callback
          * 
          * @param timer  timer a activar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_timer_start(SIMO_TIMER timer);
+        simo_state simo_timer_start(SIMO_TIMER timer);
         
         
       /**
          * @brief Desactiva el timer y la interrupcion asociada.
          * 
          * @param timer  timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_timer_stop(SIMO_TIMER timer);
+        simo_state simo_timer_stop(SIMO_TIMER timer);
 
 
 
@@ -90,9 +90,9 @@
              * 
              * @param timer timer a desactivar: TIMER_A, TIMER_B o TIMER_C. Todos son de 16 bits. Depende de NUM_SIMO_TIMER
              * @param callback  Funcion a llamar despues del evento de desborde del timer. Funcion sin parametros y retorna void
-             * @return ** uint32_t 
+             * @return ** simo_state 
              */
-            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback);
+            simo_state simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback);
         #endif
 
     #endif

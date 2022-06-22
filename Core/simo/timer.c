@@ -110,11 +110,11 @@
 
             //setea el callback
 
-            uint32_t simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback)
+            simo_state simo_timer_set_event_callback(SIMO_TIMER timer,callback_irq callback)
             {
-                uint32_t res = 0;
+                simo_state ret = SIMO_ERROR;
             if (callback != NULL){
-                    res = 1;
+                    ret = SIMO_OK;
                     switch (timer)
                     {
                         #if NUM_SIMO_TIMER >0
@@ -134,11 +134,11 @@
                         #endif
                             default:
                             __TIMER1_EVENT_IRQ__ = callback;
-                            res= 0;
+                            ret= SIMO_ERROR;
                             break;
                     }
             }
-                return res;
+                return ret;
             }
 
 
@@ -181,9 +181,9 @@
 
 
 
-    uint32_t simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time){
+    simo_state simo_timer_config(SIMO_TIMER timer,TIMER_UNIT unit,uint16_t time){
     uint32_t clock_base = simo_clock_get_base(); // Default 40 MHz
-    uint32_t res = 0;
+    simo_state ret = SIMO_ERROR;
     //CLOCK_TIMER == 40M
     TIM_HandleTypeDef* tim = __get_timer(timer);
     // si unit es uS   => unit = 100 , si unit es mS => unit = 1
@@ -194,20 +194,20 @@
     tim->Init.RepetitionCounter = 0;
     tim->Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_Base_Init(tim) == HAL_OK){
-        res = 1;
+        ret = SIMO_OK;
     }
     TIM_ClockConfigTypeDef sClockSourceConfig = {0};
     TIM_MasterConfigTypeDef sMasterConfig = {0};   
     sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
     if (HAL_TIM_ConfigClockSource(tim, &sClockSourceConfig) != HAL_OK){
-        res= 0;
+        ret= SIMO_ERROR;
     }
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
     sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
     if (HAL_TIMEx_MasterConfigSynchronization(tim, &sMasterConfig) != HAL_OK){
-        res = 0;
+        ret = SIMO_ERROR;
     }
-       return res;
+       return ret;
     }
 
 
@@ -215,25 +215,26 @@
 
 
 
-    uint32_t simo_timer_start(SIMO_TIMER timer){
-        uint32_t res = 0;
+    simo_state simo_timer_start(SIMO_TIMER timer){
+        uint32_t ret = SIMO_ERROR;
         TIM_HandleTypeDef* tim = __get_timer(timer);
         if(HAL_TIM_Base_Start_IT(tim) == HAL_OK){
-            res = 1; // EXITO EN LA CONFIGURACION
+            ret = SIMO_OK; // EXITO EN LA CONFIGURACION
         }
-        return  res;
+        return  ret;
     }
 
 
 
-    uint32_t simo_timer_stop(SIMO_TIMER timer){
-          uint32_t res = 0;
+    simo_state simo_timer_stop(SIMO_TIMER timer){
+          uint32_t ret = SIMO_ERROR;
         TIM_HandleTypeDef* tim = __get_timer(timer);
         if(HAL_TIM_Base_Stop_IT(tim) == HAL_OK){
-            res = 1; // EXITO EN LA CONFIGURACION
+            ret = SIMO_OK; // EXITO EN LA CONFIGURACION
         }
-        return  res;
+        return  ret;
     }
+    
     uint16_t simo_timer_get_conter(SIMO_TIMER timer){
         //Falta implementacion
         return 0;
