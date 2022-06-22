@@ -68,7 +68,7 @@ uint32_t simo_clock_rtc(void){
     RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
     PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
-    PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
+    PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV8;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
     ret = 0;
   }

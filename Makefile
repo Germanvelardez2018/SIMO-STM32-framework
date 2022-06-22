@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/ejemplos/ejemplo_adc.c \
 Core/drivers/debug/debug.c \
 Core/drivers/sensors/sensor_fake.c \
 Core/Src/sensors/mpu6050.c \

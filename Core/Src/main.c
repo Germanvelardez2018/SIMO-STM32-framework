@@ -188,7 +188,7 @@ static void __refresh_wdt(void){
  * @retval int
  */
 
-int main(void)
+int xmain(void)
 {
 
 

@@ -12,10 +12,19 @@
 #include "adc.h"
 #include "main.h"
 
-
-
+#define NUM_SIMO_ADC_CHANNEL     2
 
 #if SIMO_ADC_ENA  == 1
+      
+      static uint16_t __ADC1_PIN__  = 0;
+      
+      static uint16_t __ADC2_PIN__  = 0;
+
+      static uint8_t __FLAG_ADC_PORTB__ = 0; // ADC2 usar port A  flag = 0 , usar portb flag = 1
+      // ADC2 podria usar GPIOB
+
+
+
     #if NUM_SIMO_ADC >0
         ADC_HandleTypeDef hadc1;
         #if SIMO_ADC_IRQ   == 1
@@ -32,13 +41,11 @@
             static  callback_irq __ADC2_COMPLETE_CONVER_IRQ__ ;   
          
          
-         //   void ADC1_2_IRQHandler(void){
-         //     HAL_ADC_IRQHandler(&hadc2);
-         //  }
+         
         #endif
     #endif
   
-    #if SIMO_TIMER_IRQ   == 1
+    #if SIMO_ADC_IRQ   == 1
 
         void simo_adc_ena_irq(SIMO_ADC adc,uint32_t ena){
                 IRQn_Type __adc= 0;
@@ -164,26 +171,32 @@ static uint32_t __get_channel( SIMO_ADC_CHANNEL channel){
 
   uint32_t ret = 0;
 
-  switch (CHANNEL_0)
+  switch (channel)
   {
     case CHANNEL_0:
       ret = ADC_CHANNEL_0 ;
+    
+      __ADC1_PIN__ = GPIO_PIN_0;
       break;
     
     case CHANNEL_1:
       ret = ADC_CHANNEL_1 ;
+      __ADC1_PIN__ = GPIO_PIN_1;
       break;
     
     case CHANNEL_2:
       ret = ADC_CHANNEL_2 ;
+      __ADC1_PIN__ = GPIO_PIN_2;
       break;
     
     case CHANNEL_3:
       ret = ADC_CHANNEL_3 ;
+      __ADC1_PIN__ = GPIO_PIN_3;
       break;
 
     case CHANNEL_4:
       ret = ADC_CHANNEL_4 ;
+      __ADC1_PIN__ = GPIO_PIN_4;
       break;
 
     #if NUM_SIMO_ADC_CHANNEL > 5  
@@ -250,15 +263,9 @@ uint32_t __get_trigger(simo_adc_trigger trigger){
 }
 
 
-
-
  simo_state    simo_adc_init(SIMO_ADC adc, SIMO_ADC_CHANNEL channel, simo_adc_trigger trigger){
 
-        simo_state ret = SIMO_ERROR;
-
-
-        return ret;
-
+        simo_state ret = SIMO_OK;
 
         ADC_HandleTypeDef* ADC = __get_adc(adc);
         ADC->Init.ScanConvMode = ADC_SCAN_DISABLE;
@@ -267,40 +274,31 @@ uint32_t __get_trigger(simo_adc_trigger trigger){
         ADC->Init.ExternalTrigConv = __get_trigger(trigger);
         ADC->Init.DataAlign = ADC_DATAALIGN_RIGHT;
         ADC->Init.NbrOfConversion = 1;
-        if (HAL_ADC_Init(&hadc1) != HAL_OK)
+        if (HAL_ADC_Init(ADC) != HAL_OK)
         {
-          Error_Handler();
+       //   Error_Handler();
+          ret = SIMO_ERROR;
         }
-          ADC_ChannelConfTypeDef sConfig = {0};
-
-
-     
         
-        sConfig.Channel =__get_channel(channel);
+        
+        
+        ADC_ChannelConfTypeDef sConfig = {0};
+        
+        sConfig.Channel = __get_channel(channel);
         sConfig.Rank = ADC_REGULAR_RANK_1;
         sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5; // Para usos de ADC lentos.
         // DEberia implementarse teniendo en cuenta el main clock, el clock de ADC y
         // el tiempo minimo necesario para la conversion
-        if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+        if (HAL_ADC_ConfigChannel(ADC, &sConfig) != HAL_OK)
         {
-          Error_Handler();
+         // Error_Handler();
+          ret = SIMO_ERROR;
         }
 
 
+        return ret;
+
     }
-
-
-
-
-
-    
-
-
-
-
-
-
-
 
 
 simo_state simo_adc_start(SIMO_ADC adc,uint32_t ena_interruption){
@@ -348,8 +346,8 @@ simo_state simo_adc_stop(SIMO_ADC adc,uint32_t ena_interruption){
 
 uint32_t simo_adc_get_value(SIMO_ADC adc){
   ADC_HandleTypeDef* __adc = __get_adc(adc);
-  return  HAL_ADC_GetValue(__adc);
-
+  uint32_t ret =  HAL_ADC_GetValue(__adc);
+  return ret;
 }
 
 
@@ -376,8 +374,9 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-  #if NUM_SIMO_ADC >0
-  if(hadc->Instance==ADC1)
+  #if NUM_SIMO_ADC_CHANNEL >0
+  if(1)
+
   {
  
     __HAL_RCC_ADC1_CLK_ENABLE();
@@ -385,39 +384,57 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**ADC1 GPIO Configuration
     PA0-WKUP     ------> ADC1_IN0
-    PA1     ------> ADC1_IN1
-    PA2     ------> ADC1_IN2
-    PA3     ------> ADC1_IN3
-    PA4     ------> ADC1_IN4
+    PA1          ------> ADC1_IN1
+    PA2          ------> ADC1_IN2
+    PA3          ------> ADC1_IN3
+    PA4          ------> ADC1_IN4
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
-                          |GPIO_PIN_4;
+    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 |GPIO_PIN_4;
+    //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+
+    //GPIO_InitStruct.Pin = GPIO_PIN_2;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
   }
   #endif
-  #if NUM_SIMO_ADC >1
+  #if NUM_SIMO_ADC_CHANNEL >1
   if(hadc->Instance==ADC2)
   {
  
     __HAL_RCC_ADC2_CLK_ENABLE();
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**ADC2 GPIO Configuration
-    PA5     ------> ADC2_IN5
-    PA6     ------> ADC2_IN6
-    PA7     ------> ADC2_IN7
-    PB0     ------> ADC2_IN8
-    PB1     ------> ADC2_IN9
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+    if( __FLAG_ADC_PORTB__ ){
+      __HAL_RCC_GPIOB_CLK_ENABLE() ;
+
+    } else{
+       __HAL_RCC_GPIOA_CLK_ENABLE();
+    }
+
+
+  //  GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+   // GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+   // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    //GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+    //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    //HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = __ADC2_PIN__;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    if(__FLAG_ADC_PORTB__){
+      HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    }
+   else{
+      HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  }
+
+
+
+
+
 
   #endif
   }
