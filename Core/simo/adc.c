@@ -203,23 +203,31 @@ static uint32_t __get_channel( SIMO_ADC_CHANNEL channel){
     
       case CHANNEL_5:
         ret = ADC_CHANNEL_5 ;
+        __ADC2_PIN__ = GPIO_PIN_5;
         break;
       
       case CHANNEL_6:
         ret = ADC_CHANNEL_6 ;
+        __ADC2_PIN__ = GPIO_PIN_6;
         break;
       
       case CHANNEL_7:
         ret = ADC_CHANNEL_7 ;
+        __ADC2_PIN__ = GPIO_PIN_7;
         break;
 
       
       case CHANNEL_8:
         ret = ADC_CHANNEL_8 ;
+        __ADC2_PIN__ = GPIO_PIN_8;
+
         break;
       
       case CHANNEL_9:
         ret = ADC_CHANNEL_9 ;
+        __ADC2_PIN__ = GPIO_PIN_1;
+        __FLAG_ADC_PORTB__ = 1;
+
         break;
     #endif
   
@@ -375,24 +383,18 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   #if NUM_SIMO_ADC_CHANNEL >0
-  if(1)
-
+  
+    if(hadc->Instance==ADC1)
   {
  
     __HAL_RCC_ADC1_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**ADC1 GPIO Configuration
-    PA0-WKUP     ------> ADC1_IN0
-    PA1          ------> ADC1_IN1
-    PA2          ------> ADC1_IN2
-    PA3          ------> ADC1_IN3
-    PA4          ------> ADC1_IN4
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 |GPIO_PIN_4;
+   
+    //GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 |GPIO_PIN_4;
     //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
 
-    //GPIO_InitStruct.Pin = GPIO_PIN_2;
+    GPIO_InitStruct.Pin = __ADC1_PIN__;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
 
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);

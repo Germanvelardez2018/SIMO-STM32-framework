@@ -115,7 +115,7 @@ uint32_t value = 0;
 char buffer[100]={0};
 
 
-simo_adc_init(ADC_A,CHANNEL_2,ADC_TIGGER_SOFTWARE);
+simo_adc_init(ADC_A,CHANNEL_0,ADC_TIGGER_SOFTWARE);
 
 while(1){
 

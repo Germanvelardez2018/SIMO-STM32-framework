@@ -8,7 +8,6 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include "core.h"
 #include "i2c.h"
 #include "main.h"
 
@@ -93,69 +92,69 @@
  * @return ** I2C_HandleTypeDef* 
  */
 
-static I2C_HandleTypeDef* __get_i2c(SIMO_I2C uart_enum)
+static I2C_HandleTypeDef* __get_i2c(SIMO_I2C i2c_enum)
 {
-    I2C_HandleTypeDef* uart = NULL;
-    switch (uart_enum)
+    I2C_HandleTypeDef* i2c = NULL;
+    switch (i2c_enum)
     {
         #if NUM_SIMO_I2C >0
             case I2C_A:
-            uart = &hi2c1;
-            uart->Instance = I2C1;
+            i2c = &hi2c1;
+            i2c->Instance = I2C1;
             break;
         #endif
         #if NUM_SIMO_I2C >1
             case I2C_B:
-            uart = &hi2c2;
-            uart->Instance = I2C2;
+            i2c = &hi2c2;
+            i2c->Instance = I2C2;
             break;
         #endif
      
             default:
             break;
     }
-    return uart;
+    return i2c;
 }
 
 
 #if SIMO_I2C_SLAVE_ENA == 1
 
-uint32_t simo_i2c_slave_write(SIMO_I2C i2c, uint8_t* data, uint32_t len, uint32_t ena_callback ){
-    uint32_t res = 0;  // retorna error por defecto
+simo_state simo_i2c_slave_write(SIMO_I2C i2c, uint8_t* data, uint32_t len, uint32_t ena_callback ){
+    simo_state ret = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                  if(HAL_I2C_Slave_Transmit_IT(simo_i2c,data,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret =SIMO_OK;
                 }
             }
             else{
                  if(HAL_I2C_Slave_Transmit_IT(simo_i2c,data,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK;
                 }
             }
     }
-    return res;
+    return ret;
 }
 
 
 
-uint32_t simo_i2c_slave_read(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
-    uint32_t res = 0;  // retorna error por defecto
+simo_state simo_i2c_slave_read(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
+    simo_state reT = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                  if(HAL_I2C_Slave_Receive_IT(simo_i2c,data,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_I2C_Slave_Receive(simo_i2c,data,len,timeout) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }           
     }
-    return res;          
+    return ret;          
 }
 
 #endif // SLAVE MODE
@@ -166,18 +165,18 @@ uint32_t simo_i2c_slave_read(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t t
 #if SIMO_I2C_MASTER_ENA == 1
 
 
-uint32_t simo_i2c_master_read(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout,uint32_t ena_callback ){
-    uint32_t ret = 0;  // retorna error por defecto
+simo_state simo_i2c_master_read(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout,uint32_t ena_callback ){
+    simo_state ret = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                  if(HAL_I2C_Master_Receive_IT(simo_i2c,address,data,len) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_I2C_Master_Receive(simo_i2c,address,data,len,timeout) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }           
     }
@@ -185,18 +184,18 @@ uint32_t simo_i2c_master_read(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32
 }
 
 
-uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout, uint32_t ena_callback ){
-    uint32_t ret = 0;  // retorna error por defecto
+simo_state simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout, uint32_t ena_callback ){
+    simo_state ret = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                  if(HAL_I2C_Master_Transmit_IT(simo_i2c,address,data,len) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_I2C_Master_Transmit(simo_i2c,address,data,len,timeout) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
     }
@@ -207,7 +206,7 @@ uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint3
 // Modo memoria ( Master cons facilidades)
 
 
-   uint32_t simo_i2c_mem_write(   SIMO_I2C i2c,
+   simo_state simo_i2c_mem_write(   SIMO_I2C i2c,
                                 uint16_t address,
                                 uint16_t mem_address,
                                 uint16_t mem_size,
@@ -218,17 +217,17 @@ uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint3
 
 
 
-        uint32_t ret = 0;  // retorna error por defecto
+        simo_state ret = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                 if(HAL_I2C_Mem_Write_IT(simo_i2c,address,mem_address,mem_size,data,len) == HAL_OK) {
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{ 
                  if( HAL_I2C_Mem_Write(simo_i2c,address,mem_address,mem_size,data,len,timeout) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
     }
@@ -238,7 +237,7 @@ uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint3
     }
 
 
-   uint32_t simo_i2c_mem_read(   SIMO_I2C i2c,
+   simo_state simo_i2c_mem_read(   SIMO_I2C i2c,
                                 uint16_t address,
                                 uint16_t mem_address,
                                 uint16_t mem_size,
@@ -249,17 +248,17 @@ uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint3
 
 
 
-        uint32_t ret = 0;  // retorna error por defecto
+        simo_state ret = SIMO_ERROR;  // retorna error por defecto
         I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
         if(simo_i2c != NULL) {  
             if (ena_callback == 1){
                 if(HAL_I2C_Mem_Read_IT(simo_i2c,address,mem_address,mem_size,data,len) == HAL_OK) {
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{ 
                  if( HAL_I2C_Mem_Read(simo_i2c,address,mem_address,mem_size,data,len,timeout) == HAL_OK){
-                ret = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
     }
@@ -274,8 +273,8 @@ uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint3
 
 
 
-uint32_t simo_i2c_init(SIMO_I2C i2c,uint32_t clock_speed,uint32_t address_7bits){
-    uint32_t ret = 1;
+simo_state simo_i2c_init(SIMO_I2C i2c,uint32_t clock_speed,uint32_t address_7bits){
+    uint32_t ret = SIMO_OK;
     I2C_HandleTypeDef* simo_i2c = __get_i2c(i2c);
     simo_i2c->Init.ClockSpeed = clock_speed;
     simo_i2c->Init.DutyCycle = I2C_DUTYCYCLE_2;
@@ -287,7 +286,7 @@ uint32_t simo_i2c_init(SIMO_I2C i2c,uint32_t clock_speed,uint32_t address_7bits)
     simo_i2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(simo_i2c) != HAL_OK)
   {
-    ret = 0;  // Error al iniciar el periferico
+    ret =SIMO_ERROR;  // Error al iniciar el periferico
   }
 
     return ret;
@@ -476,11 +475,11 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
             }
 
-                uint32_t simo_i2c_set_master_tx_callback(SIMO_I2C i2c,callback_irq callback)
+                simo_state simo_i2c_set_master_tx_callback(SIMO_I2C i2c,callback_irq callback)
                 {
-                    uint32_t res = 0;
+                    simo_state ret = SIMO_ERROR;
                 if (callback != NULL){
-                        res = 1;
+                        ret = SIMO_OK;
                         switch (i2c)
                         {
                             #if NUM_SIMO_I2C >0
@@ -494,19 +493,19 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
                                 break;
                             #endif
                                 default:
-                                res= 0;
+                                ret = SIMO_ERROR;
                                 break;
                         }
                 }
-                    return res;
+                    return ret;
                 }
 
             
-                uint32_t simo_i2c_set_master_rx_callback(SIMO_I2C i2c,callback_irq callback)
+                simo_state simo_i2c_set_master_rx_callback(SIMO_I2C i2c,callback_irq callback)
                 {
-                    uint32_t res = 0;
+                    simo_state ret = SIMO_ERROR;
                     if(callback != NULL){
-                        res = 1;
+                        ret = SIMO_OK;
                         switch (i2c)
                         {
                             #if NUM_SIMO_I2C >0
@@ -520,11 +519,11 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
                                 break;
                             #endif
                                 default:
-                                res= 0;
+                                ret= SIMO_ERROR;
                                 break;
                         }
                 }
-                    return res;
+                    return ret;
                 }
 
         #endif    //MASTER ENA
@@ -567,11 +566,11 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
         // Configuracion
 
       
-                uint32_t simo_i2c_set_slave_rx_callback(SIMO_I2C i2c,callback_irq callback)
+                simo_state simo_i2c_set_slave_rx_callback(SIMO_I2C i2c,callback_irq callback)
                 {
-                    uint32_t res = 0;
+                    simo_state ret = SIMO_ERROR;
                     if(callback != NULL){
-                        res = 1;
+                        ret = SIMO_OK;
                         switch (i2c)
                         {
                             #if NUM_SIMO_I2C >0
@@ -585,11 +584,11 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
                                 break;
                             #endif
                                 default:
-                                res= 0;
+                                ret= SIMO_ERROR;
                                 break;
                         }
                 }
-                    return res;
+                    return ret;
                 }
 
         #endif   //SLAVE ENA

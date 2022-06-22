@@ -39,9 +39,10 @@
      * @param i2c 
      * @param clock_speed 
      * @param address_7bits 
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_i2c_init(SIMO_I2C i2c,uint32_t clock_speed,uint32_t address_7bits);
+    
+    simo_state simo_i2c_init(SIMO_I2C i2c,uint32_t clock_speed,uint32_t address_7bits);
     
     
     /**
@@ -55,7 +56,7 @@
 
 
 
-    uint32_t simo_i2c_mem_write(   SIMO_I2C i2c,
+    simo_state simo_i2c_mem_write(   SIMO_I2C i2c,
                                 uint16_t address,
                                 uint16_t mem_address,
                                 uint16_t mem_size,
@@ -65,7 +66,7 @@
                                 uint32_t ena_callback );
 
 
-    uint32_t simo_i2c_mem_read(   SIMO_I2C i2c,
+    simo_state simo_i2c_mem_read(   SIMO_I2C i2c,
                                 uint16_t address,
                                 uint16_t mem_address,
                                 uint16_t mem_size,
@@ -89,9 +90,9 @@
     * @param len 
     * @param timeout 
     * @param ena_callback 
-    * @return ** uint32_t 
+    * @return ** simo_state 
     */
-    uint32_t simo_i2c_master_read(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout,uint32_t ena_callback );
+    simo_state simo_i2c_master_read(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len,uint32_t timeout,uint32_t ena_callback );
 
 
     /**
@@ -103,9 +104,9 @@
      * @param len 
      * @param timeout 
      * @param ena_callback 
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback );
+    simo_state simo_i2c_master_write(SIMO_I2C i2c,uint16_t address,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback );
 
 
 
@@ -122,9 +123,9 @@
          * 
          * @param i2c 
          * @param callback 
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_i2c_set_master_rx_callback(SIMO_I2C i2c,callback_irq callback);
+        simo_state simo_i2c_set_master_rx_callback(SIMO_I2C i2c,callback_irq callback);
        
        
        /**
@@ -135,7 +136,7 @@
         * @return ** uint32_t 
         */
             
-        uint32_t simo_i2c_set_master_tx_callback(SIMO_I2C i2c,callback_irq callback);
+        simo_state simo_i2c_set_master_tx_callback(SIMO_I2C i2c,callback_irq callback);
         
 
         //Modo  manejo de memoria
@@ -159,9 +160,9 @@
      * @param len 
      * @param timeout 
      * @param ena_callback 
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_i2c_slave_read(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
+    simo_state simo_i2c_slave_read(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
         
    
     /**
@@ -172,9 +173,9 @@
      * @param len 
      * @param timeout 
      * @param ena_callback 
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_i2c_slave_write(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t ena_callback );
+    simo_state simo_i2c_slave_write(SIMO_I2C i2c,uint8_t* data,uint32_t len, uint32_t ena_callback );
 
 
 
@@ -187,18 +188,18 @@
          * 
          * @param I2C 
          * @param callback 
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_i2c_set_slave_tx_callback(SIMO_I2C I2C,callback_irq callback);
+        simo_state simo_i2c_set_slave_tx_callback(SIMO_I2C I2C,callback_irq callback);
 
         /**
          * @brief 
          * 
          * @param i2c 
          * @param callback 
-         * @return ** uint32_t 
+         * @return ** simo_state 
          */
-        uint32_t simo_uart_set_slave_rx_callback(SIMO_I2C i2c,callback_irq callback);
+        simo_state simo_uart_set_slave_rx_callback(SIMO_I2C i2c,callback_irq callback);
 
         #endif
 
