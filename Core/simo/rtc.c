@@ -86,28 +86,28 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* hrtc)
 
 
 
-uint32_t simo_rtc_init(){
-    uint32_t ret = 1;
+simo_state simo_rtc_init(){
+    simo_state ret = SIMO_OK;
     ret =  simo_clock_rtc();
   __hrtc.Instance = RTC;
   __hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
   __hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
   if (HAL_RTC_Init(&__hrtc) != HAL_OK){
-    ret = 0; // Error
+    ret = SIMO_ERROR; // Error
   }
 return ret;
 }
 
 
 
-uint32_t simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds){
-uint32_t ret = 1;
+simo_state simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds){
+simo_state ret = SIMO_OK;
 RTC_TimeTypeDef sTime = {0};
 sTime.Hours   = hours;
 sTime.Minutes = minutes;
 sTime.Seconds = seconds;
 if (HAL_RTC_SetTime(&__hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK){
-    ret = 0;
+    ret = SIMO_ERROR;
   }
 
 return ret;
@@ -116,13 +116,13 @@ return ret;
 
 
 
-uint32_t simo_rtc_get_time(uint8_t* hours, uint8_t* minutes, uint8_t* seconds){
+simo_state simo_rtc_get_time(uint8_t* hours, uint8_t* minutes, uint8_t* seconds){
    
-  uint32_t ret = 0;
+  simo_state ret = SIMO_ERROR;
   RTC_TimeTypeDef sTime = {0};
 
 if (HAL_RTC_GetTime(&__hrtc, &sTime, RTC_FORMAT_BIN) == HAL_OK){
-    ret = 1;
+    ret = SIMO_OK;
     (*hours) = sTime.Hours;
     (*minutes) = sTime.Minutes;
     (*seconds) = sTime.Seconds;
@@ -139,12 +139,12 @@ if (HAL_RTC_GetTime(&__hrtc, &sTime, RTC_FORMAT_BIN) == HAL_OK){
 
 
 
-uint32_t simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year){
-    uint32_t ret = 0;
+simo_state simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year){
+    simo_state ret = SIMO_ERROR;
     RTC_DateTypeDef DateToUpdate = {0};
     
     if (HAL_RTC_GetDate(&__hrtc, &DateToUpdate, RTC_FORMAT_BIN) == HAL_OK){
-        ret = 1;
+        ret = SIMO_OK;
         (*week_day)  = DateToUpdate.WeekDay ;
         (*month)     = DateToUpdate.Month ;
         (*date_day)  = DateToUpdate.Date ;
@@ -158,15 +158,15 @@ uint32_t simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,u
 
 
  
-uint32_t simo_rtc_set_date(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year){
-uint32_t ret = 1;
+simo_state simo_rtc_set_date(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year){
+simo_state ret = SIMO_OK;
 RTC_DateTypeDef DateToUpdate = {0};
 DateToUpdate.WeekDay = week_day;
 DateToUpdate.Month = month;
 DateToUpdate.Date = date_day;
 DateToUpdate.Year = year;
 if (HAL_RTC_SetDate(&__hrtc, &DateToUpdate, RTC_FORMAT_BIN) != HAL_OK){
-    ret = 0;
+    ret = SIMO_ERROR;
   }
 return ret;
 }
@@ -185,12 +185,12 @@ void simo_rtc_ena_irq(uint32_t ena){
 }
 
 
-uint32_t simo_rtc_set_alarm_callback(callback_irq callback){
+simo_state simo_rtc_set_alarm_callback(callback_irq callback){
 
-    uint32_t ret = 0;
+    simo_state ret = SIMO_ERROR;
     if(callback != NULL){
         __RTC_ALARM_IRQ__ = callback;
-        ret = 1;
+        ret = SIMO_OK;
     }
     return ret;
 }
@@ -198,15 +198,15 @@ uint32_t simo_rtc_set_alarm_callback(callback_irq callback){
 
 
 
-uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
-    uint32_t ret = 1;
+simo_state simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
+    simo_state ret = SIMO_OK;
     RTC_AlarmTypeDef sAlarm ={0};
     sAlarm.AlarmTime.Hours = hours;
     sAlarm.AlarmTime.Minutes = minutes;
     sAlarm.AlarmTime.Seconds = seconds;
     sAlarm.Alarm = 1;
     if( HAL_RTC_SetAlarm_IT(&__hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK){
-        ret = 0;
+        ret = SIMO_ERROR;
     }
     return ret;
 }
@@ -216,15 +216,15 @@ uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds){
 
 
 
-uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t*seconds){
+simo_state simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t*seconds){
 
-     uint32_t ret = 0;
+     simo_state ret = SIMO_ERROR;
      uint32_t counter =0;
     RTC_AlarmTypeDef sAlarm ={0};
   
     sAlarm.Alarm = 1;
     if(  HAL_RTC_GetAlarm(&__hrtc, &sAlarm,&counter,  RTC_FORMAT_BIN) == HAL_OK){
-        ret = 1;
+        ret = SIMO_OK;
         (*hours) = sAlarm.AlarmTime.Hours;
         (*minutes) = sAlarm.AlarmTime.Minutes;
         (*seconds) = sAlarm.AlarmTime.Seconds;

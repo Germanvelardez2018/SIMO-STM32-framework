@@ -64,9 +64,9 @@
   /**
    * @brief Inicio el hardware RTC.
    * 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_init();
+  simo_state simo_rtc_init();
 
 
 
@@ -80,9 +80,9 @@
    * @brief Obtiene el valor de la hora del dispositvo. En caso de error retorna 0 
    * 
    * @param time Esctructura con formato de hora 
-   * @return ** uint32_t
+   * @return ** simo_state
    */
-  uint32_t simo_rtc_get_time(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
+  simo_state simo_rtc_get_time(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
 
 
 
@@ -90,9 +90,9 @@
    * @brief Obtiene el valor de la hora del dispositvo. En caso de error retorna 0 
    * 
    * @param time Esctructura con formato de hora 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds);
+  simo_state simo_rtc_set_time(uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 
 
@@ -102,9 +102,9 @@
    * @brief Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0  
    * 
    * @param date Estructura con el formato de fecha 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year);
+  simo_state simo_rtc_get_date(uint8_t* week_day,uint8_t* month, uint8_t* date_day,uint8_t* year);
 
 
 
@@ -112,9 +112,9 @@
    * @brief Obtiene el valor de la fecha del dispositvo. En caso de error retorna 0  
    * 
    * @param date Estructura con el formato de fecha 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */ 
-  uint32_t simo_rtc_set_date(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year);
+  simo_state simo_rtc_set_date(uint8_t week_day,uint8_t month, uint8_t date_day,uint8_t year);
 
   /**
    * @brief Habilita la interrupcion por Alarma RTC
@@ -128,9 +128,9 @@
    * @brief Configura la funcion de callback correspondiente
    * 
    * @param callback  Funcion callback
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_set_alarm_callback(callback_irq callback);
+  simo_state simo_rtc_set_alarm_callback(callback_irq callback);
 
 
 
@@ -140,9 +140,9 @@
    * @param hours 
    * @param minutes 
    * @param seconds 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
+  simo_state simo_rtc_set_alarm(uint8_t hours, uint8_t minutes, uint8_t seconds);
 
 
 
@@ -152,9 +152,9 @@
    * @param hours 
    * @param minutes 
    * @param seconds 
-   * @return ** uint32_t 
+   * @return ** simo_state 
    */
-  uint32_t simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
+  simo_state simo_rtc_get_alarm(uint8_t* hours, uint8_t* minutes, uint8_t* seconds);
 
 
 
