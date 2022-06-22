@@ -54,9 +54,9 @@
      * @param len       Tamanio del buffer de datos a leer.
      * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
      * @param ena_callback  Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
+    simo_state simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback );
 
 
 
@@ -69,9 +69,9 @@
      * @param len       Tamanio del buffer de datos a enviar
      * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
      * @param ena_callback  Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_spi_write(SIMO_SPI spi,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
+    simo_state simo_spi_write(SIMO_SPI spi,uint8_t* buffer,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
 
 
 
@@ -85,9 +85,9 @@
      * @param len       Tamanio del buffer de datos a enviar
      * @param timeout   Timeout de la operacion de escritura. En caso de habilitar callback timeout es invalidado
      * @param ena_callback  Habilita la transmicion de datos mediante interrupciones. Modo no bloqueante de operacion
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
+    simo_state simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback);
 
 
     /**
@@ -96,9 +96,9 @@
      * @param SPI SPI a iniciar. SPI_A, SPI_B y SPI_C. NUM_SIMO_SPI
      * @param prescaler  el prescaler puede dividir el clock por un rango de valores( 2, 4 ,8 ,...,256).
      * Recordar que el maximo valor de clock de SPI es 10Mhz.Tambien SPI1 alimentado por APB1 y SP2 alimentado por APB2
-     * @return ** uint32_t 
+     * @return ** simo_state 
      */
-    uint32_t simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler);
+    simo_state simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler);
 
 
     /**
@@ -121,9 +121,9 @@
          * 
          * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
          * @param callback  Funcion sin argumentos y  retorna void 
-         * @return ** uint32_t   1 Exitoso, 0 Error
+         * @return ** simo_state   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback);
+            simo_state simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
         #if SIMO_SPI_RX_IRQ == 1
          /**
@@ -131,9 +131,9 @@
          * 
          * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
          * @param callback  Funcion sin argumentos y  retorna void 
-         * @return ** uint32_t   1 Exitoso, 0 Error
+         * @return ** simo_state   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback);
+            simo_state simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
           #if SIMO_SPI_TX_RX_IRQ == 1
          /**
@@ -141,9 +141,9 @@
          * 
          * @param SPI SPI a utilizar. SPI_A , SPI_B . Visibilidad depende de NUM_SIMO_SPI
          * @param callback  Funcion sin argumentos y  retorna void 
-         * @return ** uint32_t   1 Exitoso, 0 Error
+         * @return ** simo_state   1 Exitoso, 0 Error
          */
-            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback);
+            simo_state simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback);
         #endif
     
     #endif

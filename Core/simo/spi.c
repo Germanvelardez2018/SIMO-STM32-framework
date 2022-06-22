@@ -154,71 +154,71 @@ static SPI_HandleTypeDef* __get_spi(SIMO_SPI spi_enum)
 
 
 
-uint32_t simo_spi_write(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback ){
-    uint32_t res = 0;  // retorna error por defecto
+simo_state simo_spi_write(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout, uint32_t ena_callback ){
+    simo_state ret = SIMO_ERROR;  // retorna error por defecto
 
         SPI_HandleTypeDef* simo_spi = __get_spi(spi);
         if(simo_spi != NULL) {  
             if (ena_callback == 1){
                  if(HAL_SPI_Transmit_IT(simo_spi,data,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_SPI_Transmit(simo_spi,data,len,timeout) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
 
            
     }
-    return res;
+    return ret;
 }
 
 
 
 
-uint32_t simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
-    uint32_t res = 0;  // retorna error por defecto
+simo_state simo_spi_read(SIMO_SPI spi,uint8_t* data,uint32_t len, uint32_t timeout,uint32_t ena_callback ){
+    simo_state ret = SIMO_ERROR;  // retorna error por defecto
 
         SPI_HandleTypeDef* simo_spi = __get_spi(spi);
         if(simo_spi != NULL) {  
             if (ena_callback == 1){
                  if(HAL_SPI_Receive_IT(simo_spi,data,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_SPI_Receive(simo_spi,data,len,timeout) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
 
            
     }
-    return res;
+    return ret;
            
    
 }
 
 
-uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback){
-     uint32_t res = 0;  // retorna error por defecto
+simo_state simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx ,uint32_t len ,uint32_t timeout,uint32_t ena_callback){
+     simo_state ret = SIMO_ERROR;  // retorna error por defecto
 
         SPI_HandleTypeDef* simo_spi = __get_spi(spi);
         if(simo_spi != NULL) {  
             if (ena_callback == 1){
                  if(HAL_SPI_TransmitReceive_IT(simo_spi,buffer_tx,buffer_rx,len) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }
             else{
                  if(HAL_SPI_TransmitReceive(simo_spi,buffer_tx,buffer_rx,len,timeout) == HAL_OK){
-                res = 1; // EXITO EN LA CONFIGURACION
+                ret = SIMO_OK; // EXITO EN LA CONFIGURACION
                 }
             }           
     }
-    return res;
+    return ret;
 
 }
 
@@ -231,11 +231,11 @@ uint32_t simo_spi_write_read(SIMO_SPI spi,uint8_t* buffer_tx,uint8_t* buffer_rx 
  * 
  * @param SPI 
  * @param baudrate 
- * @return ** uint32_t 
+ * @return ** simo_state 
  */
 
-uint32_t simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler){
-        uint32_t res = 0;  // retorna error por defecto
+simo_state simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler){
+        uint32_t ret = SIMO_OK;  // retorna OK por defecto
         SPI_HandleTypeDef* simo_SPI = __get_spi(SPI);   
         uint32_t __prescaler = __get_prescaler(prescaler);     
         
@@ -254,11 +254,11 @@ uint32_t simo_spi_init(SIMO_SPI SPI,SIMO_SPI_PRESCALER prescaler){
             simo_SPI->Init.CRCPolynomial = 10;
             if (HAL_SPI_Init(simo_SPI) != HAL_OK)
             {
-                Error_Handler();
+                ret =SIMO_ERROR;
             }
        
     }
-    return res;
+    return ret;
 }
 
 
@@ -401,11 +401,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
 
         #if SIMO_SPI_TX_IRQ == 1
             
-            uint32_t simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback)
+            simo_state simo_spi_set_tx_callback(SIMO_SPI spi,callback_irq callback)
             {
-                uint32_t res = 0;
+                simo_state ret = SIMO_ERROR;
             if (callback != NULL){
-                    res = 1;
+                    ret = SIMO_OK;
                     switch (spi)
                     {
                         #if NUM_SIMO_SPI >0
@@ -419,12 +419,12 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                             break;
                         #endif
                             default:
-                            res= 0;
+                            ret= SIMO_ERROR;
                             break;
                     }
 
             }
-                return res;
+                return ret;
             }
 
             void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi){
@@ -470,11 +470,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
             }
         
         
-            uint32_t simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback)
+            simo_state simo_spi_set_rx_callback(SIMO_SPI spi,callback_irq callback)
             {
-                uint32_t res = 0;
+                simo_state ret = SIMO_ERROR;
             if (callback != NULL){
-                    res = 1;
+                    ret = SIMO_OK;
                     switch (spi)
                     {
                         #if NUM_SIMO_SPI >0
@@ -489,11 +489,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                         #endif
                        
                             default:
-                            res= 0;
+                            ret= SIMO_ERROR;
                             break;
                     }
             }
-                return res;
+                return ret;
             }
         #endif // SIMO_SPI_RX_IRQ
 
@@ -520,11 +520,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
             }
         
         
-            uint32_t simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback)
+            simo_state simo_spi_set_tx_rx_callback(SIMO_SPI spi,callback_irq callback)
             {
-                uint32_t res = 0;
+                simo_state ret =SIMO_ERROR;
             if (callback != NULL){
-                    res = 1;
+                    ret =SIMO_OK;
                     switch (spi)
                     {
                         #if NUM_SIMO_SPI >0
@@ -539,11 +539,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
                         #endif
                        
                             default:
-                            res= 0;
+                            ret= SIMO_ERROR;
                             break;
                     }
             }
-                return res;
+                return ret;
             }
         #endif // SIMO_SPI_TX_RX_IRQ
 
