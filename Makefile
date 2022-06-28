@@ -36,7 +36,6 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-Core/Src/ejemplos/ejemplo_adc.c \
 Core/drivers/debug/debug.c \
 Core/drivers/sensors/sensor_fake.c \
 Core/Src/sensors/mpu6050.c \
@@ -56,7 +55,6 @@ Core/simo/gpio.c\
 Core/simo/uart.c\
 Core/simo/spi.c\
 Core/simo/wdt.c \
-Core/simo/adc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \

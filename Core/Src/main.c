@@ -45,7 +45,7 @@
 
  
 
-#define UPDATE_SLEEP            h,m+30,s
+#define UPDATE_SLEEP            h,m+1,s
 
 
 #define _WRITE_MQTT_            (0) // ! CON 1 grabo los parametros de mqtt en flash
@@ -168,9 +168,6 @@ static void setup(){
 }
 
 
-
-
-
 static void __refresh_wdt(void){
 
 
@@ -187,8 +184,8 @@ static void __refresh_wdt(void){
  * @brief  The application entry point.
  * @retval int
  */
-
-int xmain(void)
+#include "uart.h"
+int main(void)
 {
 
 
@@ -299,7 +296,7 @@ int xmain(void)
                 #define MQTT_TOPIC                 "X1111"
                  
                 comm_mqtt_publish(MQTT_TOPIC,buffer, strlen( buffer));
-                comm_send_mesage("se envio un nuevo frame de mediciones", "3856870066");
+             //   comm_send_mesage("se envio un nuevo frame de mediciones", "3856870066");
 
 
                 simo_delay_ms(4000);

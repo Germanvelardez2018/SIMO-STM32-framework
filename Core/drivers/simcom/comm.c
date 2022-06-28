@@ -5,7 +5,7 @@
 
 
 
-#define SIMCOM_AT_UART             UART_A            //! Pin A10  (TX) y A9 (RX)
+#define SIMCOM_AT_UART             UART_B            //! Pin A10  (TX) y A9 (RX)
 #define SIMCOM_DEBUG_UART          DEBUG_UART        //! Pin A3 (RX)  y A2 (TX)
 #define SIMCOM_BAUDRATE            115200
 

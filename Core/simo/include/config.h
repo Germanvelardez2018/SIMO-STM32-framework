@@ -17,7 +17,8 @@
 
 #define C_DEBUG_NAME                                ("SIMO STM32")
 #define C_DEBUG_ON                                   (1)
-#define C_DEBUG_UART                              (UART_B)
+#define C_DEBUG_UART                              (UART_A)       // PA9  > USART1_TX           PA10   > USART1_RX
+            
 #define C_DEBUG_BAUDRATE                          (115200)
 
 
@@ -39,7 +40,7 @@
 //!Habilita el uso hardware GPIO                 
 #define C_SIMO_GPIO_ENA                         1
 //! Habilita el hardware ADC
-#define C_SIMO_ADC_ENA                          1
+#define C_SIMO_ADC_ENA                          0
 
 
 //! Cantidad de instancias

@@ -9,11 +9,24 @@
 #define MQTT_READY_MSG                  "COMM SERVICES READY\r\n"
 
 
-char MQTT_TOPIC[35]={0};
-char MQTT_URL[35]={0};
-char MQTT_PASS[35]={0};
-char MQTT_ID[35]={0};
-char MQTT_QOS[35]={0};
+
+
+
+
+#define HARD_CODER_CREDENTIALS              0
+
+
+#define CREDENTIAL_SIZE_MAX                 35
+
+
+
+#if HARD_CODER_CREDENTIALS     == 1
+
+char MQTT_TOPIC[CREDENTIAL_SIZE_MAX]={0};
+char MQTT_URL[CREDENTIAL_SIZE_MAX]={0};
+char MQTT_PASS[CREDENTIAL_SIZE_MAX]={0};
+char MQTT_ID[CREDENTIAL_SIZE_MAX]={0};
+char MQTT_QOS[CREDENTIAL_SIZE_MAX]={0};
 
 
 
@@ -22,6 +35,29 @@ char MQTT_QOS[35]={0};
 #define MQTT_PASS                   (MQTT_PASS )
 #define MQTT_ID                     (MQTT_ID )
 #define MQTT_QOS                    (MQTT_QOS )
+
+#else
+
+
+
+#define CREDENTIALS_MQTT_TOPIC                 "X1111"
+#define CREDENTIALS_MQTT_URL                   "simointi.cloud.shiftr.io"
+#define CREDENTIALS_MQTT_PASS                  "fdZY5b69OhOVsAns"
+#define CREDENTIALS_MQTT_ID                    "simointi"
+#define CREDENTIALS_MQTT_QOS                    "0"
+
+
+
+char MQTT_TOPIC[35]=    CREDENTIALS_MQTT_TOPIC  ;
+char MQTT_URL[35]=      CREDENTIALS_MQTT_URL  ;
+char MQTT_PASS[35]=     CREDENTIALS_MQTT_PASS  ;
+char MQTT_ID[35]=       CREDENTIALS_MQTT_ID  ;
+char MQTT_QOS[35]=      CREDENTIALS_MQTT_QOS  ;
+
+
+
+#endif
+
 
 
 
@@ -40,12 +76,15 @@ uint32_t comm_services_config_all(void){
    simo_delay_ms(500);
    comm_services_gps_init(1);
    debug_print("configurando mqtt  con datos desde mem\r\n");
-   mem_services_get_mqtt_origen(MQTT_URL);
-   mem_services_get_mqtt_id_origen(MQTT_ID);
-   mem_services_get_mqtt_pass_origen(MQTT_PASS);
-   mem_services_get_mqtt_pub_topics(MQTT_TOPIC,0);
-   mem_services_get_mqtt_qos_origen(MQTT_QOS);
+   #if HARD_CODER_CREDENTIALS     == 1
+    // Si HARD_CODER es 1 , no usamos memoria externa para cargar credenciales MQTT
+        mem_services_get_mqtt_origen(MQTT_URL);
+        mem_services_get_mqtt_id_origen(MQTT_ID);
+        mem_services_get_mqtt_pass_origen(MQTT_PASS);
+        mem_services_get_mqtt_pub_topics(MQTT_TOPIC,0);
+        mem_services_get_mqtt_qos_origen(MQTT_QOS);
 
+   #endif
    comm_config_mqtt(MQTT_URL ,MQTT_ID,MQTT_PASS,MQTT_QOS);
 
 }
