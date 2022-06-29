@@ -137,7 +137,7 @@ static void setup(){
    mem_services_set_mqtt_pub_topics(MQTT_TOPIC,0);
    mem_services_set_mqtt_qos_origen(MQTT_QOS);
 
-  #define MAX_COUNTER          5
+  #define MAX_COUNTER          2
 
   //grabo contador maximo
    mem_services_set_data_counter(MAX_COUNTER); 

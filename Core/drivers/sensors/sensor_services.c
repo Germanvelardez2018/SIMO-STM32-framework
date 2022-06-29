@@ -3,7 +3,7 @@
 #include "debug.h"
 #include "mpu6050.h"
 #include "sensor_fake.h"   // sensor de prueba imaginario
-#include "simcom.h"
+#include "batery.h"
 #define SERVICES_READY                    "Sensors services READY"
 #define SERVICES_ERROR                     "Sensors services ERROR"
 
@@ -16,8 +16,10 @@
 
 #define __SIM7000G_ON__                         (0)
 
+#define __BATERY_LEVEL_ON__                       (1)
 
-#define __SENSOR_FAKE_ON__                      (1)
+
+#define __SENSOR_FAKE_ON__                      (0)
 
 
 
@@ -38,13 +40,19 @@ static uint32_t __init_sensors(){
     #if (__ACCELEROMETER_ON__ == 1)                 
         
         ret = ACCEL_init();
-     
-  
+
         #if (__CALIBRATION_ON__ == 1)        
-        
-        ACCEL_calibration();
-        //accelerometer_calibration();
+            
+            ACCEL_calibration();
+            //accelerometer_calibration();
         #endif
+    #endif
+
+
+    #if (__BATERY_LEVEL_ON__ == 1)
+
+        batery_level_init();
+        
     #endif
 
 
@@ -111,6 +119,9 @@ uint32_t sensor_services_check(char* buffer){
 
     #if (__SENSOR_FAKE_ON__ == 1)
         ret = sensor_fake_get_measure(buffer,LEN_MAX_BUFFER); // 
+    #endif
+    #if (__BATERY_LEVEL_ON__ == 1)
+        ret = batery_level_get_measure(buffer,LEN_MAX_BUFFER); // 
     #endif
 
    return ret;

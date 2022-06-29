@@ -82,7 +82,6 @@ uint8_t sensor_fake_get_measure(char* buffer, uint8_t len_max){
     #define PRINT_FAKE          "SENSOR FAKE:\r\n\tMEDICION CORRECTA \r\n" 
     // si tengo espacion en buffer agrego
     uint8_t ret = 0;
-    char buff[100];
     uint8_t last_pos = strlen(buffer);
  
 

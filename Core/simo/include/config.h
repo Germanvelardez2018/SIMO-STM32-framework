@@ -40,7 +40,7 @@
 //!Habilita el uso hardware GPIO                 
 #define C_SIMO_GPIO_ENA                         1
 //! Habilita el hardware ADC
-#define C_SIMO_ADC_ENA                          0
+#define C_SIMO_ADC_ENA                          1
 
 
 //! Cantidad de instancias

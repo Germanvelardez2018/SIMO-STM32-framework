@@ -13,8 +13,8 @@
 
 
 
-#ifndef __ SENSOR_FAKE_H_
-#define __ SENSOR_FAKE_H_
+#ifndef __SENSOR_FAKE_H_
+#define __SENSOR_FAKE_H_
 
 
 #include "core.h"
